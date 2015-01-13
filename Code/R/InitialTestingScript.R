@@ -1,7 +1,7 @@
 require(caret)
 
 #Read data 
-klett_samf_jan14 = read.csv2("C:\\Users\\Thomas\\Documents\\GitHub\\master\\Data\\O3-H-01-2014\\klett_samf_jan14.csv")
+klett_samf_jan14 = read.csv2("../../Data/O3-H-01-2014/klett_samf_jan14.csv")
 
 #Extract travel times and construct trainingdata
 traveltimes = klett_samf_jan14$Reell.reisetid..sek.
