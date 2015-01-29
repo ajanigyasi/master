@@ -1,4 +1,6 @@
-travels <- read.csv("~/dev/master/Data/20150128_reiser_test.csv", sep=";", stringsAsFactor = FALSE)
+args <- commandArgs(trailingOnly = TRUE)
+
+travels <- read.csv(args[1], sep=";", stringsAsFactor = FALSE)
 start <- paste(travels$startdato, travels$starttid, sep = " ")
 start <- strptime(start, "%Y-%m-%d %H:%M:%S")
 end <- paste(travels$sluttdato, travels$sluttid, sep = " ")
