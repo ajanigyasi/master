@@ -1,7 +1,10 @@
 # Read data
-rawData = read.csv2("../../Data/20150128PasseringerTest.csv", stringsAsFactors=FALSE)
+travels = read.csv("../../Data/20150128_passeringer_test.csv", stringsAsFactors=FALSE, sep=";")
 # Order data by tag id
-rawData = rawData[order(rawData[,3]),]
+travels = travels[order(travels[,3]),]
+
+dateAndTime <- paste(travels$dato, travels$tid, sep = " ")
+dateAndTime <- strptime(dateAndTime, "%d.%m.%Y %H:%M:%S")
 
 
 
@@ -16,7 +19,8 @@ calculateTravelTimesForTagId <- function(rowsForTagId){
   numRows = dim(rowsForTagId)[1]
   for (i in 1:(numRows-1)){
     #   Calculate the difference with the next row
-    currentRowTime = rowsForTagId[i, c("dateAndTime")]
+    startTime = rowsForTagId[i, c("dateAndTime")]
+    endTime = rowsForTagId[i, c("dateAndTime")]
     #   Insert the travel time in a new column 
   }
   # Return the input
