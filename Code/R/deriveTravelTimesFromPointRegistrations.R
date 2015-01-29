@@ -4,7 +4,7 @@ travels = read.csv("../../Data/20150128_passeringer_test.csv", stringsAsFactors=
 travels = travels[order(travels[,3]),]
 
 dateAndTime <- paste(travels$dato, travels$tid, sep = " ")
-dateAndTime <- strptime(dateAndTime, "%d.%m.%Y %H:%M:%S")
+dateAndTime <- strptime(dateAndTime, "%Y-%m-%d %H:%M:%S")
 
 
 
