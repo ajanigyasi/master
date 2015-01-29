@@ -1,19 +1,19 @@
-"delstrekning_id";"startpunkt";"sluttpkt"
-100098;"Asker";"Holmen"
-100101;"Holmen";"Asker"
-100108;"Filipstad";"Skøyen"
-100109;"Skøyen";"Lysaker vest"
-100110;"Lysaker vest";"Skøyen"
-100111;"Skøyen";"Filipstad"
-100157;"Forus";"Auglendshøyden"
-100158;"Auglendshøyden";"Forus"
-100159;"Holmen";"Sandvika"
-100160;"Sandvika";"Lysaker vest"
-100161;"Lysaker vest";"Sandvika"
-100162;"Sandvika";"Holmen"
-100167;"Bogafjell";"Forus"
-100168;"Forus";"Bogafjell"
-100181;"Auglendshøyden";"Tjensvoll"
-100182;"Tjensvoll";"Auglendshøyden"
-100183;"Tjensvoll";"Dusavik"
-100184;"Dusavik";"Tjensvoll"
+delstrekning_id;startpunkt;sluttpkt
+100098;Asker;Holmen
+100101;Holmen;Asker
+100108;Filipstad;Skøyen
+100109;Skøyen;Lysaker vest
+100110;Lysaker vest;Skøyen
+100111;Skøyen;Filipstad
+100157;Forus;Auglendshøyden
+100158;Auglendshøyden;Forus
+100159;Holmen;Sandvika
+100160;Sandvika;Lysaker vest
+100161;Lysaker vest;Sandvika
+100162;Sandvika;Holmen
+100167;Bogafjell;Forus
+100168;Forus;Bogafjell
+100181;Auglendshøyden;Tjensvoll
+100182;Tjensvoll;Auglendshøyden
+100183;Tjensvoll;Dusavik
+100184;Dusavik;Tjensvoll
