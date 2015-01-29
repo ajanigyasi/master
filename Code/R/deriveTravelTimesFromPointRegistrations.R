@@ -24,5 +24,12 @@ calculateTravelTimesForTagId <- function(rowsForTagId){
   }
 }
 
+
+# Start the clock!
+ptm <- proc.time()
+
 # Calculate travel times
 by(data=travels,INDICES=travels$brikke_id,FUN=calculateTravelTimesForTagId)
+
+# Stop the clock
+print(proc.time() - ptm)
