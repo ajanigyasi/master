@@ -1,4 +1,16 @@
+#load libraries
+library(tools)
+
 args <- commandArgs(trailingOnly = TRUE) #get command line arguments
+
+#validate arguments
+validArgs = TRUE
+if (length(args) < 1) { #check if args is empty
+  validArgs = FALSE
+} else if (!(identical(file_ext(args[1]), "csv"))) { #checks file extension
+  validArgs = FALSE
+}
+stopifnot(validArgs) #stops execution
 
 travels <- read.csv(args[1], sep=";", stringsAsFactor = FALSE) #create data frame from csv file
 
@@ -15,6 +27,6 @@ time <- difftime(end, start, unit = "sec")
 travels <- data.frame(travels$delstrekning_id, start, end, time)
 
 #save data frame
-save(travels, file = "travels.Rda")
+#save(travels, file = "travels.Rda")
 #save(travels, file = "travels.Rda", compress = "xz")
-#write.table(travels, file = "travels.csv", sep = ";", row.names = FALSE)
+write.table(travels, file = "travels.csv", sep = ";", row.names = FALSE)
