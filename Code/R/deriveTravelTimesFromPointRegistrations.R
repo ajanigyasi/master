@@ -1,5 +1,17 @@
+#load libraries
+library(tools)
+
 # Take in file name as argument
 args <- commandArgs(trailingOnly = TRUE)
+
+#validate arguments
+validArgs = TRUE
+if (length(args) < 1) { #check if args is empty
+  validArgs = FALSE
+} else if (!(identical(file_ext(args[1]), "csv"))) { #checks file extension
+  validArgs = FALSE
+}
+stopifnot(validArgs) #stops execution
 
 # Extract file name
 fullFileName = args[1]
