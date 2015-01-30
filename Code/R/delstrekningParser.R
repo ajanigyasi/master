@@ -10,7 +10,7 @@ if (length(args) < 1) { #check if args is empty
 } else if (!(identical(file_ext(args[1]), "csv"))) { #checks file extension
   validArgs = FALSE
 }
-stopifnot(validArgs) #stops execution
+stopifnot(validArgs) #stops execution if command line arguments are invalid
 
 travels <- read.csv(args[1], sep=";", stringsAsFactor = FALSE) #create data frame from csv file
 

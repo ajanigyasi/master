@@ -1,17 +1,29 @@
 #!/bin/bash
 
+#change directory to the directory where this script is located
+cd ${0%/*}
+
+#get yesterday's date
 yesterdays_date=$(date +%Y%m%d -d "yesterday")
-passeringer_file="_passeringer.csv"
-reiser_file="_reiser.csv"
-passeringer=$yesterdays_date$passeringer_file
-reiser=$yesterdays_date$reiser_file
-passeringer_url="ftp://vegvesen:WShTMJRxzL@sinteftfgoofy.sintef.no/$passeringer"
-reiser_url="ftp://vegvesen:WShTMJRxzL@sinteftfgoofy.sintef.no/$reiser"
+
+#create filenames
+reiser_str="_reiser.csv"
+passeringer_str="_passeringer.csv"
+reiser_filename=$yesterdays_date$reiser_str
+passeringer_filename=$yesterdays_date$passeringer_str
+
+#create urls
+url="ftp://vegvesen:WShTMJRxzL@sinteftfgoofy.sintef.no/"
+reiser_url=$url$reiser_filename
+passeringer_url=$url$passeringer_filename
+
+#get files
 wget -P ../Data $reiser_url
 wget -P ../Data  $passeringer_url
 
-Rscript R/delstrekningParser.R ../Data/$reiser
-Rscript R/deriveTravelTimesFromPointRegistrations.R ../Data/$passeringer
+#run R-scripts
+Rscript R/delstrekningParser.R ../Data/$reiser_filename
+#Rscript R/deriveTravelTimesFromPointRegistrations.R ../Data/$passeringer_filename
 
 
 
