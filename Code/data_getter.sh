@@ -10,8 +10,8 @@ reiser_url="ftp://vegvesen:WShTMJRxzL@sinteftfgoofy.sintef.no/$reiser"
 wget $reiser_url
 wget $passeringer_url
 
-Rscript R/deriveTravelTimesFromPointRegistrations.R $passeringer
 Rscript R/delstrekningParser.R $reiser
+Rscript R/deriveTravelTimesFromPointRegistrations.R $passeringer
 
 
 
