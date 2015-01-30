@@ -27,7 +27,8 @@ time <- difftime(end, start, unit = "sec")
 travels <- data.frame(travels$delstrekning_id, start, end, time)
 
 #save data frame
-filename <- paste(file_path_sans_ext(args[1]), "_med_reisetider.csv") #create file name
+filename <- paste(file_path_sans_ext(args[1]), "_med_reisetider.csv", sep="") #create file name
 write.table(travels, file = filename, sep = ";", row.names = FALSE)
+print("delstrekningParser.R completed without errors")
 #save(travels, file = "travels.Rda")
 #save(travels, file = "travels.Rda", compress = "xz")

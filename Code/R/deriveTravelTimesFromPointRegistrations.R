@@ -56,4 +56,5 @@ while(i < dim(travels)[1]){
 }
 
 # Write results to file
-write.table(travels, paste(fileName, "_med_reisetider", fileExt), sep=";", row.names=FALSE)
+write.table(travels, paste(fileName, "_med_reisetider", fileExt, sep=""), sep=";", row.names=FALSE)
+print("deriveTravelTimesFromPointRegistrations.R completed without errors")
