@@ -1,12 +1,16 @@
 import xml.etree.ElementTree as ET
 import sys
 import pickle
+import time
 
 tree = ET.parse(sys.argv[1]) #parse xml file
 root = tree.getroot()
 
+#get todays date to use in filename
+date = str(time.strftime("%Y%m%d"))
+
 #open xml file containing log of traffic messages
-traffic_messages = open('../Data/traffic_messages.xml', 'a')
+traffic_messages = open('../Data/' + date + '_traffic_messages.xml', 'a')
 
 #load list of previous message numbers
 try:
