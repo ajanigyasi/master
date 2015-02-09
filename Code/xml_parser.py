@@ -4,13 +4,14 @@ import pickle
 import time
 
 tree = ET.parse(sys.argv[1]) #parse xml file
+city = sys.argv[2]
 root = tree.getroot()
 
 #get todays date to use in filename
 date = str(time.strftime("%Y%m%d"))
 
 #open xml file containing log of traffic messages
-traffic_messages = open('../Data/' + date + '_traffic_messages.xml', 'a')
+traffic_messages = open('../Data/' + city + '_' + date + '_traffic_messages.xml', 'a')
 
 #load list of previous message numbers
 try:
