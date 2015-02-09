@@ -17,11 +17,10 @@ trainingdata = data[trainingindices, ]
 testingdata = data[-trainingindices, 1:2]
 targettraveltimes = data[-trainingindices, 3]
 
-#Train neural network
-net.traveltimes = train(y~x1+x2, trainingdata, method="nnet", maxit=10000, linout=TRUE)
+#Train kNN
+knn = knnreg(trainingdata[, 1:2], trainingdata[, 3])
 
-#Test neural network
-predictedtraveltimes = predict(net.traveltimes, testingdata, type="raw")
-print(head(predictedtraveltimes))
-diff = abs(predictedtraveltimes-targettraveltimes)
-print(head(diff))
+#Test kNN
+predictedtraveltimes = predict(knn, testingdata)
+
+
