@@ -16,6 +16,7 @@ data = as.data.frame(cbind(x1, x2, y))
 min.value = min(traveltimes)
 max.value = max(traveltimes)
 
+#TODO: understand how to setup membership functions correctly
 a1 <- min.value
 c3 <- max.value
 b1 <- (c3 - a1)/4
@@ -53,6 +54,22 @@ frbs.model <- frbs.gen(range.data, num.fvalinput, names.varinput, num.fvaloutput
                        names.varoutput, rule, varinp.mf, type.model, type.defuz, type.tnorm, type.snorm, 
                        type.implication.func, colnames.var, name)
 
-#TODO: input predictions from svm and knn into frbs
+#partition data into training and testing sets
+trainingindices <- unlist(createDataPartition(1:8926, p=0.7))
+trainingdata <- data[trainingindices, ]
+testingdata <- data[-trainingindices, 1:2]
+targettraveltimes <- data[-trainingindices, 3]
 
-frbs.predictions <- predict(frbs.model, test.data)$predicted.val
+#train baselines
+knn <- knnreg(trainingdata[, 1:2], trainingdata[, 3])
+svm <- train(y~x1+x2, trainingdata, method="svmLinear")
+
+#get baseline predictions
+knn.predictions <- predict(knn, testingdata)
+svm.predictions <- predict(svm, testingdata)
+
+#input predictions from svm and knn into frbs
+baseline.predictions <- as.data.frame(cbind(svm.predictions, knn.predictions))
+frbs.predictions <- predict(frbs.model, baseline.predictions)$predicted.val
+
+comparison <- as.data.frame(cbind(frbs.predictions, targettraveltimes))
