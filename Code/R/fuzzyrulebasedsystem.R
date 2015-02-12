@@ -1,5 +1,6 @@
 library(caret)
 library(frbs)
+library(kernlab)
 
 #read data 
 klett_samf_jan14 = read.csv2("../../Data/O3-H-01-2014/klett_samf_jan14.csv")
@@ -17,15 +18,15 @@ min.value = min(traveltimes)
 max.value = max(traveltimes)
 
 #TODO: understand how to setup membership functions correctly
-a1 <- min.value
-c3 <- max.value
-b1 <- (c3 - a1)/4
-c1 <- (c3 - a1)/2
-a2 <- b1
-b2 <- c1
-c2 <- 3*(c3 - a1)/4
-a3 <- b2
-b3 <- c2
+# a1 <- min.value
+# c3 <- max.value
+# b1 <- (c3 - a1)/4
+# c1 <- (c3 - a1)/2
+# a2 <- b1
+# b2 <- c1
+# c2 <- 3*(c3 - a1)/4
+# a3 <- b2
+# b3 <- c2
 
 varinp.mf <- matrix(c(1, a1, b1, c1, NA, 1, a2, b2, c2, NA, 1, a3, b3, c3, NA, 1, a1, b1, c1, NA, 1, a2, b2, c2, NA, 1, a3, b3, c3, NA), nrow = 5, byrow = FALSE)
 varout.mf <- matrix(c(1, a1, b1, c1, NA, 1, a2, b2, c2, NA, 1, a3, b3, c3, NA), nrow = 5, byrow = FALSE)
