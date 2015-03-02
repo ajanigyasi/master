@@ -1,0 +1,32 @@
+Oslo:
+	- 5-minutts gjennomsnittsdata 
+		- kan eksporteres som .csv fra adminpanel på Statens Vegvesen sine reisetider webside
+		- har script som kan lese inn disse filene
+	- Reiser m/beregnet reisetid 
+		- .csv filer på ftp-serveren fra Ciber
+		- har script som kan lese inn disse filene og beregne reisetid
+		- mangler å kjøre scriptet på alle filene
+	- Passeringer m/beregnet reisetid 
+		- .csv filer på ftp-serveren fra Ciber
+		- har script som kan lese inn disse filene og beregne reisetid
+		- mangler å kjøre scriptet på alle filene
+	- Data fra datainn?
+		- .csv fil som ligger på Google Drive
+
+Stavanger:
+	- 5-minutts gjennomsnittsdata
+		- kan eksporteres som .csv fra adminpanel på Statens Vegvesen sine reisetider webside
+		- har script som kan lese inn disse filene
+	- Reiser m/beregnet reisetid 
+		- .csv filer på ftp-serveren fra Ciber
+		- har script som kan lese inn disse filene og beregne reisetid
+		- mangler å kjøre scriptet på alle filene
+	- Passeringer m/beregnet reisetid 
+		- .csv filer på ftp-serveren fra Ciber
+		- har script som kan lese inn disse filene og beregne reisetid
+		- mangler å kjøre scriptet på alle filene
+	- Enkeltkjøretøydata
+		- .RED filer på Google Drive
+		- Mangler script som behandler disse
+	- Data fra datainn?
+		- .csv filer som ligger på Google Drive
