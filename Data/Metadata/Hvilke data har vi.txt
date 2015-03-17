@@ -12,6 +12,7 @@ Oslo:
 		- mangler å kjøre scriptet på alle filene
 	- Data fra datainn?
 		- .csv fil som ligger på Google Drive
+		- Trenger ikke noe script som regner ut noe
 
 Stavanger:
 	- 5-minutts gjennomsnittsdata
@@ -30,3 +31,4 @@ Stavanger:
 		- Mangler script som behandler disse
 	- Data fra datainn?
 		- .csv filer som ligger på Google Drive
+		- Trenger ikke noe script som regner ut noe
