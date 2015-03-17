@@ -5,11 +5,17 @@ library(tools)
 args <- commandArgs(trailingOnly = TRUE)
 
 # Extract filenames
-reiserFileName1 = "../../Data/Autopassdata/Singledatefiles/20150129_reiser_med_reisetider.csv"
-reiserFileName2 = "../../Data/Autopassdata/Singledatefiles/20150128_reiser_med_reisetider.csv"
-passeringerFileName1 = "../../Data/Autopassdata/Singledatefiles/20150129_passeringer_med_reisetider.csv"
-passeringerFileName2 = "../../Data/Autopassdata/Singledatefiles/20150128_passeringer_med_reisetider.csv"
-delstrekningId = "100182"
+reiserFileName1 = args[1]
+reiserFileName2 = args[2]
+passeringerFileName1 = args[3]
+passeringerFileName2 = args[4]
+delstrekningId = args[5]
+
+# Get date
+fullFileName = reiserFileName1
+len = nchar(reiserFileName2)
+fileExt = substr(fullFileName, start=len-3, len)
+fileName = substr(fullFileName, start=1, len-26)
 
 # Read travel time data (reiser)
 travelTimes1 <- read.csv(reiserFileName1, stringsAsFactors=FALSE, sep=";")
@@ -28,6 +34,8 @@ passages1 <- passages1[passages1$antenne_id==10091, ]
 passages2 <- passages2[passages2$antenne_id==10091, ]
 passages <- rbind(passages2, passages1)
 
+passages <- passages[order(passages[,c("dateAndTime")]),]
+
 # Convert date and time to dateTime objects
 travelTimes$start <- strptime(travelTimes$start, "%Y-%m-%d %H:%M:%S")
 travelTimes$end <- strptime(travelTimes$end, "%Y-%m-%d %H:%M:%S")
@@ -41,7 +49,7 @@ getLastFiveMinutesEnd <- function(rowNum){
 
 getLastFiveMinutesStart <- function(rowNum){
   currentTime = travelTimes[rowNum, c("start")]
-  return(nrow(passages[((passages$dateAndTime<=currentTime)&(passages$dateAndTime>=(currentTime-300))), ]))
+  return(nrow(passages[((passages$dateAndTime<=currentTime)&(passages$dateAndTime>=(currentTime-300))),]))
 }
 
 # Calculate 5 min mean travel times for each row
@@ -49,10 +57,18 @@ n = dim(travelTimes)[1]
 dataSet = data.frame(cbind(travelTimes$time, rep(300, n), rep(0, n)))
 colnames(dataSet) = c("actualTravelTime", "fiveMinuteMean", "trafficVolume")
 
-for (i in 1:100){
+print("Computing five minute means and traffic volumes...")
+for (i in 1:n){
   prevRows = getLastFiveMinutesEnd(i)
-  if(dim(prevRows[1])>=1){
+  if(nrow(prevRows)>=1){
     dataSet[i, c("fiveMinuteMean")] = mean(prevRows$time)
   }
   dataSet[i, c("trafficVolume")] = getLastFiveMinutesStart(i)
+  cat("\r", round((i/n)*100, 1), "%", sep="")
+  flush.console()
 }
+cat("\r\n")
+
+# Write data set to file
+write.table(dataSet, paste(fileName, "_dataset", fileExt, sep=""), sep=";", row.names=FALSE)
+print("createDataSet completed without errors")
