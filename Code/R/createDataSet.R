@@ -5,10 +5,15 @@ library(tools)
 args <- commandArgs(trailingOnly = TRUE)
 
 # Extract filenames
+# Det første argumentet er filnavnet til reiserfilen for den første datoen
 reiserFileName1 = args[1]
+# Det andre argumentet er filnavnet til reiserfilen for den andre datoen
 reiserFileName2 = args[2]
+# Det tredje argumentet er filnavnet til passeringerfilen for den første datoen
 passeringerFileName1 = args[3]
+# Det fjerde argumentet er filnavnet til passeringerfilen for den andre datoen
 passeringerFileName2 = args[4]
+# Det femte argumentet er id-en til den delstrekningen en ønsker å se på
 delstrekningId = args[5]
 
 # Get date
@@ -28,11 +33,11 @@ passages2 <- read.csv(passeringerFileName2, stringsAsFactors=FALSE, sep=";")
 # Select a delstrekning
 travelTimes1 <- travelTimes1[travelTimes1$travels.delstrekning_id==delstrekningId, ]
 travelTimes2 <- travelTimes2[travelTimes2$travels.delstrekning_id==delstrekningId, ]
-travelTimes <- rbind(travelTimes2, travelTimes1)
+travelTimes <- rbind(travelTimes1, travelTimes2)
 
 passages1 <- passages1[passages1$antenne_id==10091, ]
 passages2 <- passages2[passages2$antenne_id==10091, ]
-passages <- rbind(passages2, passages1)
+passages <- rbind(passages1, passages2)
 
 passages <- passages[order(passages[,c("dateAndTime")]),]
 
@@ -70,5 +75,6 @@ for (i in 1:n){
 cat("\r\n")
 
 # Write data set to file
+# The data set is stored in increasing date and time for when the vehicle exited the road section
 write.table(dataSet, paste(fileName, "_dataset", fileExt, sep=""), sep=";", row.names=FALSE)
 print("createDataSet completed without errors")
