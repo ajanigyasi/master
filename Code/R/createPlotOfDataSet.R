@@ -11,6 +11,14 @@ dataSet$timeOfDay = strptime(travels$start, "%Y-%m-%d %H:%M:%S")
 dataSet = dataSet[order(dataSet[,c("timeOfDay")]),]
 
 
-#plot(dataSet$timeOfDay, dataSet$fiveMinuteMean, type="l", xlab="Time", ylab="Mean travel time last 5 minutes")
-#plot(dataSet$timeOfDay, dataSet$trafficVolume, type="l", xlab="Time", ylab="Traffic volume the last 5 minutes")
+pdf("../../Data/Plots/Initial Dataset/MeanTravelTimeLastFiveMinutes.pdf", paper="a4r", width=20)
+plot(dataSet$timeOfDay, dataSet$fiveMinuteMean, type="l", xlab="Time", ylab="Mean travel time last 5 minutes")
+dev.off()
+
+pdf("../../Data/Plots/Initial Dataset/TrafficVolumeLastFiveMinutes.pdf", paper="a4r", width=20)
+plot(dataSet$timeOfDay, dataSet$trafficVolume, type="l", xlab="Time", ylab="Traffic volume the last 5 minutes")
+dev.off()
+
+pdf("../../Data/Plots/Initial Dataset/ActualTravelTime.pdf", paper="a4r", width=20)
 plot(dataSet$timeOfDay, dataSet$actualTravelTime, type="l", xlab="Time", ylab="Actual travel time")
+dev.off()
