@@ -4,27 +4,34 @@ library(tools)
 # Take in file name(s) as argument
 args <- commandArgs(trailingOnly = TRUE)
 
-# Extract filenames
-# First argument is path to data files
-dataFilesPath = args[1]
-# Second argument is the first date
-firstDate = args[2]
-# Third argument is the second date
-secondDate = args[3]
-# Fourth argument is the ID of the road section in question
-delstrekningId = args[4]
+# Parse arguments
+# First argument is path to reiser data files
+reiserFilesPath = args[1]
+# Second argument is path to reiser data files
+passeringerFilesPath = args[2]
+# Third argument is path to where to save data set
+dataSetFilePath = args[3]
+# Fourth argument is the first date
+firstDate =  args[4]
+# Fifth argument is the second date year
+secondDateYear = args[5]
+# Sixth argument is the second date month
+secondDateMonth = args[6]
+# Seventh argument is the second date day
+secondDateDay = args[7]
+secondDate = paste(secondDateYear, secondDateMonth, secondDateDay, sep="")
+# Eight argument is the ID of the road section in question
+delstrekningId = args[8]
 
+# Construct file names
+reiserFileName1 = paste(reiserFilesPath, firstDate, "_reiser_med_reisetider.csv", sep="")
+reiserFileName2 = paste(reiserFilesPath, secondDate, "_reiser_med_reisetider.csv", sep="")
+passeringerFileName1 = paste(passeringerFilesPath, firstDate, "_passeringer.csv", sep="")
+passeringerFileName2 = paste(passeringerFilesPath, secondDate, "_passeringer.csv", sep="")
 
-reiserFileName1 = paste(dataFilesPath, firstDate, "_reiser.csv", sep="")
-reiserFileName2 = paste(dataFilesPath, secondDate, "_reiser.csv", sep="")
-passeringerFileName1 = paste(dataFilesPath, firstDate, "_passeringer.csv", sep="")
-passeringerFileName2 = paste(dataFilesPath, secondDate, "_passeringer.csv", sep="")
-
-# Get date
-fullFileName = reiserFileName2
+# Get file extension
 len = nchar(reiserFileName2)
-fileExt = substr(fullFileName, start=len-3, len)
-fileName = substr(fullFileName, start=1, len-26)
+fileExt = substr(reiserFileName2, start=len-3, len)
 
 # Read travel time data (reiser)
 travelTimes1 <- read.csv(reiserFileName1, stringsAsFactors=FALSE, sep=";")
@@ -43,14 +50,26 @@ passages1 <- passages1[passages1$antenne_id==10091, ]
 passages2 <- passages2[passages2$antenne_id==10091, ]
 passages <- rbind(passages1, passages2)
 
+# Extract time and date for passages
+dateAndTime <- paste(passages$dato, passages$tid, sep = " ")
+dateAndTime <- strptime(dateAndTime, "%Y-%m-%d %H:%M:%S")
+
+# Insert time and date column
+passages$dateAndTime = dateAndTime
+
+# Delete dato column and tid column
+drops = c("dato", "tid")
+passages <- passages[, !(names(passages) %in% drops)]
+
 # Order travelTimes and passages in increasing date and time of when the vehicle entered the road section
+# Note that this operation mixes the rows from the two files, so no assumptions about the number of rows for the different
+# dates can be made
 passages <- passages[order(passages[,c("dateAndTime")]),]
 travelTimes <- travelTimes[order(travelTimes[,c("start")]),]
 
 # Convert date and time to POSIXlt objects
 travelTimes$start <- strptime(travelTimes$start, "%Y-%m-%d %H:%M:%S")
 travelTimes$end <- strptime(travelTimes$end, "%Y-%m-%d %H:%M:%S")
-passages$dateAndTime <- strptime(passages$dateAndTime, "%Y-%m-%d %H:%M:%S")
 
 # Function for retrieving the rows for the last five minutes, given a row number
 getRowsForLastFiveMinutes <- function(rowNum){
@@ -61,30 +80,42 @@ getRowsForLastFiveMinutes <- function(rowNum){
 # Function for retrieving the number of rows in the last five minutes, given a row number
 getNumberOfRowsForLastFiveMinutes <- function(rowNum){
   currentTime = travelTimes[rowNum, c("start")]
-  return(nrow(passages[((passages$dateAndTime<=currentTime)&(passages$dateAndTime>=(currentTime-300))),]))
+  prevRows = passages[(passages$dateAndTime<=currentTime)&(passages$dateAndTime>=(currentTime-300)),]
+  return(nrow(prevRows))
 }
 
-# Get number of rows in travel times data frame
-n = dim(travelTimes)[1]
+# Function for retrieving the number of rows having a date smaller than the given date and time object
+getNumberOfRowsWithTimeBefore = function(t){
+  return(nrow(travelTimes[travelTimes$start<t,]))
+}
+
+# Number of rows with date prior to the date of the data set
+n1 = getNumberOfRowsWithTimeBefore(strptime(c(paste(paste(secondDateYear, secondDateMonth, secondDateDay, sep="-"), "00:00:00", sep=" ")), "%Y-%m-%d %H:%M:%S"))
+# Number of rows in total
+n = nrow(travelTimes)
+# Number of rows in the data set
+n2 = n-n1
 
 # Initialize data set
-dataSet = data.frame(cbind(travelTimes$start), rep(300, n), rep(0, n), travelTimes$time)
+startTime = as.data.frame(travelTimes[(n1+1):n,c("start")])
+actualTime = as.data.frame(travelTimes[(n1+1):n,c("time")])
+dataSet = data.frame(cbind(startTime, rep(300, n2), rep(0, n2), actualTime))
 colnames(dataSet) = c("dateAndTime", "fiveMinuteMean", "trafficVolume", "actualTravelTime")
 
 # Compute five minute mean travel times and traffic volume
 print("Computing five minute means and traffic volumes...")
-for (i in 1:n){
+for (i in (n1+1):(n1+10)){
   prevRows = getRowsForLastFiveMinutes(i)
   if(nrow(prevRows)>=1){
-    dataSet[i, c("fiveMinuteMean")] = mean(prevRows$time)
+    dataSet[(i-n1), c("fiveMinuteMean")] = mean(prevRows$time)
   }
-  dataSet[i, c("trafficVolume")] = getNumberOfRowsForLastFiveMinutes(i)
-  cat("\r", round((i/n)*100, 1), "%", sep="")
+  dataSet[(i-n1), c("trafficVolume")] = getNumberOfRowsForLastFiveMinutes(i)
+  cat("\r", round(((i-n1)/(n-n1))*100, 1), "%", sep="")
   flush.console()
 }
 cat("\r\n")
 
 # Write data set to file
 # The data set is stored in increasing date and time for when the vehicle entered the road section
-write.table(dataSet, paste(fileName, "_dataset", fileExt, sep=""), sep=";", row.names=FALSE)
+write.table(dataSet, paste(dataSetFilePath, secondDate, "_dataset", fileExt, sep=""), sep=";", row.names=FALSE)
 print("createDataSet completed without errors")
