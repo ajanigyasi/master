@@ -68,7 +68,7 @@ class kernel:
         self.updateKInv()
     
     """
-    Returns y' * (K+lambda*I)-1* k, a.k.a. the kernel's prediction.
+    Returns y' * (K+lambda*I)_inv* k, a.k.a. the kernel's prediction.
     Parameter:
         data_point - array containing observation
     """
