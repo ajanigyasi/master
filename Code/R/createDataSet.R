@@ -5,23 +5,24 @@ library(tools)
 args <- commandArgs(trailingOnly = TRUE)
 
 # Parse arguments
-# First argument is path to reiser data files
-reiserFilesPath = args[1]
-# Second argument is path to reiser data files
-passeringerFilesPath = args[2]
-# Third argument is path to where to save data set
-dataSetFilePath = args[3]
-# Fourth argument is the first date
-firstDate =  args[4]
-# Fifth argument is the second date year
-secondDateYear = args[5]
-# Sixth argument is the second date month
-secondDateMonth = args[6]
-# Seventh argument is the second date day
-secondDateDay = args[7]
+# Path to reiser data files
+reiserFilesPath = "../Data/Autopassdata/Singledatefiles/Reiser/IncludingTravelTimes/"
+# Path to passeringer data files
+passeringerFilesPath = "../Data/Autopassdata/Singledatefiles/Passeringer/ExcludingTravelTimes/"
+# Path to where to save data set
+dataSetFilePath = "../Data/Autopassdata/Singledatefiles/Dataset/"
+# First argument is the first date
+firstDate =  args[1]
+# Second argument is the second date year
+secondDateYear = args[2]
+# Third argument is the second date month
+secondDateMonth = args[3]
+# Fourth argument is the second date day
+secondDateDay = args[4]
 secondDate = paste(secondDateYear, secondDateMonth, secondDateDay, sep="")
-# Eight argument is the ID of the road section in question
-delstrekningId = args[8]
+# ID of the road section in question
+delstrekningId = 100182
+
 
 # Construct file names
 reiserFileName1 = paste(reiserFilesPath, firstDate, "_reiser_med_reisetider.csv", sep="")
@@ -91,7 +92,7 @@ getNumberOfRowsWithTimeBefore = function(t){
 
 # Number of rows with date prior to the date of the data set
 n1 = getNumberOfRowsWithTimeBefore(strptime(c(paste(paste(secondDateYear, secondDateMonth, secondDateDay, sep="-"), "00:00:00", sep=" ")), "%Y-%m-%d %H:%M:%S"))
-# Number of rows in total
+# Number of rows in total 
 n = nrow(travelTimes)
 # Number of rows in the data set
 n2 = n-n1
@@ -104,13 +105,13 @@ colnames(dataSet) = c("dateAndTime", "fiveMinuteMean", "trafficVolume", "actualT
 
 # Compute five minute mean travel times and traffic volume
 print("Computing five minute means and traffic volumes...")
-for (i in (n1+1):(n1+10)){
+for (i in (n1+1):n){
   prevRows = getRowsForLastFiveMinutes(i)
   if(nrow(prevRows)>=1){
     dataSet[(i-n1), c("fiveMinuteMean")] = mean(prevRows$time)
   }
   dataSet[(i-n1), c("trafficVolume")] = getNumberOfRowsForLastFiveMinutes(i)
-  cat("\r", round(((i-n1)/(n-n1))*100, 1), "%", sep="")
+  cat("\r", round(((i-n1)/(n2))*100, 1), "%", sep="")
   flush.console()
 }
 cat("\r\n")
