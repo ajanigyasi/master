@@ -22,13 +22,9 @@ directory <- "../../Data/Autopassdata/Singledatefiles/Dataset/"
 dataSet <- getDataSet(startDate, endDate, directory)
 
 # Normalize data set
-fiveMinuteMeanMin <- min(dataSet$fiveMinuteMean)
-fiveMinuteMeanMax <- max(dataSet$fiveMinuteMean)
-dataSet$fiveMinuteMean <- (dataSet$fiveMinuteMean-fiveMinuteMeanMin)/(fiveMinuteMeanMax-fiveMinuteMeanMin)
+dataSet$fiveMinuteMean <- normalize(dataSet$fiveMinuteMean, min(dataSet$fiveMinuteMean), max(dataSet$fiveMinuteMean))
 
-trafficVolumeMin <- min(dataSet$trafficVolume)
-trafficVolumeMax <- max(dataSet$trafficVolume)
-dataSet$trafficVolume <- (dataSet$trafficVolume-trafficVolumeMin)/(trafficVolumeMax-trafficVolumeMin)
+dataSet$trafficVolume <- normalize(dataSet$trafficVolume, min(dataSet$trafficVolume), max(dataSet$trafficVolume))
 
 #partition into training and testing set
 splitDate <- as.Date(c("20150215"), "%Y%m%d")
@@ -36,9 +32,9 @@ splitIndex <- which(dataSet$dateAndTime >= splitDate)[1]
 trainingSet <- dataSet[1:(splitIndex-1), ]
 
 # Normalize actual travel time for training set
-actualTravelTimeMin <- min(trainingSet$actualTravelTime)
-actualTravelTimeMax <- max(trainingSet$actualTravelTime)
-trainingSet$actualTravelTime <- (trainingSet$actualTravelTime-actualTravelTimeMin)/(actualTravelTimeMax-actualTravelTimeMin)
+actualTravelTimeMin <- min(dataSet$actualTravelTime)
+actualTravelTimeMax <- max(dataSet$actualTravelTime)
+trainingSet$actualTravelTime <- normalize(trainingSet$actualTravelTime, actualTravelTimeMin, actualTravelTimeMax)
 
 testingSet <- dataSet[splitIndex:nrow(dataSet), ]
 
@@ -63,6 +59,4 @@ stopCluster(cluster)
 # predictions <- predict(svm1, testingSet)
 
 # Denormalize predictions
-predictionMin <- min(predictions)
-predictionMax <- max(predictions)
-predictions <- (predictions*(predictionMax-predictionMin))+predictionMin
+predictions <- deNormalize(predictions, actualTravelTimeMin, actualTravelTimeMax)
