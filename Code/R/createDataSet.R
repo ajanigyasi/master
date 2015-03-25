@@ -105,13 +105,13 @@ colnames(dataSet) = c("dateAndTime", "fiveMinuteMean", "trafficVolume", "actualT
 
 # Compute five minute mean travel times and traffic volume
 print("Computing five minute means and traffic volumes...")
-for (i in (n1+1):(n1+10)){
+for (i in n1:n){
   prevRows = getRowsForLastFiveMinutes(i)
   if(nrow(prevRows)>=1){
     dataSet[(i-n1), c("fiveMinuteMean")] = mean(prevRows$time)
   }
   dataSet[(i-n1), c("trafficVolume")] = getNumberOfRowsForLastFiveMinutes(i)
-  cat("\r", round(((i-n1)/(n-n1))*100, 1), "%", sep="")
+  cat("\r", round(((i-n1)/(n2))*100, 1), "%", sep="")
   flush.console()
 }
 cat("\r\n")
