@@ -6,11 +6,11 @@ args <- commandArgs(trailingOnly = TRUE)
 
 # Parse arguments
 # First argument is path to reiser data files
-reiserFilesPath = args[1]
-# Second argument is path to reiser data files
-passeringerFilesPath = args[2]
+reiserFilesPath = "../Data/Autopassdata/Singledatefiles/Reiser/IncludingTravelTimes/"
+# Second argument is path to passeringer data files
+passeringerFilesPath = "../Data/Autopassdata/Singledatefiles/Passeringer/ExcludingTravelTimes/"
 # Third argument is path to where to save data set
-dataSetFilePath = args[3]
+dataSetFilePath = "../Data/Autopassdata/Singledatefiles/Dataset/"
 # Fourth argument is the first date
 firstDate =  args[4]
 # Fifth argument is the second date year
@@ -21,7 +21,8 @@ secondDateMonth = args[6]
 secondDateDay = args[7]
 secondDate = paste(secondDateYear, secondDateMonth, secondDateDay, sep="")
 # Eight argument is the ID of the road section in question
-delstrekningId = args[8]
+delstrekningId = 100182
+
 
 # Construct file names
 reiserFileName1 = paste(reiserFilesPath, firstDate, "_reiser_med_reisetider.csv", sep="")
