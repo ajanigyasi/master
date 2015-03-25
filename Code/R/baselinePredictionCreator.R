@@ -35,6 +35,9 @@ splitDate <- as.Date(c("20150215"), "%Y%m%d")
 splitIndex <- which(dataSet$dateAndTime >= splitDate)[1]
 trainingSet <- dataSet[1:(splitIndex-1), ]
 
+#TODO:remove when done testing
+trainingSet <- trainingSet[1:1000, ]
+
 # Normalize actual travel time for training set
 actualTravelTimeMin <- min(trainingSet$actualTravelTime)
 actualTravelTimeMax <- max(trainingSet$actualTravelTime)
@@ -59,10 +62,10 @@ results <- clusterApply(cluster, c("svm", "ann"), createBaseline)
 
 stopCluster(cluster)
 
-# svm1 <- createBaseline("svm")
-# predictions <- predict(svm1, testingSet)
+svm_predictions <- predict(results[1], testingSet)
+ann_predictions <- predict(results[2], testingSet)
 
 # Denormalize predictions
-predictionMin <- min(predictions)
-predictionMax <- max(predictions)
-predictions <- (predictions*(predictionMax-predictionMin))+predictionMin
+# predictionMin <- min(predictions)
+# predictionMax <- max(predictions)
+# predictions <- (predictions*(predictionMax-predictionMin))+predictionMin
