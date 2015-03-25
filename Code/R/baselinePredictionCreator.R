@@ -8,10 +8,10 @@ source("dataSetGetter.R")
 createBaseline <- function(model) {
   switch(model,
          "svm" = {
-           train(actualTravelTime~dateAndTime+fiveMinuteMean+trafficVolume, data = trainingSet[1:10, ], method="svmLinear")
+           train(actualTravelTime~fiveMinuteMean+trafficVolume, trainingSet, method="svmLinear")
          },
          "ann" = {
-           train(actualTravelTime~dateAndTime+fiveMinuteMean+trafficVolume, data = trainingSet[1:10, ], method="nnet", maxit=100, linout=TRUE)
+           train(actualTravelTime~fiveMinuteMean+trafficVolume, trainingSet, method="nnet", maxit=100, linout=TRUE)
          }
          )
 }
@@ -28,6 +28,11 @@ splitDate <- as.Date(c("20150215"), "%Y%m%d")
 splitIndex <- which(dataSet$dateAndTime >= splitDate)[1]
 trainingSet <- dataSet[1:(splitIndex-1), ]
 testingSet <- dataSet[splitIndex:nrow(dataSet), ]
+
+#just for testing
+#trainingSet <- trainingSet[1:1000, 2:4]
+#train(actualTravelTime~fiveMinuteMean+trafficVolume, trainingSet, method="svmLinear")
+#train(actualTravelTime~fiveMinuteMean+trafficVolume, trainingSet, method="nnet", maxit=100, linout=TRUE)
 
 cluster <- makeMPIcluster(2)
 
