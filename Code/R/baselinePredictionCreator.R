@@ -1,5 +1,5 @@
-library(snow)
-library(Rmpi)
+#library(snow)
+#library(Rmpi)
 library(caret)
 library(kernlab)
 
@@ -8,10 +8,10 @@ source("dataSetGetter.R")
 createBaseline <- function(model) {
   switch(model,
          "svm" = {
-           train(actualTravelTime~dateAndTime+fiveMinuteMean+trafficVolume, data = trainingSet[1:10, ], method="svmLinear")
+           train(actualTravelTime~fiveMinuteMean+trafficVolume, data = trainingSet[1:10, ], method="svmLinear")
          },
          "ann" = {
-           train(actualTravelTime~dateAndTime+fiveMinuteMean+trafficVolume, data = trainingSet[1:10, ], method="nnet", maxit=100, linout=TRUE)
+           train(actualTravelTime~fiveMinuteMean+trafficVolume, data = trainingSet[1:10, ], method="nnet", maxit=100, linout=TRUE)
          }
          )
 }
@@ -29,13 +29,16 @@ splitIndex <- which(dataSet$dateAndTime >= splitDate)[1]
 trainingSet <- dataSet[1:(splitIndex-1), ]
 testingSet <- dataSet[splitIndex:nrow(dataSet), ]
 
-cluster <- makeMPIcluster(2)
+#cluster <- makeMPIcluster(2)
 
 #set up environment
-clusterCall(cluster, function() library(caret))
-clusterCall(cluster, function() library(kernlab))
-clusterExport(cluster, c("trainingSet"), envir = .GlobalEnv)
+#clusterCall(cluster, function() library(caret))
+#clusterCall(cluster, function() library(kernlab))
+#clusterExport(cluster, c("trainingSet"), envir = .GlobalEnv)
 
-results <- clusterApply(cluster, c("svm", "ann"), createBaseline)
+#results <- clusterApply(cluster, c("svm", "ann"), createBaseline)
 
-stopCluster(cluster)
+#stopCluster(cluster)
+
+svm1 <- createBaseline("svm")
+predictions <- predict(svm1, testingSet)
