@@ -21,16 +21,30 @@ endDate <- "20150228"
 directory <- "../../Data/Autopassdata/Singledatefiles/Dataset/"
 dataSet <- getDataSet(startDate, endDate, directory)
 
-#TODO: normalize data set
+# Normalize data set
+fiveMinuteMeanMin <- min(dataSet$fiveMinuteMean)
+fiveMinuteMeanMax <- max(dataSet$fiveMinuteMean)
+dataSet$fiveMinuteMean <- (dataSet$fiveMinuteMean-fiveMinuteMeanMin)/(fiveMinuteMeanMax-fiveMinuteMeanMin)
+
+trafficVolumeMin <- min(dataSet$trafficVolume)
+trafficVolumeMax <- max(dataSet$trafficVolume)
+dataSet$trafficVolume <- (dataSet$trafficVolume-trafficVolumeMin)/(trafficVolumeMax-trafficVolumeMin)
 
 #partition into training and testing set
 splitDate <- as.Date(c("20150215"), "%Y%m%d")
 splitIndex <- which(dataSet$dateAndTime >= splitDate)[1]
 trainingSet <- dataSet[1:(splitIndex-1), ]
+
+# Normalize actual travel time for training set
+actualTravelTimeMin <- min(trainingSet$actualTravelTime)
+actualTravelTimeMax <- max(trainingSet$actualTravelTime)
+trainingSet$actualTravelTime <- (trainingSet$actualTravelTime-actualTravelTimeMin)/(actualTravelTimeMax-actualTravelTimeMin)
+
 testingSet <- dataSet[splitIndex:nrow(dataSet), ]
 
+
 #just for testing
-trainingSet <- trainingSet[1:1000, 2:4]
+#trainingSet <- trainingSet[1:1000, 2:4]
 #train(actualTravelTime~fiveMinuteMean+trafficVolume, trainingSet, method="svmLinear")
 #train(actualTravelTime~fiveMinuteMean+trafficVolume, trainingSet, method="nnet", maxit=100, linout=TRUE)
 
@@ -47,3 +61,8 @@ stopCluster(cluster)
 
 # svm1 <- createBaseline("svm")
 # predictions <- predict(svm1, testingSet)
+
+# Denormalize predictions
+predictionMin <- min(predictions)
+predictionMax <- max(predictions)
+predictions <- (predictions*(predictionMax-predictionMin))+predictionMin
