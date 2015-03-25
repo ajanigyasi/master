@@ -28,7 +28,7 @@ getDataSet <- function(startDate, endDate, directory){
 
 # Function for normalizing a vector
 normalize <- function(x, min, max){
-  return((x-min/(max-min)
+  return((x-min)/(max-min))
 }
 
 deNormalize <- function(x, min, max){
