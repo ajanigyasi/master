@@ -2,7 +2,7 @@ library(caret)
 library(kernlab) #needed for svm
 
 #Read data 
-klett_samf_jan14 = read.csv2("../../Data/O3-H-01-2014/klett_samf_jan14.csv")
+klett_samf_jan14 = read.csv2("../../Data/5-min data/O3-H-01-2014/klett_samf_jan14.csv")
 
 #Extract travel times and construct trainingdata
 traveltimes = klett_samf_jan14$Reell.reisetid..sek.
@@ -16,7 +16,7 @@ data = as.data.frame(cbind(x1, x2, y))
 trainingindices = unlist(createDataPartition(1:8926, p=0.7))
 trainingdata = data[trainingindices, ]
 testingdata = data[-trainingindices, 1:2]
-targetTraveltimes = data[-trainingindices, 3]
+targetTravelTimes = data[-trainingindices, 3]
 
 #Train SVM
 svm = train(y~x1+x2, trainingdata, method="svmLinear")
