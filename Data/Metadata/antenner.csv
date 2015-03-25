@@ -1,23 +1,24 @@
-"antenne_id";"antenne_identifikator";"navn"
-10051;"A02P01L01";"Filipstad"
-10052;"A02P01L02";"Filipstad"
-10053;"A02P03L01";"Asker"
-10054;"A02P03L02";"Asker"
-10055;"A02P02L01";"Lysaker vest"
-10056;"A02P02L02";"Lysaker vest"
-10088;"A04P01L01";"Dusavik"
-10089;"A04P01L02";"Dusavik"
-10090;"A04P02L01";"Tjensvoll"
-10091;"A04P02L02";"Tjensvoll"
-10093;"A04P03L02";"Auglendshøyden"
-10096;"A04P04L01";"Forus"
-10097;"A04P04L02";"Forus"
-10100;"A04P05L01";"Bogafjell"
-10101;"A04P05L02";"Bogafjell"
-10109;"A02P04L01";"Skøyen"
-10110;"A02P04L02";"Skøyen"
-10111;"A02P06L01";"Holmen"
-10112;"A02P06L02";"Holmen"
-10115;"A02P05L01";"Sandvika"
-10116;"A02P05L02";"Sandvika"
-10117;"A02P05L03";"Sandvika"
+antenne_id;antenne_identifikator;navn
+10051;A02P01L01;Filipstad
+10052;A02P01L02;Filipstad
+10053;A02P03L01;Asker
+10054;A02P03L02;Asker
+10055;A02P02L01;Lysaker vest
+10056;A02P02L02;Lysaker vest
+10088;A04P01L01;Dusavik
+10089;A04P01L02;Dusavik
+10090;A04P02L01;Tjensvoll
+10091;A04P02L02;Tjensvoll
+10092;A04P03L01;Auglendshøyden
+10093;A04P03L02;Auglendshøyden
+10096;A04P04L01;Forus
+10097;A04P04L02;Forus
+10100;A04P05L01;Bogafjell
+10101;A04P05L02;Bogafjell
+10109;A02P04L01;Skøyen
+10110;A02P04L02;Skøyen
+10111;A02P06L01;Holmen
+10112;A02P06L02;Holmen
+10115;A02P05L01;Sandvika
+10116;A02P05L02;Sandvika
+10117;A02P05L03;Sandvika
