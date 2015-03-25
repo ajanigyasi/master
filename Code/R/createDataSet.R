@@ -92,7 +92,7 @@ getNumberOfRowsWithTimeBefore = function(t){
 
 # Number of rows with date prior to the date of the data set
 n1 = getNumberOfRowsWithTimeBefore(strptime(c(paste(paste(secondDateYear, secondDateMonth, secondDateDay, sep="-"), "00:00:00", sep=" ")), "%Y-%m-%d %H:%M:%S"))
-# Number of rows in total
+# Number of rows in total 
 n = nrow(travelTimes)
 # Number of rows in the data set
 n2 = n-n1
@@ -105,7 +105,7 @@ colnames(dataSet) = c("dateAndTime", "fiveMinuteMean", "trafficVolume", "actualT
 
 # Compute five minute mean travel times and traffic volume
 print("Computing five minute means and traffic volumes...")
-for (i in n1:n){
+for (i in (n1+1):n){
   prevRows = getRowsForLastFiveMinutes(i)
   if(nrow(prevRows)>=1){
     dataSet[(i-n1), c("fiveMinuteMean")] = mean(prevRows$time)
