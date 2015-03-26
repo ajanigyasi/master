@@ -6,13 +6,20 @@ library(kernlab)
 source("dataSetGetter.R")
 
 createBaseline <- function(model) {
+  formula = actualTravelTime~fiveMinuteMean+trafficVolume
   switch(model,
          "svm" = {
-           train(actualTravelTime~fiveMinuteMean+trafficVolume, trainingSet, method="svmLinear")
+           train(formula, trainingSet, method="svmLinear")
          },
          "ann" = {
-           train(actualTravelTime~fiveMinuteMean+trafficVolume, trainingSet, method="nnet", maxit=100, linout=TRUE)
-         }
+           train(formula, trainingSet, method="nnet", maxit=100, linout=TRUE)
+         },
+         "knn" = {
+           train(formula, trainingSet, method="knn")
+         }#,
+         #"kalman" = {
+          #TODO:call kalman function 
+         #}
          )
 }
 
@@ -29,11 +36,27 @@ getPredictions <- function(baselines) {
   
   for (i in 1:length(baselines)) {
     baseline <- baselines[[i]]
-    predictions <- predict(baseline, testingSet)
-    denormalizedPredictions <- deNormalize(predictions, minTravelTime, maxTravelTime)
-    #print(baseline$method)
-    testingSet[baseline$method] <<- denormalizedPredictions
-    #print(testingSet[baseline$method])
+    if (baseline$method == "kalman") {
+      #TODO:handle kalman preditions
+    }
+    else {
+      predictions <- predict(baseline, testingSet)
+      denormalizedPredictions <- deNormalize(predictions, minTravelTime, maxTravelTime)
+      testingSet[baseline$method] <<- denormalizedPredictions
+    }
+  }
+}
+
+storePredictions <- function() {
+  #create list of dates
+  firstDate <- as.Date(testingSet[1, "dateAndTime"])
+  lastDate <- as.Date(testingSet[nrow(testingSet), "dateAndTime"])
+  listOfDates <- seq(firstDate, lastDate, by="days")
+  
+  #create data frame from testingSet for each day in list of dates and write to csv file
+  for (i in 1:length(listOfDates)) {
+    date = listOfDates[i]
+    write.csv(testingSet[testingSet$dateAndTime == date, ], file = paste(directory, as.character(date), "_test.csv", sep = ""), sep = ";")
   }
 }
 
@@ -52,7 +75,7 @@ testingSet <- dataSet[splitIndex:nrow(dataSet), ]
 trainingSet$actualTravelTime <- preProcess(trainingSet, "actualTravelTime")
 
 #TODO:remove when done testing
-trainingSet <- trainingSet[1:1000, ]
+trainingSet <- trainingSet[1:100, ]
 
 cluster <- makeMPIcluster(2)
 
@@ -61,9 +84,9 @@ clusterCall(cluster, function() library(caret))
 clusterCall(cluster, function() library(kernlab))
 clusterExport(cluster, c("trainingSet"), envir = .GlobalEnv)
 
-baselines <- clusterApply(cluster, c("svm", "ann"), createBaseline)
+baselines <- clusterApply(cluster, c("svm", "ann", "knn"), createBaseline)
 
 stopCluster(cluster)
 
 getPredictions(baselines)
-
+storePredictions()
