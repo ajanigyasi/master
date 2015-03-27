@@ -10,12 +10,16 @@ createBaseline <- function(model) {
   switch(model,
          "svm" = {
            train(formula, trainingSet, method="svmLinear")
+           #train(formula, trainingSet, method="svmPoly")
+           #train(formula, trainingSet, method="svmRadial")
          },
-         "ann" = {
-           train(formula, trainingSet, method="nnet", maxit=100, linout=TRUE)
+         "ann" ={ 
+           train(formula, traningSet, method="neuralnet")
+           #caret finds optimal number of hidden nodes
          },
          "knn" = {
-           train(formula, trainingSet, method="knn")
+           train(formula, trainingSet, method="kknn")
+           #caret finds optimal k, kernel, and minkowski distance
          }#,
          #"kalman" = {
           #TODO:call kalman function 
