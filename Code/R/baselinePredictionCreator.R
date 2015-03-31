@@ -64,6 +64,10 @@ storePredictions <- function() {
   }
 }
 
+getKalmanFilterPredictions <- function(){
+  
+}
+
 startDate <- "20150129"
 endDate <- "20150311"
 directory <- "../../Data/Autopassdata/Singledatefiles/Dataset/"
