@@ -1,12 +1,13 @@
 library(caret)
 #library(kernlab) #needed for svm
 library(elasticnet) #needed for lasso
+source("dataSetGetter.R")
 
 #--------------------- OLD CODE START ---------------------------
-# #read data 
-# klett_samf_jan14 = read.csv2("../../Data/5-min data/O3-H-01-2014/klett_samf_jan14.csv")
-# 
-# #extract travel times and construct trainingdata
+#read data 
+#klett_samf_jan14 = read.csv2("../../Data/5-min data/O3-H-01-2014/klett_samf_jan14.csv")
+
+#extract travel times and construct trainingdata
 # traveltimes = klett_samf_jan14$Reell.reisetid..sek.
 # l = length(traveltimes)
 # y = traveltimes[-1:-2]
@@ -34,25 +35,16 @@ library(elasticnet) #needed for lasso
 # response <- data[-trainingindices, 3]
 #--------------------- OLD CODE END ---------------------------
 
-# Read data set. TODO: change these to the proper paths
-annFullPath = "../../Data/Autopassdata/Singledatefiles/Dataset/20150129_dataset_ann.csv"
-knnFullPath = "../../Data/Autopassdata/Singledatefiles/Dataset/20150129_dataset_knn.csv"
-svmFullPath = "../../Data/Autopassdata/Singledatefiles/Dataset/20150129_dataset_svm.csv"
-kfFullPath = "../../Data/Autopassdata/Singledatefiles/Dataset/20150129_dataset_kf.csv"
-trueTravelTimesPath = "../../Data/Autopassdata/Singledatefiles/Dataset/20150129_dataset_kf.csv"
+# TODO: read actual predictions made by the baselines
+trainingPredictions = as.matrix(getDataSetForBaselines("20150129", "20150129", "../../Data/Autopassdata/Singledatefiles/Dataset/", c("ann", "knn", "svm", "kf")))
+trainingResponse = getDataSet("20150129", "20150129", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", onlyActualTravelTimes=TRUE)[, 1]
 
-# Remember to remove the divisions, and add the proper column name. This is just to make the numbers different
-annPredictions = read.csv(annFullPath, , sep=";", stringsAsFactor = FALSE)$actualTravelTime/4
-knnPredictions = read.csv(knnFullPath, , sep=";", stringsAsFactor = FALSE)$actualTravelTime/2
-svmPredictions = read.csv(svmFullPath, , sep=";", stringsAsFactor = FALSE)$actualTravelTime/3
-kfPredictions = read.csv(kfFullPath, , sep=";", stringsAsFactor = FALSE)$actualTravelTime/5
-trueTravelTimes = read.csv(trueTravelTimesPath, , sep=";", stringsAsFactor = FALSE)$actualTravelTime
+# create lasso model based on the predictions and correct travel times
+lasso <- train(trainingPredictions, trainingResponse, method="lasso") #setting lambda=0 performs lasso fit
 
-predictions = as.matrix(cbind(annPredictions, knnPredictions, svmPredictions, kfPredictions))
-response = trueTravelTimes
-
-#create lasso model based on the predictions and correct travel times
-lasso <- train(predictions, response, method="lasso") #setting lambda=0 performs lasso fit
+# TODO: read actual predictions made by the baselines
+testingPredictions = as.matrix(getDataSetForBaselines("20150130", "20150130", "../../Data/Autopassdata/Singledatefiles/Dataset/", c("ann", "knn", "svm", "kf")))
+testingResponse = getDataSet("20150130", "20150130", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", onlyActualTravelTimes=TRUE)[, 1]
 
 #use lasso model to predict
-lassoPredictions <- predict(lasso, predictions) #we predict the same data we trained on, don't do this!
+lassoPredictions <- predict(lasso, testingPredictions)
