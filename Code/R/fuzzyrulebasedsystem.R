@@ -2,16 +2,16 @@ library(caret)
 library(frbs)
 library(kernlab)
 
-#read data 
-klett_samf_jan14 = read.csv2("../../Data/O3-H-01-2014/klett_samf_jan14.csv")
-
-#extract travel times and construct trainingdata
-traveltimes = klett_samf_jan14$Reell.reisetid..sek.
-l = length(traveltimes)
-y = traveltimes[-1:-2]
-x1 = traveltimes[2:(l-1)]
-x2 = traveltimes[1:(l-2)]
-data = as.data.frame(cbind(x1, x2, y))
+# #read data 
+# klett_samf_jan14 = read.csv2("../../Data/O3-H-01-2014/klett_samf_jan14.csv")
+# 
+# #extract travel times and construct trainingdata
+# traveltimes = klett_samf_jan14$Reell.reisetid..sek.
+# l = length(traveltimes)
+# y = traveltimes[-1:-2]
+# x1 = traveltimes[2:(l-1)]
+# x2 = traveltimes[1:(l-2)]
+# data = as.data.frame(cbind(x1, x2, y))
 
 #create triangular membership functions
 min.value = min(traveltimes)
@@ -55,22 +55,26 @@ frbs.model <- frbs.gen(range.data, num.fvalinput, names.varinput, num.fvaloutput
                        names.varoutput, rule, varinp.mf, type.model, type.defuz, type.tnorm, type.snorm, 
                        type.implication.func, colnames.var, name)
 
-#partition data into training and testing sets
-trainingindices <- unlist(createDataPartition(1:8926, p=0.7))
-trainingdata <- data[trainingindices, ]
-testingdata <- data[-trainingindices, 1:2]
-targettraveltimes <- data[-trainingindices, 3]
+# #partition data into training and testing sets
+# trainingindices <- unlist(createDataPartition(1:8926, p=0.7))
+# trainingdata <- data[trainingindices, ]
+# testingdata <- data[-trainingindices, 1:2]
+# targettraveltimes <- data[-trainingindices, 3]
+
 
 #train baselines
-knn <- knnreg(trainingdata[, 1:2], trainingdata[, 3])
-svm <- train(y~x1+x2, trainingdata, method="svmLinear")
+# knn <- knnreg(trainingDataSet[, 2:3], trainingDataSet[, 4])
+# svm <- train(actualTravelTime~fiveMinuteMean+trafficVolume, trainingdata, method="svmLinear")
 
 #get baseline predictions
-knn.predictions <- predict(knn, testingdata)
-svm.predictions <- predict(svm, testingdata)
+# knn.predictions <- predict(knn, testingdata)
+# svm.predictions <- predict(svm, testingdata)
+
+baselinePredictions = getDataSetForBaselines("20150129", "20150129", "../../Data/Autopassdata/Singledatefiles/Dataset/", c("knn", "svm"))
+actualTravelTimes = getDataSet("20150129", "20150129", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", onlyActualTravelTimes=TRUE)
 
 #input predictions from svm and knn into frbs
-baseline.predictions <- as.data.frame(cbind(svm.predictions, knn.predictions))
-frbs.predictions <- predict(frbs.model, baseline.predictions)$predicted.val
+#baseline.predictions <- as.data.frame(cbind(svm.predictions, knn.predictions))
+frbs.predictions <- predict(frbs.model, baselinePredictions)$predicted.val
 
-comparison <- as.data.frame(cbind(frbs.predictions, targettraveltimes))
+comparison <- as.data.frame(cbind(frbs.predictions, actualTravelTimes))
