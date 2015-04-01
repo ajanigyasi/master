@@ -26,6 +26,20 @@ getDataSet <- function(startDate, endDate, directory){
   return(combinedDataSet)
 }
 
+# Returns a data set for which each column represents the predictions for the different baselines provided in the argument "baselines"
+# This function assumes that directory is the path to the dataset folder, and that there exists a sub-folder in that directory
+# for each baseline which contains predictions made from that baseline for the different dates
+getDataSetForBaselines <- function(startDate, endDate, directory, baselines){
+  firstBaseLine = baselines[1]
+  combinedDataSet = data.frame(getDataSet(startDate, endDate, paste(directory, firstBaseLine, "/", sep="")))
+  for(baseline in baselines[-1]){
+    dataSet = data.frame(getDataSet(startDate, endDate, paste(directory, baseline, "/", sep="")))
+    combinedDataSet = data.frame(cbind(combinedDataSet, dataSet))
+  }
+  colnames(combinedDataSet) = baselines
+  return(combinedDataSet)
+}
+
 # Function for normalizing a vector
 normalize <- function(x, min, max){
   return((x-min)/(max-min))

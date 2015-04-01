@@ -70,7 +70,7 @@ getKalmanFilterPredictions <- function(){
 
 startDate <- "20150129"
 endDate <- "20150311"
-directory <- "../../Data/Autopassdata/Singledatefiles/Dataset/"
+directory <- "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
 dataSet <- getDataSet(startDate, endDate, directory)
 
 #normalize data and partition into training and testing set
