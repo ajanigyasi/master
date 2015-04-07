@@ -60,7 +60,7 @@ storePredictions <- function() {
   #create data frame from testingSet for each day in list of dates and write to csv file
   for (i in 1:length(listOfDates)) {
     date = listOfDates[i]
-    write.csv(testingSet[testingSet$dateAndTime == date, c("dateAndTime", "ann", "knn", "svm")], file = paste(directory, "predictions/", gsub("-", "", as.character(date)), "_test.csv", sep = ""), sep = ";")
+    write.csv(testingSet[testingSet$dateAndTime == date, c("dateAndTime", "neuralnet", "kknn", "svmLinear")], file = paste(directory, "predictions/", gsub("-", "", as.character(date)), "_predictions.csv", sep = ""), sep = ";")
   }
 }
 
@@ -85,21 +85,16 @@ trainingSet$actualTravelTime <- preProcess(trainingSet, "actualTravelTime")
 #TODO:remove when done testing
 trainingSet <- trainingSet[1:100, ]
 
-# cluster <- makeMPIcluster(2)
-# 
-# #set up environment
-# clusterCall(cluster, function() library(caret))
-# clusterCall(cluster, function() library(kernlab))
-# clusterExport(cluster, c("trainingSet"), envir = .GlobalEnv)
-# 
-# baselines <- clusterApply(cluster, c("svm", "ann", "knn"), createBaseline)
-# 
-# stopCluster(cluster)
+cluster <- makeMPIcluster(2)
 
-svm <- createBaseline("svm")
-ann <- createBaseline("ann")
-knn <- createBaseline("knn")
-baselines = list(svm, ann, knn)
+#set up environment
+clusterCall(cluster, function() library(caret))
+clusterCall(cluster, function() library(kernlab))
+clusterExport(cluster, c("trainingSet"), envir = .GlobalEnv)
+
+baselines <- clusterApply(cluster, c("svm", "ann", "knn"), createBaseline)
+
+stopCluster(cluster)
 
 getPredictions(baselines)
 storePredictions()
