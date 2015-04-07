@@ -14,7 +14,7 @@ createBaseline <- function(model) {
            #train(formula, trainingSet, method="svmRadial")
          },
          "ann" ={ 
-           train(formula, traningSet, method="neuralnet")
+           train(formula, trainingSet, method="neuralnet")
            #caret finds optimal number of hidden nodes
          },
          "knn" = {
