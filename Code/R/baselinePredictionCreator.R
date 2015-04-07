@@ -14,7 +14,7 @@ createBaseline <- function(model) {
            #train(formula, trainingSet, method="svmRadial")
          },
          "ann" ={ 
-           train(formula, traningSet, method="neuralnet")
+           train(formula, trainingSet, method="neuralnet")
            #caret finds optimal number of hidden nodes
          },
          "knn" = {
@@ -60,7 +60,7 @@ storePredictions <- function() {
   #create data frame from testingSet for each day in list of dates and write to csv file
   for (i in 1:length(listOfDates)) {
     date = listOfDates[i]
-    write.csv(testingSet[testingSet$dateAndTime == date, ], file = paste(directory, as.character(date), "_test.csv", sep = ""), sep = ";")
+    write.csv(testingSet[testingSet$dateAndTime == date, c("dateAndTime", "ann", "knn", "svm")], file = paste(directory, "predictions/", gsub("-", "", as.character(date)), "_test.csv", sep = ""), sep = ";")
   }
 }
 
@@ -70,8 +70,8 @@ getKalmanFilterPredictions <- function(){
 
 startDate <- "20150129"
 endDate <- "20150311"
-directory <- "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
-dataSet <- getDataSet(startDate, endDate, directory)
+directory <- "../../Data/Autopassdata/Singledatefiles/Dataset/"
+dataSet <- getDataSet(startDate, endDate, paste(directory, "raw/", sep=""))
 
 #normalize data and partition into training and testing set
 dataSet$fiveMinuteMean <- preProcess(dataSet, "fiveMinuteMean")
