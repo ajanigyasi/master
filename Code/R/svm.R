@@ -58,9 +58,6 @@ ctrl <- trainControl(verboseIter = TRUE)
 cl <- makeMPIcluster(4)
 registerDoSNOW(cl)
 
-#TODO: remove after testing is finished
-trainingSet <- trainingSet[1:100, ]
-
 time_used <- system.time({
   linear.svm <- train(formula, trainingSet, method="svmLinear", trControl=ctrl)
   print("linear done")
