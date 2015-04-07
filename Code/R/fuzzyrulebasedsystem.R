@@ -78,3 +78,5 @@ actualTravelTimes = getDataSet("20150129", "20150129", "../../Data/Autopassdata/
 frbs.predictions <- predict(frbs.model, baselinePredictions)$predicted.val
 
 comparison <- as.data.frame(cbind(frbs.predictions, actualTravelTimes))
+
+# TODO: write FRBS predictions to file

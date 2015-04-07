@@ -10,7 +10,7 @@ reiserFilesPath = "../Data/Autopassdata/Singledatefiles/Reiser/IncludingTravelTi
 # Path to passeringer data files
 passeringerFilesPath = "../Data/Autopassdata/Singledatefiles/Passeringer/ExcludingTravelTimes/"
 # Path to where to save data set
-dataSetFilePath = "../Data/Autopassdata/Singledatefiles/Dataset/"
+dataSetFilePath = "../Data/Autopassdata/Singledatefiles/Dataset/raw"
 # First argument is the first date
 firstDate =  args[1]
 # Second argument is the second date year

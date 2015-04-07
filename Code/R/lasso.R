@@ -48,3 +48,5 @@ testingResponse = getDataSet("20150130", "20150130", "../../Data/Autopassdata/Si
 
 #use lasso model to predict
 lassoPredictions <- predict(lasso, testingPredictions)
+
+# TODO: Write lasso predictions to file
