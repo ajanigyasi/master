@@ -1,6 +1,7 @@
 library(caret)
 library(kernlab) #needed for svm
 library(Metrics) #needed for rmse
+library(doSNOW)
 
 # ----- old code -----
 
@@ -38,7 +39,7 @@ preProcess <- function(data, column) {
 
 startDate <- "20150129"
 endDate <- "20150311"
-directory <- "../../Data/Autopassdata/Singledatefiles/Dataset/"
+directory <- "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
 dataSet <- getDataSet(startDate, endDate, directory)
 
 #normalize data and partition into training and testing set
@@ -50,9 +51,26 @@ trainingSet <- dataSet[1:(splitIndex-1), ]
 testingSet <- dataSet[splitIndex:nrow(dataSet), ]
 trainingSet$actualTravelTime <- preProcess(trainingSet, "actualTravelTime")
 
-linear.svm <- train(formula, trainingSet, method="svmLinear")
-poly.svm <- train(formula, trainingSet, method="svmPoly")
-radial.svm <- train(formula, trainingSet, method="svmRadial")
+formula <- actualTravelTime~fiveMinuteMean+trafficVolume
+ctrl <- trainControl(verboseIter = TRUE)
+
+#enable parallel execution
+cl <- makeMPIcluster(4)
+registerDoSNOW(cl)
+
+#TODO: remove after testing is finished
+trainingSet <- trainingSet[1:100, ]
+
+time_used <- system.time({
+  linear.svm <- train(formula, trainingSet, method="svmLinear", trControl=ctrl)
+  print("linear done")
+  poly.svm <- train(formula, trainingSet, method="svmPoly", trControl=ctrl)
+  print("poly done")
+  radial.svm <- train(formula, trainingSet, method="svmRadial", trControl=ctrl)
+  print("radial done")
+})
+
+stopCluster(cl)
 
 pred.linear.svm <- predict(linear.svm, testingSet)
 pred.poly.svm <- predict(poly.svm, testingSet)
@@ -64,3 +82,8 @@ maximum <- max(dataSet$actualTravelTime)
 rmse.linear.svm <- rmse(actual, deNormalize(pred.linear.svm, minimum, maximum))
 rmse.poly.svm <- rmse(actual, deNormalize(pred.poly.svm, minimum, maximum))
 rmse.radial.svm <- rmse(actual, deNormalize(pred.radial.svm, minimum, maximum))
+
+print(time_used)
+print(paste("linear:", rmse.linear.svm, sep=" "))
+print(paste("poly:", rmse.poly.svm, sep=" "))
+print(paste("radial:", rmse.radial.svm, sep=" "))
