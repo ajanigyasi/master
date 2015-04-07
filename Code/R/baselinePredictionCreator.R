@@ -85,16 +85,21 @@ trainingSet$actualTravelTime <- preProcess(trainingSet, "actualTravelTime")
 #TODO:remove when done testing
 trainingSet <- trainingSet[1:100, ]
 
-cluster <- makeMPIcluster(2)
+# cluster <- makeMPIcluster(2)
+# 
+# #set up environment
+# clusterCall(cluster, function() library(caret))
+# clusterCall(cluster, function() library(kernlab))
+# clusterExport(cluster, c("trainingSet"), envir = .GlobalEnv)
+# 
+# baselines <- clusterApply(cluster, c("svm", "ann", "knn"), createBaseline)
+# 
+# stopCluster(cluster)
 
-#set up environment
-clusterCall(cluster, function() library(caret))
-clusterCall(cluster, function() library(kernlab))
-clusterExport(cluster, c("trainingSet"), envir = .GlobalEnv)
-
-baselines <- clusterApply(cluster, c("svm", "ann", "knn"), createBaseline)
-
-stopCluster(cluster)
+svm <- createBaseline("svm")
+ann <- createBaseline("ann")
+knn <- createBaseline("knn")
+baselines = list(svm, ann, knn)
 
 getPredictions(baselines)
 storePredictions()
