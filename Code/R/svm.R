@@ -59,7 +59,7 @@ ctrl <- trainControl(verboseIter = TRUE)
 # registerDoSNOW(cl)
 
 time_used <- system.time({
-  linear.svm <- train(formula, trainingSet, method="svmLinear", trControl=ctrl)
+  linear.svm <- train(formula, trainingSet, method="svmLinear", trControl=ctrl, tuneGrid = data.frame(C = c(0.25, 0.5, 1)))
   print("linear done")
   poly.svm <- train(formula, trainingSet, method="svmPoly", trControl=ctrl)
   print("poly done")
@@ -68,6 +68,7 @@ time_used <- system.time({
 })
 
 #stopCluster(cl)
+
 
 pred.linear.svm <- predict(linear.svm, testingSet)
 pred.poly.svm <- predict(poly.svm, testingSet)
