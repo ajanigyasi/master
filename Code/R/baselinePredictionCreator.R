@@ -6,8 +6,6 @@ library(kernlab)
 source("dataSetGetter.R")
 source("kalmanFilter.R")
 
-
-
 startDate <- "20150129"
 endDate <- "20150311"
 splitDate <- "20150219"
@@ -18,7 +16,7 @@ createBaseline <- function(model) {
   ctrl <- trainControl(verboseIter = TRUE)
   switch(model,
          "svm" = {
-           #train(formula, trainingSet, method="svmLinear", trControl = ctrl)
+           train(formula, trainingSet, method="svmLinear", trControl = ctrl)
            #train(formula, trainingSet, method="svmPoly", trControl = ctrl)
            #train(formula, trainingSet, method="svmRadial", trControl = ctrl)
          },
@@ -68,7 +66,7 @@ storePredictions <- function() {
   #create data frame from testingSet for each day in list of dates and write to csv file
   for (i in 1:length(listOfDates)) {
     date = listOfDates[i]
-    write.csv(testingSet[testingSet$dateAndTime == date, c("dateAndTime", "neuralnet", "kknn", "svmLinear", "kalmanFilter")], file = paste(directory, "predictions/", gsub("-", "", as.character(date)), "_predictions.csv", sep = ""), sep = ";", row.names=FALSE)
+    write.csv(testingSet[testingSet$dateAndTime == date, c("dateAndTime", "neuralnet", "kknn", "svmLinear", "kalmanFilter")], file = paste(directory, "predictions/", gsub("-", "", as.character(date)), "_baselines.csv", sep = ""), sep = ";", row.names=FALSE)
   }
 }
 dataSet <- getDataSet(startDate, endDate, paste(directory, "raw/", sep=""))
