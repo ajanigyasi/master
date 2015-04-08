@@ -15,7 +15,7 @@ source("dataSetGetter.R")
 # observations = as.matrix(dataSet$actualTravelTime)
 
 # Function for evaluating creating a dlm polynomial model with the given parameters
-timesBuild <- function(par){
+timesBuild <- function(par, m0=300, C0=100){
 #   #print(par)
 #   priorStateMean=dataSet$actualTravelTime[1]
 #   #print(m0)
@@ -32,7 +32,7 @@ timesBuild <- function(par){
 #   stateVariance=exp(par[4])
 #   #cat("W: ", stateVariance, "\n")
 #   return(dlm(m0=priorStateMean, C0=priorStateVariance, FF=mapStateToObservation, V=observationVariance, GG=mapStateToState, W=stateVariance))
-  return(dlmModPoly(order=1, m0=observations[1], C0=sd(observations), dV=exp(par[1]), dW=exp(par[2])))
+  return(dlmModPoly(order=1, m0=m0, C0=C0, dV=exp(par[1]), dW=exp(par[2])))
 }
 
 getKalmanFilterPredictions <- function(startDate, testingStartDate, endDate, directory){  
@@ -46,10 +46,10 @@ getKalmanFilterPredictions <- function(startDate, testingStartDate, endDate, dir
   par <- c(0, 0)
   
   # Find optimal parameters for filter
-  timesMLE <- dlmMLE(observations, par, timesBuild)
+  timesMLE <- dlmMLE(observations, par, timesBuild, m0=observations[1], C0=sd(observations))
   
   # Build model from the optimal parameters
-  timesMod <- timesBuild(timesMLE$par)
+  timesMod <- timesBuild(timesMLE$par, m0=observations[1], C0=sd(observations))
   
   # Build filter based on model
   timesFilt <- dlmFilter(observations, timesMod)
