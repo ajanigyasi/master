@@ -38,14 +38,14 @@ preProcess <- function(data, column) {
 }
 
 startDate <- "20150129"
-endDate <- "20150311"
+endDate <- "20150212"
 directory <- "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
 dataSet <- getDataSet(startDate, endDate, directory)
 
 #normalize data and partition into training and testing set
 dataSet$fiveMinuteMean <- preProcess(dataSet, "fiveMinuteMean")
 dataSet$trafficVolume <- preProcess(dataSet, "trafficVolume")
-splitDate <- as.Date(c("20150219"), "%Y%m%d")
+splitDate <- as.Date(c("20150206"), "%Y%m%d")
 splitIndex <- which(dataSet$dateAndTime >= splitDate)[1]
 trainingSet <- dataSet[1:(splitIndex-1), ]
 testingSet <- dataSet[splitIndex:nrow(dataSet), ]
@@ -55,8 +55,8 @@ formula <- actualTravelTime~fiveMinuteMean+trafficVolume
 ctrl <- trainControl(verboseIter = TRUE)
 
 #enable parallel execution
-cl <- makeMPIcluster(4)
-registerDoSNOW(cl)
+# cl <- makeMPIcluster(4)
+# registerDoSNOW(cl)
 
 time_used <- system.time({
   linear.svm <- train(formula, trainingSet, method="svmLinear", trControl=ctrl)
@@ -67,7 +67,7 @@ time_used <- system.time({
   print("radial done")
 })
 
-stopCluster(cl)
+#stopCluster(cl)
 
 pred.linear.svm <- predict(linear.svm, testingSet)
 pred.poly.svm <- predict(poly.svm, testingSet)
