@@ -66,7 +66,7 @@ storePredictions <- function() {
   #create data frame from testingSet for each day in list of dates and write to csv file
   for (i in 1:length(listOfDates)) {
     date = listOfDates[i]
-    write.csv(testingSet[testingSet$dateAndTime == date, c("dateAndTime", "neuralnet", "kknn", "svmLinear", "kalmanFilter")], file = paste(directory, "predictions/", gsub("-", "", as.character(date)), "_baselines.csv", sep = ""), sep = ";", row.names=FALSE)
+    write.table(testingSet[testingSet$dateAndTime == date, c("dateAndTime", "neuralnet", "kknn", "svmLinear", "kalmanFilter")], file = paste(directory, "predictions/", gsub("-", "", as.character(date)), "_baselines.csv", sep = ""), sep = ";", row.names=FALSE)
   }
 }
 dataSet <- getDataSet(startDate, endDate, paste(directory, "raw/", sep=""))
