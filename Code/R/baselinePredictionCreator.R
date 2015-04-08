@@ -6,20 +6,23 @@ library(kernlab)
 source("dataSetGetter.R")
 
 createBaseline <- function(model) {
-  formula = actualTravelTime~fiveMinuteMean+trafficVolume
+  formula <- actualTravelTime~fiveMinuteMean+trafficVolume
+  ctrl <- trainControl(verboseIter = TRUE)
   switch(model,
          "svm" = {
-           train(formula, trainingSet, method="svmLinear")
-           #train(formula, trainingSet, method="svmPoly")
-           #train(formula, trainingSet, method="svmRadial")
+           #train(formula, trainingSet, method="svmLinear", trControl = ctrl)
+           #train(formula, trainingSet, method="svmPoly", trControl = ctrl)
+           #train(formula, trainingSet, method="svmRadial", trControl = ctrl)
          },
-         "ann" ={ 
-           train(formula, trainingSet, method="neuralnet")
-           #caret finds optimal number of hidden nodes
+         "ann" ={
+           #TODO: set grid to decide how many hidden nodes in layer 1
+           train(formula, trainingSet, method="neuralnet", trControl = ctrl)
+           #caret finds optimal number of hidden nodes in layer 1, 2 and 3
          },
          "knn" = {
-           train(formula, trainingSet, method="kknn")
-           #caret finds optimal k, kernel, and minkowski distance
+           knn_grid <- expand.grid(kmax = c(3, 5, 7, 10), distance = c(1, 2), kernel = c("rectangular", "optimal"))
+           train(formula, trainingSet, method="kknn", trControl = ctrl, tuneGrid = knn_grid)
+           #caret finds optimal kmax, kernel, and minkowski distance
          }#,
          #"kalman" = {
           #TODO:call kalman function 
@@ -85,6 +88,7 @@ trainingSet$actualTravelTime <- preProcess(trainingSet, "actualTravelTime")
 #TODO:remove when done testing
 trainingSet <- trainingSet[1:100, ]
 
+setDefaultClusterOptions(outfile = "baselinePredictionCreator_output")
 cluster <- makeMPIcluster(2)
 
 #set up environment

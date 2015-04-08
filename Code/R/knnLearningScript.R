@@ -20,7 +20,7 @@ targettraveltimes = data[-trainingindices, 3]
 
 #Train kNN
 ctrl <- trainControl(verboseIter = TRUE)
-knn = train(trainingdata[, 1:2], trainingdata[, 3], method="kknn", trControl = ctrl)
+knn = train(trainingdata[, 1:2], trainingdata[, 3], method="kknn", trControl = ctrl, tuneGrid = expand.grid(kmax = c(3, 5, 7, 10), distance = c(1, 2), kernel = c("rectangular", "optimal")))
 
 #Test kNN
 predictedtraveltimes = predict(knn, testingdata)
