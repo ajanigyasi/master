@@ -40,11 +40,11 @@ trainingPredictions = as.matrix(getDataSetForBaselines("20150129", "20150129", "
 trainingResponse = getDataSet("20150129", "20150129", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", onlyActualTravelTimes=TRUE)[, 1]
 
 # create lasso model based on the predictions and correct travel times
-lasso <- train(trainingPredictions, trainingResponse, method="lasso") #setting lambda=0 performs lasso fit
+lasso <- train(trainingPredictions, trainingResponse, method="lasso")
 
 # TODO: read actual predictions made by the baselines
 testingPredictions = as.matrix(getDataSetForBaselines("20150130", "20150130", "../../Data/Autopassdata/Singledatefiles/Dataset/", c("ann", "knn", "svm", "kf")))
-testingResponse = getDataSet("20150130", "20150130", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", onlyActualTravelTimes=TRUE)[, 1]
+#testingResponse = getDataSet("20150130", "20150130", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", onlyActualTravelTimes=TRUE)[, 1]
 
 #use lasso model to predict
 lassoPredictions <- predict(lasso, testingPredictions)
