@@ -24,17 +24,15 @@ createBaseline <- function(model) {
          },
          "ann" ={
            #TODO: set grid to decide how many hidden nodes in layer 1
-           train(formula, trainingSet, method="neuralnet", trControl = ctrl)
+           ann_grid <- data.frame(layer1 = c(1, 2, 4, 8, 16), layer2 = 0, layer3 = 0)
+           train(formula, trainingSet, method="neuralnet", trControl = ctrl, tuneGrid = ann_grid)
            #caret finds optimal number of hidden nodes in layer 1, 2 and 3
          },
          "knn" = {
            knn_grid <- expand.grid(kmax = c(3, 5, 7, 10), distance = c(1, 2), kernel = c("rectangular", "optimal"))
            train(formula, trainingSet, method="kknn", trControl = ctrl, tuneGrid = knn_grid)
            #caret finds optimal kmax, kernel, and minkowski distance
-         }#,
-         #"kalman" = {
-          #TODO:call kalman function 
-         #}
+         }
          )
 }
 
