@@ -4,6 +4,7 @@ library(caret)
 library(kernlab)
 
 source("dataSetGetter.R")
+source("kalmanFilter.R")
 
 createBaseline <- function(model) {
   formula <- actualTravelTime~fiveMinuteMean+trafficVolume
@@ -43,15 +44,15 @@ getPredictions <- function(baselines) {
   
   for (i in 1:length(baselines)) {
     baseline <- baselines[[i]]
-    if (baseline$method == "kalman") {
-      #TODO:handle kalman preditions
-    }
-    else {
-      predictions <- predict(baseline, testingSet)
-      denormalizedPredictions <- deNormalize(predictions, minTravelTime, maxTravelTime)
-      testingSet[baseline$method] <<- denormalizedPredictions
-    }
+    predictions <- predict(baseline, testingSet)
+    denormalizedPredictions <- deNormalize(predictions, minTravelTime, maxTravelTime)
+    testingSet[baseline$method] <<- denormalizedPredictions
   }
+  
+  # Handle Kalman Filter predictions
+  predictions <- getKalmanFilterPredictions("20150129", "20150219",  "20150311", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/")
+  testingSet["kalmanFilter"] <<- predictions
+  
 }
 
 storePredictions <- function() {
@@ -65,10 +66,6 @@ storePredictions <- function() {
     date = listOfDates[i]
     write.csv(testingSet[testingSet$dateAndTime == date, c("dateAndTime", "neuralnet", "kknn", "svmLinear")], file = paste(directory, "predictions/", gsub("-", "", as.character(date)), "_predictions.csv", sep = ""), sep = ";", row.names=FALSE)
   }
-}
-
-getKalmanFilterPredictions <- function(){
-  
 }
 
 startDate <- "20150129"
