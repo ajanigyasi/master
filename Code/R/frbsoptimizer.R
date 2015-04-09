@@ -35,40 +35,54 @@ source("dataSetGetter.R")
 # svm.predictions <- predict(svm, testingdata.input)
 # knn.predictions <- predict(knn, testingdata.input)
 
+# Set start and end dates for training and testing
 frbsTrainingStartDate = "20150219"
 frbsTrainingEndDate = "20150219"
 frbsTestingStartDate = "20150220"
 frbsTestingEndDate = "20150220"
 
+# Set directories for data sets and predictions
 dataSetDirectory = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
 predictionsDirectory = "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/"
 
-baselinePredictions = getDataSet(frbsTrainingStartDate, frbsTrainingEndDate, predictionsDirectory)
-actualTravelTimes = getDataSet(frbsTrainingStartDate, frbsTrainingEndDate, dataSetDirectory , onlyActualTravelTimes=TRUE)
+# Read training inputs and training targets
+frbsTrainingInputs = getDataSet(frbsTrainingStartDate, frbsTrainingEndDate, predictionsDirectory)
+frbsTrainingTargets = getDataSet(frbsTrainingStartDate, frbsTrainingEndDate, dataSetDirectory , onlyActualTravelTimes=TRUE)
 
-frbsTestingData = getDataSet(frbsTestingStartDate, frbsTestingEndDate, predictionsDirectory)
-frbsTestingData <- data.frame(abs(cbind(frbsTestingData$neuralnet, frbsTestingData$kalmanFilter)))
-colnames(frbsTestingData) = c("ANN", "KalmanFilter")
+# Read testing inputs and testing targets
+frbsTestingInputs = getDataSet(frbsTestingStartDate, frbsTestingEndDate, predictionsDirectory)
+frbsTestingInputs <- data.frame(abs(cbind(frbsTestingInputs$neuralnet, frbsTestingInputs$kalmanFilter)))
+colnames(frbsTestingInputs) = c("ANN", "KalmanFilter")
+frbsTestingDataSet <- getDataSet(frbsTestingStartDate, frbsTestingEndDate, dataSetDirectory)
+frbsTestingTargets <- frbsTestingDataSet$actualTravelTime
+colnames(frbsTestingTargets) = c("ActualTravelTime")
+numberOfTestingExamples = nrow(frbsTestingTargets)
 
-actualTravelTimesTesting <- getDataSet(frbsTestingStartDate, frbsTestingEndDate, dataSetDirectory, onlyActualTravelTimes=TRUE)
-colnames(actualTravelTimesTesting) = c("ActualTravelTime")
-numberOfTestingExamples = nrow(actualTravelTimesTesting)
+# Make data frame which contains both testing inputs and testing targets
+comp <- data.frame(frbsTestingInputs, frbsTestingTargets)
 
-comp <- data.frame(frbsTestingData, actualTravelTimesTesting)
-
+# Find the rows where ANN performs better than Kalman Filter
 annIndex <- which((comp$ANN-comp$ActualTravelTime)<(comp$KalmanFilter-comp$ActualTravelTime))
+
+# Find the rows where Kalman Filter performs better than ANN
 kalmanFilterIndex <- which(!((comp$ANN-comp$ActualTravelTime)<(comp$KalmanFilter-comp$ActualTravelTime)))
+
+# Store the first index where ANN is better and the last index ANN is better
 firstAnnIndex = head(annIndex, n=1)
 lastAnnIndex = tail(annIndex, n=1)
+
+# Increment the indices because during frbs-prediction the predictions from ANN an Kalman Filter from the previous rows are used
 annIndex <-annIndex+1
 kalmanFilterIndex <- kalmanFilterIndex+1
 
+# Add 1 to the index of the method performing best on the first example
 if(firstAnnIndex==1){
   annIndex = c(1, annIndex)
 } else{
   kalmanFilterIndex = c(1, kalmanFilterIndex)
 }
 
+# Remove the last index of the method performing best on the last example
 if(lastAnnIndex==numberOfTestingExamples){
   annIndex <- head(annIndex, -1)
 } else{
@@ -76,12 +90,12 @@ if(lastAnnIndex==numberOfTestingExamples){
 }
 
 min.value <- 0#min(actualTravelTimes)
-max.value <- max(actualTravelTimes)
+max.value <- max(frbsTrainingTargets)
 
 #the predictions from the baselines are used as training data for the frbs
-x <- data.frame(cbind(baselinePredictions$neuralnet, baselinePredictions$kalmanFilter))
+x <- data.frame(cbind(frbsTrainingInputs$neuralnet, frbsTrainingInputs$kalmanFilter))
 #x <- x[1:10, ]
-y <- data.frame(actualTravelTimes)
+y <- data.frame(frbsTrainingTargets)
 #y <- y[1:10, ]
 
 #set up some parameters needed to generate FRBS
@@ -206,7 +220,7 @@ buildFrbs <- function(params, rule=NULL){
 ############## constrOptim ##############
 
 #theta <- c(222, 290, 304, 313, 323, 333, 347, 368, 505)
-theta <- quantile(actualTravelTimes$combinedDataSet.actualTravelTime, probs=seq(0, 1, 0.1))[2:10]
+theta <- quantile(frbsTrainingTargets$combinedDataSet.actualTravelTime, probs=seq(0, 1, 0.1))[2:10]
 f <- objective.func
 
 #constraints:
@@ -235,19 +249,42 @@ ci <- c(min.value, 0, 0, 0, 0, 0, 0, 0, 0, -max.value)
 
 ctrl <- list(trace = 1, reltol=0.1)
 
+# Optimize two set of parameters, one for each rule base
 annOptim <- constrOptim(theta, f, NULL, ui, ci, control = ctrl, outer.iterations = 1, rule=preferAnnRule)
 kalmanFilterOptim <- constrOptim(theta, f, NULL, ui, ci, control = ctrl, outer.iterations = 1, rule=preferKalmanFilterRule)
 
+# Build two frbs-models based on the two optimal sets of parameters
 annFrbsModel = buildFrbs(annOptim$par, preferAnnRule)
 kalmanFilterFrbsModel = buildFrbs(kalmanFilterOptim$par, preferKalmanFilterRule)
 
-annFrbsPredictions <- data.frame(predict(annFrbsModel, frbsTestingData)$predicted.val)
-kalmanFilterFrbsPredictions <- data.frame(predict(kalmanFilterFrbsModel, frbsTestingData)$predicted.val)
+# Make two sets of predictions, one for each frbs-model
+annFrbsPredictions <- data.frame(predict(annFrbsModel, frbsTestingInputs)$predicted.val)
+kalmanFilterFrbsPredictions <- data.frame(predict(kalmanFilterFrbsModel, frbsTestingInputs)$predicted.val)
 
+# Make final predictions according to the rule base preferring the best performing baseline
 finalPredictions <- data.frame(seq(1, numberOfTestingExamples, 1))
-colnames(finalPredictions) = c("FRBS-Prediction")
+colnames(finalPredictions) = c("frbsPrediction")
 finalPredictions[annIndex, 1] <- annFrbsPredictions[annIndex, 1]
 finalPredictions[kalmanFilterIndex, 1] <- kalmanFilterFrbsPredictions[kalmanFilterIndex, 1]
+
+storePredictions <- function(predictions) {
+  #create list of dates
+  firstDate <- as.Date(head(predictions$dateAndTime, n=1))
+  lastDate <- as.Date(tail(predictions$dateAndTime, n=1))
+  listOfDates <- seq(firstDate, lastDate, by="days")
+  
+  #create data frame from testingSet for each day in list of dates and write to csv file
+  for (i in 1:length(listOfDates)) {
+    date = listOfDates[i]
+    write.table(predictions[predictions$dateAndTime == date, c("dateAndTime", "frbsPrediction")], file = paste(predictionsDirectory, gsub("-", "", as.character(date)), "_frbs.csv", sep = ""), sep = ";", row.names=FALSE)
+  }
+}
+
+# Store predictions to file
+finalPredictions$dateAndTime <- as.character(frbsTestingDataSet$dateAndTime)
+colnames(finalPredictions) = c("frbsPrediction", "dateAndTime")
+print(class(finalPredictions$dateAndTime))
+storePredictions(finalPredictions)
 
 # comparison <- data.frame(frbsTestingData, frbsPredictions, actualTravelTimesTesting)
 # colnames(comparison) <- c("ANN Prediction", "Kalman Filter Prediction",  "FRBS Predictions", "Actual Travel Time")
