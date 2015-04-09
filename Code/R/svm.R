@@ -1,7 +1,7 @@
 library(caret)
 library(kernlab) #needed for svm
 library(Metrics) #needed for rmse
-library(doSNOW)
+#library(doSNOW)
 
 # ----- old code -----
 
@@ -38,33 +38,38 @@ preProcess <- function(data, column) {
 }
 
 startDate <- "20150129"
-endDate <- "20150212"
+#endDate <- "20150212"
+endDate <- "20150131"
 directory <- "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
 dataSet <- getDataSet(startDate, endDate, directory)
 
 #normalize data and partition into training and testing set
 dataSet$fiveMinuteMean <- preProcess(dataSet, "fiveMinuteMean")
 dataSet$trafficVolume <- preProcess(dataSet, "trafficVolume")
-splitDate <- as.Date(c("20150206"), "%Y%m%d")
+#splitDate <- as.Date(c("20150206"), "%Y%m%d")
+splitDate <- as.Date(c("20150130"), "%Y%m%d")
 splitIndex <- which(dataSet$dateAndTime >= splitDate)[1]
 trainingSet <- dataSet[1:(splitIndex-1), ]
 testingSet <- dataSet[splitIndex:nrow(dataSet), ]
 trainingSet$actualTravelTime <- preProcess(trainingSet, "actualTravelTime")
 
 formula <- actualTravelTime~fiveMinuteMean+trafficVolume
-ctrl <- trainControl(verboseIter = TRUE)
+ctrl <- trainControl(verboseIter = TRUE, number = 2)
 
 #enable parallel execution
 # cl <- makeMPIcluster(4)
 # registerDoSNOW(cl)
 
 time_used <- system.time({
-  linear.svm <- train(formula, trainingSet, method="svmLinear", trControl=ctrl, tuneGrid = data.frame(C = c(0.25, 0.5, 1)))
-  print("linear done")
-  poly.svm <- train(formula, trainingSet, method="svmPoly", trControl=ctrl)
-  print("poly done")
-  radial.svm <- train(formula, trainingSet, method="svmRadial", trControl=ctrl)
-  print("radial done")
+  #linear.svm <- train(formula, trainingSet, method="svmLinear", trControl=ctrl, tuneGrid = data.frame(C = c(0.25, 0.5, 1)))
+  #print("linear done")
+  #poly.svm <- train(formula, trainingSet, method="svmPoly", trControl=ctrl)
+  #print("poly done")
+  #http://www.csie.ntu.edu.tw/~cjlin/papers/guide/guide.pdf suggests these ranges for C and sigma:
+  #C=2^-5...2^15, s=2^-15...2^3
+  radial_grid <- expand.grid(sigma = c(0.001, 0.01, 0.1, 1, 2), C = c(0.001, 0.01, 0.1, 1, 10, 100, 1000))
+  radial.svm <- train(formula, trainingSet, method="svmRadial", trControl=ctrl, tuneGrid=radial_grid)
+  #print("radial done")
 })
 
 #stopCluster(cl)
