@@ -1,5 +1,4 @@
 library(caret)
-#library(kernlab) #needed for svm
 library(elasticnet) #needed for lasso
 source("dataSetGetter.R")
 
@@ -34,20 +33,29 @@ source("dataSetGetter.R")
 # #create vector of the correct travel times
 # response <- data[-trainingindices, 3]
 #--------------------- OLD CODE END ---------------------------
-
+directory <- "../../Data/Autopassdata/Singledatefiles/Dataset/"
 #get training data
-trainingPredictions <- getDataSet("20150219", "20150220", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/")
-trainingResponse = getDataSet("20150221", "20150222", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", onlyActualTravelTimes=TRUE)
+baselinePredictions <- getDataSet("20150219", "20150220", paste(directory, "predictions/", sep=""), "baselines")
+actualTravelTimes <- getDataSet("20150219", "20150220", paste(directory, "raw/", sep=""), "dataset", onlyActualTravelTimes=TRUE)
 
 # create lasso model based on the predictions and correct travel times
-lasso <- train(trainingPredictions, trainingResponse, method="lasso")
+lasso <- train(baselinePredictions[, -1], actualTravelTimes[, 1], method="lasso")
 
 #get testing data
-testingPredictions = getDataSet("20150311", "20150311", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions")
-#testingResponse = getDataSet("20150130", "20150130", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", onlyActualTravelTimes=TRUE)[, 1]
+testingSet = getDataSet("20150221", "20150221", paste(directory, "predictions/", sep=""), "baselines")
 
 #use lasso model to predict
-lassoPredictions <- predict(lasso, testingPredictions)
+lassoPredictions <- predict(lasso, testingSet[-1])
 
-# TODO: Write lasso predictions to file
+#write lasso predictions to file
+firstDate <- as.Date(testingSet[1, "dateAndTime"])
+lastDate <- as.Date(testingSet[nrow(testingSet), "dateAndTime"])
+listOfDates <- seq(firstDate, lastDate, by="days")
 
+#create data frame from testingSet for each day in list of dates and write to csv file
+for (i in 1:length(listOfDates)) {
+  date = listOfDates[i]
+  table <- testingSet[testingSet$dateAndTime == date, c("dateAndTime")]
+  table <- data.frame(table, lassoPredictions)
+  write.table(table, file = paste(directory, "predictions/", gsub("-", "", as.character(date)), "_lasso.csv", sep = ""), sep = ";", row.names=FALSE)
+}

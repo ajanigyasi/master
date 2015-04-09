@@ -41,7 +41,7 @@ startDate <- "20150129"
 #endDate <- "20150212"
 endDate <- "20150131"
 directory <- "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
-dataSet <- getDataSet(startDate, endDate, directory)
+dataSet <- getDataSet(startDate, endDate, directory, "dataset")
 
 #normalize data and partition into training and testing set
 dataSet$fiveMinuteMean <- preProcess(dataSet, "fiveMinuteMean")
@@ -75,18 +75,18 @@ time_used <- system.time({
 #stopCluster(cl)
 
 
-pred.linear.svm <- predict(linear.svm, testingSet)
-pred.poly.svm <- predict(poly.svm, testingSet)
+#pred.linear.svm <- predict(linear.svm, testingSet)
+#pred.poly.svm <- predict(poly.svm, testingSet)
 pred.radial.svm <- predict(radial.svm, testingSet)
 
 actual <- testingSet$actualTravelTime
 minimum <- min(dataSet$actualTravelTime)
 maximum <- max(dataSet$actualTravelTime)
-rmse.linear.svm <- rmse(actual, deNormalize(pred.linear.svm, minimum, maximum))
-rmse.poly.svm <- rmse(actual, deNormalize(pred.poly.svm, minimum, maximum))
+#rmse.linear.svm <- rmse(actual, deNormalize(pred.linear.svm, minimum, maximum))
+#rmse.poly.svm <- rmse(actual, deNormalize(pred.poly.svm, minimum, maximum))
 rmse.radial.svm <- rmse(actual, deNormalize(pred.radial.svm, minimum, maximum))
 
 print(time_used)
-print(paste("linear:", rmse.linear.svm, sep=" "))
-print(paste("poly:", rmse.poly.svm, sep=" "))
+#print(paste("linear:", rmse.linear.svm, sep=" "))
+#print(paste("poly:", rmse.poly.svm, sep=" "))
 print(paste("radial:", rmse.radial.svm, sep=" "))

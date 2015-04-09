@@ -4,9 +4,11 @@
 # The directory parameter is the path to the directory where the data sets are stored. This parameter should end with "/"
 # The parameter onlyActualTravelTimes is optional. However, if the argument is provided and it is TRUE, then only the column representing
 # the actual travel times is returned
-getDataSet <- function(startDate, endDate, directory, onlyActualTravelTimes=FALSE){
+getDataSet <- function(startDate, endDate, directory, model, onlyActualTravelTimes=FALSE){
   # Retrieve all files in directory
   fileNames = list.files(directory)
+  # Filter out predictions from other models
+  fileNames <- fileNames[grep(model, fileNames)]
   # Assume that the eight first characters are the date for the respective data set
   fileDates = substr(fileNames, 1, 8)
   # Convert dates to date objects
