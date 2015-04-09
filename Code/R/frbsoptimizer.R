@@ -5,38 +5,50 @@ library(Metrics) #needed for rmse()
 library(optimx) #needed for optimx()
 library(ROI)
 
-#read data 
-klett_samf_jan14 <- read.csv2("../../Data/O3-H-01-2014/klett_samf_jan14.csv")
+source("dataSetGetter.R")
 
-#extract travel times and construct trainingdata
-traveltimes = klett_samf_jan14$Reell.reisetid..sek.
-l <- length(traveltimes)
-y <- traveltimes[-1:-2]
-x1 <- traveltimes[2:(l-1)]
-x2 <- traveltimes[1:(l-2)]
-data <- as.data.frame(cbind(x1, x2, y))
+# #read data 
+# klett_samf_jan14 <- read.csv2("../../Data/O3-H-01-2014/klett_samf_jan14.csv")
+# 
+# #extract travel times and construct trainingdata
+# traveltimes = klett_samf_jan14$Reell.reisetid..sek.
+# l <- length(traveltimes)
+# y <- traveltimes[-1:-2]
+# x1 <- traveltimes[2:(l-1)]
+# x2 <- traveltimes[1:(l-2)]
+# data <- as.data.frame(cbind(x1, x2, y))
+# 
+# #partition data into training and testing sets
+# trainingindices <- unlist(createDataPartition(1:8926, p=0.7))
+# trainingdata <- data[trainingindices, ]
+# testingdata.input <- data[-trainingindices, 1:2]
+# testingdata.output <- data[-trainingindices, 3]
+# 
+# min.value <- min(traveltimes)
+# max.value <- max(traveltimes)
+# 
+# #train baselines
+# svm <- train(y~x1+x2, trainingdata, method="svmLinear")
+# knn <- knnreg(trainingdata[, 1:2], trainingdata[, 3])
+# 
+# #get predictions
+# svm.predictions <- predict(svm, testingdata.input)
+# knn.predictions <- predict(knn, testingdata.input)
 
-#partition data into training and testing sets
-trainingindices <- unlist(createDataPartition(1:8926, p=0.7))
-trainingdata <- data[trainingindices, ]
-testingdata.input <- data[-trainingindices, 1:2]
-testingdata.output <- data[-trainingindices, 3]
+baselinePredictions = getDataSet("20150219", "20150219", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/")
+actualTravelTimes = getDataSet("20150219", "20150219", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", onlyActualTravelTimes=TRUE)
 
-min.value <- min(traveltimes)
-max.value <- max(traveltimes)
+frbsTestingData = getDataSet("20150220", "20150220", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/")
+frbsTestingData <- data.frame(abs(cbind(frbsTestingData$neuralnet, frbsTestingData$kalmanFilter)))
+actualTravelTimesTesting <- getDataSet("20150220", "20150220", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", onlyActualTravelTimes=TRUE)
 
-#train baselines
-svm <- train(y~x1+x2, trainingdata, method="svmLinear")
-knn <- knnreg(trainingdata[, 1:2], trainingdata[, 3])
-
-#get predictions
-svm.predictions <- predict(svm, testingdata.input)
-knn.predictions <- predict(knn, testingdata.input)
+min.value <- 0#min(actualTravelTimes)
+max.value <- max(actualTravelTimes)
 
 #the predictions from the baselines are used as training data for the frbs
-x <- data.frame(cbind(svm.predictions, knn.predictions))
+x <- data.frame(cbind(baselinePredictions$neuralnet, baselinePredictions$kalmanFilter))
 #x <- x[1:10, ]
-y <- data.frame(testingdata.output)
+y <- data.frame(actualTravelTimes)
 #y <- y[1:10, ]
 
 #set up some parameters needed to generate FRBS
@@ -73,6 +85,13 @@ objective.func <- function(params) {
 #     return (-1)
 #   }
   
+  frbs.model <- buildFrbs(params)
+  
+  result <- predict(frbs.model, x)$predicted.val
+  return (rmse(y, result))
+}
+
+buildFrbs <- function(params){
   a1 <- params[1]
   b1 <- params[2]
   c1 <- params[3]
@@ -85,14 +104,13 @@ objective.func <- function(params) {
   
   varinp.mf <- matrix(c(1, a1, b1, c1, NA, 1, a2, b2, c2, NA, 1, a3, b3, c3, NA, 1, a1, b1, c1, NA, 1, a2, b2, c2, NA, 1, a3, b3, c3, NA), nrow = 5, byrow = FALSE)
   varout.mf <- matrix(c(1, a1, b1, c1, NA, 1, a2, b2, c2, NA, 1, a3, b3, c3, NA), nrow = 5, byrow = FALSE)
-   
+  
   #generate model with frbs.gen
   frbs.model <- frbs.gen(range.data, num.fvalinput, names.varinput, num.fvaloutput, varout.mf,
                          names.varoutput, rule, varinp.mf, type.model, type.defuz, type.tnorm, type.snorm, 
                          type.implication.func, colnames.var, name)
   
-  result <- predict(frbs.model, x)$predicted.val
-  return (rmse(y, result))
+  return(frbs.model)
 }
 
 ############## OPTIMX ##############
@@ -151,7 +169,8 @@ objective.func <- function(params) {
 
 ############## constrOptim ##############
 
-theta <- c(500, 550, 600, 650, 700, 750, 800, 850, 900)
+#theta <- c(222, 290, 304, 313, 323, 333, 347, 368, 505)
+theta <- quantile(actualTravelTimes$combinedDataSet.actualTravelTime, probs=seq(0, 1, 0.1))[2:10]
 f <- objective.func
 
 #constraints:
@@ -181,3 +200,12 @@ ci <- c(min.value, 0, 0, 0, 0, 0, 0, 0, 0, -max.value)
 ctrl <- list(trace = 1, reltol = 1e-2)
 
 optim <- constrOptim(theta, f, NULL, ui, ci, control = ctrl, outer.iterations = 1)
+
+frbsModel = buildFrbs(optim$par)
+
+frbsPredictions <- data.frame(predict(frbsModel, frbsTestingData)$predicted.val)
+
+comparison <- data.frame(frbsTestingData, frbsPredictions, actualTravelTimesTesting)
+colnames(comparison) <- c("ANN Prediction", "Kalman Filter Prediction",  "FRBS Predictions", "Actual Travel Time")
+View(comparison)
+plot(cbind(as.ts(comparison[, 1]), as.ts(comparison[, 2])), plot.type='s', col=c("black", "green"), ylab="Travel Time", main="Travel Times", lwd=c(1,1,1,1))
