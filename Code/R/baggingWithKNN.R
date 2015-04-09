@@ -1,4 +1,5 @@
 library(caret)
+source("dataSetGetter.R")
 
 #Function for making m training sets
 generateTrainingIndices <- function(m, n, nofObs){
@@ -6,7 +7,7 @@ generateTrainingIndices <- function(m, n, nofObs){
 }
 
 #m is number of models in ensemble
-#n is number of samples per model
+#n is number of samples per model. set n to be number of rows in training set.
 generateModels <- function(m, n, data, trainingMethod, ...){
   #Initialize empty list of models
   models = list()
@@ -22,37 +23,42 @@ generateModels <- function(m, n, data, trainingMethod, ...){
   return(models)
 }
 
-makePrediction <- function(models, testingdata){
-  predictions = vector(length=dim(testingdata)[1])
-  print(predictions)
-  for(model in models){
-    predictions = cbind(predictions, predict(model, testingdata))
+makePrediction <- function(models, testingdata){  
+  predictions <- data.frame(predict(models[1], testingdata))
+  for(i in 2:length(models)) {
+    predictions <- cbind(predictions, predict(models[i], testingdata))
   }
-  return(cbind(rowMeans(predictions[, -1]), predictions))
+  predictions <- cbind(predictions, apply(predictions, 1, mean))
+  colnames(predictions) <- c(seq(1, nrOfModels), "bagging")
+  return(predictions)
 }
 
-#Read data 
-klett_samf_jan14 = read.csv2("../../Data/O3-H-01-2014/klett_samf_jan14.csv")
+#get training data
+directory <- "../../Data/Autopassdata/Singledatefiles/Dataset/"
+trainingSet <- getDataSet("20150219", "20150220", paste(directory, "raw/", sep=""), "dataset")
+#TODO: normalize data (depends on what baseline is used)
 
-#Extract travel times and construct trainingdata
-traveltimes = klett_samf_jan14$Reell.reisetid..sek.
-l = length(traveltimes)
-y = traveltimes[-1:-2]
-x1 = traveltimes[2:(l-1)]
-x2 = traveltimes[1:(l-2)]
-data = as.data.frame(cbind(x1, x2, y))
+#Train ensemble of models using bagging
+#TODO: decide what model to use
+nrOfModels <- 2
+models = generateModels(nrOfModels, nrow(trainingSet), trainingSet[-1], "knn")
 
-#Partition data into training and testing sets
-trainingindices = unlist(createDataPartition(1:8926, p=0.7))
-trainingdata = data[trainingindices, ]
-testingdata = data[-trainingindices, 1:2]
-targettraveltimes = data[-trainingindices, 3]
-
-#Train ensemble of knn models using bagging
-models = generateModels(10, 1000, trainingdata, "kknn")
+#get testing data
+testingSet = getDataSet("20150221", "20150221", paste(directory, "raw/", sep=""), "dataset")
 
 #Make predictions
-predictions = as.data.frame(makePrediction(models, testingdata))
-predictions = predictions[, -2]
-predictions = cbind(targettraveltimes, predictions)
-colnames(predictions) = c('Target Value', 'Ensemble Prediction', 'M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10')
+predictions <- makePrediction(models, testingSet[, c(-1, -4)])
+
+#write bagging predictions to file
+firstDate <- as.Date(testingSet[1, "dateAndTime"])
+lastDate <- as.Date(testingSet[nrow(testingSet), "dateAndTime"])
+listOfDates <- seq(firstDate, lastDate, by="days")
+
+#create data frame from testingSet for each day in list of dates and write to csv file
+for (i in 1:length(listOfDates)) {
+  date = listOfDates[i]
+  table <- testingSet[testingSet$dateAndTime == date, c("dateAndTime")]
+  table <- data.frame(table, predictions)
+  colnames(table)[1] <- "dateAndTime"
+  write.table(table, file = paste(directory, "predictions/", gsub("-", "", as.character(date)), "_bagging.csv", sep = ""), sep = ";", row.names=FALSE)
+}
