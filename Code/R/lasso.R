@@ -36,14 +36,15 @@ source("dataSetGetter.R")
 #--------------------- OLD CODE END ---------------------------
 
 # TODO: read actual predictions made by the baselines
-trainingPredictions = as.matrix(getDataSetForBaselines("20150129", "20150129", "../../Data/Autopassdata/Singledatefiles/Dataset/", c("ann", "knn", "svm", "kf")))
-trainingResponse = getDataSet("20150129", "20150129", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", onlyActualTravelTimes=TRUE)[, 1]
+#trainingPredictions = as.matrix(getDataSetForBaselines("20150129", "20150129", "../../Data/Autopassdata/Singledatefiles/Dataset/", c("ann", "knn", "svm", "kf")))
+trainingPredictions <- getDataSet("20150219", "20150220", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/")
+trainingResponse = getDataSet("20150221", "20150222", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", onlyActualTravelTimes=TRUE)[, 1]
 
 # create lasso model based on the predictions and correct travel times
 lasso <- train(trainingPredictions, trainingResponse, method="lasso")
 
 # TODO: read actual predictions made by the baselines
-testingPredictions = as.matrix(getDataSetForBaselines("20150130", "20150130", "../../Data/Autopassdata/Singledatefiles/Dataset/", c("ann", "knn", "svm", "kf")))
+testingPredictions = getDataSet("20150311", "20150311", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions")
 #testingResponse = getDataSet("20150130", "20150130", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", onlyActualTravelTimes=TRUE)[, 1]
 
 #use lasso model to predict
