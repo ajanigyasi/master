@@ -53,7 +53,7 @@ getPredictions <- function(baselines) {
   }
   
   # Handle Kalman Filter predictions
-  predictions <- getKalmanFilterPredictions(startDate, splitDate,  endDate, paste(directory, "raw/", sep=""))
+  predictions <- getKalmanFilterPredictions(startDate, splitDate, endDate, paste(directory, "raw/", sep=""))
   testingSet["kalmanFilter"] <<- predictions
 }
 
