@@ -57,5 +57,6 @@ for (i in 1:length(listOfDates)) {
   date = listOfDates[i]
   table <- testingSet[testingSet$dateAndTime == date, c("dateAndTime")]
   table <- data.frame(table, lassoPredictions)
+  colnames(table) <- c("dateAndTime", "lasso")
   write.table(table, file = paste(directory, "predictions/", gsub("-", "", as.character(date)), "_lasso.csv", sep = ""), sep = ";", row.names=FALSE)
 }
