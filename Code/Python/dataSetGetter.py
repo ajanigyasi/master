@@ -39,4 +39,9 @@ def getDataSet(startDate, endDate, directory, model, onlyActualTravelTimes=False
 
 def saveDataSet(directory, filename, dataSet, format, header):
 	np.savetxt(join(directory, filename), dataSet, fmt=format, header=header, comments='')	
-# np.savetxt(join(directory, '20150129_dataset_test.csv'), dataSet, fmt=('%s;%f;%i;%f'), header='dateAndTime;fiveMinuteMean;trafficVolume;actualTravelTime', comments='')
+
+def normalize(x, min, max):
+	return((x-min)/(max-min))
+
+def denormalize(x, min, max):
+	return((x*(max-min))+min)
