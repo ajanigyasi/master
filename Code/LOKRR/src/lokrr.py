@@ -1,5 +1,5 @@
 from numpy import matrix, loadtxt
-from src.kernel import kernel
+from kernel import kernel
 
 
 if __name__ == '__main__':

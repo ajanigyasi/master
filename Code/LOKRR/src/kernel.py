@@ -1,5 +1,4 @@
-from numpy import asmatrix, exp, identity, add, dot, delete, vstack, hstack, subtract,\
-    resize
+from numpy import asmatrix, exp, identity, add, dot, delete, vstack, hstack, subtract, resize
 from scipy.spatial.distance  import pdist, cdist, squareform
 
 
