@@ -18,7 +18,7 @@ def getDataSet(startDate, endDate, directory, model, onlyActualTravelTimes=False
 	dates = [datetime.strptime(filename[0:8], '%Y%m%d') for filename in filenames]
 
 	# Filenames with dates within the range of the provided dates
-	dataSetFileNames = [filename for (filename, date) in zip(filenames, dates) if (date>=startDate) and (date<=endDate)]
+	dataSetFileNames = sorted([filename for (filename, date) in zip(filenames, dates) if (date>=startDate) and (date<=endDate)])
 
 	# Initialize array for containing the data set
 	dataSet = np.zeros((1,), dtype=[('dateAndTime', datetime), ('fiveMinuteMean', np.float), ('trafficVolume', np.int), ('actualTravelTime', np.float)])
