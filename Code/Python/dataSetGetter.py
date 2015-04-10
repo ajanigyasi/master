@@ -37,4 +37,6 @@ def getDataSet(startDate, endDate, directory, model, onlyActualTravelTimes=False
 	# Return only actual travel times if flag is set, otherwise return whole data set
 	return dataSet['actualTravelTime'] if onlyActualTravelTimes else dataSet
 
+def saveDataSet(directory, filename, dataSet, format, header):
+	np.savetxt(join(directory, filename), dataSet, fmt=format, header=header, comments='')	
 # np.savetxt(join(directory, '20150129_dataset_test.csv'), dataSet, fmt=('%s;%f;%i;%f'), header='dateAndTime;fiveMinuteMean;trafficVolume;actualTravelTime', comments='')
