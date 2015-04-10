@@ -41,7 +41,15 @@ def saveDataSet(directory, filename, dataSet, format, header):
 	np.savetxt(join(directory, filename), dataSet, fmt=format, header=header, comments='')	
 
 def normalize(x, min, max):
-	return((x-min)/(max-min))
+	# Convert elements to float so that the next operation produces floats and not ints
+	xf = np.array([float(n) for n in x])
+	# Normalize elements
+	xr = np.array((xf-min)/(max-min))
+	return xr
 
 def denormalize(x, min, max):
-	return((x*(max-min))+min)
+	# Convert elements to float so that the next operation produces floats and not ints
+	xf = np.array([float(n) for n in x])
+	# Denormalize elements
+	xr = np.array((xf*(max-min))+min)
+	return xr
