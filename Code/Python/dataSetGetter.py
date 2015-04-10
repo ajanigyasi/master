@@ -7,6 +7,10 @@ from os.path import isfile, join
 dateTimeConverter = lambda x: datetime.strptime(x, '%Y-%m-%d %H:%M:%S')
 
 def getDataSet(startDate, endDate, directory, model, onlyActualTravelTimes=False):
+	# Convert date strings to datetime objects
+	startDate = datetime.strptime(startDate, '%Y%m%d')
+	endDate = datetime.strptime(endDate, '%Y%m%d')
+
 	# Retrieve file names in directory and only select the ones containing model
 	filenames = [filename for filename in listdir(directory) if isfile(join(directory,filename)) and model in filename]
 
