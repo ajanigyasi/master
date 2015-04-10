@@ -53,3 +53,6 @@ def denormalize(x, min, max):
 	# Denormalize elements
 	xr = np.array((xf*(max-min))+min)
 	return xr
+
+def roundToNearestFiveMinute(dateAndTime):
+   return dateAndTime - timedelta(minutes=dateAndTime.minute % 5, seconds=dateAndTime.second, microseconds=dateAndTime.microsecond)

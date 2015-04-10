@@ -7,7 +7,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import AdaBoostRegressor
 from sklearn.neural_network import BernoulliRBM
 from sklearn import neighbors, svm
-from dataSetGetter import *
+from utils import *
 
 # Initialize start date, end date, directory and model
 trainingStartDate = "20150219"
