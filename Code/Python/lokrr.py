@@ -1,6 +1,6 @@
-from numpy import matrix, loadtxt, vstack, asmatrix, where, asarray, zeros, hstack, delete
+from numpy import matrix, loadtxt, vstack, asmatrix, where, zeros, hstack, delete
 from kernel import kernel
-from utils import getDataSet
+from utils import getDataSet, get_list_of_times, get_list_of_intervals
 from datetime import time, date, datetime, timedelta
 
 class lokrr:
@@ -51,23 +51,6 @@ class lokrr:
     def update(self, data_point):
         None
 
-#Returns a list containing datetime objects between start and end with delta
-#distance between them
-def get_list_of_intervals(start, end, delta):
-    intervals = list()
-    curr = start
-    while curr < end:
-        intervals.append(curr)
-        curr += delta
-    return intervals
-
-#Returns an array containing the time (without the date)
-#for each datetime object in list_of_datetimes
-def get_list_of_times(list_of_datetimes):
-    list_of_times = list()
-    for dt in list_of_datetimes:
-        list_of_times.append(dt.time())
-    return asarray(list_of_times)
 
 
 if __name__ == '__main__':

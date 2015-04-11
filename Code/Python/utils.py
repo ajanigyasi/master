@@ -56,3 +56,21 @@ def denormalize(x, min, max):
 
 def roundToNearestFiveMinute(dateAndTime):
    return dateAndTime - timedelta(minutes=dateAndTime.minute % 5, seconds=dateAndTime.second, microseconds=dateAndTime.microsecond)
+
+#Returns a list containing datetime objects between start and end with delta
+#distance between them
+def get_list_of_intervals(start, end, delta):
+    intervals = list()
+    curr = start
+    while curr < end:
+        intervals.append(curr)
+        curr += delta
+    return intervals
+
+#Returns an array containing the time (without the date)
+#for each datetime object in list_of_datetimes
+def get_list_of_times(list_of_datetimes):
+    list_of_times = list()
+    for dt in list_of_datetimes:
+        list_of_times.append(dt.time())
+    return np.asarray(list_of_times)
