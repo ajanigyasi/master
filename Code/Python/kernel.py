@@ -72,6 +72,8 @@ class kernel:
         data_point - array containing observation
     """
     def predict(self, data_point):
+        if (len(self.y) == 0):
+            return float('NaN')
         tmp = dot(self.y, self.reg_K_inv)
         k = cdist(asmatrix(data_point), self.X, 'sqeuclidean')
         k = asmatrix(exp(-k / (2*(self.s**2)))).getT()

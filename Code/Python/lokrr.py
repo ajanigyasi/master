@@ -12,10 +12,10 @@ class lokrr:
         self.create_kernels(self.data, self.window_size, self.kernel_map)
 
     #Creates a data set based on the list of indices passed as an argument
-    def create_dataset(self, data, indices):
-        fiveMinuteMean = data['fiveMinuteMean'][indices]
-        trafficVolume = data['trafficVolume'][indices]
-        actualTravelTime = data['actualTravelTime'][indices]
+    def create_dataset(self, indices):
+        fiveMinuteMean = self.data['fiveMinuteMean'][indices]
+        trafficVolume = self.data['trafficVolume'][indices]
+        actualTravelTime = self.data['actualTravelTime'][indices]
         return vstack((fiveMinuteMean, trafficVolume, actualTravelTime)).T
 
     #Creates kernels based on the data for every 5-minute interval of the day
@@ -29,7 +29,7 @@ class lokrr:
         for i in range(0, len(intervals)-1): #create data set for every 5-minute interval
             indices = where((list_of_times >= intervals[i].time()) &
                              (list_of_times < intervals[i+1].time()))
-            dataset = self.create_dataset(self.data, indices)
+            dataset = self.create_dataset(indices)
             list_of_datasets.append(dataset)
         for i in range(0, len(list_of_datasets)): #combine data sets with neighbors
             kernel_data = zeros((1, 3))
