@@ -33,10 +33,7 @@ class lokrr:
             list_of_datasets.append(dataset)
         for i in range(0, len(list_of_datasets)): #combine data sets with neighbors
             kernel_data = zeros((1, 3))
-            for j in range(window_size, 0, -1):
-                kernel_data = vstack((kernel_data, list_of_datasets[(i-j)%len(list_of_datasets)]))
-            kernel_data = vstack((kernel_data, list_of_datasets[i]))
-            for j in range(1, window_size+1):
+            for j in range(-window_size, window_size+1):
                 kernel_data = vstack((kernel_data, list_of_datasets[(i+j)%len(list_of_datasets)]))
             kernel_data = delete(kernel_data, 0, axis=0) #delete first row
             k = kernel(kernel_data[:, [0,1]], kernel_data[:, 2], 1, 1) #create kernel
