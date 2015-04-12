@@ -18,6 +18,7 @@ Ns=1;
 
 % Read data set
 trainingDataSet = getDataSet('20150129', '20150130', '../../Data/Autopassdata/Singledatefiles/Dataset/raw/', 'dataset');
+
 % Extract training inputs and normalize the values
 x = table2array(trainingDataSet(:, 2:3))';
 min_x1 = min(x(1, :));
