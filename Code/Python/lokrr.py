@@ -50,12 +50,10 @@ class lokrr:
     #data_point contains:['dateAndTime', 'fiveMinuteMean', 'trafficVolume', 'actualTravelTime']
     def update(self, data_point):
         interval =  roundToNearestFiveMinute(data_point[0])
-        for i in range(self.window_size, 0, -1):
-            time = interval - timedelta(minutes=(i*5))
-            print time
-        # k = self.kernel_map[str(interval)]
-        # k.update(data_point[1:3], data_point[3])
-
+        for i in range(-self.window_size, self.window_size+1):
+            time = (interval + timedelta(minutes=(i*5))).time()
+            k = self.kernel_map[str(time)]
+            k.update(data_point[1:3], data_point[3])
 
 
 if __name__ == '__main__':
@@ -64,4 +62,4 @@ if __name__ == '__main__':
     dir = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
     model = "dataset"
     dataset = getDataSet(from_date, to_date, dir, model)
-    l = lokrr(dataset, 3)
+    l = lokrr(dataset, 1)
