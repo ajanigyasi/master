@@ -62,4 +62,23 @@ if __name__ == '__main__':
     dir = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
     model = "dataset"
     dataset = getDataSet(from_date, to_date, dir, model)
-    l = lokrr(dataset, 1)
+    l = lokrr(dataset, 3)
+    
+    # k = l.kernel_map[str(datetime(2015, 1, 1, 0, 0).time())]
+    # data = hstack((dataset[0][0], dataset[0][1], dataset[0][2], dataset[0][3]))
+    # l.update(data)
+    # print k.X
+    # print l.predict(data[0:3])
+    # update_data = l.create_dataset([0])
+    # k = kernel(data[:, 0:2], data[:, 2], 1, 1)
+    # print k.X
+    # print k.reg_K
+    # k.update(update_data[:, 0:2], update_data[:, 2])
+    # print k.X
+    # print k.reg_K
+    # k.update(update_data[:, 0:2], update_data[:, 2])
+    # print k.X
+    # print k.reg_K
+    # k.update(update_data[:, 0:2], update_data[:, 2])
+    # print k.X
+    # print k.reg_K

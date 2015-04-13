@@ -1,6 +1,7 @@
-from numpy import asmatrix, exp, identity, add, dot, delete, vstack, hstack, subtract, resize
+from numpy import asmatrix, exp, identity, add, dot, delete, vstack, hstack, subtract, resize, zeros
 from scipy.spatial.distance  import pdist, cdist, squareform
 
+th = 200 #threshold: remove observations only if kernel contains at least th points
 
 class kernel:
     
@@ -26,6 +27,16 @@ class kernel:
     def updateK(self, data_point):
         n = self.X.shape[0]
         self.reg_K[:n-1, :n-1] = self.reg_K[1:n, 1:n]
+        self.add_b(data_point, n)
+        # b = cdist(asmatrix(data_point), self.X[:n-1,], 'sqeuclidean')
+        # b = exp(-b / (2*(self.s**2)))
+        # b = resize(b, (n-1, 1))
+        # self.reg_K[n-1, :n-1] = b.T
+        # self.reg_K[:n-1, n-1] = b
+        # d = 1 + self.l
+        # self.reg_K[n-1, n-1] = d
+
+    def add_b(self, data_point, n):
         b = cdist(asmatrix(data_point), self.X[:n-1,], 'sqeuclidean')
         b = exp(-b / (2*(self.s**2)))
         b = resize(b, (n-1, 1))
@@ -60,11 +71,21 @@ class kernel:
     """
     def update(self, x, y):
         self.X = vstack((self.X, x))
-        self.X = delete(self.X, 0, 0)
         self.y = hstack((self.y, y))
-        self.y = delete(self.y, 0, 0)
-        self.updateK(x)
-        self.updateKInv()
+        n = self.X.shape[0]
+        if (n <= th):
+            if (n != 1):
+                row = zeros((1, n-1))
+                col = zeros((n, 1))
+                self.reg_K = vstack((self.reg_K, row))
+                self.reg_K = hstack((self.reg_K, col))
+            self.add_b(x, n)
+            self.reg_K_inv = self.reg_K.getI()
+        else:
+            self.X = delete(self.X, 0, 0)
+            self.y = delete(self.y, 0, 0)
+            self.updateK(x)
+            self.updateKInv()
     
     """
     Returns y' * (K+lambda*I)_inv* k, a.k.a. the kernel's prediction.
