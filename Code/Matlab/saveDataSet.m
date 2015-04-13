@@ -3,6 +3,15 @@ function [] = saveDataSet(dataSet, directory, filename)
 %   dataSet is a table with data
 %   directory is the folder which dataSet is to be saved in
 %   filename is the filename of the saved file
-writetable(dataSet, strcat(directory, filename), 'Delimiter', ';');
+
+    firstDate = dataSet.dateAndTime(1);
+    lastDate = dataSet.dateAndTime(size(dataSet, 1));
+    dates = datetime(year(firstDate):year(lastDate), month(firstDate):month(lastDate), day(firstDate):day(lastDate));
+
+    for i=1:size(dates,2)
+        date = dates(i);
+        index = find(isbetween(dataSet.dateAndTime, date, date+duration(24, 0, 0)));
+        writetable(dataSet(index, :), strcat(directory, num2str(yyyymmdd(date)), filename), 'Delimiter', ';');    
+    end
 end
 

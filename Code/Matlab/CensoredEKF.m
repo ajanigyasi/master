@@ -17,19 +17,22 @@ Ns=1;
 % z=y;
 
 % Read data set
-trainingDataSet = getDataSet('20150129', '20150130', '../../Data/Autopassdata/Singledatefiles/Dataset/raw/', 'dataset');
+dataSet = getDataSet('20150129', '20150130', '../../Data/Autopassdata/Singledatefiles/Dataset/raw/', 'dataset');
+dataSet = generateDelayedDataSet(dataSet);
+[nObs, ~] = size(dataSet);
+dataSet.delayedEkfPrediction= zeros(nObs, 1);
 
 % Extract training inputs and normalize the values
-x = table2array(trainingDataSet(:, 2:3))';
+x = table2array(dataSet(:, 2:3))';
 min_x1 = min(x(1, :));
 max_x1 = max(x(1, :));
 min_x2 = min(x(2, :));
 max_x2 = max(x(2, :));
 x = [normalize(x(1, :), min_x1, max_x1); normalize(x(2, :), min_x2, max_x2)];
-[nx, nObs] = size(x);
+[nx, nObs2] = size(x);
 
 % Extract training targets and normalize the values
-y = table2array(trainingDataSet(:, 4))';
+y = table2array(dataSet(:, 4))';
 min_y = min(y);
 max_y = max(y);
 y = normalize(y, min_y, max_y);
@@ -64,16 +67,31 @@ R=500*eye(Ns);
 
 % % alpha=0.8;
 
+t1 = datetime('now');
 % Train the neural network through N/2 passes, with Ns observations in each
 % pass
 T1=1:nObs;
 for k=T1
     % TODO: only retain this update iff: G(u_k, theta_k+1) > G(u_k, theta_k)
-    [theta,P,z(k)]=nnekf(theta,P,x(:,k),y(k),Q,R);
+    % [theta,P,z(k)]=nnekf(theta,P,x(:,k),y(k),Q,R);
+    % Online-Delayed EKF:
+    if dataSet.useForTraining(k)
+        [theta,P,~]=nnekf(theta,P,x(:,k),y(k),Q,R);
+    else
+        dataSet.delayedEkfPrediction(k) = nn(theta,x(:, k),size(y(k), 1));
+    end
 end
+trainingDuration = seconds(datetime('now')-t1);
 
 y = denormalize(y, min_y, max_y);
-z = denormalize(z, min_y, max_y);
+dataSet.delayedEkfPrediction = denormalize(dataSet.delayedEkfPrediction, min_y, max_y);
+
+index = find(~dataSet.useForTraining);
+delayedEkfPredictions = dataSet(index, 'dateAndTime');
+delayedEkfPredictions.prediction =  dataSet.delayedEkfPrediction(index);
+
+% Save data to file
+saveDataSet(delayedEkfPredictions, '../../Data/Autopassdata/Singledatefiles/Dataset/predictions/', '_delayedEkfPredictions.csv');
 
 % Extract the matrices from the parameter vector theta
 % W1=reshape(theta(1:nh*2),nh,[]);
