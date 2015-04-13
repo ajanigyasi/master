@@ -1,7 +1,8 @@
 from numpy import matrix, loadtxt, vstack, asmatrix, where, zeros, hstack, delete
 from kernel import kernel
-from utils import getDataSet, get_list_of_times, get_list_of_intervals, roundToNearestFiveMinute
+from utils import getDataSet, get_list_of_times, get_list_of_intervals, roundToNearestFiveMinute, normalize
 from datetime import time, date, datetime, timedelta
+import heapq
 
 class lokrr:
 
@@ -55,14 +56,49 @@ class lokrr:
             k = self.kernel_map[str(time)]
             k.update(data_point[1:3], data_point[3])
 
+def get_data_point(dataset, index):
+    return hstack((dataset[index][0], testingset[index][1], testingset[index][2], testingset[index][3]))
 
+def normalize_dataset(dataset):
+    fiveMinuteMean = dataset['fiveMinuteMean']
+    trafficVolume = dataset['trafficVolume']
+    actualTravelTime = dataset['actualTravelTime']
+    dataset['fiveMinuteMean'] = normalize(fiveMinuteMean, min(fiveMinuteMean), max(fiveMinuteMean))
+    print dataset['trafficVolume'][0]
+    dataset['trafficVolume'] = normalize(trafficVolume, min(trafficVolume), max(trafficVolume))
+    print dataset['trafficVolume'][0]
+    dataset['actualTravelTime'] = normalize(actualTravelTime, min(actualTravelTime), max(actualTravelTime))
+    
 if __name__ == '__main__':
-    from_date = "20150219"
-    to_date = "20150220"
+    
+    training_from_date = "20150219"
+    training_to_date = "20150220"
     dir = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
     model = "dataset"
-    dataset = getDataSet(from_date, to_date, dir, model)
-    l = lokrr(dataset, 3)
+    trainingset = getDataSet(training_from_date, training_to_date, dir, model)
+    
+    normalize_dataset(trainingset)
+    
+    l = lokrr(trainingset, 3)
+
+    k = l.kernel_map[str(datetime(2015, 1, 1, 0, 0).time())]
+    print k.X
+    print k.y
+
+    # testing_from_date = "20150221"
+    # testing_to_date = "20150222"
+    # testingset = getDataSet(testing_from_date, testing_to_date, dir, model)
+
+    # h = []
+    
+    # for i in range(0, len(testingset)):
+    #     curr = get_data_point(testingset, i)
+    #     while(len(h) > 0 and h[0][0] < curr[0]): #new travel times are observed prior to the current time
+    #         index = heapq.heappop(h)[1]
+    #         observation = get_data_point(testingset, index)
+    #         l.update(observation)
+    #     print l.predict(curr[0:3])
+    #     heapq.heappush(h, (curr[0] + timedelta(seconds=curr[3]), i))
     
     # k = l.kernel_map[str(datetime(2015, 1, 1, 0, 0).time())]
     # data = hstack((dataset[0][0], dataset[0][1], dataset[0][2], dataset[0][3]))
