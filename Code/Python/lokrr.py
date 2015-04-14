@@ -64,9 +64,7 @@ def normalize_dataset(dataset):
     trafficVolume = dataset['trafficVolume']
     actualTravelTime = dataset['actualTravelTime']
     dataset['fiveMinuteMean'] = normalize(fiveMinuteMean, min(fiveMinuteMean), max(fiveMinuteMean))
-    #print dataset['trafficVolume'][0]
     dataset['trafficVolume'] = normalize(trafficVolume, min(trafficVolume), max(trafficVolume))
-    #print dataset['trafficVolume'][0]
     dataset['actualTravelTime'] = normalize(actualTravelTime, min(actualTravelTime), max(actualTravelTime))
     
 if __name__ == '__main__':
@@ -81,24 +79,31 @@ if __name__ == '__main__':
     
     l = lokrr(trainingset, 3)
 
-    k = l.kernel_map[str(datetime(2015, 1, 1, 0, 0).time())]
-    print k.X
+    #k = l.kernel_map[str(datetime(2015, 1, 1, 0, 0).time())]
+    #print k.X
     #print k.y
 
-    # testing_from_date = "20150221"
-    # testing_to_date = "20150222"
-    # testingset = getDataSet(testing_from_date, testing_to_date, dir, model)
-
-    # h = []
+    testing_from_date = "20150221"
+    testing_to_date = "20150221"
+    testingset = getDataSet(testing_from_date, testing_to_date, dir, model)
+    target_values = list(testingset['actualTravelTime']) #copy instead of referencing
+    #predictions = zeros((len(testingset), 2), dtype=(datetime, float))
+    predictions = zeros((len(testingset), 1))
     
-    # for i in range(0, len(testingset)):
-    #     curr = get_data_point(testingset, i)
-    #     while(len(h) > 0 and h[0][0] < curr[0]): #new travel times are observed prior to the current time
-    #         index = heapq.heappop(h)[1]
-    #         observation = get_data_point(testingset, index)
-    #         l.update(observation)
-    #     print l.predict(curr[0:3])
-    #     heapq.heappush(h, (curr[0] + timedelta(seconds=curr[3]), i))
+    normalize_dataset(testingset)
+    
+    h = []
+    
+    for i in range(0, len(testingset)):
+        curr = get_data_point(testingset, i)
+        while(len(h) > 0 and h[0][0] < curr[0]): #new travel times are observed prior to the current time
+            index = heapq.heappop(h)[1]
+            observation = get_data_point(testingset, index)
+            l.update(observation)
+        predictions[i] = l.predict(curr[0:3])
+        print predictions[i]
+        heapq.heappush(h, (curr[0] + timedelta(seconds=curr[3]), i))
+
     
     # k = l.kernel_map[str(datetime(2015, 1, 1, 0, 0).time())]
     # data = hstack((dataset[0][0], dataset[0][1], dataset[0][2], dataset[0][3]))
