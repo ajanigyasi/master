@@ -45,14 +45,18 @@ frbsTestingEndDate = "20150220"
 dataSetDirectory = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
 predictionsDirectory = "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/"
 
+# Set the type of file you want to retreive
+model = 'baselines'
+
 # Read training inputs and training targets
-frbsTrainingInputs = getDataSet(frbsTrainingStartDate, frbsTrainingEndDate, predictionsDirectory)
-frbsTrainingTargets = getDataSet(frbsTrainingStartDate, frbsTrainingEndDate, dataSetDirectory , onlyActualTravelTimes=TRUE)
+frbsTrainingInputs = getDataSet(frbsTrainingStartDate, frbsTrainingEndDate, predictionsDirectory, model)
+frbsTrainingTargets = getDataSet(frbsTrainingStartDate, frbsTrainingEndDate, dataSetDirectory, model, onlyActualTravelTimes=TRUE)
 
 # Read testing inputs and testing targets
 frbsTestingInputs = getDataSet(frbsTestingStartDate, frbsTestingEndDate, predictionsDirectory)
 frbsTestingInputs <- data.frame(abs(cbind(frbsTestingInputs$neuralnet, frbsTestingInputs$kalmanFilter)))
 colnames(frbsTestingInputs) = c("ANN", "KalmanFilter")
+
 frbsTestingDataSet <- getDataSet(frbsTestingStartDate, frbsTestingEndDate, dataSetDirectory)
 frbsTestingTargets <- frbsTestingDataSet$actualTravelTime
 colnames(frbsTestingTargets) = c("ActualTravelTime")
@@ -94,9 +98,7 @@ max.value <- max(frbsTrainingTargets)
 
 #the predictions from the baselines are used as training data for the frbs
 x <- data.frame(cbind(frbsTrainingInputs$neuralnet, frbsTrainingInputs$kalmanFilter))
-#x <- x[1:10, ]
 y <- data.frame(frbsTrainingTargets)
-#y <- y[1:10, ]
 
 #set up some parameters needed to generate FRBS
 num.fvalinput <- matrix(c(3, 3), nrow = 1) #number of fuzzy terms for each input variable

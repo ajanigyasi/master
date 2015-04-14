@@ -1,4 +1,5 @@
 import numpy as np
+import numpy.lib.recfunctions as rfn
 from datetime import *
 from os import listdir
 from os.path import isfile, join
@@ -38,7 +39,17 @@ def getDataSet(startDate, endDate, directory, model, onlyActualTravelTimes=False
 	return dataSet['actualTravelTime'] if onlyActualTravelTimes else dataSet
 
 def saveDataSet(directory, filename, dataSet, format, header):
-	np.savetxt(join(directory, filename), dataSet, fmt=format, header=header, comments='')	
+	nRows = dataSet.shape[0]
+	firstDate = dataSet['dateAndTime'][0]
+	lastDate = dataSet['dateAndTime'][nRows-1]
+	nDays = (lastDate - firstDate).days
+	dates = [firstDate + timedelta(x) for x in range(0, nDays+1)]
+	for date in dates:
+		dateStr = date.strftime('%Y%m%d')
+		filenameStr = dateStr + filename
+		rowsOnDate = [dataSet[i] for i in range(0, nRows) if dataSet['dateAndTime'][i].date() == date.date()]
+		rowsOnDate = rfn.stack_arrays(rowsOnDate,usemask=False)
+		np.savetxt(join(directory, filenameStr), rowsOnDate, fmt=format, header=header, comments='')	
 
 def normalize(x, min, max):
 	# Convert elements to float so that the next operation produces floats and not ints
