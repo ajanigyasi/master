@@ -23,6 +23,10 @@ class kernel:
         I = identity(K.shape[0])
         self.reg_K = add(K, l*I) #K + lambda*I
         self.reg_K_inv = self.reg_K.getI() #inverse of (K + lambda*I)
+
+    def __init__(self, X, y):
+        self.X = X
+        self.y = y 
             
     def updateK(self, data_point):
         n = self.X.shape[0]
@@ -100,3 +104,15 @@ class kernel:
         k = asmatrix(exp(-k / (2*(self.s**2)))).getT()
         return dot(tmp, k)[0, 0]
         
+    def tune(data):
+        None
+        #TODO:
+        #figure out parameter ranges
+        #for every parameter combo:
+        # create kernel with parameters
+        # predict on data
+        # calculate some metric
+        #save best metric and corresp. parameters
+        
+
+#NB! Had to install cython to make statsmodel work
