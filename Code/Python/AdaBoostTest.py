@@ -13,14 +13,12 @@ from utils import *
 trainingStartDate = "20150219"
 trainingEndDate = "20150220"
 testingStartDate = "20150131"
-testingEndDate = "20150131"
+testingEndDate = "20150215"
 directory = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
 model = "dataset"
 
 # Read training data set
 trainingDataSet = getDataSet(trainingStartDate, trainingEndDate, directory, model)
-print(trainingDataSet['dateAndTime'][0])
-print(trainingDataSet['fiveMinuteMean'][0])
 nofTrainingRows = trainingDataSet.shape[0]
 trainingFiveMinuteMean = np.array(trainingDataSet['fiveMinuteMean'])
 trainingTrafficVolume = np.array(trainingDataSet['trafficVolume'])
@@ -40,10 +38,10 @@ testingTarget = np.array(testingDataSet['actualTravelTime'])
 #boostedKnn = AdaBoostRegressor(neighbors.KNeighborsRegressor(n_neighbors, weights='uniform'), n_estimators=100, random_state=np.random.RandomState(1))
 #boostedKnn.fit(trainingInput, trainingTarget)
 #boostedKnnPrediction = boostedKnn.predict(testingInput)
-#writeToFile = np.zeros((nofTestingRows,), dtype=[('dateAndTime', datetime), ('boostedKnnPrediction', np.float)])
-#writeToFile['dateAndTime'] = testingDataSet['dateAndTime']
-#writeToFile['boostedKnnPrediction'] = boostedKnnPrediction
-#saveDataSet(directory, '20150129_boostedknn.csv', writeToFile, ('%s;%f'), 'dateAndTime;boostedKnnPrediction')
+writeToFile = np.zeros((nofTestingRows,), dtype=[('dateAndTime', datetime), ('boostedKnnPrediction', np.float)])
+writeToFile['dateAndTime'] = testingDataSet['dateAndTime']
+writeToFile['boostedKnnPrediction'] = testingTarget
+saveDataSet(directory, '_boostedknn.csv', writeToFile, ('%s;%f'), 'dateAndTime;boostedKnnPrediction')
 
 # Boosted SVR
 #boostedSvr = AdaBoostRegressor(svm.SVR(), n_estimators=100, random_state=np.random.RandomState(1))

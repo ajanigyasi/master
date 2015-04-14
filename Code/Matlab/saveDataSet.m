@@ -6,7 +6,7 @@ function [] = saveDataSet(dataSet, directory, filename)
 
     firstDate = dataSet.dateAndTime(1);
     lastDate = dataSet.dateAndTime(size(dataSet, 1));
-    dates = datetime(year(firstDate):year(lastDate), month(firstDate):month(lastDate), day(firstDate):day(lastDate));
+    dates = firstDate:lastDate;
 
     for i=1:size(dates,2)
         date = dates(i);

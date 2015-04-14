@@ -1,4 +1,4 @@
-function [dataSet] = calculateCensoredObservations(dataSet)
+function [dataSet] = computeCensoredObservations(dataSet)
 %CALCULATECENSOREDOBSERVATIONS Summary of this function goes here
 %   Detailed explanation goes here
     [nObs, ~] = size(dataSet);
