@@ -1,7 +1,8 @@
-from numpy import matrix, loadtxt, vstack, asmatrix, where, zeros, hstack, delete
+from numpy import matrix, loadtxt, vstack, asmatrix, where, zeros, hstack, delete, empty
 from kernel import kernel
-from utils import getDataSet, get_list_of_times, get_list_of_intervals, roundToNearestFiveMinute
+from utils import getDataSet, get_list_of_times, get_list_of_intervals, roundToNearestFiveMinute, normalize, denormalize, saveDataSet
 from datetime import time, date, datetime, timedelta
+import heapq
 
 class lokrr:
 
@@ -55,30 +56,54 @@ class lokrr:
             k = self.kernel_map[str(time)]
             k.update(data_point[1:3], data_point[3])
 
+def get_data_point(dataset, index):
+    return hstack((dataset[index][0], testingset[index][1], testingset[index][2], testingset[index][3]))
 
+def normalize_dataset(dataset):
+    fiveMinuteMean = dataset['fiveMinuteMean']
+    trafficVolume = dataset['trafficVolume']
+    actualTravelTime = dataset['actualTravelTime']
+    dataset['fiveMinuteMean'] = normalize(fiveMinuteMean, min(fiveMinuteMean), max(fiveMinuteMean))
+    dataset['trafficVolume'] = normalize(trafficVolume, min(trafficVolume), max(trafficVolume))
+    dataset['actualTravelTime'] = normalize(actualTravelTime, min(actualTravelTime), max(actualTravelTime))
+    
 if __name__ == '__main__':
-    from_date = "20150219"
-    to_date = "20150220"
+    ofrom_date = "20150219"
+    to_date = "20150221"
     dir = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
     model = "dataset"
     dataset = getDataSet(from_date, to_date, dir, model)
-    l = lokrr(dataset, 3)
+    min_travel_time = min(dataset['actualTravelTime'])
+    max_travel_time = max(dataset['actualTravelTime'])
+    target_values = list(dataset['actualTravelTime']) #copy instead of referencing
+    normalize_dataset(dataset)
     
-    # k = l.kernel_map[str(datetime(2015, 1, 1, 0, 0).time())]
-    # data = hstack((dataset[0][0], dataset[0][1], dataset[0][2], dataset[0][3]))
-    # l.update(data)
-    # print k.X
-    # print l.predict(data[0:3])
-    # update_data = l.create_dataset([0])
-    # k = kernel(data[:, 0:2], data[:, 2], 1, 1)
-    # print k.X
-    # print k.reg_K
-    # k.update(update_data[:, 0:2], update_data[:, 2])
-    # print k.X
-    # print k.reg_K
-    # k.update(update_data[:, 0:2], update_data[:, 2])
-    # print k.X
-    # print k.reg_K
-    # k.update(update_data[:, 0:2], update_data[:, 2])
-    # print k.X
-    # print k.reg_K
+    split_date = datetime(2015, 2, 20, 0, 0)
+    split_index = where(dataset['dateAndTime'] >= split_date)[0][0]
+    trainingset = dataset[0:split_index]
+    testingset = dataset[split_index:]
+    target_values = target_values[split_index:]
+    predictions = zeros((len(target_values), ), dtype=[('dateAndTime', datetime), ('lokrr', float)])
+
+    normalize_dataset(trainingset)
+    normalize_dataset(testingset)
+    
+    l = lokrr(trainingset, 3)
+    
+    h = []
+    
+    for i in range(0, len(testingset)):
+        curr = get_data_point(testingset, i)
+        while(len(h) > 0 and h[0][0] < curr[0]): #new travel times are observed prior to the current time
+            index = heapq.heappop(h)[1]
+            observation = get_data_point(testingset, index)
+            l.update(observation)
+        predictions[i] = (curr[0], l.predict(curr[0:3]))
+        print predictions[i]
+        heapq.heappush(h, (curr[0] + timedelta(seconds=curr[3]), i))
+
+    predictions['lokrr'] = denormalize(predictions['lokrr'], min_travel_time, max_travel_time)
+    
+    save_path = "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/"
+    saveDataSet(save_path, "20150221_lokrr.csv", predictions, ('%s;%f'), 'dateAndTime;lokrr')
+
