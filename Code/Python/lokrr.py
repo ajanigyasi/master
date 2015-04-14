@@ -68,11 +68,13 @@ def normalize_dataset(dataset):
     dataset['actualTravelTime'] = normalize(actualTravelTime, min(actualTravelTime), max(actualTravelTime))
     
 if __name__ == '__main__':
-        from_date = "20150219"
+    ofrom_date = "20150219"
     to_date = "20150221"
     dir = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
     model = "dataset"
     dataset = getDataSet(from_date, to_date, dir, model)
+    min_travel_time = min(dataset['actualTravelTime'])
+    max_travel_time = max(dataset['actualTravelTime'])
     target_values = list(dataset['actualTravelTime']) #copy instead of referencing
     normalize_dataset(dataset)
     
@@ -100,8 +102,7 @@ if __name__ == '__main__':
         print predictions[i]
         heapq.heappush(h, (curr[0] + timedelta(seconds=curr[3]), i))
 
-    predictions = denormalize(predictions['lokrr'],
-                              min(dataset['actualTravelTime']), max(dataset['actualTravelTime']))
+    predictions['lokrr'] = denormalize(predictions['lokrr'], min_travel_time, max_travel_time)
     
     save_path = "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/"
     saveDataSet(save_path, "20150221_lokrr.csv", predictions, ('%s;%f'), 'dateAndTime;lokrr')
