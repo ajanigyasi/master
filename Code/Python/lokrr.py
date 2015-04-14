@@ -64,9 +64,9 @@ def normalize_dataset(dataset):
     trafficVolume = dataset['trafficVolume']
     actualTravelTime = dataset['actualTravelTime']
     dataset['fiveMinuteMean'] = normalize(fiveMinuteMean, min(fiveMinuteMean), max(fiveMinuteMean))
-    print dataset['trafficVolume'][0]
+    #print dataset['trafficVolume'][0]
     dataset['trafficVolume'] = normalize(trafficVolume, min(trafficVolume), max(trafficVolume))
-    print dataset['trafficVolume'][0]
+    #print dataset['trafficVolume'][0]
     dataset['actualTravelTime'] = normalize(actualTravelTime, min(actualTravelTime), max(actualTravelTime))
     
 if __name__ == '__main__':
@@ -83,7 +83,7 @@ if __name__ == '__main__':
 
     k = l.kernel_map[str(datetime(2015, 1, 1, 0, 0).time())]
     print k.X
-    print k.y
+    #print k.y
 
     # testing_from_date = "20150221"
     # testing_to_date = "20150222"

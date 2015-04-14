@@ -21,19 +21,19 @@ def getDataSet(startDate, endDate, directory, model, onlyActualTravelTimes=False
 	dataSetFileNames = sorted([filename for (filename, date) in zip(filenames, dates) if (date>=startDate) and (date<=endDate)])
 
 	# Initialize array for containing the data set
-	dataSet = np.zeros((1,), dtype=[('dateAndTime', datetime), ('fiveMinuteMean', np.float), ('trafficVolume', np.int), ('actualTravelTime', np.float)])
+	dataSet = np.zeros((1,), dtype=[('dateAndTime', datetime), ('fiveMinuteMean', np.float), ('trafficVolume', np.float), ('actualTravelTime', np.float)])
 
 	# Store all data sets for the dates in the provided range in one array
 	for dataSetFileName in dataSetFileNames:
 		# Read data set from file
-		dataSetForOneDate = np.genfromtxt(join(directory, dataSetFileName), delimiter=';', missing_values=0, skip_header=0, dtype=(datetime, np.float, np.int, np.float), usecols=(0, 1, 2, 3), names=True, converters={0: dateTimeConverter})
+		dataSetForOneDate = np.genfromtxt(join(directory, dataSetFileName), delimiter=';', missing_values=0, skip_header=0, dtype=(datetime, np.float, np.float, np.float), usecols=(0, 1, 2, 3), names=True, converters={0: dateTimeConverter})
 		
 		# Add data set to matrix of data
 		dataSet = np.concatenate([dataSet, dataSetForOneDate])
 
 	# Remove first row because it is just zeros
 	dataSet = np.delete(dataSet, 0, 0)
-
+        
 	# Return only actual travel times if flag is set, otherwise return whole data set
 	return dataSet['actualTravelTime'] if onlyActualTravelTimes else dataSet
 
@@ -42,6 +42,7 @@ def saveDataSet(directory, filename, dataSet, format, header):
 
 def normalize(x, min, max):
 	# Convert elements to float so that the next operation produces floats and not ints
+        #print type(x[0])
 	xf = np.array([float(n) for n in x])
 	# Normalize elements
 	xr = np.array((xf-min)/(max-min))
