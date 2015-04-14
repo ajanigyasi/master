@@ -68,8 +68,8 @@ def normalize_dataset(dataset):
     dataset['actualTravelTime'] = normalize(actualTravelTime, min(actualTravelTime), max(actualTravelTime))
     
 if __name__ == '__main__':
-    ofrom_date = "20150219"
-    to_date = "20150221"
+    from_date = "20150219"
+    to_date = "20150228"
     dir = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
     model = "dataset"
     dataset = getDataSet(from_date, to_date, dir, model)
@@ -78,7 +78,7 @@ if __name__ == '__main__':
     target_values = list(dataset['actualTravelTime']) #copy instead of referencing
     normalize_dataset(dataset)
     
-    split_date = datetime(2015, 2, 20, 0, 0)
+    split_date = datetime(2015, 2, 25, 0, 0)
     split_index = where(dataset['dateAndTime'] >= split_date)[0][0]
     trainingset = dataset[0:split_index]
     testingset = dataset[split_index:]
@@ -105,5 +105,5 @@ if __name__ == '__main__':
     predictions['lokrr'] = denormalize(predictions['lokrr'], min_travel_time, max_travel_time)
     
     save_path = "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/"
-    saveDataSet(save_path, "20150221_lokrr.csv", predictions, ('%s;%f'), 'dateAndTime;lokrr')
+    #saveDataSet(save_path, "20150221_lokrr.csv", predictions, ('%s;%f'), 'dateAndTime;lokrr')
 
