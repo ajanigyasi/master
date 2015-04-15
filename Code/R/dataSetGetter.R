@@ -8,6 +8,7 @@ getDataSet <- function(startDate, endDate, directory, model, onlyActualTravelTim
   # Retrieve all files in directory
   fileNames = list.files(directory)
   # Filter out predictions from other models
+  print(model)
   fileNames <- fileNames[grep(model, fileNames)]
   # Assume that the eight first characters are the date for the respective data set
   fileDates = substr(fileNames, 1, 8)
