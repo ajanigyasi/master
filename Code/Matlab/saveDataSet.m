@@ -9,9 +9,8 @@ function [] = saveDataSet(dataSet, directory, filename)
     dates = firstDate:lastDate;
 
     for i=1:size(dates,2)
-        date = dates(i);
-        index = find(isbetween(dataSet.dateAndTime, date, date+duration(24, 0, 0)));
-        writetable(dataSet(index, :), strcat(directory, num2str(yyyymmdd(date)), filename), 'Delimiter', ';');    
+        date = yyyymmdd(dates(i));
+        writetable(dataSet(yyyymmdd(dataSet.dateAndTime) == date, :), strcat(directory, num2str(date), filename), 'Delimiter', ';');    
     end
 end
 
