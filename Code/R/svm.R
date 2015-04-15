@@ -39,7 +39,6 @@ preProcess <- function(data, column) {
 }
 
 startDate <- "20150129"
-#endDate <- "20150212"
 endDate <- "20150204"
 directory <- "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
 dataSet <- getDataSet(startDate, endDate, directory, "filteredDataSet")
@@ -47,7 +46,6 @@ dataSet <- getDataSet(startDate, endDate, directory, "filteredDataSet")
 #normalize data and partition into training and testing set
 dataSet$fiveMinuteMean <- preProcess(dataSet, "fiveMinuteMean")
 dataSet$trafficVolume <- preProcess(dataSet, "trafficVolume")
-#splitDate <- as.Date(c("20150206"), "%Y%m%d")
 splitDate <- as.Date(c("20150202"), "%Y%m%d")
 splitIndex <- which(dataSet$dateAndTime >= splitDate)[1]
 trainingSet <- dataSet[1:(splitIndex-1), ]
@@ -76,15 +74,16 @@ ctrl <- trainControl(verboseIter = TRUE, method='cv')
 actual <- testingSet$actualTravelTime
 minimum <- min(dataSet$actualTravelTime)
 maximum <- max(dataSet$actualTravelTime)
+radialSigma = as.vector(sigest(as.matrix(trainingSet[, 2:3]), frac = 1))
 
 runSVM <- function(model){
   switch(model, 
          'svmLinear' = {
            # SVM Linear
            time_used_linear <- system.time({
-             linear.svm <- train(formula, trainingSet, method="svmLinear", trControl=ctrl, tuneGrid = data.frame(C = c(2^-5, 2^-1, 2, 2^5)))
-             store(linear.svm, 'linear_svm.RData')
-             cat("Linear done. Parameters: ", linear.svm$bestTune, "\n")
+             linear.svm <- train(formula, trainingSet, method="svmLinear", trControl=ctrl, tuneGrid = data.frame(C = c(2^-5, 2^-1, 2, 2^5, 2^10, 2^15)))
+             save(linear.svm, file='linear_svm.RData')
+             print("Linear done")
            })
            print(time_used_linear)
            pred.linear.svm <- predict(linear.svm, testingSet)
@@ -95,9 +94,9 @@ runSVM <- function(model){
            # SVM Polynomial
            time_used_poly <- system.time({
              poly_grid = expand.grid(degree = c(1, 2, 3), C = c(2^-5, 2^-1, 2, 2^5, 2^10, 2^15), scale = c(0.001, 0.01, 0.1))
-             poly.svm <- train(formula, trainingSet, method="svmPoly", trControl=ctrl)
-             store(poly.svm, 'poly_svm.RData')
-             cat("Poly done. Parameters: ", poly.svm$bestTune, "\n")
+             poly.svm <- train(formula, trainingSet, method="svmPoly", trControl=ctrl, poly_grid)
+             save(poly.svm, file='poly_svm.RData')
+             print("Poly done")
            })
            print(time_used_poly)
            pred.poly.svm <- predict(poly.svm, testingSet)
@@ -109,10 +108,10 @@ runSVM <- function(model){
            time_used_radial <- system.time({
              #http://www.csie.ntu.edu.tw/~cjlin/papers/guide/guide.pdf suggests these ranges for C and sigma:
              #C=2^-5...2^15, s=2^-15...2^3
-             radial_grid <- expand.grid(sigma = c(2^-15, 2^-10, 2^-5, 2^-1, 2, 2^3), C = c(2^-5, 2^-1, 2, 2^5, 2^10, 2^15))
+             radial_grid <- expand.grid(sigma = radialSigma, C = c(2^-5, 2^-1, 2, 2^5, 2^10, 2^15))
              radial.svm <- train(formula, trainingSet, method="svmRadial", trControl=ctrl, tuneGrid=radial_grid)
-             store(radial.svm, 'poly_svm.RData')
-             cat("Radial done. Parameters: ", radial.svm$bestTune, "\n")
+             save(radial.svm, file='radial_svm.RData')
+             print("Radial done")
            })
            print(time_used_radial)
            pred.radial.svm <- predict(radial.svm, testingSet)
@@ -127,11 +126,19 @@ cluster <- makeMPIcluster(3)
 #set up environment
 clusterCall(cluster, function() library(caret))
 clusterCall(cluster, function() library(kernlab))
-clusterCall(cluster, function() library(metrics))
+clusterCall(cluster, function() library(Metrics))
+clusterCall(cluster, function() source('dataSetGetter.R'))
 clusterExport(cluster, c("trainingSet"), envir = .GlobalEnv)
 clusterExport(cluster, c("testingSet"), envir = .GlobalEnv)
+clusterExport(cluster, c("ctrl"), envir = .GlobalEnv)
+clusterExport(cluster, c("formula"), envir = .GlobalEnv)
+clusterExport(cluster, c("actual"), envir = .GlobalEnv)
+clusterExport(cluster, c("minimum"), envir = .GlobalEnv)
+clusterExport(cluster, c("maximum"), envir = .GlobalEnv)
+clusterExport(cluster, c("radialSigma"), envir = .GlobalEnv)
 
-baselines <- clusterApply(cluster, c("svmLinear", "svmPoly", "svmRadial"), runSVM)
+
+svmOutput <- clusterApply(cluster, c("svmLinear", "svmPoly", "svmRadial"), runSVM)
 
 stopCluster(cluster)
 
