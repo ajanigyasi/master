@@ -52,6 +52,20 @@ normalize <- function(x, min, max){
   return((x-min)/(max-min))
 }
 
+# Function for denormalizing a vector
 deNormalize <- function(x, min, max){
   return((x*(max-min))+min)
+}
+
+storeDataSet <- function(dataSet, directory) {
+  #create list of dates
+  firstDate <- as.Date(dataSet[1, "dateAndTime"])
+  lastDate <- as.Date(dataSet[nrow(dataSet), "dateAndTime"])
+  listOfDates <- seq(firstDate, lastDate, by="days")
+  
+  #create data frame from dataSet for each day in list of dates and write to csv file
+  for (i in 1:length(listOfDates)) {
+    date = listOfDates[i]
+    write.table(dataSet[dataSet$dateAndTime == date, colnames(dataSet)], file = paste(directory, gsub("-", "", as.character(date)), "_filteredDataSet.csv", sep = ""), sep = ";", row.names=FALSE)
+  }
 }
