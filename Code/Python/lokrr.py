@@ -68,8 +68,8 @@ def normalize_dataset(dataset):
     dataset['actualTravelTime'] = normalize(actualTravelTime, min(actualTravelTime), max(actualTravelTime))
     
 if __name__ == '__main__':
-    ofrom_date = "20150219"
-    to_date = "20150221"
+    from_date = "20150219"
+    to_date = "20150220"
     dir = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
     model = "dataset"
     dataset = getDataSet(from_date, to_date, dir, model)
@@ -105,5 +105,5 @@ if __name__ == '__main__':
     predictions['lokrr'] = denormalize(predictions['lokrr'], min_travel_time, max_travel_time)
     
     save_path = "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/"
-    saveDataSet(save_path, "20150221_lokrr.csv", predictions, ('%s;%f'), 'dateAndTime;lokrr')
+    saveDataSet(save_path, "_lokrr.csv", predictions, ('%s;%f'), 'dateAndTime;lokrr')
 
