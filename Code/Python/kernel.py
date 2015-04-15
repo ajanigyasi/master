@@ -1,5 +1,7 @@
-from numpy import asmatrix, exp, identity, add, dot, delete, vstack, hstack, subtract, resize, zeros
+from numpy import asmatrix, exp, identity, add, dot, delete, vstack, hstack, subtract, resize, zeros, percentile
 from scipy.spatial.distance  import pdist, cdist, squareform
+import statsmodels.api as sm
+import heapq
 
 th = 200 #threshold: remove observations only if kernel contains at least th points
 
@@ -13,32 +15,23 @@ class kernel:
         s - float representing sigma used in radial basis function
         l - float representing lambda used in kernel ridge regression
     """ 
-    def __init__(self, X, y, s, l):
+    def __init__(self, X, y):
         self.X = X
         self.y = y
+        
+    def updateParams(self, s, l):
         self.s = s
         self.l = l
-        pairwise_sq_dists = squareform(pdist(X, 'sqeuclidean'))
+        pairwise_sq_dists = squareform(pdist(self.X, 'sqeuclidean'))
         K = asmatrix(exp(-pairwise_sq_dists / (2*(s**2)))) #gaussian RBF
         I = identity(K.shape[0])
         self.reg_K = add(K, l*I) #K + lambda*I
         self.reg_K_inv = self.reg_K.getI() #inverse of (K + lambda*I)
-
-    def __init__(self, X, y):
-        self.X = X
-        self.y = y 
             
     def updateK(self, data_point):
         n = self.X.shape[0]
         self.reg_K[:n-1, :n-1] = self.reg_K[1:n, 1:n]
         self.add_b(data_point, n)
-        # b = cdist(asmatrix(data_point), self.X[:n-1,], 'sqeuclidean')
-        # b = exp(-b / (2*(self.s**2)))
-        # b = resize(b, (n-1, 1))
-        # self.reg_K[n-1, :n-1] = b.T
-        # self.reg_K[:n-1, n-1] = b
-        # d = 1 + self.l
-        # self.reg_K[n-1, n-1] = d
 
     def add_b(self, data_point, n):
         b = cdist(asmatrix(data_point), self.X[:n-1,], 'sqeuclidean')
@@ -104,8 +97,54 @@ class kernel:
         k = asmatrix(exp(-k / (2*(self.s**2)))).getT()
         return dot(tmp, k)[0, 0]
         
-    def tune(data):
-        None
+    def tune(self, data):
+        X_orig = self.X
+        y_orig = self.y
+        
+        l_params = self.get_l_params()
+        s_params = self.get_s_params()
+        
+        best_params = None #store best params
+        lowest_rmse = float('inf')
+        for l in l_params:
+            for s in s_params:
+                self.updateParams(s, l)
+                h = []
+                preds = zeros(data.shape[0])
+                for i in range(0, data.shape[0]):
+                    curr = data[0, :]
+                    while(len(h) > 0 and h[0][0] < curr[0]):
+                        index = heapq.heappop(h)[1]
+                        observation = data[index]
+                        self.update(observation[1:3], observation[3])
+                    heapq.heappush(h, (curr[0] + timedelta(seconds=curr[3]), i))
+                    preds[i] = self.predict(curr[1:3])
+                curr_rmse = sm.tools.eval_measures.rmse(preds, data[:, 3])
+                if curr_rmse < lowest_rmse:
+                    lowest_rmse = curr_rmse
+                    best_params = (s, l)
+
+        self.X = X_orig
+        self.y = y_orig
+        self.updateParams(best_params[0], best_params[1])
+
+
+    def get_l_params(self):
+        model = sm.OLS(self.y, self.X)
+        results = model.fit()
+        r2 = results.rsquared
+        if  r2 == 1.0:
+            l_params = [0]
+        else:
+            fi0 = r2/(1-r2)
+            l0 = 1.0/fi0
+            l_params = [0.125*l0, 0.25*l0, 0.5*l0, l0, 2*l0]
+        return l_params
+
+    def get_s_params(self):
+        pairw_dists = pdist(self.X)
+        return percentile(pairw_dists, [0.25, 0.5, 0.75])
+        
         #TODO:
         #figure out parameter ranges
         #for every parameter combo:
