@@ -86,3 +86,6 @@ def get_list_of_times(list_of_datetimes):
     for dt in list_of_datetimes:
         list_of_times.append(dt.time())
     return np.asarray(list_of_times)
+    
+def get_data_point(dataset, index):
+    return np.hstack((dataset[index][0], dataset[index][1], dataset[index][2], dataset[index][3]))
