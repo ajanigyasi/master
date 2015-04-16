@@ -103,10 +103,6 @@ if __name__ == '__main__':
     target_values = target_values[verification_index:]
     predictions = zeros((len(target_values), ), dtype=[('dateAndTime', datetime), ('lokrr', float)])
 
-    normalize_dataset(trainingset)
-    normalize_dataset(testingset)
-    normalize_dataset(verificationset)
-
     print 'Training kernels'
     print 'Training on data from', from_date, 'to', (test_start_date - timedelta(days=1)).date()
     print 'Testing on data from', test_start_date.date(), 'to', verification_start_date.date()
