@@ -116,12 +116,12 @@ if __name__ == '__main__':
     print 'Training done'
     
     # h = []
-    #TODO: change testingset to verificationset in for loop
-    # for i in range(0, len(testingset)):
-    #     curr = get_data_point(testingset, i)
+
+    # for i in range(0, len(verificationset)):
+    #     curr = get_data_point(verificationset, i)
     #     while(len(h) > 0 and h[0][0] < curr[0]): #new travel times are observed prior to the current time
     #         index = heapq.heappop(h)[1]
-    #         observation = get_data_point(testingset, index)
+    #         observation = get_data_point(verificationset, index)
     #         l.update(observation)
     #     predictions[i] = (curr[0], l.predict(curr[0:3]))
     #     print predictions[i]
