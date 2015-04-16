@@ -3,6 +3,8 @@ rng('default')
 rng('shuffle')
 
 % Read data set
+% TODO: set startDate and endDate to the dates that LOKRR uses to optimize
+% its parameters
 startDate = '20150129';
 endDate =  '20150131';
 directory = '../../Data/Autopassdata/Singledatefiles/Dataset/raw/';
@@ -40,103 +42,93 @@ y_unnormalized = y;
 y = normalize(y, min_y, max_y);
 [ny, ~] = size(y);
 
-% Setup grid search for Q and R
-% qVals = [0.1 0.01 0.001 0.0001];
-% rVals = [10 25 50 100 250 500 750 1000];
-% rVals2 = [0 0.0001 0.001 0.01 0.1 1];
-% grid = combvec(qVals, rVals);
-% grid = grid';
-% grid(:, 3) = zeros(32, 1);
-% grid2 = zeros(6, 2);
-% grid2(:, 1) = rVals2;
+% Setup grid search for Q, R and nh
+qVals = [0.1 0.01 0.001 0.0001];
+rVals = [10 25 50 100 250 500 750 1000];
+nhVals = [1 2 4 8 16 32];
+grid = combvec(qVals, rVals, nhVals);
+grid = grid';
+grid(:, 4) = zeros(192, 1);
 
-% nh is the number of hidden nodes in the neural network
-% nh = 4;
-%NH=[2 4 8 16 32];
-%gridResults = zeros(5, 2);
-%best_nh = 2;
-% best_rmse = Inf;
-% best_theta = [];
-% best_y = zeros(nObs, 1);
+best_rmse = Inf;
+best_theta = [];
+best_y = zeros(nObs, 1);
 
 % Do grid search to optimize number of hidden nodes
-% for i=1:size(grid2, 1)
-%     % Get the current number of hidden nodes
-%     %nh = NH(i);
-%     %vals = grid(i, 1:2);
-%     %q = vals(1);
-%     r = grid2(i, 1);
-%     
-%     % Run the delayedEkf algorithm
-%     % ns is the number of elements in the parameter vector theta
-%     ns = (nx*nh)+nh+(nh*ny)+ny;
+for i=1:size(grid, 1)
+    % Get the current combination of parameters
+    vals = grid(i, 1:3);
+    q = vals(1);
+    r = vals(2);
+    nh = vals(3);
+ 
+    % ns is the number of elements in the parameter vector theta
+    ns = (nx*nh)+nh+(nh*ny)+ny;
+
+    % P is the covariance matrix of the predictions being made
+    % TODO: may have to initialize to other values
+    P=diag(10000*ones(1,ns));
+
+    % Q is the covariance matrix of the process
+    % TODO: may have to initialize to other values
+    Q=q*eye(ns);
+
+    % R is the covariance matrix of the observations
+    % TODO: may have to initialize to other values
+    R=r;
+    
+    % Train the MLP with the EKF algorithm and receive the resulting
+    % weights and predictions
+    [temp_theta, temp_y] = delayedEkf(x, y, dataSet.useForTraining(:), nh, ns, P, Q, R);
+    
+    % Denormalize the returned predictions
+    temp_y = denormalize(temp_y, min_y, max_y);
+    
+    % Calculate rmse between the actual travel times and the denormalized predictions
+    % made
+    temp_rmse = sqrt(mean((y_unnormalized(predictionIndex) - temp_y(predictionIndex)).^2));
+    
+    % Store the results
+    grid(i, 4) = temp_rmse;
+    
+    % Print the number of hidden nodes and the resulting rmse to the
+    % console
+    q, r, nh, temp_rmse
+    
+    % Keep track of the best performing model
+    if temp_rmse < best_rmse
+        best_rmse = temp_rmse;
+        best_theta = temp_theta;
+        best_y = temp_y;
+    end
+end
+
+% % nh is the number of hidden nodes in the neural network
+% nh = 4;
 % 
-%     % P is the covariance matrix of the predictions being made
-%     % TODO: may have to initialize to other values
-%     P=diag(10000*ones(1,ns));
+% % ns is the number of elements in the parameter vector theta
+% ns = (nx*nh)+nh+(nh*ny)+ny;
 % 
-%     % Q is the covariance matrix of the process
-%     % TODO: may have to initialize to other values
-%     Q=0.0001*eye(ns);
+% % P is the covariance matrix of the predictions being made
+% % TODO: may have to initialize to other values
+% P=diag(10000*ones(1,ns));
 % 
-%     % R is the covariance matrix of the observations
-%     % TODO: may have to initialize to other values
-%     R=r;
-%     
-%     % Train the MLP with the EKF algorithm and receive the resulting
-%     % weights and predictions
-%     [temp_theta, temp_y] = delayedEkf(x, y, dataSet.useForTraining(:), nh, ns, P, Q, R);
-%     
-%     % Denormalize the returned predictions
-%     temp_y = denormalize(temp_y, min_y, max_y);
-%     
-%     % Calculate rmse between the actual travel times and the denormalized predictions
-%     % made
-%     temp_rmse = sqrt(mean((y_unnormalized(predictionIndex) - temp_y(predictionIndex)).^2));
-%     
-%     % Store the results
-%     % gridResults(i, :) = [nh, temp_rmse];
-%     grid2(i, 2) = temp_rmse;
-%     
-%     % Print the number of hidden nodes and the resulting rmse to the
-%     % console
-%     r, temp_rmse
-%     
-%     % Keep track of the best performing model
-%     if temp_rmse < best_rmse
-%         %best_nh = nh;
-%         best_rmse = temp_rmse;
-%         best_theta = temp_theta;
-%         best_y = temp_y;
-%     end
-% end
-
-% nh is the number of hidden nodes in the neural network
-nh = 4;
-
-% ns is the number of elements in the parameter vector theta
-ns = (nx*nh)+nh+(nh*ny)+ny;
-
-% P is the covariance matrix of the predictions being made
-% TODO: may have to initialize to other values
-P=diag(10000*ones(1,ns));
-
-% Q is the covariance matrix of the process
-% TODO: may have to initialize to other values
-Q=0.0001*eye(ns);
-
-% R is the covariance matrix of the observations
-% TODO: may have to initialize to other values
-R=1000;
-
-% Run the delayedEkf algorithm
-[theta, y_hat] = delayedEkf(x, y, dataSet.useForTraining(:), nh, ns, P, Q, R);
-
-% Denormalize predictions
-y_hat = denormalize(y_hat, min_y, max_y);
+% % Q is the covariance matrix of the process
+% % TODO: may have to initialize to other values
+% Q=0.0001*eye(ns);
+% 
+% % R is the covariance matrix of the observations
+% % TODO: may have to initialize to other values
+% R=1000;
+% 
+% % Run the delayedEkf algorithm
+% [theta, y_hat] = delayedEkf(x, y, dataSet.useForTraining(:), nh, ns, P, Q, R);
+% 
+% % Denormalize predictions
+% y_hat = denormalize(y_hat, min_y, max_y);
 
 % Set the predictions in the data set to be the best performing model
-dataSet.delayedEkfPrediction = y_hat';
+dataSet.delayedEkfPrediction = best_y';
 
 % Retrieve the date and times for the prediction rows
 delayedEkfPredictions = dataSet(predictionIndex, 'dateAndTime');
@@ -145,7 +137,7 @@ delayedEkfPredictions = dataSet(predictionIndex, 'dateAndTime');
 delayedEkfPredictions.prediction =  dataSet.delayedEkfPrediction(predictionIndex);
 
 % Save data to file
-saveDataSet(delayedEkfPredictions, '../../Data/Autopassdata/Singledatefiles/Dataset/predictions/', '_delayedEkfPredictions.csv');
+saveDataSet(delayedEkfPredictions, '../../Data/Autopassdata/Singledatefiles/Dataset/predictions/', '_delayedEkfPredictions_optim_params.csv');
 
 % Save workspace to file
 save('workspace.mat');
