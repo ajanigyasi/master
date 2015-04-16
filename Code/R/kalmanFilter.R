@@ -35,10 +35,6 @@ timesBuild <- function(par, m0=300, C0=100){
     return(dlmModPoly(order=1, m0=m0, C0=C0, dV=exp(par[1]), dW=exp(par[2])))
 }
 
-timesBuildArma <- function(par){
-  return(dlmModARMA(ar=c(par[1]), ma=c(par[2]), sigma=exp(par[3])))
-}
-
 getKalmanFilterPredictions <- function(startDate, testingStartDate, endDate, directory, model){  
   # Get data
   dataSet <- getDataSet(startDate, endDate, directory, model)
@@ -48,21 +44,22 @@ getKalmanFilterPredictions <- function(startDate, testingStartDate, endDate, dir
   
   # Initialize parameters
   par <- c(0, 0)
-  #par <- c(0, 0, 0)
   
   # Find optimal parameters for filter
   timesMLE <- dlmMLE(observations, par, timesBuild, m0=observations[1], C0=sd(observations))
-  # timesMLE <-dlmMLE(observations, par, timesBuildArma, lower=c(0, 0, 0), upper=c(1, 1, 1), control=list('maxit', 100000))
+  save(timesMLE, file="timesMLE.RData")
   
   # Build model from the optimal parameters
   timesMod <- timesBuild(timesMLE$par, m0=observations[1], C0=sd(observations))
-  #timesMod <- timesBuildArma(timesMLE$par)
+  save(timesMod, file="timesMod.RData")
   
   # Build filter based on model
   timesFilt <- dlmFilter(observations, timesMod)
+  save(timesFilt, file="timesFilt.RData")
   
   # Get the means of the distribution of the state vector at time t, given the observations from time 1 to time t-1
   timesFore <- timesFilt$a
+  save(timesFore, file="timesFore.RData")
   
   # Extract predictions for testing dates
   splitDate <- as.Date(c(testingStartDate), "%Y%m%d")
@@ -73,17 +70,17 @@ getKalmanFilterPredictions <- function(startDate, testingStartDate, endDate, dir
   return(testingPredictions)
 }
 
-startDate <- "20150201"
-endDate <- "20150228"
-splitDate <- "20150205"
-directory <- "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
-model <- "dataset"
-predictions <- getKalmanFilterPredictions(startDate, splitDate, endDate, directory, model)
-actualTravelTimes <- getDataSet(splitDate, endDate, directory, model)
+#startDate <- "20150201"
+#endDate <- "20150228"
+#splitDate <- "20150205"
+#directory <- "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
+#model <- "dataset"
+#predictions <- getKalmanFilterPredictions(startDate, splitDate, endDate, directory, model)
+#actualTravelTimes <- getDataSet(splitDate, endDate, directory, model)
 
-error = rmse(as.ts(predictions), as.ts(actualTravelTimes$actualTravelTime))
+#error = rmse(as.ts(predictions), as.ts(actualTravelTimes$actualTravelTime))
 
-plot(cbind(as.ts(actualTravelTimes$actualTravelTime), as.ts(predictions)), plot.type='s', col=c("black", "green"), ylab="Travel Time", main="Travel Times", lwd=c(1,1,1,1))
+#plot(cbind(as.ts(actualTravelTimes$actualTravelTime), as.ts(predictions)), plot.type='s', col=c("black", "green"), ylab="Travel Time", main="Travel Times", lwd=c(1,1,1,1))
 
 # predictions <- getKalmanFilterPredictions("20150129", "20150219",  "20150311", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/")
 # dataSet <- getDataSet("20150129", "20150311", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/")
