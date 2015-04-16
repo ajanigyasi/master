@@ -7,13 +7,13 @@ source("dataSetGetter.R")
 source("kalmanFilter.R")
 
 startDate <- "20150129"
-endDate <- "20150311"
-splitDate <- "20150219"
+endDate <- "20150204"
+splitDate <- "20150202"
 directory <- "../../Data/Autopassdata/Singledatefiles/Dataset/"
 
 createBaseline <- function(model) {
   formula <- actualTravelTime~fiveMinuteMean+trafficVolume
-  ctrl <- trainControl(verboseIter = TRUE)
+  ctrl <- trainControl(verboseIter = TRUE, , method='cv')
   switch(model,
          "svm" = {
            train(formula, trainingSet, method="svmLinear", trControl = ctrl)
@@ -23,12 +23,19 @@ createBaseline <- function(model) {
          "ann" ={
            #TODO: set grid to decide how many hidden nodes in layer 1
            ann_grid <- data.frame(layer1 = c(1, 2, 4, 8, 16), layer2 = 0, layer3 = 0)
-           train(formula, trainingSet, method="neuralnet", trControl = ctrl, tuneGrid = ann_grid)
+           print("Start ANN training")
+           annMod = train(formula, trainingSet, method="neuralnet", trControl = ctrl, tuneGrid = ann_grid)
+           print("ANN done")
+           save(annMod, file="annMod.RData")
+           return(annMod)
            #caret finds optimal number of hidden nodes in layer 1, 2 and 3
          },
          "knn" = {
            knn_grid <- expand.grid(kmax = c(3, 5, 7, 10), distance = c(1, 2), kernel = c("rectangular", "optimal"))
-           train(formula, trainingSet, method="kknn", trControl = ctrl, tuneGrid = knn_grid)
+           knnMod = train(formula, trainingSet, method="kknn", trControl = ctrl, tuneGrid = knn_grid)
+           print("kNN done")
+           save(knnMod, file="knnMod.RData")
+           return(knnMod)
            #caret finds optimal kmax, kernel, and minkowski distance
          }
          )
@@ -41,7 +48,6 @@ preProcess <- function(data, column) {
 }
 
 getPredictions <- function(baselines) {
-  
   minTravelTime <- min(dataSet$actualTravelTime)
   maxTravelTime <- max(dataSet$actualTravelTime)
   
@@ -53,7 +59,7 @@ getPredictions <- function(baselines) {
   }
   
   # Handle Kalman Filter predictions
-  predictions <- getKalmanFilterPredictions(startDate, splitDate, endDate, paste(directory, "raw/", sep=""))
+  predictions <- getKalmanFilterPredictions(startDate, splitDate, endDate, paste(directory, "raw/", sep=""), 'filteredDataSet')
   testingSet["kalmanFilter"] <<- predictions
 }
 
@@ -66,10 +72,12 @@ storePredictions <- function() {
   #create data frame from testingSet for each day in list of dates and write to csv file
   for (i in 1:length(listOfDates)) {
     date = listOfDates[i]
-    write.table(testingSet[testingSet$dateAndTime == date, c("dateAndTime", "neuralnet", "kknn", "svmLinear", "kalmanFilter")], file = paste(directory, "predictions/", gsub("-", "", as.character(date)), "_baselines.csv", sep = ""), sep = ";", row.names=FALSE)
+    write.table(testingSet[testingSet$dateAndTime == date, c("dateAndTime", "neuralnet", "kknn", "kalmanFilter")], file = paste(directory, "predictions/", gsub("-", "", as.character(date)), "_baselines_param_optim.csv", sep = ""), sep = ";", row.names=FALSE)
   }
 }
-dataSet <- getDataSet(startDate, endDate, paste(directory, "raw/", sep=""))
+
+# Get data set from startDate to endDate
+dataSet <- getDataSet(startDate, endDate, paste(directory, "raw/", sep=""), 'filteredDataSet')
 
 #normalize data and partition into training and testing set
 dataSet$fiveMinuteMean <- preProcess(dataSet, "fiveMinuteMean")
@@ -80,17 +88,17 @@ testingSet <- dataSet[splitIndex:nrow(dataSet), ]
 trainingSet$actualTravelTime <- preProcess(trainingSet, "actualTravelTime")
 
 #TODO:remove when done testing
-trainingSet <- trainingSet[1:100, ]
+#trainingSet <- trainingSet[1:100, ]
 
-setDefaultClusterOptions(outfile = "baselinePredictionCreator_output")
-cluster <- makeMPIcluster(2)
+setDefaultClusterOptions(outfile = "annOptimizeParams_output")
+cluster <- makeMPIcluster(1)
 
 #set up environment
 clusterCall(cluster, function() library(caret))
 clusterCall(cluster, function() library(kernlab))
 clusterExport(cluster, c("trainingSet"), envir = .GlobalEnv)
 
-baselines <- clusterApply(cluster, c("svm", "ann", "knn"), createBaseline)
+baselines <- clusterApply(cluster, c("ann"), createBaseline)
 
 stopCluster(cluster)
 
