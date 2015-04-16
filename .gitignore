@@ -6,3 +6,4 @@
 *.pyc
 *.asv
 Code/Matlab/test.m
+Code/R/inspectDataSet.R

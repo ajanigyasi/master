@@ -86,3 +86,40 @@ def get_list_of_times(list_of_datetimes):
     for dt in list_of_datetimes:
         list_of_times.append(dt.time())
     return np.asarray(list_of_times)
+
+def getRowsWithinDateRange(startDate, endDate, dataSet):
+	startDate = datetime.strptime(startDate, '%Y%m%d').date()
+	endDate = datetime.strptime(endDate, '%Y%m%d').date()
+	return [dataSet[i] for i in range(0, dataSet.shape[0]) if (dataSet['dateAndTime'][i].date() >= startDate) & (dataSet['dateAndTime'][i].date() <= endDate)]
+
+def getRowsWithinTimeIntervalRange(startInterval, endInterval, dataSet):
+	return [dataSet[i] for i in range(0, len(dataSet)) if (dataSet[i][0].time() >= startInterval) & (dataSet[i][0].time() < endInterval)]
+
+def computeDataPointCounts():
+	dataSet = getDataSet('20150129', '20150331', '../../Data/Autopassdata/Singledatefiles/Dataset/raw/', 'dataset')
+	dataPointCounts = np.zeros((288,62))
+	firstDate = dataSet['dateAndTime'][1]
+	firstDateStr = firstDate.strftime('%Y%m%d')
+	date_list = [firstDate.date() + timedelta(days=x) for x in range(0, 62)]
+	interval_list = [(datetime(2015, 1, 1, 0, 0, 0) + timedelta(minutes=x)).time() for x in range(0, 1440, 5)]
+	interval_list.append(datetime(2015, 1, 1, 23, 59, 59).time())
+	for i in range(0, len(date_list)):
+		endDate = date_list[i]
+		print(endDate)
+		endDateStr = endDate.strftime('%Y%m%d')
+		dataDateSubSet = []
+		if i == 0:
+			dataDateSubSet = getRowsWithinDateRange(firstDateStr, endDateStr, dataSet)
+		else:
+			dataDateSubSet = getRowsWithinDateRange(endDateStr, endDateStr, dataSet)
+		for j in range(0, len(interval_list)-1):
+			i1 = interval_list[j]
+			i2 = interval_list[j+1]
+			dataDateIntervalSubSet = getRowsWithinTimeIntervalRange(i1, i2, dataDateSubSet)
+			if i == 0:
+				dataPointCounts[j][i] = len(dataDateIntervalSubSet)
+			else:
+				dataPointCounts[j][i] = len(dataDateIntervalSubSet)
+		print(dataPointCounts[:, i])
+	dataPointCounts = rfn.stack_arrays(dataPointCounts,usemask=False)
+	np.savetxt("dataPointCountsIndividualDates.csv", dataPointCounts, fmt="%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f")
