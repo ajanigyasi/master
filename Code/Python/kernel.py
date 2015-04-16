@@ -127,6 +127,8 @@ class kernel:
         lowest_rmse = float('inf')
         for l in l_params:
             for s in s_params:
+                print 'sigma: ', s
+                print 'lambda: ', l
                 self.X = copy(X_orig)
                 self.y = copy(y_orig)
                 self.updateParams(s, l)
@@ -141,6 +143,7 @@ class kernel:
                     heapq.heappush(h, (curr[0] + timedelta(seconds=curr[3]), i))
                     preds[i] = self.predict(curr[1:3])
                 curr_rmse = sm.tools.eval_measures.rmse(preds, data['actualTravelTime'])
+                print 'rmse: ', curr_rmse
                 if curr_rmse < lowest_rmse:
                     lowest_rmse = curr_rmse
                     best_params = (s, l)

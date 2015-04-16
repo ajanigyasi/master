@@ -83,8 +83,8 @@ def normalize_dataset(dataset):
     dataset['actualTravelTime'] = normalize(actualTravelTime, min(actualTravelTime), max(actualTravelTime))
     
 if __name__ == '__main__':
-    from_date = "20150219"
-    to_date = "20150301"
+    from_date = "20150129"
+    to_date = "20150331"
     dir = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
     model = "dataset"
     dataset = getDataSet(from_date, to_date, dir, model)
@@ -93,8 +93,8 @@ if __name__ == '__main__':
     target_values = list(dataset['actualTravelTime']) #copy instead of referencing
     normalize_dataset(dataset)
     
-    test_start_date = datetime(2015, 2, 22, 0, 0)
-    verification_start_date = datetime(2015, 2, 28, 0, 0)
+    test_start_date = datetime(2015, 2, 12, 0, 0)
+    verification_start_date = datetime(2015, 2, 19, 0, 0)
     test_index = where((dataset['dateAndTime'] >= test_start_date) & (dataset['dateAndTime'] < verification_start_date))[0][0]
     verification_index = where(dataset['dateAndTime'] >= verification_start_date)[0][0]
     trainingset = dataset[0:test_index]
@@ -110,6 +110,9 @@ if __name__ == '__main__':
     l = lokrr(trainingset, testingset, 3)
 
     print 'Training done'
+
+    with open('lokrr_object.pkl', 'wb') as output:
+        pickle.dump(l, output, pickle.HIGHEST_PROTOCOL)
     
     # h = []
 
