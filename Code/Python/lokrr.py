@@ -26,9 +26,9 @@ class lokrr:
     #Creates kernels based on the data for every 5-minute interval of the day
     #and adds them to kernel_map
     def create_kernels(self):
-        intervals = get_list_of_intervals(datetime(2015, 1, 1, 0, 0, 0),
-                                          datetime(2015, 1, 1, 23, 59, 59), timedelta(minutes=5))
-        intervals.append(datetime(2015, 1, 1, 23, 59, 59))
+        intervals = get_list_of_intervals(datetime(2015, 1, 1, 6, 0, 0),
+                                          datetime(2015, 1, 1, 21, 5, 0), timedelta(minutes=5))
+        #intervals.append(datetime(2015, 1, 1, 23, 59, 59))
         # list_of_times = get_list_of_times(self.trainingdata['dateAndTime'])
         # list_of_datasets = list()
         # for i in range(0, len(intervals)-1): #create data set for every 5-minute interval
@@ -93,8 +93,8 @@ if __name__ == '__main__':
     target_values = list(dataset['actualTravelTime']) #copy instead of referencing
     normalize_dataset(dataset)
     
-    test_start_date = datetime(2015, 2, 12, 0, 0)
-    verification_start_date = datetime(2015, 2, 25, 0, 0)
+    test_start_date = datetime(2015, 2, 5, 0, 0)
+    verification_start_date = datetime(2015, 2, 12, 0, 0)
     test_index = where((dataset['dateAndTime'] >= test_start_date) & (dataset['dateAndTime'] < verification_start_date))[0][0]
     verification_index = where(dataset['dateAndTime'] >= verification_start_date)[0][0]
     trainingset = dataset[0:test_index]

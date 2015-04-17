@@ -161,20 +161,23 @@ class kernel:
         results = model.fit()
         r2 = results.rsquared
         if  r2 == 1.0:
-            l_params = [0]
-        else:
-            fi0 = r2/(1-r2)
-            l0 = 1.0/fi0
-            l_params = [0.125*l0, 0.25*l0, 0.5*l0, l0, 2*l0]
+        #     l_params = [0]
+            print 'Warning: r2=1' 
+        # else:
+        #     fi0 = r2/(1-r2)
+        #     l0 = 1.0/fi0
+        #     l_params = [0.125*l0, 0.25*l0, 0.5*l0, l0, 2*l0]
+        fi0 = r2/(1-r2)
+        l0 = 1.0/fi0
+        l_params = [0.125*l0, 0.25*l0, 0.5*l0, l0, 2*l0]
         return l_params
 
     def get_s_params(self):
         pairw_dists = pdist(self.X)
         s_params = asarray(percentile(pairw_dists, [0.25, 0.5, 0.75]))
-        print s_params
         if 0 in s_params:
-            s_params[where(s_params == 0)] = 1e-50
-        print s_params
+            print 'Warning: sigma=0'
+            #s_params[where(s_params == 0)] = 1e-50
         return s_params
 
 #NB! Had to install cython to make statsmodel work
