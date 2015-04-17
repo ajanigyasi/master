@@ -1,7 +1,11 @@
-from numpy import asmatrix, exp, identity, add, dot, delete, vstack, hstack, subtract, resize, zeros, percentile
+#from numpy import asmatrix, exp, identity, add, dot, delete, vstack, hstack, subtract, resize, zeros, percentile, copy, where
+from numpy import *
 from scipy.spatial.distance  import pdist, cdist, squareform
 import statsmodels.api as sm
 import heapq
+from datetime import timedelta
+from utils import get_data_point
+from numpy.linalg import det, slogdet
 
 th = 200 #threshold: remove observations only if kernel contains at least th points
 
@@ -67,8 +71,13 @@ class kernel:
         y - a number corresponding to the data point added
     """
     def update(self, x, y):
+        tmp_X = self.X
+        tmp_y = self.y
+        tmp_reg_K = self.reg_K
+        
         self.X = vstack((self.X, x))
         self.y = hstack((self.y, y))
+        
         n = self.X.shape[0]
         if (n <= th):
             if (n != 1):
@@ -77,11 +86,21 @@ class kernel:
                 self.reg_K = vstack((self.reg_K, row))
                 self.reg_K = hstack((self.reg_K, col))
             self.add_b(x, n)
+            if det(self.reg_K) == 0:
+                self.X = tmp_X
+                self.y = tmp_y
+                self.reg_K = tmp_reg_K
+                return
             self.reg_K_inv = self.reg_K.getI()
         else:
             self.X = delete(self.X, 0, 0)
             self.y = delete(self.y, 0, 0)
             self.updateK(x)
+            if det(self.reg_K) is 0:
+                self.X = tmp_X
+                self.y = tmp_y
+                self.reg_K = temp_reg_K
+                return
             self.updateKInv()
     
     """
@@ -98,8 +117,8 @@ class kernel:
         return dot(tmp, k)[0, 0]
         
     def tune(self, data):
-        X_orig = self.X
-        y_orig = self.y
+        X_orig = copy(self.X)
+        y_orig = copy(self.y)
         
         l_params = self.get_l_params()
         s_params = self.get_s_params()
@@ -108,18 +127,23 @@ class kernel:
         lowest_rmse = float('inf')
         for l in l_params:
             for s in s_params:
+                print 'sigma: ', s
+                print 'lambda: ', l
+                self.X = copy(X_orig)
+                self.y = copy(y_orig)
                 self.updateParams(s, l)
                 h = []
                 preds = zeros(data.shape[0])
                 for i in range(0, data.shape[0]):
-                    curr = data[0, :]
+                    curr = get_data_point(data, i)
                     while(len(h) > 0 and h[0][0] < curr[0]):
                         index = heapq.heappop(h)[1]
-                        observation = data[index]
+                        observation = get_data_point(data, index)
                         self.update(observation[1:3], observation[3])
                     heapq.heappush(h, (curr[0] + timedelta(seconds=curr[3]), i))
                     preds[i] = self.predict(curr[1:3])
-                curr_rmse = sm.tools.eval_measures.rmse(preds, data[:, 3])
+                curr_rmse = sm.tools.eval_measures.rmse(preds, data['actualTravelTime'])
+                print 'rmse: ', curr_rmse
                 if curr_rmse < lowest_rmse:
                     lowest_rmse = curr_rmse
                     best_params = (s, l)
@@ -143,15 +167,9 @@ class kernel:
 
     def get_s_params(self):
         pairw_dists = pdist(self.X)
-        return percentile(pairw_dists, [0.25, 0.5, 0.75])
-        
-        #TODO:
-        #figure out parameter ranges
-        #for every parameter combo:
-        # create kernel with parameters
-        # predict on data
-        # calculate some metric
-        #save best metric and corresp. parameters
-        
+        s_params = asarray(percentile(pairw_dists, [0.25, 0.5, 0.75]))
+        if 0 in s_params:
+            s_params[where(s_params == 0)] = 1e-50
+        return s_params
 
 #NB! Had to install cython to make statsmodel work

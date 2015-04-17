@@ -123,3 +123,6 @@ def computeDataPointCounts():
 		print(dataPointCounts[:, i])
 	dataPointCounts = rfn.stack_arrays(dataPointCounts,usemask=False)
 	np.savetxt("dataPointCountsIndividualDates.csv", dataPointCounts, fmt="%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f;%f")
+    
+def get_data_point(dataset, index):
+    return np.hstack((dataset[index][0], dataset[index][1], dataset[index][2], dataset[index][3]))
