@@ -5,843 +5,332 @@ Loading required package: ggplot2
 Type: EXEC 
 Type: EXEC 
 Type: EXEC 
-+ Resample01: C=1 
-- Resample01: C=1 
-+ Resample02: C=1 
-- Resample02: C=1 
-+ Resample03: C=1 
-- R+ Resample01: layer1=1, layer2=0, layer3=0 
-- Resample01: layer1=1, layer2=0, layer3=0 
-+ Resample01: layer1=3, layer2=0, layer3=0 
-- Resample01: layer1=3, layer2=0, layer3=0 
-+ Resample01: layer1=5, layer2=0, layer3=0 
-- Resample01: layer1=5, layer2=0, layer3=0 
-+ Resample02: layer1=1, layer2=0, layer3=0 
-- Resample02: layer1=1, layer2=0, layer3=0 
-+ Resample02: layer1=3, layer2=0, layer3=0 
-- Resample02: layer1=3, layer2=0, layer3=0 
-+ Resample02: layer1=5, layer2=0, layer3=0 
-- Resample02: layer1=5, layer2=0, layer3=0 
-+ Resample03: layer1=1, layer2=0, layer3=0 
-- Resample03: layer1=1, layer2=0, layer3=0 
-+ Resample03: layer1=3, layer2=0, layer3=0 
-- Resample03: layer1=3, layer2=0, layer3=0 
-+ Resample03: layer1=5, layer2=0, layer3=0 
-- Resample03: layer1=5, layer2=0, layer3=0 
-+ Resample04: layer1=1, layer2=0, layer3=0 
-- Resample04: layer1=1, layer2=0, layer3=0 
-+ Resample04: layer1=3, layer2=0,Type: EXEC 
 Loading required package: kknn
 
 Attaching package: ‘kknn’
 
-The following object is masked from ‘package:caret’:
-
-    contr.dummy
-
-+ Resample01: kmax= 3, distance=1, kernel=rectangular 
-- Resample01: kmax= 3, distance=1, kernel=rectangular 
-+ Resample01: kmax= 5, distance=1, kernel=rectangular 
-- Resample01: kmax= 5, distance=1, kernel=rectangular 
-+ Resample01: kmax= 7, distance=1, kernel=rectangular 
-- Resample01: kmax= 7, distance=1, kernel=rectangular 
-+ Resample01: kmax=10, distance=1, kernel=rectangular 
-- Resample01: kmax=10, distance=1, kernel=rectangular 
-+ Resample01: kmax= 3, distance=2, kernel=rectangular 
-- Resample01: kmax= 3, distance=2, kernel=rectangular 
-+ Resample01: kmax= 5, distance=2, kernel=rectangular 
-- Resample01: kmax= 5, distance=2, kernel=rectangular 
-+ Resample01: kmax= 7, distance=2, kernel=rectangular 
-- Resample01: kmax= 7, distance=2, kernel=rectangular 
-+ Resample01: kmax=10, distance=2, kernel=rectangular 
-- Resample01: kmax=10, distance=2, kernel=rectangular 
-+ Resample01: kmax= 3, distance=1, kernel=optimal 
-- Resample01: kmax= 3, distance=1, kernel=optimal 
-+ Resample01: kmax= 5, distance=1, kernel=optimal 
-- Resample01: kmax= 5, distance=1, kernel=optimal 
-+ Resample01: kmax= 7, distance=1, kernel=optimal 
-- Resample01: kmax= 7, distance=1, kernel=optimal 
-+ Resample01: kmax=10, distance=1, kernel=optimal 
-- Resample01: kmax=10, distance=1, kernel=optimal 
-+ Resample01: kmax= 3, distance=2, kernel=optimal 
-- Resample01: kmax= 3, distance=2, kernel=optimal 
-+ Resample01: kmax= 5, distance=2, kernel=optimal 
-- Resample01: kmax= 5, distance=2, kernel=optimal 
-+ Resample01: kmax= 7, distance=2, kernel=optimal 
-- Resample01: kmax= 7, distance=2, kernel=optimal 
-+ Resample01: kmax=10, distance=2, kernel=optimal 
-- Resample01: kmax=10, distance=2, kernel=optimal 
-+ Resample02: kmax= 3, distance=1, kernel=rectangular 
-- Resample02: kmax= 3, distance=1, kernel=rectangular 
-+ Resample02: kmax= 5, distance=1, kernel=rectangular 
-- Resample02: kmax= 5, distance=1, kernel=rectangular 
-+ Resample02: kmax= 7, distance=1, kernel=rectangular 
-- Resample02: kmax= 7, distance=1, kernel=rectangular 
-+ Resample02: kmax=10, distance=1, kernel=rectangular 
-- Resample02: kmax=10, distance=1, kernel=rectangular 
-+ Resample02: kmax= 3, distance=2, kernel=rectangular 
-- Resample02: kmax= 3, distance=2, kernel=rectangular 
-+ Resample02: kmax= 5, distance=2, kernel=rectangular 
-- Resample02: kmax= 5, distance=2, kernel=rectangular 
-+ Resample02: kmax= 7, distance=2, kernel=rectangular 
-- Resample02: kmax= 7, distance=2, kernel=rectangular 
-+ Resample02: kmax=10, distance=2, kernel=rectangular 
-- Resample02: kmax=10, distance=2, kernel=rectangular 
-+ Resample02: kmax= 3, distance=1, kernel=optimal 
-- Resample02: kmax= 3, distance=1, kernel=optimal 
-+ Resample02: kmax= 5, distance=1, kernel=optimal 
-- Resample02: kmax= 5, distance=1, kernel=optimal 
-+ Resample02: kmax= 7, distance=1, kernel=optimal 
-- Resample02: kmax= 7, distance=1, kernel=optimal 
-+ Resample02: kmax=10, distance=1, kernel=optimal 
-- Resample02: kmax=10, distance=1, kernel=optimal 
-+ Resample02: kmax= 3, distance=2, kernel=optimal 
-- Resample02: kmax= 3, distance=2, kernel=optimal 
-+ Resample02: kmax= 5, distance=2, kernel=optimal 
-- Resample02: kmax= 5, distance=2, kernel=optimal 
-+ Resample02: kmax= 7, distance=2, kernel=optimal 
-- Resample02: kmax= 7, distance=2, kernel=optimal 
-+ Resample02: kmax=10, distance=2, kernel=optimal 
-- Resample02: kmax=10, distance=2, kernel=optimal 
-+ Resample03: kmax= 3, distance=1, kernel=rectangular 
-- Resample03: kmax= 3, distance=1, kernel=rectangular 
-+ Resample03: kmax= 5, distance=1, kernel=rectangular 
-- Resample03: kmax= 5, distance=1, kernel=rectangular 
-+ Resample03: kmax= 7, distance=1, kernel=rectangular 
-- Resample03: kmax= 7, distance=1, kernel=rectangular 
-+ Resample03: kmax=10, distance=1, kernel=rectangular 
-- Resample03: kmax=10, distance=1, kernel=rectangular 
-+ Resample03: kmax= 3, distance=2, kernel=rectangular 
-- Resample03: kmax= 3, distance=2, kernel=rectangular 
-+ Resample03: kmax= 5, distance=2, kernel=rectangular 
-- Resample03: kmax= 5, distance=2, kernel=rectangular 
-+ Resample03: kmax= 7, distance=2, kernel=rectangular 
-- Resample03: kmax= 7, distance=2, kernel=rectangular 
-+ Resample03: kmax=10, distance=2, kernel=rectangular 
-- Resample03: kmax=10, distance=2, kernel=rectangular 
-+ Resample03: kmax= 3, distance=1, kernel=optimal 
-- Resample03: kmax= 3, distance=1, kernel=optimal 
-+ Resample03: kmax= 5, distance=1, kernel=optimal 
-- Resample03: kmax= 5, distance=1, kernel=optimal 
-+ Resample03: kmax= 7, distance=1, kernel=optimal 
-- Resample03: kmax= 7, distance=1, kernel=optimal 
-+ Resample03: kmax=10, distance=1, kernel=optimal 
-- Resample03: kmax=10, distance=1, kernel=optimal 
-+ Resample03: kmax= 3, distance=2, kernel=optimal 
-- Resample03: kmax= 3, distance=2, kernel=optimal 
-+ Resample03: kmax= 5, distance=2, kernel=optimal 
-- Resample03: kmax= 5, distance=2, kernel=optimal 
-+ Resample03: kmax= 7, distance=2, kernel=optimal 
-- Resample03: kmax= 7, distance=2, kernel=optimal 
-+ Resample03: kmax=10, distance=2, kernel=optimal 
-- Resample03: kmax=10, distance=2, kernel=optimal 
-+ Resample04: kmax= 3, distance=1, kernel=rectangular 
-- Resample04: kmax= 3, distance=1, kernel=rectangular 
-+ Resample04: kmax= 5, distance=1, kernel=rectangular 
-- Resample04: kmax= 5, distance=1, kernel=rectangular 
-+ Resample04: kmax= 7, distance=1, kernel=rectangular 
-- Resample04: kmax= 7, distance=1, kernel=rectangular 
-+ Resample04: kmax=10, distance=1, kernel=rectangular 
-- Resample04: kmax=10, distance=1, kernel=rectangular 
-+ Resample04: kmax= 3, distance=2, kernel=rectangular 
-- Resample04: kmax= 3, distance=2, kernel=rectangular 
-+ Resample0Type: DONE 
-distance=2, kernel=rectangular 
-- Resample04: kmax= 5, distance=2, kernel=rectangular 
-+ Resample04: kmax= 7, distance=2, kernel=rectangular 
-- Resample04: kmax= 7, distance=2, kernel=rectangular 
-+ Resample04: kmax=10, distance=2, kernel=rectangular 
-- Resample04: kmax=10, distance=2, kernel=rectangular 
-+ Resample04: kmax= 3, distance=1, kernel=optimal 
-- Resample04: kmax= 3, distance=1, kernel=optimal 
-+ Resample04: kmax= 5, distance=1, kernel=optimal 
-- Resample04: kmax= 5, distance=1, kernel=optimal 
-+ Resample04: kmax= 7, distance=1, kernel=optimal 
-- Resample04: kmax= 7, distance=1, kernel=optimal 
-+ Resample04: kmax=10, distance=1, kernel=optimal 
-- Resample04: kmax=10, distance=1, kernel=optimal 
-+ Resample04: kmax= 3, distance=2, kernel=optimal 
-- Resample04: kmax= 3, distance=2, kernel=optimal 
-+ Resample04: kmax= 5, distance=2, kernel=optimal 
-- Resample04: kmax= 5, distance=2, kernel=optimal 
-+ Resample04: kmax= 7, distance=2, kernel=optimal 
-- Resample04: kmax= 7, distance=2, kernel=optimal 
-+ Resample04: kmax=10, distance=2, kernel=optimal 
-- Resample04: kmax=10, distance=2, kernel=optimal 
-+ Resample05: kmax= 3, distance=1, kernel=rectangular 
-- Resample05: kmax= 3, distance=1, kernel=rectangular 
-+ Resample05: kmax= 5, distance=1, kernel=rectangular 
-- Resample05: kmax= 5, distance=1, kernel=rectangular 
-+ Resample05: kmax= 7, distance=1, kernel=rectangular 
-- Resample05: kmax= 7, distance=1, kernel=rectangular 
-+ Resample05: kmax=10, distance=1, kernel=rectangular 
-- Resample05: kmax=10, distance=1, kernel=rectangular 
-+ Resample05: kmax= 3, distance=2, kernel=rectangular 
-- Resample05: kmax= 3, distance=2, kernel=rectangular 
-+ Resample05: kmax= 5, distance=2, kernel=rectangular 
-- Resample05: kmax= 5, distance=2, kernel=rectangular 
-+ Resample05: kmax= 7, distance=2, kernel=rectangular 
-- Resample05: kmax= 7, distance=2, kernel=rectangular 
-+ Resample05: kmax=10, distance=2, kernel=rectangular 
-- Resample05: kmax=10, distance=2, kernel=rectangular 
-+ Resample05: kmax= 3, distance=1, kernel=optimal 
-- Resample05: kmax= 3, distance=1, kernel=optimal 
-+ Resample05: kmax= 5, distance=1, kernel=optimal 
-- Resample05: kmax= 5, distance=1, kernel=optimal 
-+ Resample05: kmax= 7, distance=1, kernel=optimal 
-- Resample05: kmax= 7, distance=1, kernel=optimal 
-+ Resample05: kmax=10, distance=1, kernel=optimal 
-- Resample05: kmax=10, distance=1, kernel=optimal 
-+ Resample05: kmax= 3, distance=2, kernel=optimal 
-- Resample05: kmax= 3, distance=2, kernel=optimal 
-+ Resample05: kmax= 5, distance=2, kernel=optimal 
-- Resample05: kmax= 5, distance=2, kernel=optimal 
-+ Resample05: kmax= 7, distance=2, kernel=optimal 
-- Resample05: kmax= 7, distance=2, kernel=optimal 
-+ Resample05: kmax=10, distance=2, kernel=optimal 
-- Resample05: kmax=10, distance=2, kernel=optimal 
-+ Resample06: kmax= 3, distance=1, kernel=rectangular 
-- Resample06: kmax= 3, distance=1, kernel=rectangular 
-+ Resample06: kmax= 5, distance=1, kernel=rectangular 
-- Resample06: kmax= 5, distance=1, kernel=rectangular 
-+ Resample06: kmax= 7, distance=1, kernel=rectangular 
-- Resample06: kmax= 7, distance=1, kernel=rectangular 
-+ Resample06: kmax=10, distance=1, kernel=rectangular 
-- Resample06: kmax=10, distance=1, kernel=rectangular 
-+ Resample06: kmax= 3, distance=2, kernel=rectangular 
-- Resample06: kmax= 3, distance=2, kernel=rectangular 
-+ Resample06: kmax= 5, distance=2, kernel=rectangular 
-- Resample06: kmax= 5, distance=2, kernel=rectangular 
-+ Resample06: kmax= 7, distance=2, kernel=rectangular 
-- Resample06: kmax= 7, distance=2, kernel=rectangular 
-+ Resample06: kmax=10, distance=2, kernel=rectangular 
-- Resample06: kmax=10, distance=2, kernel=rectangular 
-+ Resample06: kmax= 3, distance=1, kernel=optimal 
-- Resample06: kmax= 3, distance=1, kernel=optimal 
-+ Resample06: kmax= 5, distance=1, kernel=optimal 
-- Resample06: kmax= 5, distance=1, kernel=optimal 
-+ Resample06: kmax= 7, distance=1, kernel=optimal 
-- Resample06: kmax= 7, distance=1, kernel=optimal 
-+ Resample06: kmax=10, distance=1, kernel=optimal 
-- Resample06: kmax=10, distance=1, kernel=optimal 
-+ Resample06: kmax= 3, distance=2, kernel=optimal 
-- Resample06: kmax= 3, distance=2, kernel=optimal 
-+ Resample06: kmax= 5, distance=2, kernel=optimal 
-- Resample06: kmax= 5, distance=2, kernel=optimal 
-+ Resample06: kmax= 7, distance=2, kernel=optimal 
-- Resample06: kmax= 7, distance=2, kernel=optimal 
-+ Resample06: kmax=10, distance=2, kernel=optimal 
-- Resample06: kmax=10, distance=2, kernel=optimal 
-+ Resample07: kmax= 3, distance=1, kernel=rectangular 
-- Resample07: kmax= 3, distance=1, kernel=rectangular 
-+ Resample07: kmax= 5, distance=1, kernel=rectangular 
-- Resample07: kmax= 5, distance=1, kernel=rectangular 
-+ Resample07: kmax= 7, distance=1, kernel=rectangular 
-- Resample07: kmax= 7, distance=1, kernel=rectangular 
-+ Resample07: kmax=10, distance=1, kernel=rectangular 
-- Resample07: kmax=10, distance=1, kernel=rectangular 
-+ Resample07: kmax= 3, distance=2, kernel=rectangular 
-- Resample07: kmax= 3, distance=2, kernel=rectangular 
-+ Resample07: kmax= 5, distance=2, kernel=rectangular 
-- Resample07: kmax= 5, distance=2, kernel=rectangular 
-+ Resample07: kmax= 7, distance=2, kernel=rectangular 
-- Resample07: kmax= 7, distance=2, kernel=rectangular 
-+ Resample07: kmax=10, distance=2, kernel=rectangular 
-- Resample07: kmax=10, distance=2, kernel=rectangular 
-+ Resample07: kmax= 3, distance=1, kernel=optimal 
-- Resample07: kmax= 3, distance=1, kernel=optimal 
-+ Resample07: kmax= 5, distance=1, kernel=optimal 
-- Resample07: kmax= 5, distance=1, kernel=optimal 
-+ Resample07: kmax= 7, distance=1, kernel=optimal 
-- Resample07: kmax= 7, distance=1, kernel=optimal 
-+ Resample07: kmax=10, distance=1, kernel=optimal 
-- Resample07: kmax=10, distance=1, kernel=optimal 
-+ Resample07: kmax= 3, distance=2, kernel=optimal 
-- Resample07: kmax= 3, distance=2, kernel=optimal 
-+ Resample07: kmax= 5, distance=2, kernel=optimal 
-- Resample07: kmax= 5, distance=2, kernel=optimal 
-+ Resample07: kmax= 7, distance=2, kernel=optimal 
-- Resample07: kmax= 7, distance=2, kernel=optimal 
-+ Resample07: kmax=10, distance=2, kernel=optimal 
-- Resample07: kmax=10, distance=2, kernel=optimal 
-+ Resample08: kmax= 3, distance=1, kernel=rectangular 
-- Resample08: kmax= 3, distance=1, kernel=rectangular 
-+ Resample08: kmax= 5, distance=1, kernel=rectangular 
-- Resample08: kmax= 5, distance=1, kernel=rectangular 
-+ Resample08: kmax= 7, distance=1, kernel=rectangular 
-- Resample08: kmax= 7, distance=1, kernel=rectangular 
-+ Resample08: kmax=10, distance=1, kernel=rectangular 
-- Resample08: kmax=10, distance=1, kernel=rectangular 
-+ Resample08: kmax= 3, distance=2, kernel=rectangular 
-- Resample08: kmax= 3, distance=2, kernel=rectangular 
-+ Resample08: kmax= 5, distance=2, kernel=rectangular 
-- Resample08: kmax= 5, distance=2, kernel=rectangular 
-+ Resample08: kmax= 7, distance=2, kernel=rectangular 
-- Resample08: kmax= 7, distance=2, kernel=rectangular 
-+ Resample08: kmax=10, distance=2, kernel=rectangular 
-- Resample08: kmax=10, distance=2, kernel=rectangular 
-+ Resample08: kmax= 3, distance=1, kernel=optimal 
-- Resample08: kmax= 3, distance=1, kernel=optimal 
-+ Resample08: kmax= 5, distance=1, kernel=optimal 
-- Resample08: kmax= 5, distance=1, kernel=optimal 
-+ Resample08: kmax= 7, distance=1, kernel=optimal 
-- Resample08: kmax= 7, distance=1, kernel=optimal 
-+ Resample08: kmax=10, distance=1, kernel=optimal 
-- Resample08: kmax=10, distance=1, kernel=optimal 
-+ Resample08: kmax= 3, distance=2, kernel=optimal 
-- Resample08: kmax= 3, distance=2, kernel=optimal 
-+ Resample08: kmax= 5, distance=2, kernel=optimal 
-- Resample08: kmax= 5, distance=2, kernel=optimal 
-+ Resample08: kmax= 7, distance=2, kernel=optimal 
-- Resample08: kmax= 7, distance=2, kernel=optimal 
-+ Resample08: kmax=10, distance=2, kernel=optimal 
-- Resample08: kmax=10, distance=2, kernel=optimal 
-+ Resample09: kmax= 3, distance=1, kernel=rectangular 
-- Resample09: kmax= 3, distance=1, kernel=rectangular 
-+ Resample09: kmax= 5, distance=1, kernel=rectangular 
-- Resample09: kmax= 5, distance=1, kernel=rectangular 
-+ Resample09: kmax= 7, distance=1, kernel=rectangular 
-- Resample09: kmax= 7, distance=1, kernel=rectangular 
-+ Resample09: kmax=10, distance=1, kernel=rectangular 
-- Resample09: kmax=10, distance=1, kernel=rectangular 
-+ Resample09: kmax= 3, distance=2, kernel=rectangular 
-- Resample09: kmax= 3, distance=2, kernel=rectangular 
-+ Resample09: kmax= 5, distance=2, kernel=rectangular 
-- Resample09: kmax= 5, distance=2, kernel=rectangular 
-+ Resample09: kmax= 7, distance=2, kernel=rectangular 
-- Resample09: kmax= 7, distance=2, kernel=rectangular 
-+ Resample09: kmax=10, distance=2, kernel=rectangular 
-- Resample09: kmax=10, distance=2, kernel=rectangular 
-+ Resample09: kmax= 3, distance=1, kernel=optimal 
-- Resample09: kmax= 3, distance=1, kernel=optimal 
-+ Resample09: kmax= 5, distance=1, kernel=optimal 
-- Resample09: kmax= 5, distance=1, kernel=optimal 
-+ Resample09: kmax= 7, distance=1, kernel=optimal 
-- Resample09: kmax= 7, distance=1, kernel=optimal 
-+ Resample09: kmax=10, distance=1, kernel=optimal 
-- Resample09: kmax=10, distance=1, kernel=optimal 
-+ Resample09: kmax= 3, distance=2, kernel=optimal 
-- Resample09: kmax= 3, distance=2, kernel=optimal 
-+ Resample09: kmax= 5, distance=2, kernel=optimal 
-- Resample09: kmax= 5, distance=2, kernel=optimal 
-+ Resample09: kmax= 7, distance=2, kernel=optimal 
-- Resample09: kmax= 7, distance=2, kernel=optimal 
-+ Resample09: kmax=10, distance=2, kernel=optimal 
-- Resample09: kmax=10, distance=2, kernel=optimal 
-+ Resample10: kmax= 3, distance=1, kernel=rectangular 
-- Resample10: kmax= 3, distance=1, kernel=rectangular 
-+ Resample10: kmax= 5, distance=1, kernel=rectangular 
-- Resample10: kmax= 5, distance=1, kernel=rectangular 
-+ Resample10: kmax= 7, distance=1, kernel=rectangular 
-- Resample10: kmax= 7, distance=1, kernel=rectangular 
-+ Resample10: kmax=10, distance=1, kernel=rectangular 
-- Resample10: kmax=10, distance=1, kernel=rectangular 
-+ Resample10: kmax= 3, distance=2, kernel=rectangular 
-- Resample10: kmax= 3, distance=2, kernel=rectangular 
-+ Resample10: kmax= 5, distance=2, kernel=rectangular 
-- Resample10: kmax= 5, distance=2, kernel=rectangular 
-+ Resample10: kmax= 7, distance=2, kernel=rectangular 
-- Resample10: kmax= 7, distance=2, kernel=rectangular 
-+ Resample10: kmax=10, distance=2, kernel=rectangular 
-- Resample10: kmax=10, distance=2, kernel=rectangular 
-+ Resample10: kmax= 3, distance=1, kernel=optimal 
-- Resample10: kmax= 3, distance=1, kernel=optimal 
-+ Resample10: kmax= 5, distance=1, kernel=optimal 
-- Resample10: kmax= 5, distance=1, kernel=optimal 
-+ Resample10: kmax= 7, distance=1, kernel=optimal 
-- Resample10: kmax= 7, distance=1, kernel=optimal 
-+ Resample10: kmax=10, distance=1, kernel=optimal 
-- Resample10: kmax=10, distance=1, kernel=optimal 
-+ Resample10: kmax= 3, distance=2, kernel=optimal 
-- Resample10: kmax= 3, distance=2, kernel=optimal 
-+ Resample10: kmax= 5, distance=2, kernel=optimal 
-- Resample10: kmax= 5, distance=2, kernel=optimal 
-+ Resample10: kmax= 7, distance=2, kernel=optimal 
-- Resample10: kmax= 7, distance=2, kernel=optimal 
-+ Resample10: kmax=10, distance=2, kernel=optimal 
-- Resample10: kmax=10, distance=2, kernel=optimal 
-+ Resample11: kmax= 3, distance=1, kernel=rectangular 
-- Resample11: kmax= 3, distance=1, kernel=rectangular 
-+ Resample11: kmax= 5, distance=1, kernel=rectangular 
-- Resample11: kmax= 5, distance=1, kernel=rectangular 
-+ Resample11: kmax= 7, distance=1, kernel=rectangular 
-- Resample11: kmax= 7, distance=1, kernel=rectangular 
-+ Resample11: kmax=10, distance=1, kernel=rectangular 
-- Resample11: kmax=10, distance=1, kernel=rectangular 
-+ Resample11: kmax= 3, distance=2, kernel=rectangular 
-- Resample11: kmax= 3, distance=2, kernel=rectangular 
-+ Resample11: kmax= 5, distance=2, kernel=rectangular 
-- Resample11: kmax= 5, distance=2, kernel=rectangular 
-+ Resample11: kmax= 7, distance=2, kernel=rectangular 
-- Resample11: kmax= 7, distance=2, kernel=rectangular 
-+ Resample11: kmax=10, distance=2, kernel=rectangular 
-- Resample11: kmax=10, distance=2, kernel=rectangular 
-+ Resample11: kmax= 3, distance=1, kernel=optimal 
-- Resample11: kmax= 3, distance=1, kernel=optimal 
-+ Resample11: kmax= 5, distance=1, kernel=optimal 
-- Resample11: kmax= 5, distance=1, kernel=optimal 
-+ Resample11: kmax= 7, distance=1, kernel=optimal 
-- Resample11: kmax= 7, distance=1, kernel=optimal 
-+ Resample11: kmax=10, distance=1, kernel=optimal 
-- Resample11: kmax=10, distance=1, kernel=optimal 
-+ Resample11: kmax= 3, distance=2, kernel=optimal 
-- Resample11: kmax= 3, distance=2, kernel=optimal 
-+ Resample11: kmax= 5, distance=2, kernel=optimal 
-- Resample11: kmax= 5, distance=2, kernel=optimal 
-+ Resample11: kmax= 7, distance=2, kernel=optimal 
-- Resample11: kmax= 7, distance=2, kernel=optimal 
-+ Resample11: kmax=10, distance=2, kernel=optimal 
-- Resample11: kmax=10, distance=2, kernel=optimal 
-+ Resample12: kmax= 3, distance=1, kernel=rectangular 
-- Resample12: kmax= 3, distance=1, kernel=rectangular 
-+ Resample12: kmax= 5, distance=1, kernel=rectangular 
-- Resample12: kmax= 5, distance=1, kernel=rectangular 
-+ Resample12: kmax= 7, distance=1, kernel=rectangular 
-- Resample12: kmax= 7, distance=1, kernel=rectangular 
-+ Resample12: kmax=10, distance=1, kernel=rectangular 
-- Resample12: kmax=10, distance=1, kernel=rectangular 
-+ Resample12: kmax= 3, distance=2, kernel=rectangular 
-- Resample12: kmax= 3, distance=2, kernel=rectangular 
-+ Resample12: kmax= 5, distance=2, kernel=rectangular 
-- Resample12: kmax= 5, distance=2, kernel=rectangular 
-+ Resample12: kmax= 7, distance=2, kernel=rectangular 
-- Resample12: kmax= 7, distance=2, kernel=rectangular 
-+ Resample12: kmax=10, distance=2, kernel=rectangular 
-- Resample12: kmax=10, distance=2, kernel=rectangular 
-+ Resample12: kmax= 3, distance=1, kernel=optimal 
-- Resample12: kmax= 3, distance=1, kernel=optimal 
-+ Resample12: kmax= 5, distance=1, kernel=optimal 
-- Resample12: kmax= 5, distance=1, kernel=optimal 
-+ Resample12: kmax= 7, distance=1, kernel=optimal 
-- Resample12: kmax= 7, distance=1, kernel=optimal 
-+ Resample12: kmax=10, distance=1, kernel=optimal 
-- Resample12: kmax=10, distance=1, kernel=optimal 
-+ Resample12: kmax= 3, distance=2, kernel=optimal 
-- Resample12: kmax= 3, distance=2, kernel=optimal 
-+ Resample12: kmax= 5, distance=2, kernel=optimal 
-- Resample12: kmax= 5, distance=2, kernel=optimal 
-+ Resample12: kmax= 7, distance=2, kernel=optimal 
-- Resample12: kmax= 7, distance=2, kernel=optimal 
-+ Resample12: kmax=10, distance=2, kernel=optimal 
-- Resample12: kmax=10, distance=2, kernel=optimal 
-+ Resample13: kmax= 3, distance=1, kernel=rectangular 
-- Resample13: kmax= 3, distance=1, kernel=rectangular 
-+ Resample13: kmax= 5, distance=1, kernel=rectangular 
-- Resample13: kmax= 5, distance=1, kernel=rectangular 
-+ Resample13: kmax= 7, distance=1, kernel=rectangular 
-- Resample13: kmax= 7, distance=1, kernel=rectangular 
-+ Resample13: kmax=10, distance=1, kernel=rectangular 
-- Resample13: kmax=10, distance=1, kernel=rectangular 
-+ Resample13: kmax= 3, distance=2, kernel=rectangular 
-- Resample13: kmax= 3, distance=2, kernel=rectangular 
-+ Resample13: kmax= 5, distance=2, kernel=rectangular 
-- Resample13: kmax= 5, distance=2, kernel=rectangular 
-+ Resample13: kmax= 7, distance=2, kernel=rectangular 
-- Resample13: kmax= 7, distance=2, kernel=rectangular 
-+ Resample13: kmax=10, distance=2, kernel=rectangular 
-- Resample13: kmax=10, distance=2, kernel=rectangular 
-+ Resample13: kmax= 3, distance=1, kernel=optimal 
-- Resample13: kmax= 3, distance=1, kernel=optimal 
-+ Resample13: kmax= 5, distance=1, kernel=optimal 
-- Resample13: kmax= 5, distance=1, kernel=optimal 
-+ Resample13: kmax= 7, distance=1, kernel=optimal 
-- Resample13: kmax= 7, distance=1, kernel=optimal 
-+ Resample13: kmax=10, distance=1, kernel=optimal 
-- Resample13: kmax=10, distance=1, kernel=optimal 
-+ Resample13: kmax= 3, distance=2, kernel=optimal 
-- Resample13: kmax= 3, distance=2, kernel=optimal 
-+ Resample13: kmax= 5, distance=2, kernel=optimal 
-- Resample13: kmax= 5, distance=2, kernel=optimal 
-+ Resample13: kmax= 7, distance=2, kernel=optimal 
-- Resample13: kmax= 7, distance=2, kernel=optimal 
-+ Resample13: kmax=10, distance=2, kernel=optimal 
-- Resample13: kmax=10, distance=2, kernel=optimal 
-+ Resample14: kmax= 3, distance=1, kernel=rectangular 
-- Resample14: kmax= 3, distance=1, kernel=rectangular 
-+ Resample14: kmax= 5, distance=1, kernel=rectangular 
-- Resample14: kmax= 5, distance=1, kernel=rectangular 
-+ Resample14: kmax= 7, distance=1, kernel=rectangular 
-- Resample14: kmax= 7, distance=1, kernel=rectangular 
-+ Resample14: kmax=10, distance=1, kernel=rectangular 
-- Resample14: kmax=10, distance=1, kernel=rectangular 
-+ Resample14: kmax= 3, distance=2, kernel=rectangular 
-- Resample14: kmax= 3, distance=2, kernel=rectangular 
-+ Resample14: kmax= 5, distance=2, kernel=rectangular 
-- Resample14: kmax= 5, distance=2, kernel=rectangular 
-+ Resample14: kmax= 7, distance=2, kernel=rectangular 
-- Resample14: kmax= 7, distance=2, kernel=rectangular 
-+ Resample14: kmax=10, distance=2, kernel=rectangular 
-- Resample14: kmax=10, distance=2, kernel=rectangular 
-+ Resample14: kmax= 3, distance=1, kernel=optimal 
-- Resample14: kmax= 3, distance=1, kernel=optimal 
-+ Resample14: kmax= 5, distance=1, kernel=optimal 
-- Resample14: kmax= 5, distance=1, kernel=optimal 
-+ Resample14: kmax= 7, distance=1, kernel=optimal 
-- Resample14: kmax= 7, distance=1, kernel=optimal 
-+ Resample14: kmax=10, distance=1, kernel=optimal 
-- Resample14: kmax=10, distance=1, kernel=optimal 
-+ Resample14: kmax= 3, distance=2, kernel=optimal 
-- Resample14: kmax= 3, distance=2, kernel=optimal 
-+ Resample14: kmax= 5, distance=2, kernel=optimal 
-- Resample14: kmax= 5, distance=2, kernel=optimal 
-+ Resample14: kmax= 7, distance=2, kernel=optimal 
-- Resample14: kmax= 7, distance=2, kernel=optimal 
-+ Resample14: kmax=10, distance=2, kernel=optimal 
-- Resample14: kmax=10, distance=2, kernel=optimal 
-+ Resample15: kmax= 3, distance=1, kernel=rectangular 
-- Resample15: kmax= 3, distance=1, kernel=rectangular 
-+ Resample15: kmax= 5, distance=1, kernel=rectangular 
-- Resample15: kmax= 5, distance=1, kernel=rectangular 
-+ Resample15: kmax= 7, distance=1, kernel=rectangular 
-- Resample15: kmax= 7, distance=1, kernel=rectangular 
-+ Resample15: kmax=10, distance=1, kernel=rectangular 
-- Resample15: kmax=10, distance=1, kernel=rectangular 
-+ Resample15: kmax= 3, distance=2, kernel=rectangular 
-- Resample15: kmax= 3, distance=2, kernel=rectangular 
-+ Resample15: kmax= 5, distance=2, kernel=rectangular 
-- Resample15: kmax= 5, distance=2, kernel=rectangular 
-+ Resample15: kmax= 7, distance=2, kernel=rectangular 
-- Resample15: kmax= 7, distance=2, kernel=rectangular 
-+ Resample15: kmax=10, distance=2, kernel=rectangular 
-- Resample15: kmax=10, distance=2, kernel=rectangular 
-+ Resample15: kmax= 3, distance=1, kernel=optimal 
-- Resample15: kmax= 3, distance=1, kernel=optimal 
-+ Resample15: kmax= 5, distance=1, kernel=optimal 
-- Resample15: kmax= 5, distance=1, kernel=optimal 
-+ Resample15: kmax= 7, distance=1, kernel=optimal 
-- Resample15: kmax= 7, distance=1, kernel=optimal 
-+ Resample15: kmax=10, distance=1, kernel=optimal 
-- Resample15: kmax=10, distance=1, kernel=optimal 
-+ Resample15: kmax= 3, distance=2, kernel=optimal 
-- Resample15: kmax= 3, distance=2, kernel=optimal 
-+ Resample15: kmax= 5, distance=2, kernel=optimal 
-- Resample15: kmax= 5, distance=2, kernel=optimal 
-+ Resample15: kmax= 7, distance=2, kernel=optimal 
-- Resample15: kmax= 7, distance=2, kernel=optimal 
-+ Resample15: kmax=10, distance=2, kernel=optimal 
-- Resample15: kmax=10, distance=2, kernel=optimal 
-+ Resample16: kmax= 3, distance=1, kernel=rectangular 
-- Resample16: kmax= 3, distance=1, kernel=rectangular 
-+ Resample16: kmax= 5, distance=1, kernel=rectangular 
-- Resample16: kmax= 5, distance=1, kernel=rectangular 
-+ Resample16: kmax= 7, distance=1, kernel=rectangular 
-- Resample16: kmax= 7, distance=1, kernel=rectangular 
-+ Resample16: kmax=10, distance=1, kernel=rectangular 
-- Resample16: kmax=10, distance=1, kernel=rectangular 
-+ Resample16: kmax= 3, distance=2, kernel=rectangular 
-- Resample16: kmax= 3, distance=2, kernel=rectangular 
-+ Resample16: kmax= 5, distance=2, kernel=rectangular 
-- Resample16: kmax= 5, distance=2, kernel=rectangular 
-+ Resample16: kmax= 7, distance=2, kernel=rectangular 
-- Resample16: kmax= 7, distance=2, kernel=rectangular 
-+ Resample16: kmax=10, distance=2, kernel=rectangular 
-- Resample16: kmax=10, distance=2, kernel=rectangular 
-+ Resample16: kmax= 3, distance=1, kernel=optimal 
-- Resample16: kmax= 3, distance=1, kernel=optimal 
-+ Resample16: kmax= 5, distance=1, kernel=optimal 
-- Resample16: kmax= 5, distance=1, kernel=optimal 
-+ Resample16: kmax= 7, distance=1, kernel=optimal 
-- Resample16: kmax= 7, distance=1, kernel=optimal 
-+ Resample16: kmax=10, distance=1, kernel=optimal 
-- Resample16: kmax=10, distance=1, kernel=optimal 
-+ Resample16: kmax= 3, distance=2, kernel=optimal 
-- Resample16: kmax= 3, distance=2, kernel=optimal 
-+ Resample16: kmax= 5, distance=2, kernel=optimal 
-- Resample16: kmax= 5, distance=2, kernel=optimal 
-+ Resample16: kmax= 7, distance=2, kernel=optimal 
-- Resample16: kmax= 7, distance=2, kernel=optimal 
-+ Resample16: kmax=10, distance=2, kernel=optimal 
-- Resample16: kmax=10, distance=2, kernel=optimal 
-+ Resample17: kmax= 3, distance=1, kernel=rectangular 
-- Resample17: kmax= 3, distance=1, kernel=rectangular 
-+ Resample17: kmax= 5, distance=1, kernel=rectangular 
-- Resample17: kmax= 5, distance=1, kernel=rectangular 
-+ Resample17: kmax= 7, distance=1, kernel=rectangular 
-- Resample17: kmax= 7, distance=1, kernel=rectangular 
-+ Resample17: kmax=10, distance=1, kernel=rectangular 
-- Resample17: kmax=10, distance=1, kernel=rectangular 
-+ Resample17: kmax= 3, distance=2, kernel=rectangular 
-- Resample17: kmax= 3, distance=2, kernel=rectangular 
-+ Resample17: kmax= 5, distance=2, kernel=rectangular 
-- Resample17: kmax= 5, distance=2, kernel=rectangular 
-+ Resample17: kmax= 7, distance=2, kernel=rectangular 
-- Resample17: kmax= 7, distance=2, kernel=rectangular 
-+ Resample17: kmax=10, distance=2, kernel=rectangular 
-- Resample17: kmax=10, distance=2, kernel=rectangular 
-+ Resample17: kmax= 3, distance=1, kernel=optimal 
-- Resample17: kmax= 3, distance=1, kernel=optimal 
-+ Resample17: kmax= 5, distance=1, kernel=optimal 
-- Resample17: kmax= 5, distance=1, kernel=optimal 
-+ Resample17: kmax= 7, distance=1, kernel=optimal 
-- Resample17: kmax= 7, distance=1, kernel=optimal 
-+ Resample17: kmax=10, distance=1, kernel=optimal 
-- Resample17: kmax=10, distance=1, kernel=optimal 
-+ Resample17: kmax= 3, distance=2, kernel=optimal 
-- Resample17: kmax= 3, distance=2, kernel=optimal 
-+ Resample17: kmax= 5, distance=2, kernel=optimal 
-- Resample17: kmax= 5, distance=2, kernel=optimal 
-+ Resample17: kmax= 7, distance=2, kernel=optimal 
-- Resample17: kmax= 7, distance=2, kernel=optimal 
-+ Resample17: kmax=10, distance=2, kernel=optimal 
-- Resample17: kmax=10, distance=2, kernel=optimal 
-+ Resample18: kmax= 3, distance=1, kernel=rectangular 
-- Resample18: kmax= 3, distance=1, kernel=rectangular 
-+ Resample18: kmax= 5, distance=1, kernel=rectangular 
-- Resample18: kmax= 5, distance=1, kernel=rectangular 
-+ Resample18: kmax= 7, distance=1, kernel=rectangular 
-- Resample18: kmax= 7, distance=1, kernel=rectangular 
-+ Resample18: kmax=10, distance=1, kernel=rectangular 
-- Resample18: kmax=10, distance=1, kernel=rectangular 
-+ Resample18: kmax= 3, distance=2, kernel=rectangular 
-- Resample18: kmax= 3, distance=2, kernel=rectangular 
-+ Resample18: kmax= 5, distance=2, kernel=rectangular 
-- Resample18: kmax= 5, distance=2, kernel=rectangular 
-+ Resample18: kmax= 7, distance=2, kernel=rectangular 
-- Resample18: kmax= 7, distance=2, kernel=rectangular 
-+ Resample18: kmax=10, distance=2, kernel=rectangular 
-- Resample18: kmax=10, distance=2, kernel=rectangular 
-+ Resample18: kmax= 3, distance=1, kernel=optimal 
-- Resample18: kmax= 3, distance=1, kernel=optimal 
-+ Resample18: kmax= 5, distance=1, kernel=optimal 
-- Resample18: kmax= 5, distance=1, kernel=optimal 
-+ Resample18: kmax= 7, distance=1, kernel=optimal 
-- Resample18: kmax= 7, distance=1, kernel=optimal 
-+ Resample18: kmax=10, distance=1, kernel=optimal 
-- Resample18: kmax=10, distance=1, kernel=optimal 
-+ Resample18: kmax= 3, distance=2, kernel=optimal 
-- Resample18: kmax= 3, distance=2, kernel=optimal 
-+ Resample18: kmax= 5, distance=2, kernel=optimal 
-- Resample18: kmax= 5, distance=2, kernel=optimal 
-+ Resample18: kmax= 7, distance=2, kernel=optimal 
-- Resample18: kmax= 7, distance=2, kernel=optimal 
-+ Resample18: kmax=10, distance=2, kernel=optimal 
-- Resample18: kmax=10, distance=2, kernel=optimal 
-+ Resample19: kmax= 3, distance=1, kernel=rectangular 
-- Resample19: kmax= 3, distance=1, kernel=rectangular 
-+ Resample19: kmax= 5, distance=1, kernel=rectangular 
-- Resample19: kmax= 5, distance=1, kernel=rectangular 
-+ Resample19: kmax= 7, distance=1, kernel=rectangular 
-- Resample19: kmax= 7, distance=1, kernel=rectangular 
-+ Resample19: kmax=10, distance=1, kernel=rectangular 
-- Resample19: kmax=10, distance=1, kernel=rectangular 
-+ Resample19: kmax= 3, distance=2, kernel=rectangular 
-- Resample19: kmax= 3, distance=2, kernel=rectangular 
-+ Resample19: kmax= 5, distance=2, kernel=rectangular 
-- Resample19: kmax= 5, distance=2, kernel=rectangular 
-+ Resample19: kmax= 7, distance=2, kernel=rectangular 
-- Resample19: kmax= 7, distance=2, kernel=rectangular 
-+ Resample19: kmax=10, distance=2, kernel=rectangular 
-- Resample19: kmax=10, distance=2, kernel=rectangular 
-+ Resample19: kmax= 3, distance=1, kernel=optimal 
-- Resample19: kmax= 3, distance=1, kernel=optimal 
-+ Resample19: kmax= 5, distance=1, kernel=optimal 
-- Resample19: kmax= 5, distance=1, kernel=optimal 
-+ Resample19: kmax= 7, distance=1, kernel=optimal 
-- Resample19: kmax= 7, distance=1, kernel=optimal 
-+ Resample19: kmax=10, distance=1, kernel=optimal 
-- Resample19: kmax=10, distance=1, kernel=optimal 
-+ Resample19: kmax= 3, distance=2, kernel=optimal 
-- Resample19: kmax= 3, distance=2, kernel=optimal 
-+ Resample19: kmax= 5, distance=2, kernel=optimal 
-- Resample19: kmax= 5, distance=2, kernel=optimal 
-+ Resample19: kmax= 7, distance=2, kernel=optimal 
-- Resample19: kmax= 7, distance=2, kernel=optimal 
-+ Resample19: kmax=10, distance=2, kernel=optimal 
-- Resample19: kmax=10, distance=2, kernel=optimal 
-+ Resample20: kmax= 3, distance=1, kernel=rectangular 
-- Resample20: kmax= 3, distance=1, kernel=rectangular 
-+ Resample20: kmax= 5, distance=1, kernel=rectangular 
-- Resample20: kmax= 5, distance=1, kernel=rectangular 
-+ Resample20: kmax= 7, distance=1, kernel=rectangular 
-- Resample20: kmax= 7, distance=1, kernel=rectangular 
-+ Resample20: kmax=10, distance=1, kernel=rectangular 
-- Resample20: kmax=10, distance=1, kernel=rectangular 
-+ Resample20: kmax= 3, distance=2, kernel=rectangular 
-- Resample20: kmax= 3, distance=2, kernel=rectangular 
-+ Resample20: kmax= 5, distance=2, kernel=rectangular 
-- Resample20: kmax= 5, distance=2, kernel=rectangular 
-+ Resample20: kmax= 7, distance=2, kernel=rectangular 
-- Resample20: kmax= 7, distance=2, kernel=rectangular 
-+ Resample20: kmax=10, distance=2, kernel=rectangular 
-- Resample20: kmax=10, distance=2, kernel=rectangular 
-+ Resample20: kmax= 3, distance=1, kernel=optimal 
-- Resample20: kmax= 3, distance=1, kernel=optimal 
-+ Resample20: kmax= 5, distance=1, kernel=optimal 
-- Resample20: kmax= 5, distance=1, kernel=optimal 
-+ Resample20: kmax= 7, distance=1, kernel=optimal 
-- Resample20: kmax= 7, distance=1, kernel=optimal 
-+ Resample20: kmax=10, distance=1, kernel=optimal 
-- Resample20: kmax=10, distance=1, kernel=optimal 
-+ Resample20: kmax= 3, distance=2, kernel=optimal 
-- Resample20: kmax= 3, distance=2, kernel=optimal 
-+ Resample20: kmax= 5, distance=2, kernel=optimal 
-- Resample20: kmax= 5, distance=2, kernel=optimal 
-+ Resample20: kmax= 7, distance=2, kernel=optimal 
-- Resample20: kmax= 7, distance=2, kernel=optimal 
-+ Resample20: kmax=10, distance=2, kernel=optimal 
-- Resample20: kmax=10, distance=2, kernel=optimal 
-+ Resample21: kmax= 3, distance=1, kernel=rectangular 
-- Resample21: kmax= 3, distance=1, kernel=rectangular 
-+ Resample21: kmax= 5, distance=1, kernel=rectangular 
-- Resample21: kmax= 5, distance=1, kernel=rectangular 
-+ Resample21: kmax= 7, distance=1, kernel=rectangular 
-- Resample21: kmax= 7, distance=1, kernel=rectangular 
-+ Resample21: kmax=10, distance=1, kernel=rectangular 
-- Resample21: kmax=10, distance=1, kernel=rectangular 
-+ Resample21: kmax= 3, distance=2, kernel=rectangular 
-- Resample21: kmax= 3, distance=2, kernel=rectangular 
-+ Resample21: kmax= 5, distance=2, kernel=rectangular 
-- Resample21: kmax= 5, distance=2, kernel=rectangular 
-+ Resample21: kmax= 7, distance=2, kernel=rectangular 
-- Resample21: kmax= 7, distance=2, kernel=rectangular 
-+ Resample21: kmax=10, distance=2, kernel=rectangular 
-- Resample21: kmax=10, distance=2, kernel=rectangular 
-+ Resample21: kmax= 3, distance=1, kernel=optimal 
-- Resample21: kmax= 3, distance=1, kernel=optimal 
-+ Resample21: kmax= 5, distance=1, kernel=optimal 
-- Resample21: kmax= 5, distance=1, kernel=optimal 
-+ Resample21: kmax= 7, distance=1, kernel=optimal 
-- Resample21: kmax= 7, distance=1, kernel=optimal 
-+ Resample21: kmax=10, distance=1, kernel=optimal 
-- Resample21: kmax=10, distance=1, kernel=optimal 
-+ Resample21: kmax= 3, distance=2, kernel=optimal 
-- Resample21: kmax= 3, distance=2, kernel=optimal 
-+ Resample21: kmax= 5, distance=2, kernel=optimal 
-- Resample21: kmax= 5, distance=2, kernel=optimal 
-+ Resample21: kmax= 7, distance=2, kernel=optimal 
-- Resample21: kmax= 7, distance=2, kernel=optimal 
-+ Resample21: kmax=10, distance=2, kernel=optimal 
-- Resample21: kmax=10, distance=2, kernel=optimal 
-+ Resample22: kmax= 3, distance=1, kernel=rectangular 
-- Resample22: kmax= 3, distance=1, kernel=rectangular 
-+ Resample22: kmax= 5, distance=1, kernel=rectangular 
-- Resample22: kmax= 5, distance=1, kernel=rectangular 
-+ Resample22: kmax= 7, distance=1, kernel=rectangular 
-- Resample22: kmax= 7, distance=1, kernel=rectangular 
-+ Resample22: kmax=10, distance=1, kernel=rectangular 
-- Resample22: kmax=10, distance=1, kernel=rectangular 
-+ Resample22: kmax= 3, distance=2, kernel=rectangular 
-- Resample22: kmax= 3, distance=2, kernel=rectangular 
-+ Resample22: kmax= 5, distance=2, kernel=rectangular 
-- Resample22: kmax= 5, distance=2, kernel=rectangular 
-+ Resample22: kmax= 7, distance=2, kernel=rectangular 
-- Resample22: kmax= 7, distance=2, kernel=rectangular 
-+ Resample22: kmax=10, distance=2, kernel=rectangular 
-- Resample22: kmax=10, distance=2, kernel=rectangular 
-+ Resample22: kmax= 3, distance=1, kernel=optimal 
-- Resample22: kmax= 3, distance=1, kernel=optimal 
-+ Resample22: kmax= 5, distance=1, kernel=optimal 
-- Resample22: kmax= 5, distance=1, kernel=optimal 
-+ Resample22: kmax= 7, distance=1, kernel=optimal 
-- Resample22: kmax= 7, distance=1, kernel=optimal 
-+ Resample22: kmax=10, distance=1, kernel=optimal 
-- Resample22: kmax=10, distance=1, kernel=optimal 
-+ Resample22: kmax= 3, distance=2, kernel=optimal 
-- Resample22: kmax= 3, distance=2, kernel=optimal 
-+ Resample22: kmax= 5, distance=2, kernel=optimal 
-- Resample22: kmax= 5, distance=2, kernel=optimal 
-+ Resample22: kmax= 7, distance=2, kernel=optimal 
-- Resample22: kmax= 7, distance=2, kernel=optimal 
-+ Resample22: kmax=10, distance=2, kernel=optimal 
-- Resample22: kmax=10, distance=2, kernel=optimal 
-+ Resample23: kmax= 3, distance=1, kernel=rectangular 
-- Resample23: kmax= 3, distance=1, kernel=rectangular 
-+ Resample23: kmax= 5, distance=1, kernel=rectangular 
-- Resample23: kmax= 5, distance=1, kernel=rectangular 
-+ Resample23: kmax= 7, distance=1, kernel=rectangular 
-- Resample23: kmax= 7, distance=1, kernel=rectangular 
-+ Resample23: kmax=10, distance=1, kernel=rectangular 
-- Resample23: kmax=10, distance=1, kernel=rectangular 
-+ Resample23: kmax= 3, distance=2, kernel=rectangular 
-- Resample23: kmax= 3, distance=2, kernel=rectangular 
-+ Resample23: kmax= 5, distance=2, kernel=rectangular 
-- Resample23: kmax= 5, distance=2, kernel=rectangular 
-+ Resample23: kmax= 7, distance=2, kernel=rectangular 
-- Resample23: kmax= 7, distance=2, kernel=rectangular 
-+ Resample23: kmax=10, distance=2, kernel=rectangular 
-- Resample23: kmax=10, distance=2, kernel=rectangular 
-+ Resample23: kmax= 3, distance=1, kernel=optimal 
-- Resample23: kmax= 3, distance=1, kernel=optimal 
-+ Resample23: kmax= 5, distance=1, kernel=optimal 
-- Resample23: kmax= 5, distance=1, kernel=optimal 
-+ Resample23: kmax= 7, distance=1, kernel=optimal 
-- Resample23: kmax= 7, distance=1, kernel=optimal 
-+ Resample23: kmax=10, distance=1, kernel=optimal 
-- Resample23: kmax=10, distance=1, kernel=optimal 
-+ Resample23: kmax= 3, distance=2, kernel=optimal 
-- Resample23: kmax= 3, distance=2, kernel=optimal 
-+ Resample23: kmax= 5, distance=2, kernel=optimal 
-- Resample23: kmax= 5, distance=2, kernel=optimal 
-+ Resample23: kmax= 7, distance=2, kernel=optimal 
-- Resample23: kmax= 7, distance=2, kernel=optimal 
-+ Resample23: kmax=10, distance=2, kernel=optimal 
-- Resample23: kmax=10, distance=2, kernel=optimal 
-+ Resample24: kmax= 3, distance=1, kernel=rectangular 
-- Resample24: kmax= 3, distance=1, kernel=rectangular 
-+ Resample24: kmax= 5, distance=1, kernel=rectangular 
-- Resample24: kmax= 5, distance=1, kernel=rectangular 
-+ Resample24: kmax= 7, distance=1, kernel=rectangular 
-- Resample24: kmax= 7, distance=1, kernel=rectangular 
-+ Resample24: kmax=10, distance=1, kernel=rectangular 
-- Resample24: kmax=10, distance=1, kernel=rectangular 
-+ Resample24: kmax= 3, distance=2, kernel=rectangular 
-- Resample24: kmax= 3, distance=2, kernel=rectangular 
-+ Resample24: kmax= 5, distance=2, kernel=rectangular 
-- Resample24: kmax= 5, distance=2, kernel=rectangular 
-+ Resample24: kmax= 7, distance=2, kernel=rectangular 
-- Resample24: kmax= 7, distance=2, kernel=rectangular 
-+ Resample24: kmax=10, distance=2, kernel=rectangular 
-- Resample24: kmax=10, distance=2, kernel=rectangular 
-+ Resample24: kmax= 3, distance=1, kernel=optimal 
-- Resample24: kmax= 3, distance=1, kernel=optimal 
-+ Resample24: kmax= 5, distance=1, kernel=optimal 
-- Resample24: kmax= 5, distance=1, kernel=optimal 
-+ Resample24: kmax= 7, distance=1, kernel=optimal 
-- Resample24: kmax= 7, distance=1, kernel=optimal 
-+ Resample24: kmax=10, distance=1, kernel=optimal 
-- Resample24: kmax=10, distance=1, kernel=optimal 
-+ Resample24: kmax= 3, distance=2, kernel=optimal 
-- Resample24: kmax= 3, distance=2, kernel=optimal 
-+ Resample24: kmax= 5, distance=2, kernel=optimal 
-- Resample24: kmax= 5, distance=2, kernel=optimal 
-+ Resample24: kmax= 7, distance=2, kernel=optimal 
-- Resample24: kmax= 7, distance=2, kernel=optimal 
-+ Resample24: kmax=10, distance=2, kernel=optimal 
-- Resample24: kmax=10, distance=2, kernel=optimal 
-+ Resample25: kmax= 3, distance=1, kernel=rectangular 
-- Resample25: kmax= 3, distance=1, kernel=rectangular 
-+ Resample25: kmax= 5, distance=1, kernel=rectangular 
-- Resample25: kmax= 5, distance=1, kernel=rectangular 
-+ Resample25: kmax= 7, distance=1, kernel=rectangular 
-- Resample25: kmax= 7, distance=1, kernel=rectangular 
-+ Resample25: kmax=10, distance=1, kernel=rectangular 
-- Resample25: kmax=10, distance=1, kernel=rectangular 
-+ Resample25: kmax= 3, distance=2, kernel=rectangular 
-- Resample25: kmax= 3, distance=2, kernel=rectangular 
-+ Resample25: kmax= 5, distance=2, kernel=rectangular 
-- Resample25: kmax= 5, distance=2, kernel=rectangular 
-+ Resample25: kmax= 7, distance=2, kernel=rectangular 
-- Resample25: kmax= 7, distance=2, kernel=rectangular 
-+ Resample25: kmax=10, distance=2, kernel=rectangular 
-- Resample25: kmax=10, distance=2, kernel=rectangular 
-+ Resample25: kmax= 3, distance=1, kernel=optimal 
-- Resample25: kmax= 3, distance=1, kernel=optimal 
-+ Resample25: kmax= 5, distance=1, kernel=optimal 
-- Resample25: kmax= 5, distance=1, kernel=optimal 
-+ Resample25: kmax= 7, distance=1, kernel=optimal 
-- Resample25: kmax= 7, distance=1, kernel=optimal 
-+ Resample25: kmax=10, distance=1, kernel=optimal 
-- Resample25: kmax=10, distance=1, kernel=optimal 
-+ Resample25: kmax= 3, distance=2, kernel=optimal 
-- Resample25: kmax= 3, distance=2, kernel=optimal 
-+ Resample25: kmax= 5, distance=2, kernel=optimal 
-- Resample25: kmax= 5, distance=2, kernel=optimal 
-+ Resample25: kmax= 7, distance=2, kernel=optimal 
-- Resample25: kmax= 7, distance=2, kernel=optimal 
-+ Resample25: kmax=10, distance=2, kernel=optimal 
-- Resample25: kmax=10, distance=2, kernel=optimal 
+The following object is masked from+ Fold01: layer1= 1, layer2=0, layer3=0 +- Fold01: layer1= 1, layer2=0, layer3=0 
++ Fold01: layer1= 2, layer2=0, layer3=0 
+- Fold01: layer1= 2, layer2=0, layer3=0 
++ Fold01: layer1= 4, layer2=0, layer3=0 
+ax= 5, distance=1, kernel=rectangular 
++ Fold01: kmax= 7, distance=1, kernel=rectangular 
+- Fold01: kmax= 7, distance=1, kernel=rectangular 
++ Fold01: kmax=10, distance=1, kernel=rectangular 
+- Fold01: kmax=10, distance=1, kernel=rectangular 
++ Fold01: kmax= 3, distance=2, kernel=rectangular 
+- Fold01: kmax= 3, distance=2, kernel=rectangular 
++ Fold01: kmax= 5, distance=2, kernel=rectangular 
+- Fold01: kmax= 5, distance=2, kernel=rectangular 
++ Fold01: kmax= 7, distance=2, kernel=rectangular 
+- Fold01: kmax= 7, distance=2, kernel=rectangular 
++ Fold01: kmax=10, distance=2, kernel=rectangular 
+- Fold01: kmax=10, distance=2, kernel=rectangular 
++ Fold01: kmax= 3, distance=1, kernel=optimal 
+- Fold01: kmax= 3, distance=1, kernel=optimal 
++ Fold01: kmax= 5, distance=1, kernel=optimal 
+- Fold01: kmax= 5, distance=1, kernel=optimal 
++ Fold01: kmax= 7, distance=1, kernel=optimal 
+- Fold01: kmax= 7, distance=1, kernel=optimal 
++ Fold01: kmax=10, distance=1, kernel=optimal 
+- Fold01: kmax=10, distance=1, kernel=optimal 
++ Fold01: kmax= 3, distance=2, kernel=optimal 
+- Fold01: kmax= 3, distance=2, kernel=optimal 
++ Fold01: kmax= 5, distance=2, kernel=optimal 
+- Fold01: kmax= 5, distance=2, kernel=optimal 
++ Fold01: kmax= 7, distance=2, kernel=optimal 
+- Fold01: kmax= 7, distance=2, kernel=optimal 
++ Fold01: kmax=10, distance=2, kernel=optimal 
+- Fold01: kmax=10, distance=2, kernel=optimal 
++ Fold02: kmax= 3, distance=1, kernel=rectangular 
+- Fold02: kmax= 3, distance=1, kernel=rectangular 
++ Fold02: kmax= 5, distance=1, kernel=rectangular 
+- Fold02: kmax= 5, distance=1, kernel=rectangular 
++ Fold02: kmax= 7, distance=1, kernel=rectangular 
+- Fold02: kmax= 7, distance=1, kernel=rectangular 
++ Fold02: kmax=10, distance=1, kernel=rectangular 
+- Fold02: kmax=10, distance=1, kernel=rectangular 
++ Fold02: kmax= 3, distance=2, kernel=rectangular 
+- Fold02: kmax= 3, distance=2, kernel=rectangular 
++ Fold02: kmax= 5, distance=2, kernel=rectangular 
+- Fold02: kmax= 5, distance=2, kernel=rectangular 
++ Fold02: kmax= 7, distance=2, kernel=rectangular 
+- Fold02: kmax= 7, distance=2, kernel=rectangular 
++ Fold02: kmax=10, distance=2, kernel=rectangular 
+- Fold02: kmax=10, distance=2, kernel=rectangular 
++ Fold02: kmax= 3, distance=1, kernel=optimal 
+- Fold02: kmax= 3, distance=1, kernel=optimal 
++ Fold02: kmax= 5, distance=1, kernel=optimal 
+- Fold02: kmax= 5, distance=1, kernel=optimal 
++ Fold02: kmax= 7, distance=1, kernel=optimal 
+- Fold02: kmax= 7, distance=1, kernel=optimal 
++ Fold02: kmax=10, distance=1, kernel=optimal 
+- Fold02: kmax=10, distance=1, kernel=optimal 
++ Fold02: kmax= 3, distance=2, kernel=optimal 
+- Fold02: kmax= 3, distance=2, kernel=optimal 
++ Fold02: kmax= 5, distance=2, kernel=optimal 
+- Fold02: kmax= 5, distance=2, kernel=optimal 
++ Fold02: kmax= 7, distance=2, kernel=optimal 
+- Fold02: kmax= 7, distance=2, kernel=optimal 
++ Fold02: kmax=10, distance=2, kernel=optimal 
+- Fold02: kmax=10, distance=2, kernel=optimal 
++ Fold03: kmax= 3, distance=1, kernel=rectangular 
+- Fold03: kmax= 3, distance=1, kernel=rectangular 
++ Fold03: kmax= 5, distance=1, kernel=rectangular 
+- Fold03: kmax= 5, distance=1, kernel=rectangular 
++ Fold03: kmax= 7, distance=1, kernel=rectangular 
+- Fold03: kmax= 7, distance=1, kernel=rectangular 
++ Fold03: kmax=10, distance=1, kernel=rectangular 
+- Fold03: kmax=10, distance=1, kernel=rectangular 
++ Fold03: kmax= 3, distance=2, kernel=rectangular 
+- Fold03: kmax= 3, distance=2, kernel=rectangular 
++ Fold03: kmax= 5, distance=2, kernel=rectangular 
+- Fold03: kmax= 5, distance=2, kernel=rectangular 
++ Fold03: kmax= 7, distance=2, kernel=rectangular 
+- Fold03: kmax= 7, distance=2, kernel=rectangular 
++ Fold03: kmax=10, distance=2, kernel=rectangular 
+- Fold03: kmax=10, distance=2, kernel=rectangular 
++ Fold03: kmax= 3, distance=1, kernel=optimal 
+- Fold03: kmax= 3, distance=1, kernel=optimal 
++ Fold03: kmax= 5, distance=1, kernel=optimal 
+- Fold03: kmax= 5, distance=1, kernel=optimal 
++ Fold03: kmax= 7, distance=1, kernel=optimal 
+- Fold03: kmax= 7, distance=1, kernel=optimal 
++ Fold03: kmax=10, distance=1, kernel=optimal 
+- Fold03: kmax=10, distance=1, kernel=optimal 
++ Fold03: kmax= 3, distance=2, kernel=optimal 
+- Fold03: kmax= 3, distance=2, kernel=optimal 
++ Fold03: kmax= 5, distance=2, kernel=optimal 
+- Fold03: kmax= 5, distance=2, kernel=optimal 
++ Fold03: kmax= 7, distance=2, kernel=optimal 
+- Fold03: kmax= 7, distance=2, kernel=optimal 
++ Fold03: kmax=10, distance=2, kernel=optimal 
+- Fold03: kmax=10, distance=2, kernel=optimal 
++ Fold04: kmax= 3, distance=1, kernel=rectangular 
+- Fold04: kmax= 3, distance=1, kernel=rectangular 
++ Fold04: kmax= 5, distance=1, kernel=rectangular 
+- Fold04: kmax= 5, distance=1, kernel=rectangular 
++ Fold04: kmax= 7, distance=1, kernel=rectangular 
+- Fold04: kmax= 7, distance=1, kernel=rectangular 
++ Fold04: kmax=10, distance=1, kernel=rectangular 
+- Fold04: kmax=10, distance=1, kernel=rectangular 
++ Fold04: kmax= 3, distance=2, kernel=rectangular 
+- Fold04: kmax= 3, distance=2, kernel=rectangular 
++ Fold04: kmax= 5, distance=2, kernel=rectangular 
+- Fold04: kmax= 5, distance=2, kernel=rectangular 
++ Fold04: kmax= 7, distance=2, kernel=rectangular 
+- Fold04: kmax= 7, distance=2, kernel=rectangular 
++ Fold04: kmax=10, distance=2, kernel=rectangular 
+- Fold04: kmax=10, distance=2, kernel=rectangular 
++ Fold04: kmax= 3, distance=1, kernel=optimal 
+- Fold04: kmax= 3, distance=1, kernel=optimal 
++ Fold04: kmax= 5, distance=1, kernel=optimal 
+- Fold04: kmax= 5, distance=1, kernel=optimal 
++ Fold04: kmax= 7, distance=1, kernel=optimal 
+- Fold04: kmax= 7, distance=1, kernel=optimal 
++ Fold04: kmax=10, distance=1, kernel=optimal 
+- Fold04: kmax=10, distance=1, kernel=optimal 
++ Fold04: kmax= 3, distance=2, kernel=optimal 
+- Fold04: kmax= 3, distance=2, kernel=optimal 
++ Fold04: kmax= 5, distance=2, kernel=optimal 
+- Fold04: kmax= 5, distance=2, kernel=optimal 
++ Fold04: kmax= 7, distance=2, kernel=optimal 
+- Fold04: kmax= 7, distance=2, kernel=optimal 
++ Fold04: kmax=10, distance=2, kernel=optimal 
+- Fold04: kmax=10, distance=2, kernel=optimal 
++ Fold05: kmax= 3, distance=1, kernel=rectangular 
+- Fold05: kmax= 3, distance=1, kernel=rectangular 
++ Fold05: kmax= 5, distance=1, kernel=rectangular 
+- Fold05: kmax= 5, distance=1, kernel=rectangular 
++ Fold05: kmax= 7, distance=1, kernel=rectangular 
+- Fold05: kmax= 7, distance=1, kernel=rectangular 
++ Fold05: kmax=10, distance=1, kernel=rectangular 
+- Fold05: kmax=10, distance=1, kernel=rectangular 
++ Fold05: kmax= 3, distance=2, kernel=rectangular 
+- Fold05: kmax= 3, distance=2, kernel=rectangular 
++ Fold05: kmax= 5, distance=2, kernel=rectangular 
+- Fold05: kmax= 5, distance=2, kernel=rectangular 
++ Fold05: kmax= 7, distance=2, kernel=rectangular 
+- Fold05: kmax= 7, distance=2, kernel=rectangular 
++ Fold05: kmax=10, distance=2, kernel=rectangular 
+- Fold05: kmax=10, distance=2, kernel=rectangular 
++ Fold05: kmax= 3, distance=1, kernel=optimal 
+- Fold05: kmax= 3, distance=1, kernel=optimal 
++ Fold05: kmax= 5, distance=1, kernel=optimal 
+- Fold05: kmax= 5, distance=1, kernel=optimal 
++ Fold05: kmax= 7, distance=1, kernel=optimal 
+- Fold05: kmax= 7, distance=1, kernel=optimal 
++ Fold05: kmax=10, distance=1, kernel=optimal 
+- Fold05: kmax=10, distance=1, kernel=optimal 
++ Fold05: kmax= 3, distance=2, kernel=optimal 
+- Fold05: kmax= 3, distance=2, kernel=optimal 
++ Fold05: kmax= 5, distance=2, kernel=optimal 
+- Fold05: kmax= 5, distance=2, kernel=optimal 
++ Fold05: kmax= 7, distance=2, kernel=optimal 
+- Fold05: kmax= 7, distance=2, kernel=optimal 
++ Fold05: kmax=10, distance=2, kernel=optimal 
+- Fold05: kmax=10, distance=2, kernel=optimal 
++ Fold06: kmax= 3, distance=1, kernel=rectangular 
+- Fold06: kmax= 3, distance=1, kernel=rectangular 
++ Fold06: kmax= 5, distance=1, kernel=rectangular 
+- Fold06: kmax= 5, distance=1, kernel=rectangular 
++ Fold06: kmax= 7, distance=1, kernel=rectangular 
+- Fold06: kmax= 7, distance=1, kernel=rectangular 
++ Fold06: kmax=10, distance=1, kernel=rectangular 
+- Fold06: kmax=10, distance=1, kernel=rectangular 
++ Fold06: kmax= 3, distance=2, kernel=rectangular 
+- Fold06: kmax= 3, distance=2, kernel=rectangular 
++ Fold06: kmax= 5, distance=2, kernel=rectangular 
+- Fold06: kmax= 5, distance=2, kernel=rectangular 
++ Fold06: kmax= 7, distance=2, kernel=rectangular 
+- Fold06: kmax= 7, distance=2, kernel=rectangular 
++ Fold06: kmax=10, distance=2, kernel=rectangular 
+- Fold06: kmax=10, distance=2, kernel=rectangular 
++ Fold06: kmax= 3, distance=1, kernel=optimal 
+- Fold06: kmax= 3, distance=1, kernel=optimal 
++ Fold06: kmax= 5, distance=1, kernel=optimal 
+- Fold06: kmax= 5, distance=1, kernel=optimal 
++ Fold06: kmax= 7, distance=1, kernel=optimal 
+- Fold06: kmax= 7, distance=1, kernel=optimal 
++ Fold06: kmax=10, distance=1, kernel=optimal 
+- Fold06: kmax=10, distance=1, kernel=optimal 
++ Fold06: kmax= 3, distance=2, kernel=optimal 
+- Fold06: kmax= 3, distance=2, kernel=optimal 
++ Fold06: kmax= 5, distance=2, kernel=optimal 
+- Fold06: kmax= 5, distance=2, kernel=optimal 
++ Fold06: kmax= 7, distance=2, kernel=optimal 
+- Fold06: kmax= 7, distance=2, kernel=optimal 
++ Fold06: kmax=10, distance=2, kernel=optimal 
+- Fold06: kmax=10, distance=2, kernel=optimal 
++ Fold07: kmax= 3, distance=1, kernel=rectangular 
+- Fold07: kmax= 3, distance=1, kernel=rectangular 
++ Fold07: kmax= 5, distance=1, kernel=rectangular 
+- Fold07: kmax= 5, distance=1, kernel=rectangular 
++ Fold07: kmax= 7, distance=1, kernel=rectangular 
+- Fold07: kmax= 7, distance=1, kernel=rectangular 
++ Fold07: kmax=10, distance=1, kernel=rectangular 
+- Fold07: kmax=10, distance=1, kernel=rectangular 
++ Fold07: kmax= 3, distance=2, kernel=rectangular 
+- Fold07: kmax= 3, distance=2, kernel=rectangular 
++ Fold07: kmax= 5, distance=2, kernel=rectangular 
+- Fold07: kmax= 5, distance=2, kernel=rectangular 
++ Fold07: kmax= 7, distance=2, kernel=rectangular 
+- Fold07: kmax= 7, distance=2, kernel=rectangular 
++ Fold07: kmax=10, distance=2, kernel=rectangular 
+- Fold07: kmax=10, distance=2, kernel=rectangular 
++ Fold07: kmax= 3, distance=1, kernel=optimal 
+- Fold07: kmax= 3, distance=1, kernel=optimal 
++ Fold07: kmax= 5, distance=1, kernel=optimal 
+- Fold07: kmax= 5, distance=1, kernel=optimal 
++ Fold07: kmax= 7, distance=1, kernel=optimal 
+- Fold07: kmax= 7, distance=1, kernel=optimal 
++ Fold07: kmax=10, distance=1, kernel=optimal 
+- Fold07: kmax=10, distance=1, kernel=optimal 
++ Fold07: kmax= 3, distance=2, kernel=optimal 
+- Fold07: kmax= 3, distance=2, kernel=optimal 
++ Fold07: kmax= 5, distance=2, kernel=optimal 
+- Fold07: kmax= 5, distance=2, kernel=optimal 
++ Fold07: kmax= 7, distance=2, kernel=optimal 
+- Fold07: kmax= 7, distance=2, kernel=optimal 
++ Fold07: kmax=10, distance=2, kernel=optimal 
+- Fold07: kmax=10, distance=2, kernel=optimal 
++ Fold08: kmax= 3, distance=1, kernel=rectangular 
+- Fold08: kmax= 3, distance=1, kernel=rectangular 
++ Fold08: kmax= 5, distance=1, kernel=rectangular 
+- Fold08: kmax= 5, distance=1, kernel=rectangular 
++ Fold08: kmax= 7, distance=1, kernel=rectangular 
+- Fold08: kmax= 7, distance=1, kernel=rectangular 
++ Fold08: kmax=10, distance=1, kernel=rectangular 
+- Fold08: kmax=10, distance=1, kernel=rectangular 
++ Fold08: kmax= 3, distance=2, kernel=rectangular 
+- Fold08: kmax= 3, distance=2, kernel=rectangular 
++ Fold08: kmax= 5, distance=2, kernel=rectangular 
+- Fold08: kmax= 5, distance=2, kernel=rectangular 
++ Fold08: kmax= 7, distance=2, kernel=rectangular 
+- Fold08: kmax= 7, distance=2, kernel=rectangular 
++ Fold08: kmax=10, distance=2, kernel=rectangular 
+- Fold08: kmax=10, distance=2, kernel=rectangular 
++ Fold08: kmax= 3, distance=1, kernel=optimal 
+- Fold08: kmax= 3, distance=1, kernel=optimal 
++ Fold08: kmax= 5, distance=1, kernel=optimal 
+- Fold08: kmax= 5, distance=1, kernel=optimal 
++ Fold08: kmax= 7, distance=1, kernel=optimal 
+- Fold08: kmax= 7, distance=1, kernel=optimal 
++ Fold08: kmax=10, distance=1, kernel=optimal 
+- Fold08: kmax=10, distance=1, kernel=optimal 
++ Fold08: kmax= 3, distance=2, kernel=optimal 
+- Fold08: kmax= 3, distance=2, kernel=optimal 
++ Fold08: kmax= 5, distance=2, kernel=optimal 
+- Fold08: kmax= 5, distance=2, kernel=optimal 
++ Fold08: kmax= 7, distance=2, kernel=optimal 
+- Fold08: kmax= 7, distance=2, kernel=optimal 
++ Fold08: kmax=10, distance=2, kernel=optimal 
+- Fold08: kmax=10, distance=2, kernel=optimal 
++ Fold09: kmax= 3, distance=1, kernel=rectangular 
+- Fold09: kmax= 3, distance=1, kernel=rectangular 
++ Fold09: kmax= 5, distance=1, kernel=rectangular 
+- Fold09: kmax= 5, distance=1, kernel=rectangular 
++ Fold09: kmax= 7, distance=1, kernel=rectangular 
+- Fold09: kmax= 7, distance=1, kernel=rectangular 
++ Fold09: kmax=10, distance=1, kernel=rectangular 
+- Fold09: kmax=10, distance=1, kernel=rectangular 
++ Fold09: kmax= 3, distance=2, kernel=rectangular 
+- Fold09: kmax= 3, distance=2, kernel=rectangular 
++ Fold09: kmax= 5, distance=2, kernel=rectangular 
+- Fold09: kmax= 5, distance=2, kernel=rectangular 
++ Fold09: kmax= 7, distance=2, kernel=rectangular 
+- Fold09: kmax= 7, distance=2, kernel=rectangular 
++ Fold09: kmax=10, distance=2, kernel=rectangular 
+- Fold09: kmax=10, distance=2, kernel=rectangular 
++ Fold09: kmax= 3, distance=1, kernel=optimal 
+- Fold09: kmax= 3, distance=1, kernel=optimal 
++ Fold09: kmax= 5, distance=1, kernel=optimal 
+- Fold09: kmax= 5, distance=1, kernel=optimal 
++ Fold09: kmax= 7, distance=1, kernel=optimal 
+- Fold09: kmax= 7, distance=1, kernel=optimal 
++ Fold09: kmax=10, distance=1, kernel=optimal 
+- Fold09: kmax=10, distance=1, kernel=optimal 
++ Fold09: kmax= 3, distance=2, kernel=optimal 
+- Fold09: kmax= 3, distance=2, kernel=optimal 
++ Fold09: kmax= 5, distance=2, kernel=optimal 
+- Fold09: kmax= 5, distance=2, kernel=optimal 
++ Fold09: kmax= 7, distance=2, kernel=optimal 
+- Fold09: kmax= 7, distance=2, kernel=optimal 
++ Fold09: kmax=10, distance=2, kernel=optimal 
+- Fold09: kmax=10, distance=2, kernel=optimal 
++ Fold10: kmax= 3, distance=1, kernel=rectangular 
+- Fold10: kmax= 3, distance=1, kernel=rectangular 
++ Fold10: kmax= 5, distance=1, kernel=rectangular 
+- Fold10: kmax= 5, distance=1, kernel=rectangular 
++ Fold10: kmax= 7, distance=1, kernel=rectangular 
+- Fold10: kmax= 7, distance=1, kernel=rectangular 
++ Fold10: kmax=10, distance=1, kernel=rectangular 
+- Fold10: kmax=10, distance=1, kernel=rectangular 
++ Fold10: kmax= 3, distance=2, kernel=rectangular 
+- Fold10: kmax= 3, distance=2, kernel=rectangular 
++ Fold10: kmax= 5, distance=2, kernel=rectangular 
+- Fold10: kmax= 5, distance=2, kernel=rectangular 
++ Fold10: kmax= 7, distance=2, kernel=rectangular 
+- Fold10: kmax= 7, distance=2, kernel=rectangular 
++ Fold10: kmax=10, distance=2, kernel=rectangular 
+- Fold10: kmax=10, distance=2, kernel=rectangular 
++ Fold10: kmax= 3, distance=1, kernel=optimal 
+- Fold10: kmax= 3, distance=1, kernel=optimal 
++ Fold10: kmax= 5, distance=1, kernel=optimal 
+- Fold10: kmax= 5, distance=1, kernel=optimal 
++ Fold10: kmax= 7, distance=1, kernel=optimal 
+- Fold10: kmax= 7, distance=1, kernel=optimal 
++ Fold10: kmax=10, distance=1, kernel=optimal 
+- Fold10: kmax=10, distance=1, kernel=optimal 
++ Fold10: kmax= 3, distance=2, kernel=optimal 
+- Fold10: kmax= 3, distance=2, kernel=optimal 
++ Fold10: kmax= 5, distance=2, kernel=optimal 
+- Fold10: kmax= 5, distance=2, kernel=optimal 
++ Fold10: kmax= 7, distance=2, kernel=optimal 
+- Fold10: kmax= 7, distance=2, kernel=optimal 
++ Fold10: kmax=10, distance=2, kernel=optimal 
+- Fold10: kmax=10, distance=2, kernel=optimal 
 Aggregating results
 Selecting tuning parameters
-Fitting kmax = 10, distance = 1, kernel = optimal on full training set
-Type: DONE 
-There were 25 warnings (use warnings() to see them)
+Fitting kmax = 10, distance = 2, kernel = rectangular on full training set
+[1] "kNN done"
