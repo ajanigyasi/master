@@ -107,7 +107,7 @@ if __name__ == '__main__':
     print 'Training on data from', from_date, 'to', (test_start_date - timedelta(days=1)).date()
     print 'Testing on data from', test_start_date.date(), 'to', verification_start_date.date()
     
-    l = lokrr(trainingset, testingset, 3)
+    l = lokrr(trainingset, testingset, 1)
 
     print 'Training done'
 

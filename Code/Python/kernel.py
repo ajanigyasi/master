@@ -119,8 +119,6 @@ class kernel:
     def tune(self, data):
         X_orig = copy(self.X)
         y_orig = copy(self.y)
-
-        print self.X
         
         l_params = self.get_l_params()
         s_params = self.get_s_params()
