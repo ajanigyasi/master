@@ -1,0 +1,181 @@
+starting MPI worker
+Type: EXEC 
+Loading required package: lattice
+Loading required package: ggplot2
+Type: EXEC 
+Type: EXEC 
+Type: EXEC 
+[1] "Start ANN training"
+Loading required package: neuralnet
+Loading required package: grid
+Loading required package: MASS
++ Fold01: layer1= 1, layer2=0, layer3=0 
+- Fold01: layer1= 1, layer2=0, layer3=0 
++ Fold01: layer1= 2, layer2=0, layer3=0 
+predictions failed for Fold01: layer1= 2, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold01: layer1= 2, layer2=0, layer3=0 
++ Fold01: layer1= 4, layer2=0, layer3=0 
+- Fold01: layer1= 4, layer2=0, layer3=0 
++ Fold01: layer1= 8, layer2=0, layer3=0 
+predictions failed for Fold01: layer1= 8, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold01: layer1= 8, layer2=0, layer3=0 
++ Fold01: layer1=16, layer2=0, layer3=0 
+predictions failed for Fold01: layer1=16, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold01: layer1=16, layer2=0, layer3=0 
++ Fold02: layer1= 1, layer2=0, layer3=0 
+- Fold02: layer1= 1, layer2=0, layer3=0 
++ Fold02: layer1= 2, layer2=0, layer3=0 
+- Fold02: layer1= 2, layer2=0, layer3=0 
++ Fold02: layer1= 4, layer2=0, layer3=0 
+predictions failed for Fold02: layer1= 4, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold02: layer1= 4, layer2=0, layer3=0 
++ Fold02: layer1= 8, layer2=0, layer3=0 
+predictions failed for Fold02: layer1= 8, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold02: layer1= 8, layer2=0, layer3=0 
++ Fold02: layer1=16, layer2=0, layer3=0 
+predictions failed for Fold02: layer1=16, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold02: layer1=16, layer2=0, layer3=0 
++ Fold03: layer1= 1, layer2=0, layer3=0 
+- Fold03: layer1= 1, layer2=0, layer3=0 
++ Fold03: layer1= 2, layer2=0, layer3=0 
+- Fold03: layer1= 2, layer2=0, layer3=0 
++ Fold03: layer1= 4, layer2=0, layer3=0 
+predictions failed for Fold03: layer1= 4, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold03: layer1= 4, layer2=0, layer3=0 
++ Fold03: layer1= 8, layer2=0, layer3=0 
+predictions failed for Fold03: layer1= 8, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold03: layer1= 8, layer2=0, layer3=0 
++ Fold03: layer1=16, layer2=0, layer3=0 
+predictions failed for Fold03: layer1=16, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold03: layer1=16, layer2=0, layer3=0 
++ Fold04: layer1= 1, layer2=0, layer3=0 
+- Fold04: layer1= 1, layer2=0, layer3=0 
++ Fold04: layer1= 2, layer2=0, layer3=0 
+predictions failed for Fold04: layer1= 2, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold04: layer1= 2, layer2=0, layer3=0 
++ Fold04: layer1= 4, layer2=0, layer3=0 
+- Fold04: layer1= 4, layer2=0, layer3=0 
++ Fold04: layer1= 8, layer2=0, layer3=0 
+predictions failed for Fold04: layer1= 8, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold04: layer1= 8, layer2=0, layer3=0 
++ Fold04: layer1=16, layer2=0, layer3=0 
+predictions failed for Fold04: layer1=16, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold04: layer1=16, layer2=0, layer3=0 
++ Fold05: layer1= 1, layer2=0, layer3=0 
+predictions failed for Fold05: layer1= 1, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold05: layer1= 1, layer2=0, layer3=0 
++ Fold05: layer1= 2, layer2=0, layer3=0 
+- Fold05: layer1= 2, layer2=0, layer3=0 
++ Fold05: layer1= 4, layer2=0, layer3=0 
+predictions failed for Fold05: layer1= 4, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold05: layer1= 4, layer2=0, layer3=0 
++ Fold05: layer1= 8, layer2=0, layer3=0 
+predictions failed for Fold05: layer1= 8, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold05: layer1= 8, layer2=0, layer3=0 
++ Fold05: layer1=16, layer2=0, layer3=0 
+predictions failed for Fold05: layer1=16, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold05: layer1=16, layer2=0, layer3=0 
++ Fold06: layer1= 1, layer2=0, layer3=0 
+- Fold06: layer1= 1, layer2=0, layer3=0 
++ Fold06: layer1= 2, layer2=0, layer3=0 
+predictions failed for Fold06: layer1= 2, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold06: layer1= 2, layer2=0, layer3=0 
++ Fold06: layer1= 4, layer2=0, layer3=0 
+- Fold06: layer1= 4, layer2=0, layer3=0 
++ Fold06: layer1= 8, layer2=0, layer3=0 
+predictions failed for Fold06: layer1= 8, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold06: layer1= 8, layer2=0, layer3=0 
++ Fold06: layer1=16, layer2=0, layer3=0 
+predictions failed for Fold06: layer1=16, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold06: layer1=16, layer2=0, layer3=0 
++ Fold07: layer1= 1, layer2=0, layer3=0 
+- Fold07: layer1= 1, layer2=0, layer3=0 
++ Fold07: layer1= 2, layer2=0, layer3=0 
+predictions failed for Fold07: layer1= 2, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold07: layer1= 2, layer2=0, layer3=0 
++ Fold07: layer1= 4, layer2=0, layer3=0 
+predictions failed for Fold07: layer1= 4, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold07: layer1= 4, layer2=0, layer3=0 
++ Fold07: layer1= 8, layer2=0, layer3=0 
+predictions failed for Fold07: layer1= 8, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold07: layer1= 8, layer2=0, layer3=0 
++ Fold07: layer1=16, layer2=0, layer3=0 
+predictions failed for Fold07: layer1=16, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold07: layer1=16, layer2=0, layer3=0 
++ Fold08: layer1= 1, layer2=0, layer3=0 
+- Fold08: layer1= 1, layer2=0, layer3=0 
++ Fold08: layer1= 2, layer2=0, layer3=0 
+- Fold08: layer1= 2, layer2=0, layer3=0 
++ Fold08: layer1= 4, layer2=0, layer3=0 
+predictions failed for Fold08: layer1= 4, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold08: layer1= 4, layer2=0, layer3=0 
++ Fold08: layer1= 8, layer2=0, layer3=0 
+predictions failed for Fold08: layer1= 8, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold08: layer1= 8, layer2=0, layer3=0 
++ Fold08: layer1=16, layer2=0, layer3=0 
+predictions failed for Fold08: layer1=16, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold08: layer1=16, layer2=0, layer3=0 
++ Fold09: layer1= 1, layer2=0, layer3=0 
+- Fold09: layer1= 1, layer2=0, layer3=0 
++ Fold09: layer1= 2, layer2=0, layer3=0 
+- Fold09: layer1= 2, layer2=0, layer3=0 
++ Fold09: layer1= 4, layer2=0, layer3=0 
+predictions failed for Fold09: layer1= 4, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold09: layer1= 4, layer2=0, layer3=0 
++ Fold09: layer1= 8, layer2=0, layer3=0 
+predictions failed for Fold09: layer1= 8, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold09: layer1= 8, layer2=0, layer3=0 
++ Fold09: layer1=16, layer2=0, layer3=0 
+predictions failed for Fold09: layer1=16, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold09: layer1=16, layer2=0, layer3=0 
++ Fold10: layer1= 1, layer2=0, layer3=0 
+- Fold10: layer1= 1, layer2=0, layer3=0 
++ Fold10: layer1= 2, layer2=0, layer3=0 
+- Fold10: layer1= 2, layer2=0, layer3=0 
++ Fold10: layer1= 4, layer2=0, layer3=0 
+predictions failed for Fold10: layer1= 4, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold10: layer1= 4, layer2=0, layer3=0 
++ Fold10: layer1= 8, layer2=0, layer3=0 
+predictions failed for Fold10: layer1= 8, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold10: layer1= 8, layer2=0, layer3=0 
++ Fold10: layer1=16, layer2=0, layer3=0 
+predictions failed for Fold10: layer1=16, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold10: layer1=16, layer2=0, layer3=0 
+Aggregating results
+Selecting tuning parameters
+Fitting layer1 = 4, layer2 = 0, layer3 = 0 on full training set
+[1] "ANN done"
+Type: DONE 
+There were 50 or more warnings (use warnings() to see the first 50)
