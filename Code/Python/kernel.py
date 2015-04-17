@@ -119,6 +119,8 @@ class kernel:
     def tune(self, data):
         X_orig = copy(self.X)
         y_orig = copy(self.y)
+
+        print self.X
         
         l_params = self.get_l_params()
         s_params = self.get_s_params()
@@ -142,6 +144,7 @@ class kernel:
                         self.update(observation[1:3], observation[3])
                     heapq.heappush(h, (curr[0] + timedelta(seconds=curr[3]), i))
                     preds[i] = self.predict(curr[1:3])
+                print data.shape
                 curr_rmse = sm.tools.eval_measures.rmse(preds, data['actualTravelTime'])
                 print 'rmse: ', curr_rmse
                 if curr_rmse < lowest_rmse:
@@ -168,8 +171,10 @@ class kernel:
     def get_s_params(self):
         pairw_dists = pdist(self.X)
         s_params = asarray(percentile(pairw_dists, [0.25, 0.5, 0.75]))
+        print s_params
         if 0 in s_params:
             s_params[where(s_params == 0)] = 1e-50
+        print s_params
         return s_params
 
 #NB! Had to install cython to make statsmodel work

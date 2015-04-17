@@ -94,7 +94,7 @@ if __name__ == '__main__':
     normalize_dataset(dataset)
     
     test_start_date = datetime(2015, 2, 12, 0, 0)
-    verification_start_date = datetime(2015, 2, 19, 0, 0)
+    verification_start_date = datetime(2015, 2, 25, 0, 0)
     test_index = where((dataset['dateAndTime'] >= test_start_date) & (dataset['dateAndTime'] < verification_start_date))[0][0]
     verification_index = where(dataset['dateAndTime'] >= verification_start_date)[0][0]
     trainingset = dataset[0:test_index]
