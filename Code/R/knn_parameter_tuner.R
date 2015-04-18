@@ -27,9 +27,6 @@ trainingSet$actualTravelTime <- preProcess(trainingSet, "actualTravelTime")
 formula <- actualTravelTime~fiveMinuteMean+trafficVolume
 ctrl <- trainControl(verboseIter = TRUE, , method='cv')
 
-#TODO: REMOVE!
-trainingSet <- trainingSet[1:100, ]
-
 knn_grid <- expand.grid(kmax = c(3, 5, 7, 10, 20, 50), distance = c(1, 2), kernel = 
                           c("rectangular", "optimal", "triangular", "epanechnikov", "triweight",
                             "cos", "inv", "gaussian", "rank", "optimal"))

@@ -33,9 +33,6 @@ maximum <- max(dataSet$actualTravelTime)
 formula <- actualTravelTime~fiveMinuteMean+trafficVolume
 ctrl <- trainControl(verboseIter = TRUE, , method='cv')
 
-#TODO: REMOVE!
-trainingSet <- trainingSet[1:100, ]
-
 poly_grid = expand.grid(degree = c(1, 2, 3), C = c(2^-5, 2^-1, 2, 2^5, 2^10, 2^15), scale = c(0.001, 0.01, 0.1))
 poly.svm <- train(formula, trainingSet, method="svmPoly", trControl=ctrl, tuneGrid = poly_grid)
 save(poly.svm, file='new_baselines/poly_svmMod.RData')
