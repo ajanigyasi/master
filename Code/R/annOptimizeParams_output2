@@ -181,8 +181,8 @@ predictions failed for Fold10: layer1=16, layer2=0, layer3=0 Error in nrow[w] * 
 Aggregating results
 Selecting tuning parameters
 Fitting layer1 = 4, layer2 = 0, layer3 = 0 on full training set
-76
-iter  30 value 327.056415
+[1] "ANN done"
+ue 327.056415
 iter  40 value 324.532261
 iter  50 value 323.832144
 iter  60 value 323.420142
