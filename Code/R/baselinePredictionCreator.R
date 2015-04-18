@@ -97,7 +97,7 @@ ctrl <- trainControl(verboseIter = TRUE, , method='cv')
 #TODO: set grid to decide how many hidden nodes in layer 1
 ann_grid <- expand.grid(size = c(1, 2, 4, 8, 16), decay=c(0, 1e-4, 1e-1))
 print("Start ANN training")
-annMod = train(formula, trainingSet[, -1], method="nnet", trControl = ctrl, tuneGrid=ann_grid, maxit=1000)
+annMod = train(formula, trainingSet[, -1], method="nnet", trControl = ctrl, tuneGrid=ann_grid, maxit=10000)
 print("ANN done")
 save(annMod, file="annMod_from_nnet.RData")
 
