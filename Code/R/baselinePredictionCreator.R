@@ -26,7 +26,7 @@ createBaseline <- function(model) {
            print("Start ANN training")
            annMod = train(formula, trainingSet[, -1], method="nnet", trControl = ctrl, tuneGrid=ann_grid, maxit=1000)
            print("ANN done")
-           save(annMod, file="annMod2.RData")
+           #save(annMod, file="annMod2.RData")
            return(annMod)
            #caret finds optimal number of hidden nodes in layer 1, 2 and 3
          },
@@ -90,17 +90,28 @@ trainingSet$actualTravelTime <- preProcess(trainingSet, "actualTravelTime")
 #TODO:remove when done testing
 #trainingSet <- trainingSet[1:100, ]
 
-setDefaultClusterOptions(outfile = "annOptimizeParams_output2")
-cluster <- makeMPIcluster(1)
 
-#set up environment
-clusterCall(cluster, function() library(caret))
-clusterCall(cluster, function() library(kernlab))
-clusterExport(cluster, c("trainingSet"), envir = .GlobalEnv)
+formula <- actualTravelTime~fiveMinuteMean+trafficVolume
+ctrl <- trainControl(verboseIter = TRUE, , method='cv')
 
-baselines <- clusterApply(cluster, c("ann"), createBaseline)
+#TODO: set grid to decide how many hidden nodes in layer 1
+ann_grid <- expand.grid(size = c(1, 2, 4, 8, 16), decay=c(0, 1e-4, 1e-1))
+print("Start ANN training")
+annMod = train(formula, trainingSet[, -1], method="nnet", trControl = ctrl, tuneGrid=ann_grid, maxit=1000)
+print("ANN done")
+save(annMod, file="annMod_from_nnet.RData")
 
-stopCluster(cluster)
+# setDefaultClusterOptions(outfile = "annOptimizeParams_output2")
+# cluster <- makeMPIcluster(1)
+# 
+# #set up environment
+# clusterCall(cluster, function() library(caret))
+# clusterCall(cluster, function() library(kernlab))
+# clusterExport(cluster, c("trainingSet"), envir = .GlobalEnv)
+# 
+# baselines <- clusterApply(cluster, c("ann"), createBaseline)
+# 
+# stopCluster(cluster)
 
 #getPredictions(baselines)
 #storePredictions()
