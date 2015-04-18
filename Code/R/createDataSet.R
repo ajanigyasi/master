@@ -112,7 +112,7 @@ dataSet = data.frame(cbind(startTime, rep(300, n2), rep(0, n2), actualTime))
 colnames(dataSet) = c("dateAndTime", "fiveMinuteMean", "trafficVolume", "actualTravelTime")
 
 # Compute five minute mean travel times and traffic volume
-print("Computing five minute means and traffic volumes...")
+cat("Computing five minute means and traffic volumes for ", secondDate, "\n")
 for (i in (n1+1):n){
   prevRows = getRowsForLastFiveMinutes(i)
   if(nrow(prevRows)>=1){
