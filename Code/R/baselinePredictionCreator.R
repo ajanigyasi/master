@@ -4,7 +4,7 @@ library(caret)
 library(kernlab)
 
 source("dataSetGetter.R")
-source("kalmanFilter.R")
+#source("kalmanFilter.R")
 
 startDate <- "20150129"
 endDate <- "20150204"
@@ -31,10 +31,12 @@ createBaseline <- function(model) {
            #caret finds optimal number of hidden nodes in layer 1, 2 and 3
          },
          "knn" = {
-           knn_grid <- expand.grid(kmax = c(3, 5, 7, 10), distance = c(1, 2), kernel = c("rectangular", "optimal"))
+           knn_grid <- expand.grid(kmax = c(3, 5, 7, 10, 20, 50), distance = c(1, 2), kernel = 
+                                     c("rectangular", "optimal", "triangular", "epanechnikov", "triweight",
+                                       "cos", "inv", "gaussian", "rank", "optimal"))
            knnMod = train(formula, trainingSet, method="kknn", trControl = ctrl, tuneGrid = knn_grid)
            print("kNN done")
-           save(knnMod, file="knnMod.RData")
+           save(knnMod, file="knnMod2.RData")
            return(knnMod)
            #caret finds optimal kmax, kernel, and minkowski distance
          }
@@ -59,8 +61,8 @@ getPredictions <- function(baselines) {
   }
   
   # Handle Kalman Filter predictions
-  predictions <- getKalmanFilterPredictions(startDate, splitDate, endDate, paste(directory, "raw/", sep=""), 'filteredDataSet')
-  testingSet["kalmanFilter"] <<- predictions
+  #predictions <- getKalmanFilterPredictions(startDate, splitDate, endDate, paste(directory, "raw/", sep=""), 'filteredDataSet')
+  #testingSet["kalmanFilter"] <<- predictions
 }
 
 storePredictions <- function() {
@@ -87,19 +89,21 @@ trainingSet <- dataSet[1:(splitIndex-1), ]
 testingSet <- dataSet[splitIndex:nrow(dataSet), ]
 trainingSet$actualTravelTime <- preProcess(trainingSet, "actualTravelTime")
 
+createBaseline("knn")
+
 #TODO:remove when done testing
 #trainingSet <- trainingSet[1:100, ]
 
 
-formula <- actualTravelTime~fiveMinuteMean+trafficVolume
-ctrl <- trainControl(verboseIter = TRUE, , method='cv')
+# formula <- actualTravelTime~fiveMinuteMean+trafficVolume
+# ctrl <- trainControl(verboseIter = TRUE, , method='cv')
 
-#TODO: set grid to decide how many hidden nodes in layer 1
-ann_grid <- expand.grid(size = c(1, 2, 4, 8, 16), decay=c(0, 1e-4, 1e-1))
-print("Start ANN training")
-annMod = train(formula, trainingSet[, -1], method="nnet", trControl = ctrl, tuneGrid=ann_grid, maxit=10000)
-print("ANN done")
-save(annMod, file="annMod_from_nnet.RData")
+# #TODO: set grid to decide how many hidden nodes in layer 1
+# ann_grid <- expand.grid(size = c(1, 2, 4, 8, 16), decay=c(0, 1e-4, 1e-1))
+# print("Start ANN training")
+# annMod = train(formula, trainingSet[, -1], method="nnet", trControl = ctrl, tuneGrid=ann_grid, maxit=10000)
+# print("ANN done")
+# save(annMod, file="annMod_from_nnet.RData")
 
 # setDefaultClusterOptions(outfile = "annOptimizeParams_output2")
 # cluster <- makeMPIcluster(1)
