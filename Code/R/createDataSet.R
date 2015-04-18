@@ -51,6 +51,14 @@ passages1 <- passages1[passages1$antenne_id==10091, ]
 passages2 <- passages2[passages2$antenne_id==10091, ]
 passages <- rbind(passages1, passages2)
 
+# Filter travelTimes for outliers
+# Initialize lower and upper limit for travel time
+mu = 481.4174
+sd = 425.9568
+lowerLimit = -796.4529
+upperLimit = 1759.288
+travelTimes = travelTimes[(travelTimes$time > lowerLimit) & (travelTimes$time < upperLimit), ]
+
 # Extract time and date for passages
 dateAndTime <- paste(passages$dato, passages$tid, sep = " ")
 dateAndTime <- strptime(dateAndTime, "%Y-%m-%d %H:%M:%S")
@@ -118,5 +126,5 @@ cat("\r\n")
 
 # Write data set to file
 # The data set is stored in increasing date and time for when the vehicle entered the road section
-write.table(dataSet, paste(dataSetFilePath, secondDate, "_dataset", fileExt, sep=""), sep=";", row.names=FALSE)
+write.table(dataSet, paste(dataSetFilePath, secondDate, "_filteredDataset", fileExt, sep=""), sep=";", row.names=FALSE)
 print("createDataSet completed without errors")
