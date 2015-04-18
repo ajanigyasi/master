@@ -1,0 +1,427 @@
+starting MPI worker
+Type: EXEC 
+Loading required package: lattice
+Loading required package: ggplot2
+Type: EXEC 
+Type: EXEC 
+Type: EXEC 
+Type: EXEC 
+Type: EXEC 
+Type: EXEC 
+Type: EXEC 
+Type: EXEC 
+Type: EXEC 
+Type: EXEC 
+Type: EXEC 
+Type: EXEC 
++ Fold01: sigma=0.1046,- Fold01: C=3.- Fold01: sigma=0.1046, C=3.125e-02 
++ Fold01: sigma=0.4525, C=3.125e-02 
+- Fold01: sigma=0.4525, C=3.125e-02 
++ Fold01: sig- Fold01: C=3.200e+01 
++ Fold01: C=1.024e+03 
+- Fold01: C=1.024e+03 
++ Fold01: C=3.277e+04 
+- Fold01: C=3.277e+04 
++ Fold02: C=3.125e-02 
+- Fold02: C=3.125e-02 
++ Fold02: C=5.000e-01 
+- Fold02: C=5.000e-01 
++ Fold02: C=2.000e+00 
+- Fold02: C=2.000e+00 
++ Fold02: C=3.200e+01 
+- Fold02: C=3.200e+01 
++ Fold02: C=1.024e+03 
+- Fold02: C=1.024e+03 
++ Fold02: C=3.277e+04 
+- Fold02: C=3.277e+04 
++ Fold03: C=3.125e-02 
+- Fold03: C=3.125e-02 
++ Fold03: C=5.000e-01 
+- Fold03: C=5.000e-01 
++ Fold03: C=2.000e+00 
+- Fold03: C=2.000e+00 
++ Fold03: C=3.200e+01 
+- Fold03: C=3.200e+01 
++ Fold03: C=1.024e+03 
+- Fold03: C=1.024e+03 
++ Fold03: C=3.277e+04 
+- Fold03: C=3.277e+04 
++ Fold04: C=3.125e-02 
+- Fold04: C=3.125e-02 
++ Fold04: C=5.000e-01 
+- Fold04: C=5.000e-01 
++ Fold04: C=2.000e+00 
+- Fold04: C=2.000e+00 
++ Fold04: C=3.200e+01 
+- Fold04: C=3.200e+01 
++ Fold04: C=1.024e+03 
+- Fold04: C=1.024e+03 
++ Fold04: C=3.277e+04 
+- Fold04: C=3.277e+04 
++ Fold05: C=3.125e-02 
+- Fold05: C=3.125e-02 
++ Fold05: C=5.000e-01 
+- Fold05: C=5.000e-01 
++ Fold05: C=2.000e+00 
+- Fold05: C=2.000e+00 
++ Fold05: C=3.200e+01 
+- Fold05: C=3.200e+01 
++ Fold05: C=1.024e+03 
+- Fold05: C=1.024e+03 
++ Fold05: C=3.277e+04 
+- Fold05: C=3.277e+04 
++ Fold06: C=3.125e-02 
+- Fold06: C=3.125e-02 
++ Fold06: C=5.000e-01 
+- Fold06: C=5.000e-01 
++ Fold06: C=2.000e+00 
+- Fold06: C=2.000e+00 
++ Fold06: C=3.200e+01 
+- Fold06: C=3.200e+01 
++ Fold06: C=1.024e+03 
+- Fold06: C=1.024e+03 
++ Fold06: C=3.277e+04 
+- Fold06: C=3.277e+04 
++ Fold07: C=3.125e-02 
+- Fold07: C=3.125e-02 
++ Fold07: C=5.000e-01 
+- Fold07: C=5.000e-01 
++ Fold07: C=2.000e+00 
+- Fold07: C=2.000e+00 
++ Fold07: C=3.200e+01 
+- Fold07: C=3.200e+01 
++ Fold07: C=1.024e+03 
+- Fold07: C=1.024e+03 
++ Fold07: C=3.277e+04 
+- Fold07: C=3.277e+04 
++ Fold08: C=3.125e-02 
+- Fold08: C=3.125e-02 
++ Fold08: C=5.000e-01 
+- Fold08: C=5.000e-01 
++ Fold08: C=2.000e+00 
+- Fold08: C=2.000e+00 
++ Fold08: C=3.200e+01 
+- Fold08: C=3.200e+01 
++ Fold08: C=1.024e+03 
+- Fold08: C=1.024e+03 
++ Fold08: C=3.277e+04 
+- Fold08: C=3.277e+04 
++ Fold09: C=3.125e-02 
+- Fold09: C=3.125e-02 
++ Fold09: C=5.000e-01 
+- Fold09: C=5.000e-01 
++ Fold09: C=2.000e+00 
+- Fold09: C=2.000e+00 
++ Fold09: C=3.200e+01 
+- Fold09: C=3.200e+01 
++ Fold09: C=1.024e+03 
+- Fold09: C=1.024e+03 
++ Fold09: C=3.277e+04 
+- Fold09: C=3.277e+04 
++ Fold10: C=3.125e-02 
+- Fold10: C=3.125e-02 
++ Fold10: C=5.000e-01 
+- Fold10: C=5.000e-01 
++ Fold10: C=2.000e+00 
+- Fold10: C=2.000e+00 
++ Fold10: C=3.200e+01 
+- Fold10: C=3.200e+01 
++ Fold10: C=1.024e+03 
+- Fold10: C=1.024e+03 
++ Fold10: C=3.277e+04 
+- Fold10: C=3.277e+04 
+Aggregating results
+Selecting tuning parameters
+Fitting C = 2 on full training set
+[1] "Linear done"
+     user    system   elapsed 
+64927.887     5.506 94848.402 
+[1] "linear: 258.939884892722"
+e-01 
++ Fold03: sigma=0.4525, C=5.000e-01 
+- Fold03: sigma=0.4525, C=5.000e-01 
++ Fold03: sigma=3.3674, C=5.000e-01 
+- Fold03: sigma=3.3674, C=5.000e-01 
++ Fold03: sigma=0.1046, C=2.000e+00 
+- Fold03: sigma=0.1046, C=2.000e+00 
++ Fold03: sigma=0.4525, C=2.000e+00 
+- Fold03: sigma=0.4525, C=2.000e+00 
++ Fold03: sigma=3.3674, C=2.000e+00 
+- Fold03: sigma=3.3674, C=2.000e+00 
++ Fold03: sigma=0.1046, C=3.200e+01 
+- Fold03: sigma=0.1046, C=3.200e+01 
++ Fold03: sigma=0.4525, C=3.200e+01 
+- Fold03: sigma=0.4525, C=3.200e+01 
++ Fold03: sigma=3.3674, C=3.200e+01 
+- Fold03: sigma=3.3674, C=3.200e+01 
++ Fold03: sigma=0.1046, C=1.024e+03 
+- Fold03: sigma=0.1046, C=1.024e+03 
++ Fold03: sigma=0.4525, C=1.024e+03 
+- Fold03: sigma=0.4525, C=1.024e+03 
++ Fold03: sigma=3.3674, C=1.024e+03 
+- Fold03: sigma=3.3674, C=1.024e+03 
++ Fold03: sigma=0.1046, C=3.277e+04 
+- Fold03: sigma=0.1046, C=3.277e+04 
++ Fold03: sigma=0.4525, C=3.277e+04 
+- Fold03: sigma=0.4525, C=3.277e+04 
++ Fold03: sigma=3.3674, C=3.277e+04 
+- Fold03: sigma=3.3674, C=3.277e+04 
++ Fold04: sigma=0.1046, C=3.125e-02 
+- Fold04: sigma=0.1046, C=3.125e-02 
++ Fold04: sigma=0.4525, C=3.125e-02 
+- Fold04: sigma=0.4525, C=3.125e-02 
++ Fold04: sigma=3.3674, C=3.125e-02 
+- Fold04: sigma=3.3674, C=3.125e-02 
++ Fold04: sigma=0.1046, C=5.000e-01 
+- Fold04: sigma=0.1046, C=5.000e-01 
++ Fold04: sigma=0.4525, C=5.000e-01 
+- Fold04: sigma=0.4525, C=5.000e-01 
++ Fold04: sigma=3.3674, C=5.000e-01 
+- Fold04: sigma=3.3674, C=5.000e-01 
++ Fold04: sigma=0.1046, C=2.000e+00 
+- Fold04: sigma=0.1046, C=2.000e+00 
++ Fold04: sigma=0.4525, C=2.000e+00 
+- Fold04: sigma=0.4525, C=2.000e+00 
++ Fold04: sigma=3.3674, C=2.000e+00 
+- Fold04: sigma=3.3674, C=2.000e+00 
++ Fold04: sigma=0.1046, C=3.200e+01 
+- Fold04: sigma=0.1046, C=3.200e+01 
++ Fold04: sigma=0.4525, C=3.200e+01 
+- Fold04: sigma=0.4525, C=3.200e+01 
++ Fold04: sigma=3.3674, C=3.200e+01 
+- Fold04: sigma=3.3674, C=3.200e+01 
++ Fold04: sigma=0.1046, C=1.024e+03 
+- Fold04: sigma=0.1046, C=1.024e+03 
++ Fold04: sigma=0.4525, C=1.024e+03 
+- Fold04: sigma=0.4525, C=1.024e+03 
++ Fold04: sigma=3.3674, C=1.024e+03 
+- Fold04: sigma=3.3674, C=1.024e+03 
++ Fold04: sigma=0.1046, C=3.277e+04 
+- Fold04: sigma=0.1046, C=3.277e+04 
++ Fold04: sigma=0.4525, C=3.277e+04 
+- Fold04: sigma=0.4525, C=3.277e+04 
++ Fold04: sigma=3.3674, C=3.277e+04 
+- Fold04: sigma=3.3674, C=3.277e+04 
++ Fold05: sigma=0.1046, C=3.125e-02 
+- Fold05: sigma=0.1046, C=3.125e-02 
++ Fold05: sigma=0.4525, C=3.125e-02 
+- Fold05: sigma=0.4525, C=3.125e-02 
++ Fold05: sigma=3.3674, C=3.125e-02 
+- Fold05: sigma=3.3674, C=3.125e-02 
++ Fold05: sigma=0.1046, C=5.000e-01 
+- Fold05: sigma=0.1046, C=5.000e-01 
++ Fold05: sigma=0.4525, C=5.000e-01 
+- Fold05: sigma=0.4525, C=5.000e-01 
++ Fold05: sigma=3.3674, C=5.000e-01 
+- Fold05: sigma=3.3674, C=5.000e-01 
++ Fold05: sigma=0.1046, C=2.000e+00 
+- Fold05: sigma=0.1046, C=2.000e+00 
++ Fold05: sigma=0.4525, C=2.000e+00 
+- Fold05: sigma=0.4525, C=2.000e+00 
++ Fold05: sigma=3.3674, C=2.000e+00 
+- Fold05: sigma=3.3674, C=2.000e+00 
++ Fold05: sigma=0.1046, C=3.200e+01 
+- Fold05: sigma=0.1046, C=3.200e+01 
++ Fold05: sigma=0.4525, C=3.200e+01 
+- Fold05: sigma=0.4525, C=3.200e+01 
++ Fold05: sigma=3.3674, C=3.200e+01 
+- Fold05: sigma=3.3674, C=3.200e+01 
++ Fold05: sigma=0.1046, C=1.024e+03 
+- Fold05: sigma=0.1046, C=1.024e+03 
++ Fold05: sigma=0.4525, C=1.024e+03 
+- Fold05: sigma=0.4525, C=1.024e+03 
++ Fold05: sigma=3.3674, C=1.024e+03 
+- Fold05: sigma=3.3674, C=1.024e+03 
++ Fold05: sigma=0.1046, C=3.277e+04 
+- Fold05: sigma=0.1046, C=3.277e+04 
++ Fold05: sigma=0.4525, C=3.277e+04 
+- Fold05: sigma=0.4525, C=3.277e+04 
++ Fold05: sigma=3.3674, C=3.277e+04 
+- Fold05: sigma=3.3674, C=3.277e+04 
++ Fold06: sigma=0.1046, C=3.125e-02 
+- Fold06: sigma=0.1046, C=3.125e-02 
++ Fold06: sigma=0.4525, C=3.125e-02 
+- Fold06: sigma=0.4525, C=3.125e-02 
++ Fold06: sigma=3.3674, C=3.125e-02 
+- Fold06: sigma=3.3674, C=3.125e-02 
++ Fold06: sigma=0.1046, C=5.000e-01 
+- Fold06: sigma=0.1046, C=5.000e-01 
++ Fold06: sigma=0.4525, C=5.000e-01 
+- Fold06: sigma=0.4525, C=5.000e-01 
++ Fold06: sigma=3.3674, C=5.000e-01 
+- Fold06: sigma=3.3674, C=5.000e-01 
++ Fold06: sigma=0.1046, C=2.000e+00 
+- Fold06: sigma=0.1046, C=2.000e+00 
++ Fold06: sigma=0.4525, C=2.000e+00 
+- Fold06: sigma=0.4525, C=2.000e+00 
++ Fold06: sigma=3.3674, C=2.000e+00 
+- Fold06: sigma=3.3674, C=2.000e+00 
++ Fold06: sigma=0.1046, C=3.200e+01 
+- Fold06: sigma=0.1046, C=3.200e+01 
++ Fold06: sigma=0.4525, C=3.200e+01 
+- Fold06: sigma=0.4525, C=3.200e+01 
++ Fold06: sigma=3.3674, C=3.200e+01 
+- Fold06: sigma=3.3674, C=3.200e+01 
++ Fold06: sigma=0.1046, C=1.024e+03 
+- Fold06: sigma=0.1046, C=1.024e+03 
++ Fold06: sigma=0.4525, C=1.024e+03 
+- Fold06: sigma=0.4525, C=1.024e+03 
++ Fold06: sigma=3.3674, C=1.024e+03 
+- Fold06: sigma=3.3674, C=1.024e+03 
++ Fold06: sigma=0.1046, C=3.277e+04 
+- Fold06: sigma=0.1046, C=3.277e+04 
++ Fold06: sigma=0.4525, C=3.277e+04 
+- Fold06: sigma=0.4525, C=3.277e+04 
++ Fold06: sigma=3.3674, C=3.277e+04 
+- Fold06: sigma=3.3674, C=3.277e+04 
++ Fold07: sigma=0.1046, C=3.125e-02 
+- Fold07: sigma=0.1046, C=3.125e-02 
++ Fold07: sigma=0.4525, C=3.125e-02 
+- Fold07: sigma=0.4525, C=3.125e-02 
++ Fold07: sigma=3.3674, C=3.125e-02 
+- Fold07: sigma=3.3674, C=3.125e-02 
++ Fold07: sigma=0.1046, C=5.000e-01 
+- Fold07: sigma=0.1046, C=5.000e-01 
++ Fold07: sigma=0.4525, C=5.000e-01 
+- Fold07: sigma=0.4525, C=5.000e-01 
++ Fold07: sigma=3.3674, C=5.000e-01 
+- Fold07: sigma=3.3674, C=5.000e-01 
++ Fold07: sigma=0.1046, C=2.000e+00 
+- Fold07: sigma=0.1046, C=2.000e+00 
++ Fold07: sigma=0.4525, C=2.000e+00 
+- Fold07: sigma=0.4525, C=2.000e+00 
++ Fold07: sigma=3.3674, C=2.000e+00 
+- Fold07: sigma=3.3674, C=2.000e+00 
++ Fold07: sigma=0.1046, C=3.200e+01 
+- Fold07: sigma=0.1046, C=3.200e+01 
++ Fold07: sigma=0.4525, C=3.200e+01 
+- Fold07: sigma=0.4525, C=3.200e+01 
++ Fold07: sigma=3.3674, C=3.200e+01 
+- Fold07: sigma=3.3674, C=3.200e+01 
++ Fold07: sigma=0.1046, C=1.024e+03 
+- Fold07: sigma=0.1046, C=1.024e+03 
++ Fold07: sigma=0.4525, C=1.024e+03 
+- Fold07: sigma=0.4525, C=1.024e+03 
++ Fold07: sigma=3.3674, C=1.024e+03 
+- Fold07: sigma=3.3674, C=1.024e+03 
++ Fold07: sigma=0.1046, C=3.277e+04 
+- Fold07: sigma=0.1046, C=3.277e+04 
++ Fold07: sigma=0.4525, C=3.277e+04 
+- Fold07: sigma=0.4525, C=3.277e+04 
++ Fold07: sigma=3.3674, C=3.277e+04 
+- Fold07: sigma=3.3674, C=3.277e+04 
++ Fold08: sigma=0.1046, C=3.125e-02 
+- Fold08: sigma=0.1046, C=3.125e-02 
++ Fold08: sigma=0.4525, C=3.125e-02 
+- Fold08: sigma=0.4525, C=3.125e-02 
++ Fold08: sigma=3.3674, C=3.125e-02 
+- Fold08: sigma=3.3674, C=3.125e-02 
++ Fold08: sigma=0.1046, C=5.000e-01 
+- Fold08: sigma=0.1046, C=5.000e-01 
++ Fold08: sigma=0.4525, C=5.000e-01 
+- Fold08: sigma=0.4525, C=5.000e-01 
++ Fold08: sigma=3.3674, C=5.000e-01 
+- Fold08: sigma=3.3674, C=5.000e-01 
++ Fold08: sigma=0.1046, C=2.000e+00 
+- Fold08: sigma=0.1046, C=2.000e+00 
++ Fold08: sigma=0.4525, C=2.000e+00 
+- Fold08: sigma=0.4525, C=2.000e+00 
++ Fold08: sigma=3.3674, C=2.000e+00 
+- Fold08: sigma=3.3674, C=2.000e+00 
++ Fold08: sigma=0.1046, C=3.200e+01 
+- Fold08: sigma=0.1046, C=3.200e+01 
++ Fold08: sigma=0.4525, C=3.200e+01 
+- Fold08: sigma=0.4525, C=3.200e+01 
++ Fold08: sigma=3.3674, C=3.200e+01 
+- Fold08: sigma=3.3674, C=3.200e+01 
++ Fold08: sigma=0.1046, C=1.024e+03 
+- Fold08: sigma=0.1046, C=1.024e+03 
++ Fold08: sigma=0.4525, C=1.024e+03 
+- Fold08: sigma=0.4525, C=1.024e+03 
++ Fold08: sigma=3.3674, C=1.024e+03 
+- Fold08: sigma=3.3674, C=1.024e+03 
++ Fold08: sigma=0.1046, C=3.277e+04 
+- Fold08: sigma=0.1046, C=3.277e+04 
++ Fold08: sigma=0.4525, C=3.277e+04 
+- Fold08: sigma=0.4525, C=3.277e+04 
++ Fold08: sigma=3.3674, C=3.277e+04 
+- Fold08: sigma=3.3674, C=3.277e+04 
++ Fold09: sigma=0.1046, C=3.125e-02 
+- Fold09: sigma=0.1046, C=3.125e-02 
++ Fold09: sigma=0.4525, C=3.125e-02 
+- Fold09: sigma=0.4525, C=3.125e-02 
++ Fold09: sigma=3.3674, C=3.125e-02 
+- Fold09: sigma=3.3674, C=3.125e-02 
++ Fold09: sigma=0.1046, C=5.000e-01 
+- Fold09: sigma=0.1046, C=5.000e-01 
++ Fold09: sigma=0.4525, C=5.000e-01 
+- Fold09: sigma=0.4525, C=5.000e-01 
++ Fold09: sigma=3.3674, C=5.000e-01 
+- Fold09: sigma=3.3674, C=5.000e-01 
++ Fold09: sigma=0.1046, C=2.000e+00 
+- Fold09: sigma=0.1046, C=2.000e+00 
++ Fold09: sigma=0.4525, C=2.000e+00 
+- Fold09: sigma=0.4525, C=2.000e+00 
++ Fold09: sigma=3.3674, C=2.000e+00 
+- Fold09: sigma=3.3674, C=2.000e+00 
++ Fold09: sigma=0.1046, C=3.200e+01 
+- Fold09: sigma=0.1046, C=3.200e+01 
++ Fold09: sigma=0.4525, C=3.200e+01 
+- Fold09: sigma=0.4525, C=3.200e+01 
++ Fold09: sigma=3.3674, C=3.200e+01 
+- Fold09: sigma=3.3674, C=3.200e+01 
++ Fold09: sigma=0.1046, C=1.024e+03 
+- Fold09: sigma=0.1046, C=1.024e+03 
++ Fold09: sigma=0.4525, C=1.024e+03 
+- Fold09: sigma=0.4525, C=1.024e+03 
++ Fold09: sigma=3.3674, C=1.024e+03 
+- Fold09: sigma=3.3674, C=1.024e+03 
++ Fold09: sigma=0.1046, C=3.277e+04 
+- Fold09: sigma=0.1046, C=3.277e+04 
++ Fold09: sigma=0.4525, C=3.277e+04 
+- Fold09: sigma=0.4525, C=3.277e+04 
++ Fold09: sigma=3.3674, C=3.277e+04 
+- Fold09: sigma=3.3674, C=3.277e+04 
++ Fold10: sigma=0.1046, C=3.125e-02 
+- Fold10: sigma=0.1046, C=3.125e-02 
++ Fold10: sigma=0.4525, C=3.125e-02 
+- Fold10: sigma=0.4525, C=3.125e-02 
++ Fold10: sigma=3.3674, C=3.125e-02 
+- Fold10: sigma=3.3674, C=3.125e-02 
++ Fold10: sigma=0.1046, C=5.000e-01 
+- Fold10: sigma=0.1046, C=5.000e-01 
++ Fold10: sigma=0.4525, C=5.000e-01 
+- Fold10: sigma=0.4525, C=5.000e-01 
++ Fold10: sigma=3.3674, C=5.000e-01 
+- Fold10: sigma=3.3674, C=5.000e-01 
++ Fold10: sigma=0.1046, C=2.000e+00 
+- Fold10: sigma=0.1046, C=2.000e+00 
++ Fold10: sigma=0.4525, C=2.000e+00 
+- Fold10: sigma=0.4525, C=2.000e+00 
++ Fold10: sigma=3.3674, C=2.000e+00 
+- Fold10: sigma=3.3674, C=2.000e+00 
++ Fold10: sigma=0.1046, C=3.200e+01 
+- Fold10: sigma=0.1046, C=3.200e+01 
++ Fold10: sigma=0.4525, C=3.200e+01 
+- Fold10: sigma=0.4525, C=3.200e+01 
++ Fold10: sigma=3.3674, C=3.200e+01 
+- Fold10: sigma=3.3674, C=3.200e+01 
++ Fold10: sigma=0.1046, C=1.024e+03 
+- Fold10: sigma=0.1046, C=1.024e+03 
++ Fold10: sigma=0.4525, C=1.024e+03 
+- Fold10: sigma=0.4525, C=1.024e+03 
++ Fold10: sigma=3.3674, C=1.024e+03 
+- Fold10: sigma=3.3674, C=1.024e+03 
++ Fold10: sigma=0.1046, C=3.277e+04 
+- Fold10: sigma=0.1046, C=3.277e+04 
++ Fold10: sigma=0.4525, C=3.277e+04 
+- Fold10: sigma=0.4525, C=3.277e+04 
++ Fold10: sigma=3.3674, C=3.277e+04 
+- Fold10: sigma=3.3674, C=3.277e+04 
+Aggregating results
+Selecting tuning parameters
+Fitting sigma = 3.37, C = 2 on full training set
+[1] "Radial done"
+      user     system    elapsed 
+ 88438.764     31.133 176889.198 
+[1] "radial: 250.280333911491"

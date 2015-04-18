@@ -76,6 +76,18 @@ minimum <- min(dataSet$actualTravelTime)
 maximum <- max(dataSet$actualTravelTime)
 radialSigma = as.vector(sigest(as.matrix(trainingSet[, 2:3]), frac = 1))
 
+# SVM Polynomial
+time_used_poly <- system.time({
+  poly_grid = expand.grid(degree = c(1, 2, 3), C = c(2^-5, 2^-1, 2, 2^5, 2^10, 2^15), scale = c(0.001, 0.01, 0.1))
+  poly.svm <- train(formula, trainingSet, method="svmPoly", trControl=ctrl, poly_grid)
+  save(poly.svm, file='poly_svm.RData')
+  print("Poly done")
+})
+print(time_used_poly)
+pred.poly.svm <- predict(poly.svm, testingSet)
+rmse.poly.svm <- rmse(actual, deNormalize(pred.poly.svm, minimum, maximum))
+print(paste("poly:", rmse.poly.svm, sep=" "))
+
 runSVM <- function(model){
   switch(model, 
          'svmLinear' = {
@@ -120,26 +132,28 @@ runSVM <- function(model){
          })
 }
 
-setDefaultClusterOptions(outfile = "svmKernelTesting_output")
-cluster <- makeMPIcluster(3)
+# setDefaultClusterOptions(outfile = "svmKernelTesting_output")
+# cluster <- makeMPIcluster(3)
+# 
+# #set up environment
+# clusterCall(cluster, function() library(caret))
+# clusterCall(cluster, function() library(kernlab))
+# clusterCall(cluster, function() library(Metrics))
+# clusterCall(cluster, function() source('dataSetGetter.R'))
+# clusterExport(cluster, c("trainingSet"), envir = .GlobalEnv)
+# clusterExport(cluster, c("testingSet"), envir = .GlobalEnv)
+# clusterExport(cluster, c("ctrl"), envir = .GlobalEnv)
+# clusterExport(cluster, c("formula"), envir = .GlobalEnv)
+# clusterExport(cluster, c("actual"), envir = .GlobalEnv)
+# clusterExport(cluster, c("minimum"), envir = .GlobalEnv)
+# clusterExport(cluster, c("maximum"), envir = .GlobalEnv)
+# clusterExport(cluster, c("radialSigma"), envir = .GlobalEnv)
+# 
+# 
+# svmOutput <- clusterApply(cluster, c("svmLinear", "svmPoly", "svmRadial"), runSVM)
+# 
+# stopCluster(cluster)
 
-#set up environment
-clusterCall(cluster, function() library(caret))
-clusterCall(cluster, function() library(kernlab))
-clusterCall(cluster, function() library(Metrics))
-clusterCall(cluster, function() source('dataSetGetter.R'))
-clusterExport(cluster, c("trainingSet"), envir = .GlobalEnv)
-clusterExport(cluster, c("testingSet"), envir = .GlobalEnv)
-clusterExport(cluster, c("ctrl"), envir = .GlobalEnv)
-clusterExport(cluster, c("formula"), envir = .GlobalEnv)
-clusterExport(cluster, c("actual"), envir = .GlobalEnv)
-clusterExport(cluster, c("minimum"), envir = .GlobalEnv)
-clusterExport(cluster, c("maximum"), envir = .GlobalEnv)
-clusterExport(cluster, c("radialSigma"), envir = .GlobalEnv)
 
-
-svmOutput <- clusterApply(cluster, c("svmLinear", "svmPoly", "svmRadial"), runSVM)
-
-stopCluster(cluster)
 
 #stopCluster(cl)
