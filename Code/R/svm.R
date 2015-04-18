@@ -79,7 +79,7 @@ radialSigma = as.vector(sigest(as.matrix(trainingSet[, 2:3]), frac = 1))
 # SVM Polynomial
 time_used_poly <- system.time({
   poly_grid = expand.grid(degree = c(1, 2, 3), C = c(2^-5, 2^-1, 2, 2^5, 2^10, 2^15), scale = c(0.001, 0.01, 0.1))
-  poly.svm <- train(formula, trainingSet, method="svmPoly", trControl=ctrl, poly_grid)
+  poly.svm <- train(formula, trainingSet, method="svmPoly", trControl=ctrl, tuneGrid = poly_grid)
   save(poly.svm, file='poly_svm.RData')
   print("Poly done")
 })
