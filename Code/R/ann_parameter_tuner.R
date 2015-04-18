@@ -27,9 +27,6 @@ trainingSet$actualTravelTime <- preProcess(trainingSet, "actualTravelTime")
 formula <- actualTravelTime~fiveMinuteMean+trafficVolume
 ctrl <- trainControl(verboseIter = TRUE, , method='cv')
 
-#TODO: REMOVE!
-trainingSet <- trainingSet[1:100, ]
-
 ann_grid <- expand.grid(size = c(1, 2, 4, 8, 16), decay=c(0, 1e-4, 1e-1))
 annMod = train(formula, trainingSet[, -1], method="nnet", trControl = ctrl, tuneGrid=ann_grid, maxit=10000)
 save(annMod, file="new_baselines/annMod.RData")

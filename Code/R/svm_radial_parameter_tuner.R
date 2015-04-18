@@ -34,9 +34,6 @@ formula <- actualTravelTime~fiveMinuteMean+trafficVolume
 ctrl <- trainControl(verboseIter = TRUE, , method='cv')
 radialSigma = as.vector(sigest(as.matrix(trainingSet[, 2:3]), frac = 1))
 
-#TODO: REMOVE!
-trainingSet <- trainingSet[1:100, ]
-
 radial_grid <- expand.grid(sigma = radialSigma, C = c(2^-5, 2^-1, 2, 2^5, 2^10, 2^15))
 radial.svm <- train(formula, trainingSet, method="svmRadial", trControl=ctrl, tuneGrid=radial_grid)
 save(radial.svm, file='new_baselines/radial_svmMod.RData')
