@@ -14,7 +14,7 @@ splitDate <- "20150202"
 directory <- "../../Data/Autopassdata/Singledatefiles/Dataset/"
 
 # Get data set from startDate to endDate
-dataSet <- getDataSet(startDate, endDate, paste(directory, "raw/", sep=""), 'filteredDataSet')
+dataSet <- getDataSet(startDate, endDate, paste(directory, "raw/", sep=""), 'filteredDataset')
 
 #normalize data and partition into training and testing set
 dataSet$fiveMinuteMean <- preProcess(dataSet, "fiveMinuteMean")
