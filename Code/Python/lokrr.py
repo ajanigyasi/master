@@ -3,6 +3,7 @@ from kernel import kernel
 from utils import getDataSet, get_list_of_times, get_list_of_intervals, roundToNearestFiveMinute, normalize, denormalize, saveDataSet, get_data_point
 from datetime import time, date, datetime, timedelta
 import heapq
+import pickle
 
 class lokrr:
 
