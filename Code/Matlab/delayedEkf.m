@@ -1,21 +1,18 @@
-function [theta, y_hat] = delayedEkf(x, y, useForTrainingIndex, nh, ns, P, Q, R)
+function [theta, y_hat] = delayedEkf(x, y, useForTrainingIndex, nh, ns, P, Q, R, theta)
 %DELAYEDEKF Perform the delayed EKF method on dataset [x, y]
 %   Detailed explanation goes here
     [nx, nObs] = size(x);
     
-    % Initialize parameter vector theta
-    % TODO: verify that the implementation of Nguyen-Widrow initialization is
-    % correct
-    theta=nguyenWidrow(randn(ns,1), nh, nx);
+
     
     % Initialize vector to hold predictions
     y_hat = y;
     
     % Initialize waitbar
-    h = waitbar(0,'Performing delayed EKF...');
+    %h = waitbar(0,'Performing delayed EKF...');
     
     for k=1:nObs
-        waitbar(k/nObs)
+        %waitbar(k/nObs)
         if useForTrainingIndex(k)
             [theta,P,~]=nnekf(theta,P,x(:,k),y(k),Q,R);
         else
@@ -24,6 +21,6 @@ function [theta, y_hat] = delayedEkf(x, y, useForTrainingIndex, nh, ns, P, Q, R)
     end
     
     % Close waitbar
-    close(h) 
+    %close(h) 
 end
 
