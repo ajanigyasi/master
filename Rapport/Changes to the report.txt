@@ -1,0 +1,4 @@
+The report has promising results, however there are still some challenges to overcome, which is not trivial.
+- Gjør det konsistent med forkortelser på metoder (ANN, kNN, SVM, FRBS, EKF...). Etter man har skrevet navnet på metoden fullt ut og skrevet forkortelsen i parentes kan forkortelsen brukes deretter.
+- Hvilke tabeller er nødvendig å ha med i brødteksten? Hvilke tabeller kan heller stå i appendix?
+- Hvordan skal biblioteker skriver i rapporten: caret, kursiv(caret), "caret"
