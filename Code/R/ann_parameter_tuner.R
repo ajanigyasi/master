@@ -30,5 +30,5 @@ ctrl <- trainControl(verboseIter = TRUE, method='none')
 
 #ann_grid <- expand.grid(size = c(1, 2, 4, 8, 16), decay=c(0, 1e-4, 1e-1))
 ann_grid <- data.frame(size=16, decay=1e-4)
-annMod = train(formula, trainingDataSet[, -1], method="nnet", trControl = ctrl, tuneGrid=ann_grid, maxit=10000)
+annMod = train(formula, trainingSet[, -1], method="nnet", trControl = ctrl, tuneGrid=ann_grid, maxit=10000)
 save(annMod, file="new_baselines/main_annMod.RData")

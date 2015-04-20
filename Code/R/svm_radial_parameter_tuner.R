@@ -38,7 +38,7 @@ ctrl <- trainControl(verboseIter = TRUE, method='none')
 
 #radial_grid <- expand.grid(sigma = radialSigma, C = c(2^-5, 2^-1, 2, 2^5, 2^10, 2^15))
 radial_grid <- data.frame(sigma=4.1451371, C=0.5)
-radial.svm <- train(formula, trainingDataSet, method="svmRadial", trControl=ctrl, tuneGrid=radial_grid)
+radial.svm <- train(formula, trainingSet, method="svmRadial", trControl=ctrl, tuneGrid=radial_grid)
 save(radial.svm, file='new_baselines/main_radial_svmMod.RData')
 
 # pred.radial.svm <- predict(radial.svm, testingSet)
