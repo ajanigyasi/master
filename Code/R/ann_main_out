@@ -1,0 +1,48 @@
+Fitting size = 16, decay = 1e-04 on full training set
+# weights:  65
+initial  value 20942.196741 
+iter  10 value 3361.668086
+iter  20 value 3349.812098
+iter  30 value 3349.625474
+iter  40 value 2471.169786
+iter  50 value 1626.731965
+iter  60 value 1609.213649
+iter  70 value 1606.501271
+iter  80 value 1605.624849
+iter  90 value 1604.872715
+iter 100 value 1604.187478
+iter 110 value 1603.536536
+iter 120 value 1603.177012
+iter 130 value 1602.903242
+iter 140 value 1602.443024
+iter 150 value 1601.422448
+iter 160 value 1601.075272
+iter 170 value 1600.979667
+iter 180 value 1600.886246
+iter 190 value 1600.816910
+iter 200 value 1600.743012
+iter 210 value 1600.596111
+iter 220 value 1600.319470
+iter 230 value 1600.234244
+iter 240 value 1600.120044
+iter 250 value 1600.076257
+iter 260 value 1600.030411
+iter 270 value 1599.939320
+iter 280 value 1599.887861
+iter 290 value 1599.863820
+iter 300 value 1599.824807
+iter 310 value 1599.809056
+iter 320 value 1599.804335
+iter 330 value 1599.791964
+iter 340 value 1599.771272
+iter 350 value 1599.750057
+iter 360 value 1599.725501
+iter 370 value 1599.700053
+iter 380 value 1599.680091
+iter 390 value 1599.665908
+iter 400 value 1599.651705
+iter 410 value 1599.633954
+iter 420 value 1599.615700
+iter 430 value 1599.592016
+final  value 1599.584754 
+converged
