@@ -28,5 +28,5 @@ formula <- actualTravelTime~fiveMinuteMean+trafficVolume
 ctrl <- trainControl(verboseIter = TRUE, method='none')
 
 knn_grid <- expand.grid(kmax = c(50), distance = c(1), kernel=c("rank"))
-knnMod = train(formula, trainingDataSet, method="kknn", trControl = ctrl, tuneGrid = knn_grid)
+knnMod = train(formula, trainingSet, method="kknn", trControl = ctrl, tuneGrid = knn_grid)
 save(knnMod, file="new_baselines/main_knnMod.RData")
