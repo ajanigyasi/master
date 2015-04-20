@@ -1,0 +1,336 @@
+starting MPI worker
+Type: EXEC 
+Loading required package: lattice
+Loading required package: ggplot2
+Type: EXEC 
+Type: EXEC 
+Type: EXEC 
+Loading required package: kknn
+
+Attaching package: ‘kknn’
+
+The following object is masked from+ Fold01: layer1= 1, layer2=0, layer3=0 +- Fold01: layer1= 1, layer2=0, layer3=0 
++ Fold01: layer1= 2, layer2=0, layer3=0 
+- Fold01: layer1= 2, layer2=0, layer3=0 
++ Fold01: layer1= 4, layer2=0, layer3=0 
+ax= 5, distance=1, kernel=rectangular 
++ Fold01: kmax= 7, distance=1, kernel=rectangular 
+- Fold01: kmax= 7, distance=1, kernel=rectangular 
++ Fold01: kmax=10, distance=1, kernel=rectangular 
+- Fold01: kmax=10, distance=1, kernel=rectangular 
++ Fold01: kmax= 3, distance=2, kernel=rectangular 
+- Fold01: kmax= 3, distance=2, kernel=rectangular 
++ Fold01: kmax= 5, distance=2, kernel=rectangular 
+- Fold01: kmax= 5, distance=2, kernel=rectangular 
++ Fold01: kmax= 7, distance=2, kernel=rectangular 
+- Fold01: kmax= 7, distance=2, kernel=rectangular 
++ Fold01: kmax=10, distance=2, kernel=rectangular 
+- Fold01: kmax=10, distance=2, kernel=rectangular 
++ Fold01: kmax= 3, distance=1, kernel=optimal 
+- Fold01: kmax= 3, distance=1, kernel=optimal 
++ Fold01: kmax= 5, distance=1, kernel=optimal 
+- Fold01: kmax= 5, distance=1, kernel=optimal 
++ Fold01: kmax= 7, distance=1, kernel=optimal 
+- Fold01: kmax= 7, distance=1, kernel=optimal 
++ Fold01: kmax=10, distance=1, kernel=optimal 
+- Fold01: kmax=10, distance=1, kernel=optimal 
++ Fold01: kmax= 3, distance=2, kernel=optimal 
+- Fold01: kmax= 3, distance=2, kernel=optimal 
++ Fold01: kmax= 5, distance=2, kernel=optimal 
+- Fold01: kmax= 5, distance=2, kernel=optimal 
++ Fold01: kmax= 7, distance=2, kernel=optimal 
+- Fold01: kmax= 7, distance=2, kernel=optimal 
++ Fold01: kmax=10, distance=2, kernel=optimal 
+- Fold01: kmax=10, distance=2, kernel=optimal 
++ Fold02: kmax= 3, distance=1, kernel=rectangular 
+- Fold02: kmax= 3, distance=1, kernel=rectangular 
++ Fold02: kmax= 5, distance=1, kernel=rectangular 
+- Fold02: kmax= 5, distance=1, kernel=rectangular 
++ Fold02: kmax= 7, distance=1, kernel=rectangular 
+- Fold02: kmax= 7, distance=1, kernel=rectangular 
++ Fold02: kmax=10, distance=1, kernel=rectangular 
+- Fold02: kmax=10, distance=1, kernel=rectangular 
++ Fold02: kmax= 3, distance=2, kernel=rectangular 
+- Fold02: kmax= 3, distance=2, kernel=rectangular 
++ Fold02: kmax= 5, distance=2, kernel=rectangular 
+- Fold02: kmax= 5, distance=2, kernel=rectangular 
++ Fold02: kmax= 7, distance=2, kernel=rectangular 
+- Fold02: kmax= 7, distance=2, kernel=rectangular 
++ Fold02: kmax=10, distance=2, kernel=rectangular 
+- Fold02: kmax=10, distance=2, kernel=rectangular 
++ Fold02: kmax= 3, distance=1, kernel=optimal 
+- Fold02: kmax= 3, distance=1, kernel=optimal 
++ Fold02: kmax= 5, distance=1, kernel=optimal 
+- Fold02: kmax= 5, distance=1, kernel=optimal 
++ Fold02: kmax= 7, distance=1, kernel=optimal 
+- Fold02: kmax= 7, distance=1, kernel=optimal 
++ Fold02: kmax=10, distance=1, kernel=optimal 
+- Fold02: kmax=10, distance=1, kernel=optimal 
++ Fold02: kmax= 3, distance=2, kernel=optimal 
+- Fold02: kmax= 3, distance=2, kernel=optimal 
++ Fold02: kmax= 5, distance=2, kernel=optimal 
+- Fold02: kmax= 5, distance=2, kernel=optimal 
++ Fold02: kmax= 7, distance=2, kernel=optimal 
+- Fold02: kmax= 7, distance=2, kernel=optimal 
++ Fold02: kmax=10, distance=2, kernel=optimal 
+- Fold02: kmax=10, distance=2, kernel=optimal 
++ Fold03: kmax= 3, distance=1, kernel=rectangular 
+- Fold03: kmax= 3, distance=1, kernel=rectangular 
++ Fold03: kmax= 5, distance=1, kernel=rectangular 
+- Fold03: kmax= 5, distance=1, kernel=rectangular 
++ Fold03: kmax= 7, distance=1, kernel=rectangular 
+- Fold03: kmax= 7, distance=1, kernel=rectangular 
++ Fold03: kmax=10, distance=1, kernel=rectangular 
+- Fold03: kmax=10, distance=1, kernel=rectangular 
++ Fold03: kmax= 3, distance=2, kernel=rectangular 
+- Fold03: kmax= 3, distance=2, kernel=rectangular 
++ Fold03: kmax= 5, distance=2, kernel=rectangular 
+- Fold03: kmax= 5, distance=2, kernel=rectangular 
++ Fold03: kmax= 7, distance=2, kernel=rectangular 
+- Fold03: kmax= 7, distance=2, kernel=rectangular 
++ Fold03: kmax=10, distance=2, kernel=rectangular 
+- Fold03: kmax=10, distance=2, kernel=rectangular 
++ Fold03: kmax= 3, distance=1, kernel=optimal 
+- Fold03: kmax= 3, distance=1, kernel=optimal 
++ Fold03: kmax= 5, distance=1, kernel=optimal 
+- Fold03: kmax= 5, distance=1, kernel=optimal 
++ Fold03: kmax= 7, distance=1, kernel=optimal 
+- Fold03: kmax= 7, distance=1, kernel=optimal 
++ Fold03: kmax=10, distance=1, kernel=optimal 
+- Fold03: kmax=10, distance=1, kernel=optimal 
++ Fold03: kmax= 3, distance=2, kernel=optimal 
+- Fold03: kmax= 3, distance=2, kernel=optimal 
++ Fold03: kmax= 5, distance=2, kernel=optimal 
+- Fold03: kmax= 5, distance=2, kernel=optimal 
++ Fold03: kmax= 7, distance=2, kernel=optimal 
+- Fold03: kmax= 7, distance=2, kernel=optimal 
++ Fold03: kmax=10, distance=2, kernel=optimal 
+- Fold03: kmax=10, distance=2, kernel=optimal 
++ Fold04: kmax= 3, distance=1, kernel=rectangular 
+- Fold04: kmax= 3, distance=1, kernel=rectangular 
++ Fold04: kmax= 5, distance=1, kernel=rectangular 
+- Fold04: kmax= 5, distance=1, kernel=rectangular 
++ Fold04: kmax= 7, distance=1, kernel=rectangular 
+- Fold04: kmax= 7, distance=1, kernel=rectangular 
++ Fold04: kmax=10, distance=1, kernel=rectangular 
+- Fold04: kmax=10, distance=1, kernel=rectangular 
++ Fold04: kmax= 3, distance=2, kernel=rectangular 
+- Fold04: kmax= 3, distance=2, kernel=rectangular 
++ Fold04: kmax= 5, distance=2, kernel=rectangular 
+- Fold04: kmax= 5, distance=2, kernel=rectangular 
++ Fold04: kmax= 7, distance=2, kernel=rectangular 
+- Fold04: kmax= 7, distance=2, kernel=rectangular 
++ Fold04: kmax=10, distance=2, kernel=rectangular 
+- Fold04: kmax=10, distance=2, kernel=rectangular 
++ Fold04: kmax= 3, distance=1, kernel=optimal 
+- Fold04: kmax= 3, distance=1, kernel=optimal 
++ Fold04: kmax= 5, distance=1, kernel=optimal 
+- Fold04: kmax= 5, distance=1, kernel=optimal 
++ Fold04: kmax= 7, distance=1, kernel=optimal 
+- Fold04: kmax= 7, distance=1, kernel=optimal 
++ Fold04: kmax=10, distance=1, kernel=optimal 
+- Fold04: kmax=10, distance=1, kernel=optimal 
++ Fold04: kmax= 3, distance=2, kernel=optimal 
+- Fold04: kmax= 3, distance=2, kernel=optimal 
++ Fold04: kmax= 5, distance=2, kernel=optimal 
+- Fold04: kmax= 5, distance=2, kernel=optimal 
++ Fold04: kmax= 7, distance=2, kernel=optimal 
+- Fold04: kmax= 7, distance=2, kernel=optimal 
++ Fold04: kmax=10, distance=2, kernel=optimal 
+- Fold04: kmax=10, distance=2, kernel=optimal 
++ Fold05: kmax= 3, distance=1, kernel=rectangular 
+- Fold05: kmax= 3, distance=1, kernel=rectangular 
++ Fold05: kmax= 5, distance=1, kernel=rectangular 
+- Fold05: kmax= 5, distance=1, kernel=rectangular 
++ Fold05: kmax= 7, distance=1, kernel=rectangular 
+- Fold05: kmax= 7, distance=1, kernel=rectangular 
++ Fold05: kmax=10, distance=1, kernel=rectangular 
+- Fold05: kmax=10, distance=1, kernel=rectangular 
++ Fold05: kmax= 3, distance=2, kernel=rectangular 
+- Fold05: kmax= 3, distance=2, kernel=rectangular 
++ Fold05: kmax= 5, distance=2, kernel=rectangular 
+- Fold05: kmax= 5, distance=2, kernel=rectangular 
++ Fold05: kmax= 7, distance=2, kernel=rectangular 
+- Fold05: kmax= 7, distance=2, kernel=rectangular 
++ Fold05: kmax=10, distance=2, kernel=rectangular 
+- Fold05: kmax=10, distance=2, kernel=rectangular 
++ Fold05: kmax= 3, distance=1, kernel=optimal 
+- Fold05: kmax= 3, distance=1, kernel=optimal 
++ Fold05: kmax= 5, distance=1, kernel=optimal 
+- Fold05: kmax= 5, distance=1, kernel=optimal 
++ Fold05: kmax= 7, distance=1, kernel=optimal 
+- Fold05: kmax= 7, distance=1, kernel=optimal 
++ Fold05: kmax=10, distance=1, kernel=optimal 
+- Fold05: kmax=10, distance=1, kernel=optimal 
++ Fold05: kmax= 3, distance=2, kernel=optimal 
+- Fold05: kmax= 3, distance=2, kernel=optimal 
++ Fold05: kmax= 5, distance=2, kernel=optimal 
+- Fold05: kmax= 5, distance=2, kernel=optimal 
++ Fold05: kmax= 7, distance=2, kernel=optimal 
+- Fold05: kmax= 7, distance=2, kernel=optimal 
++ Fold05: kmax=10, distance=2, kernel=optimal 
+- Fold05: kmax=10, distance=2, kernel=optimal 
++ Fold06: kmax= 3, distance=1, kernel=rectangular 
+- Fold06: kmax= 3, distance=1, kernel=rectangular 
++ Fold06: kmax= 5, distance=1, kernel=rectangular 
+- Fold06: kmax= 5, distance=1, kernel=rectangular 
++ Fold06: kmax= 7, distance=1, kernel=rectangular 
+- Fold06: kmax= 7, distance=1, kernel=rectangular 
++ Fold06: kmax=10, distance=1, kernel=rectangular 
+- Fold06: kmax=10, distance=1, kernel=rectangular 
++ Fold06: kmax= 3, distance=2, kernel=rectangular 
+- Fold06: kmax= 3, distance=2, kernel=rectangular 
++ Fold06: kmax= 5, distance=2, kernel=rectangular 
+- Fold06: kmax= 5, distance=2, kernel=rectangular 
++ Fold06: kmax= 7, distance=2, kernel=rectangular 
+- Fold06: kmax= 7, distance=2, kernel=rectangular 
++ Fold06: kmax=10, distance=2, kernel=rectangular 
+- Fold06: kmax=10, distance=2, kernel=rectangular 
++ Fold06: kmax= 3, distance=1, kernel=optimal 
+- Fold06: kmax= 3, distance=1, kernel=optimal 
++ Fold06: kmax= 5, distance=1, kernel=optimal 
+- Fold06: kmax= 5, distance=1, kernel=optimal 
++ Fold06: kmax= 7, distance=1, kernel=optimal 
+- Fold06: kmax= 7, distance=1, kernel=optimal 
++ Fold06: kmax=10, distance=1, kernel=optimal 
+- Fold06: kmax=10, distance=1, kernel=optimal 
++ Fold06: kmax= 3, distance=2, kernel=optimal 
+- Fold06: kmax= 3, distance=2, kernel=optimal 
++ Fold06: kmax= 5, distance=2, kernel=optimal 
+- Fold06: kmax= 5, distance=2, kernel=optimal 
++ Fold06: kmax= 7, distance=2, kernel=optimal 
+- Fold06: kmax= 7, distance=2, kernel=optimal 
++ Fold06: kmax=10, distance=2, kernel=optimal 
+- Fold06: kmax=10, distance=2, kernel=optimal 
++ Fold07: kmax= 3, distance=1, kernel=rectangular 
+- Fold07: kmax= 3, distance=1, kernel=rectangular 
++ Fold07: kmax= 5, distance=1, kernel=rectangular 
+- Fold07: kmax= 5, distance=1, kernel=rectangular 
++ Fold07: kmax= 7, distance=1, kernel=rectangular 
+- Fold07: kmax= 7, distance=1, kernel=rectangular 
++ Fold07: kmax=10, distance=1, kernel=rectangular 
+- Fold07: kmax=10, distance=1, kernel=rectangular 
++ Fold07: kmax= 3, distance=2, kernel=rectangular 
+- Fold07: kmax= 3, distance=2, kernel=rectangular 
++ Fold07: kmax= 5, distance=2, kernel=rectangular 
+- Fold07: kmax= 5, distance=2, kernel=rectangular 
++ Fold07: kmax= 7, distance=2, kernel=rectangular 
+- Fold07: kmax= 7, distance=2, kernel=rectangular 
++ Fold07: kmax=10, distance=2, kernel=rectangular 
+- Fold07: kmax=10, distance=2, kernel=rectangular 
++ Fold07: kmax= 3, distance=1, kernel=optimal 
+- Fold07: kmax= 3, distance=1, kernel=optimal 
++ Fold07: kmax= 5, distance=1, kernel=optimal 
+- Fold07: kmax= 5, distance=1, kernel=optimal 
++ Fold07: kmax= 7, distance=1, kernel=optimal 
+- Fold07: kmax= 7, distance=1, kernel=optimal 
++ Fold07: kmax=10, distance=1, kernel=optimal 
+- Fold07: kmax=10, distance=1, kernel=optimal 
++ Fold07: kmax= 3, distance=2, kernel=optimal 
+- Fold07: kmax= 3, distance=2, kernel=optimal 
++ Fold07: kmax= 5, distance=2, kernel=optimal 
+- Fold07: kmax= 5, distance=2, kernel=optimal 
++ Fold07: kmax= 7, distance=2, kernel=optimal 
+- Fold07: kmax= 7, distance=2, kernel=optimal 
++ Fold07: kmax=10, distance=2, kernel=optimal 
+- Fold07: kmax=10, distance=2, kernel=optimal 
++ Fold08: kmax= 3, distance=1, kernel=rectangular 
+- Fold08: kmax= 3, distance=1, kernel=rectangular 
++ Fold08: kmax= 5, distance=1, kernel=rectangular 
+- Fold08: kmax= 5, distance=1, kernel=rectangular 
++ Fold08: kmax= 7, distance=1, kernel=rectangular 
+- Fold08: kmax= 7, distance=1, kernel=rectangular 
++ Fold08: kmax=10, distance=1, kernel=rectangular 
+- Fold08: kmax=10, distance=1, kernel=rectangular 
++ Fold08: kmax= 3, distance=2, kernel=rectangular 
+- Fold08: kmax= 3, distance=2, kernel=rectangular 
++ Fold08: kmax= 5, distance=2, kernel=rectangular 
+- Fold08: kmax= 5, distance=2, kernel=rectangular 
++ Fold08: kmax= 7, distance=2, kernel=rectangular 
+- Fold08: kmax= 7, distance=2, kernel=rectangular 
++ Fold08: kmax=10, distance=2, kernel=rectangular 
+- Fold08: kmax=10, distance=2, kernel=rectangular 
++ Fold08: kmax= 3, distance=1, kernel=optimal 
+- Fold08: kmax= 3, distance=1, kernel=optimal 
++ Fold08: kmax= 5, distance=1, kernel=optimal 
+- Fold08: kmax= 5, distance=1, kernel=optimal 
++ Fold08: kmax= 7, distance=1, kernel=optimal 
+- Fold08: kmax= 7, distance=1, kernel=optimal 
++ Fold08: kmax=10, distance=1, kernel=optimal 
+- Fold08: kmax=10, distance=1, kernel=optimal 
++ Fold08: kmax= 3, distance=2, kernel=optimal 
+- Fold08: kmax= 3, distance=2, kernel=optimal 
++ Fold08: kmax= 5, distance=2, kernel=optimal 
+- Fold08: kmax= 5, distance=2, kernel=optimal 
++ Fold08: kmax= 7, distance=2, kernel=optimal 
+- Fold08: kmax= 7, distance=2, kernel=optimal 
++ Fold08: kmax=10, distance=2, kernel=optimal 
+- Fold08: kmax=10, distance=2, kernel=optimal 
++ Fold09: kmax= 3, distance=1, kernel=rectangular 
+- Fold09: kmax= 3, distance=1, kernel=rectangular 
++ Fold09: kmax= 5, distance=1, kernel=rectangular 
+- Fold09: kmax= 5, distance=1, kernel=rectangular 
++ Fold09: kmax= 7, distance=1, kernel=rectangular 
+- Fold09: kmax= 7, distance=1, kernel=rectangular 
++ Fold09: kmax=10, distance=1, kernel=rectangular 
+- Fold09: kmax=10, distance=1, kernel=rectangular 
++ Fold09: kmax= 3, distance=2, kernel=rectangular 
+- Fold09: kmax= 3, distance=2, kernel=rectangular 
++ Fold09: kmax= 5, distance=2, kernel=rectangular 
+- Fold09: kmax= 5, distance=2, kernel=rectangular 
++ Fold09: kmax= 7, distance=2, kernel=rectangular 
+- Fold09: kmax= 7, distance=2, kernel=rectangular 
++ Fold09: kmax=10, distance=2, kernel=rectangular 
+- Fold09: kmax=10, distance=2, kernel=rectangular 
++ Fold09: kmax= 3, distance=1, kernel=optimal 
+- Fold09: kmax= 3, distance=1, kernel=optimal 
++ Fold09: kmax= 5, distance=1, kernel=optimal 
+- Fold09: kmax= 5, distance=1, kernel=optimal 
++ Fold09: kmax= 7, distance=1, kernel=optimal 
+- Fold09: kmax= 7, distance=1, kernel=optimal 
++ Fold09: kmax=10, distance=1, kernel=optimal 
+- Fold09: kmax=10, distance=1, kernel=optimal 
++ Fold09: kmax= 3, distance=2, kernel=optimal 
+- Fold09: kmax= 3, distance=2, kernel=optimal 
++ Fold09: kmax= 5, distance=2, kernel=optimal 
+- Fold09: kmax= 5, distance=2, kernel=optimal 
++ Fold09: kmax= 7, distance=2, kernel=optimal 
+- Fold09: kmax= 7, distance=2, kernel=optimal 
++ Fold09: kmax=10, distance=2, kernel=optimal 
+- Fold09: kmax=10, distance=2, kernel=optimal 
++ Fold10: kmax= 3, distance=1, kernel=rectangular 
+- Fold10: kmax= 3, distance=1, kernel=rectangular 
++ Fold10: kmax= 5, distance=1, kernel=rectangular 
+- Fold10: kmax= 5, distance=1, kernel=rectangular 
++ Fold10: kmax= 7, distance=1, kernel=rectangular 
+- Fold10: kmax= 7, distance=1, kernel=rectangular 
++ Fold10: kmax=10, distance=1, kernel=rectangular 
+- Fold10: kmax=10, distance=1, kernel=rectangular 
++ Fold10: kmax= 3, distance=2, kernel=rectangular 
+- Fold10: kmax= 3, distance=2, kernel=rectangular 
++ Fold10: kmax= 5, distance=2, kernel=rectangular 
+- Fold10: kmax= 5, distance=2, kernel=rectangular 
++ Fold10: kmax= 7, distance=2, kernel=rectangular 
+- Fold10: kmax= 7, distance=2, kernel=rectangular 
++ Fold10: kmax=10, distance=2, kernel=rectangular 
+- Fold10: kmax=10, distance=2, kernel=rectangular 
++ Fold10: kmax= 3, distance=1, kernel=optimal 
+- Fold10: kmax= 3, distance=1, kernel=optimal 
++ Fold10: kmax= 5, distance=1, kernel=optimal 
+- Fold10: kmax= 5, distance=1, kernel=optimal 
++ Fold10: kmax= 7, distance=1, kernel=optimal 
+- Fold10: kmax= 7, distance=1, kernel=optimal 
++ Fold10: kmax=10, distance=1, kernel=optimal 
+- Fold10: kmax=10, distance=1, kernel=optimal 
++ Fold10: kmax= 3, distance=2, kernel=optimal 
+- Fold10: kmax= 3, distance=2, kernel=optimal 
++ Fold10: kmax= 5, distance=2, kernel=optimal 
+- Fold10: kmax= 5, distance=2, kernel=optimal 
++ Fold10: kmax= 7, distance=2, kernel=optimal 
+- Fold10: kmax= 7, distance=2, kernel=optimal 
++ Fold10: kmax=10, distance=2, kernel=optimal 
+- Fold10: kmax=10, distance=2, kernel=optimal 
+Aggregating results
+Selecting tuning parameters
+Fitting kmax = 10, distance = 2, kernel = rectangular on full training set
+[1] "kNN done"

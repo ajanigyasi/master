@@ -1,0 +1,3232 @@
+starting MPI worker
+Type: EXEC 
+Loading required package: lattice
+Loading required package: ggplot2
+Type: EXEC 
+Type: EXEC 
+Type: EXEC 
+[1] "Start ANN training"
+Loading required package: nnet
++ Fold01: size= 1, decay=0e+00 
+# weights:  5
+initial  value 826.649968 
+final  value 689.936670 
+converged
+- Fold01: size= 1, decay=0e+00 
++ Fold01: size= 2, decay=0e+00 
+# weights:  9
+initial  value 3239.949473 
+final  value 689.936670 
+converged
+- Fold01: size= 2, decay=0e+00 
++ Fold01: size= 4, decay=0e+00 
+# weights:  17
+initial  value 760.213719 
+final  value 689.936670 
+converged
+- Fold01: size= 4, decay=0e+00 
++ Fold01: size= 8, decay=0e+00 
+# weights:  33
+initial  value 64predictions failed for Fold01: layer1= 8, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold01: layer1= 8, layer2=0, layer3=0 
++ Fold01: layer1=16, layer2=0, layer3=0 
+predictions failed for Fold01: layer1=16, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold01: layer1=16, layer2=0, layer3=0 
++ Fold02: layer1= 1, layer2=0, layer3=0 
+- Fold02: layer1= 1, layer2=0, layer3=0 
++ Fold02: layer1= 2, layer2=0, layer3=0 
+- Fold02: layer1= 2, layer2=0, layer3=0 
++ Fold02: layer1= 4, layer2=0, layer3=0 
+predictions failed for Fold02: layer1= 4, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold02: layer1= 4, layer2=0, layer3=0 
++ Fold02: layer1= 8, layer2=0, layer3=0 
+predictions failed for Fold02: layer1= 8, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold02: layer1= 8, layer2=0, layer3=0 
++ Fold02: layer1=16, layer2=0, layer3=0 
+predictions failed for Fold02: layer1=16, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold02: layer1=16, layer2=0, layer3=0 
++ Fold03: layer1= 1, layer2=0, layer3=0 
+- Fold03: layer1= 1, layer2=0, layer3=0 
++ Fold03: layer1= 2, layer2=0, layer3=0 
+predictions failed for Fold03: layer1= 2, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold03: layer1= 2, layer2=0, layer3=0 
++ Fold03: layer1= 4, layer2=0, layer3=0 
+predictions failed for Fold03: layer1= 4, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold03: layer1= 4, layer2=0, layer3=0 
++ Fold03: layer1= 8, layer2=0, layer3=0 
+predictions failed for Fold03: layer1= 8, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold03: layer1= 8, layer2=0, layer3=0 
++ Fold03: layer1=16, layer2=0, layer3=0 
+predictions failed for Fold03: layer1=16, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold03: layer1=16, layer2=0, layer3=0 
++ Fold04: layer1= 1, layer2=0, layer3=0 
+- Fold04: layer1= 1, layer2=0, layer3=0 
++ Fold04: layer1= 2, layer2=0, layer3=0 
+- Fold04: layer1= 2, layer2=0, layer3=0 
++ Fold04: layer1= 4, layer2=0, layer3=0 
+predictions failed for Fold04: layer1= 4, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold04: layer1= 4, layer2=0, layer3=0 
++ Fold04: layer1= 8, layer2=0, layer3=0 
+predictions failed for Fold04: layer1= 8, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold04: layer1= 8, layer2=0, layer3=0 
++ Fold04: layer1=16, layer2=0, layer3=0 
+predictions failed for Fold04: layer1=16, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold04: layer1=16, layer2=0, layer3=0 
++ Fold05: layer1= 1, layer2=0, layer3=0 
+- Fold05: layer1= 1, layer2=0, layer3=0 
++ Fold05: layer1= 2, layer2=0, layer3=0 
+- Fold05: layer1= 2, layer2=0, layer3=0 
++ Fold05: layer1= 4, layer2=0, layer3=0 
+predictions failed for Fold05: layer1= 4, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold05: layer1= 4, layer2=0, layer3=0 
++ Fold05: layer1= 8, layer2=0, layer3=0 
+predictions failed for Fold05: layer1= 8, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold05: layer1= 8, layer2=0, layer3=0 
++ Fold05: layer1=16, layer2=0, layer3=0 
+predictions failed for Fold05: layer1=16, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold05: layer1=16, layer2=0, layer3=0 
++ Fold06: layer1= 1, layer2=0, layer3=0 
+- Fold06: layer1= 1, layer2=0, layer3=0 
++ Fold06: layer1= 2, layer2=0, layer3=0 
+- Fold06: layer1= 2, layer2=0, layer3=0 
++ Fold06: layer1= 4, layer2=0, layer3=0 
+- Fold06: layer1= 4, layer2=0, layer3=0 
++ Fold06: layer1= 8, layer2=0, layer3=0 
+predictions failed for Fold06: layer1= 8, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold06: layer1= 8, layer2=0, layer3=0 
++ Fold06: layer1=16, layer2=0, layer3=0 
+predictions failed for Fold06: layer1=16, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold06: layer1=16, layer2=0, layer3=0 
++ Fold07: layer1= 1, layer2=0, layer3=0 
+- Fold07: layer1= 1, layer2=0, layer3=0 
++ Fold07: layer1= 2, layer2=0, layer3=0 
+- Fold07: layer1= 2, layer2=0, layer3=0 
++ Fold07: layer1= 4, layer2=0, layer3=0 
+predictions failed for Fold07: layer1= 4, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold07: layer1= 4, layer2=0, layer3=0 
++ Fold07: layer1= 8, layer2=0, layer3=0 
+predictions failed for Fold07: layer1= 8, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold07: layer1= 8, layer2=0, layer3=0 
++ Fold07: layer1=16, layer2=0, layer3=0 
+predictions failed for Fold07: layer1=16, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold07: layer1=16, layer2=0, layer3=0 
++ Fold08: layer1= 1, layer2=0, layer3=0 
+- Fold08: layer1= 1, layer2=0, layer3=0 
++ Fold08: layer1= 2, layer2=0, layer3=0 
+- Fold08: layer1= 2, layer2=0, layer3=0 
++ Fold08: layer1= 4, layer2=0, layer3=0 
+predictions failed for Fold08: layer1= 4, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold08: layer1= 4, layer2=0, layer3=0 
++ Fold08: layer1= 8, layer2=0, layer3=0 
+- Fold08: layer1= 8, layer2=0, layer3=0 
++ Fold08: layer1=16, layer2=0, layer3=0 
+predictions failed for Fold08: layer1=16, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold08: layer1=16, layer2=0, layer3=0 
++ Fold09: layer1= 1, layer2=0, layer3=0 
+- Fold09: layer1= 1, layer2=0, layer3=0 
++ Fold09: layer1= 2, layer2=0, layer3=0 
+predictions failed for Fold09: layer1= 2, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold09: layer1= 2, layer2=0, layer3=0 
++ Fold09: layer1= 4, layer2=0, layer3=0 
+predictions failed for Fold09: layer1= 4, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold09: layer1= 4, layer2=0, layer3=0 
++ Fold09: layer1= 8, layer2=0, layer3=0 
+predictions failed for Fold09: layer1= 8, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold09: layer1= 8, layer2=0, layer3=0 
++ Fold09: layer1=16, layer2=0, layer3=0 
+predictions failed for Fold09: layer1=16, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold09: layer1=16, layer2=0, layer3=0 
++ Fold10: layer1= 1, layer2=0, layer3=0 
+- Fold10: layer1= 1, layer2=0, layer3=0 
++ Fold10: layer1= 2, layer2=0, layer3=0 
+- Fold10: layer1= 2, layer2=0, layer3=0 
++ Fold10: layer1= 4, layer2=0, layer3=0 
+predictions failed for Fold10: layer1= 4, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold10: layer1= 4, layer2=0, layer3=0 
++ Fold10: layer1= 8, layer2=0, layer3=0 
+predictions failed for Fold10: layer1= 8, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold10: layer1= 8, layer2=0, layer3=0 
++ Fold10: layer1=16, layer2=0, layer3=0 
+predictions failed for Fold10: layer1=16, layer2=0, layer3=0 Error in nrow[w] * ncol[w] : non-numeric argument to binary operator
+ 
+- Fold10: layer1=16, layer2=0, layer3=0 
+Aggregating results
+Selecting tuning parameters
+Fitting layer1 = 4, layer2 = 0, layer3 = 0 on full training set
+[1] "ANN done"
+ue 327.056415
+iter  40 value 324.532261
+iter  50 value 323.832144
+iter  60 value 323.420142
+iter  70 value 323.251099
+iter  80 value 323.235110
+iter  90 value 323.227507
+iter 100 value 323.217583
+final  value 323.217505 
+converged
+- Fold01: size= 4, decay=1e-01 
++ Fold01: size= 8, decay=1e-01 
+# weights:  33
+initial  value 1015.209884 
+iter  10 value 547.708775
+iter  20 value 328.791808
+iter  30 value 323.794934
+iter  40 value 323.419296
+iter  50 value 323.384845
+iter  60 value 323.359597
+iter  70 value 323.344488
+iter  80 value 323.323574
+iter  90 value 323.251443
+iter 100 value 323.251112
+final  value 323.251048 
+converged
+- Fold01: size= 8, decay=1e-01 
++ Fold01: size=16, decay=1e-01 
+# weights:  65
+initial  value 455.172829 
+iter  10 value 326.280616
+iter  20 value 325.246033
+iter  30 value 324.035746
+iter  40 value 323.544846
+iter  50 value 323.438228
+iter  60 value 323.379724
+iter  70 value 323.285686
+iter  80 value 323.246305
+iter  90 value 323.231392
+iter 100 value 323.211395
+iter 110 value 323.192997
+iter 120 value 323.187039
+iter 130 value 323.184837
+iter 140 value 323.165282
+iter 150 value 323.165042
+final  value 323.165035 
+converged
+- Fold01: size=16, decay=1e-01 
++ Fold02: size= 1, decay=0e+00 
+# weights:  5
+initial  value 2489.063631 
+final  value 696.576048 
+converged
+- Fold02: size= 1, decay=0e+00 
++ Fold02: size= 2, decay=0e+00 
+# weights:  9
+initial  value 1342.962915 
+final  value 696.576048 
+converged
+- Fold02: size= 2, decay=0e+00 
++ Fold02: size= 4, decay=0e+00 
+# weights:  17
+initial  value 2422.021384 
+final  value 696.576048 
+converged
+- Fold02: size= 4, decay=0e+00 
++ Fold02: size= 8, decay=0e+00 
+# weights:  33
+initial  value 2135.392142 
+final  value 696.576048 
+converged
+- Fold02: size= 8, decay=0e+00 
++ Fold02: size=16, decay=0e+00 
+# weights:  65
+initial  value 4164.660809 
+final  value 696.576048 
+converged
+- Fold02: size=16, decay=0e+00 
++ Fold02: size= 1, decay=1e-04 
+# weights:  5
+initial  value 3846.652191 
+iter  10 value 750.403291
+iter  20 value 697.545326
+iter  30 value 696.577136
+iter  40 value 696.569026
+iter  50 value 696.552800
+iter  60 value 696.506132
+iter  70 value 695.776344
+iter  80 value 326.953136
+iter  90 value 325.505063
+iter 100 value 324.439895
+iter 110 value 321.893817
+iter 120 value 319.850943
+final  value 319.806480 
+converged
+- Fold02: size= 1, decay=1e-04 
++ Fold02: size= 2, decay=1e-04 
+# weights:  9
+initial  value 937.194706 
+iter  10 value 697.023462
+iter  20 value 696.595978
+iter  30 value 696.595636
+iter  40 value 696.595320
+iter  50 value 696.595013
+iter  60 value 696.594679
+iter  70 value 696.594347
+iter  80 value 696.593984
+iter  90 value 696.593576
+iter 100 value 696.593113
+iter 110 value 696.592576
+iter 120 value 696.591942
+iter 130 value 696.591171
+iter 140 value 696.590203
+iter 150 value 696.588932
+iter 160 value 696.587158
+iter 170 value 696.584450
+iter 180 value 696.579688
+iter 190 value 696.568753
+iter 200 value 696.518079
+iter 210 value 360.935930
+iter 220 value 328.339430
+iter 230 value 318.157122
+iter 240 value 317.505054
+iter 250 value 317.092577
+iter 260 value 316.715537
+iter 270 value 316.648578
+final  value 316.591864 
+converged
+- Fold02: size= 2, decay=1e-04 
++ Fold02: size= 4, decay=1e-04 
+# weights:  17
+initial  value 5325.770529 
+iter  10 value 705.015012
+iter  20 value 696.673382
+iter  30 value 696.589061
+iter  40 value 696.588265
+iter  50 value 696.587177
+iter  60 value 696.585570
+iter  70 value 696.582888
+iter  80 value 696.577339
+iter  90 value 696.558325
+iter 100 value 688.710710
+iter 110 value 337.673900
+iter 120 value 318.347391
+iter 130 value 316.713757
+iter 140 value 316.616056
+iter 150 value 316.586098
+iter 160 value 316.567863
+iter 170 value 316.555316
+iter 180 value 316.551391
+iter 190 value 316.462210
+iter 200 value 315.794659
+iter 210 value 315.186588
+iter 220 value 314.982894
+iter 230 value 314.930264
+iter 240 value 314.921014
+iter 250 value 314.918425
+iter 260 value 314.917010
+iter 270 value 314.914650
+final  value 314.911591 
+converged
+- Fold02: size= 4, decay=1e-04 
++ Fold02: size= 8, decay=1e-04 
+# weights:  33
+initial  value 380.918408 
+iter  10 value 327.960324
+iter  20 value 320.199374
+iter  30 value 318.242442
+iter  40 value 317.688233
+iter  50 value 317.151230
+iter  60 value 316.380468
+iter  70 value 316.074884
+iter  80 value 315.580459
+iter  90 value 315.022651
+iter 100 value 314.503368
+iter 110 value 314.428361
+iter 120 value 314.368366
+iter 130 value 314.298396
+iter 140 value 314.207100
+iter 150 value 314.104616
+iter 160 value 313.931694
+iter 170 value 313.850008
+iter 180 value 313.799350
+iter 190 value 313.723765
+iter 200 value 313.679545
+iter 210 value 313.669997
+iter 220 value 313.635764
+iter 230 value 313.609726
+iter 240 value 313.586344
+iter 250 value 313.565442
+iter 260 value 313.544832
+iter 270 value 313.531763
+iter 280 value 313.528752
+iter 290 value 313.514678
+iter 300 value 313.503325
+iter 310 value 313.465322
+iter 320 value 313.346616
+iter 330 value 313.294209
+iter 340 value 313.277396
+iter 350 value 313.270233
+iter 360 value 313.259844
+iter 370 value 313.252780
+iter 380 value 313.245873
+iter 390 value 313.226189
+iter 400 value 313.206125
+iter 410 value 313.184536
+iter 420 value 313.155925
+iter 430 value 313.104819
+iter 440 value 313.072383
+iter 450 value 313.029478
+iter 460 value 313.017764
+iter 470 value 313.011171
+iter 480 value 313.009653
+iter 490 value 313.006925
+iter 500 value 313.003499
+iter 510 value 312.997579
+iter 520 value 312.992535
+iter 530 value 312.989335
+final  value 312.983558 
+converged
+- Fold02: size= 8, decay=1e-04 
++ Fold02: size=16, decay=1e-04 
+# weights:  65
+initial  value 2177.148902 
+iter  10 value 335.760296
+iter  20 value 319.218142
+iter  30 value 318.058372
+iter  40 value 316.729088
+iter  50 value 315.886409
+iter  60 value 315.277090
+iter  70 value 315.083301
+iter  80 value 314.899970
+iter  90 value 314.535918
+iter 100 value 314.242173
+iter 110 value 314.150227
+iter 120 value 314.061213
+iter 130 value 314.027331
+iter 140 value 314.013814
+iter 150 value 313.992227
+iter 160 value 313.964247
+iter 170 value 313.930235
+iter 180 value 313.887844
+iter 190 value 313.875329
+iter 200 value 313.863490
+iter 210 value 313.840291
+iter 220 value 313.822413
+iter 230 value 313.784137
+iter 240 value 313.718773
+iter 250 value 313.598098
+iter 260 value 313.389555
+iter 270 value 313.298847
+iter 280 value 313.284677
+iter 290 value 313.232054
+iter 300 value 313.195161
+iter 310 value 313.178750
+iter 320 value 313.159310
+iter 330 value 313.135905
+iter 340 value 313.111058
+iter 350 value 313.091566
+iter 360 value 313.065379
+iter 370 value 313.044947
+iter 380 value 313.039258
+iter 390 value 313.031818
+iter 400 value 313.026567
+iter 410 value 313.025419
+iter 420 value 313.014377
+iter 430 value 313.004167
+iter 440 value 312.992156
+iter 450 value 312.978865
+iter 460 value 312.957980
+iter 470 value 312.941692
+iter 480 value 312.924265
+iter 490 value 312.906156
+iter 500 value 312.887156
+iter 510 value 312.869222
+iter 520 value 312.849325
+iter 530 value 312.825096
+iter 540 value 312.821373
+iter 550 value 312.774564
+iter 560 value 312.733792
+iter 570 value 312.671030
+iter 580 value 312.612487
+iter 590 value 312.577729
+iter 600 value 312.541639
+iter 610 value 312.528171
+iter 620 value 312.513461
+iter 630 value 312.488468
+iter 640 value 312.454076
+iter 650 value 312.436878
+iter 660 value 312.403626
+iter 670 value 312.400513
+iter 680 value 312.390228
+iter 690 value 312.367902
+iter 700 value 312.354344
+iter 710 value 312.342826
+iter 720 value 312.332749
+iter 730 value 312.326354
+iter 740 value 312.321689
+iter 750 value 312.319670
+iter 760 value 312.317368
+iter 770 value 312.314052
+iter 780 value 312.312214
+iter 790 value 312.311336
+final  value 312.311140 
+converged
+- Fold02: size=16, decay=1e-04 
++ Fold02: size= 1, decay=1e-01 
+# weights:  5
+initial  value 795.116364 
+iter  10 value 406.058078
+iter  20 value 365.062190
+iter  30 value 337.954541
+iter  40 value 331.020220
+iter  50 value 329.938626
+final  value 329.937630 
+converged
+- Fold02: size= 1, decay=1e-01 
++ Fold02: size= 2, decay=1e-01 
+# weights:  9
+initial  value 1044.436558 
+iter  10 value 403.114683
+iter  20 value 337.828788
+iter  30 value 329.769828
+iter  40 value 329.183350
+iter  50 value 328.821583
+iter  60 value 327.868561
+final  value 327.855433 
+converged
+- Fold02: size= 2, decay=1e-01 
++ Fold02: size= 4, decay=1e-01 
+# weights:  17
+initial  value 2886.977312 
+iter  10 value 535.854728
+iter  20 value 336.796532
+iter  30 value 331.222751
+iter  40 value 329.386155
+iter  50 value 328.263441
+iter  60 value 327.930089
+iter  70 value 327.916245
+iter  80 value 327.895994
+iter  90 value 327.894235
+iter  90 value 327.894233
+iter  90 value 327.894233
+final  value 327.894233 
+converged
+- Fold02: size= 4, decay=1e-01 
++ Fold02: size= 8, decay=1e-01 
+# weights:  33
+initial  value 4460.588020 
+iter  10 value 407.874767
+iter  20 value 332.998134
+iter  30 value 330.334670
+iter  40 value 328.719544
+iter  50 value 328.402794
+iter  60 value 328.095696
+iter  70 value 327.942580
+iter  80 value 327.865607
+iter  90 value 327.774560
+iter 100 value 327.774027
+final  value 327.773963 
+converged
+- Fold02: size= 8, decay=1e-01 
++ Fold02: size=16, decay=1e-01 
+# weights:  65
+initial  value 396.791717 
+iter  10 value 331.564541
+iter  20 value 330.064432
+iter  30 value 329.092250
+iter  40 value 328.629261
+iter  50 value 328.171502
+iter  60 value 327.978432
+iter  70 value 327.925711
+iter  80 value 327.898116
+iter  90 value 327.865722
+iter 100 value 327.817274
+iter 110 value 327.805750
+iter 120 value 327.795127
+iter 130 value 327.788092
+iter 140 value 327.763414
+iter 150 value 327.761784
+final  value 327.761761 
+converged
+- Fold02: size=16, decay=1e-01 
++ Fold03: size= 1, decay=0e+00 
+# weights:  5
+initial  value 1751.316300 
+final  value 690.169422 
+converged
+- Fold03: size= 1, decay=0e+00 
++ Fold03: size= 2, decay=0e+00 
+# weights:  9
+initial  value 979.430463 
+final  value 690.169422 
+converged
+- Fold03: size= 2, decay=0e+00 
++ Fold03: size= 4, decay=0e+00 
+# weights:  17
+initial  value 4216.756199 
+final  value 690.169422 
+converged
+- Fold03: size= 4, decay=0e+00 
++ Fold03: size= 8, decay=0e+00 
+# weights:  33
+initial  value 885.419689 
+final  value 690.169422 
+converged
+- Fold03: size= 8, decay=0e+00 
++ Fold03: size=16, decay=0e+00 
+# weights:  65
+initial  value 3161.770271 
+final  value 690.169422 
+converged
+- Fold03: size=16, decay=0e+00 
++ Fold03: size= 1, decay=1e-04 
+# weights:  5
+initial  value 3909.403732 
+iter  10 value 734.443349
+iter  20 value 690.966672
+iter  30 value 690.173405
+iter  40 value 690.169932
+iter  50 value 690.164303
+iter  60 value 690.153782
+iter  70 value 690.128338
+iter  80 value 690.005125
+iter  90 value 365.745598
+iter 100 value 329.617518
+iter 110 value 319.432199
+iter 120 value 317.323861
+iter 130 value 317.267430
+final  value 317.265916 
+converged
+- Fold03: size= 1, decay=1e-04 
++ Fold03: size= 2, decay=1e-04 
+# weights:  9
+initial  value 3448.798669 
+iter  10 value 743.840911
+iter  20 value 690.788213
+iter  30 value 690.174415
+iter  40 value 690.171922
+iter  50 value 690.167155
+iter  60 value 690.154483
+iter  70 value 690.063654
+iter  80 value 352.492353
+iter  90 value 328.592731
+iter 100 value 318.113418
+iter 110 value 314.824390
+iter 120 value 314.775498
+iter 130 value 314.703023
+iter 140 value 314.668024
+iter 150 value 314.635195
+iter 160 value 314.626387
+iter 170 value 314.617166
+iter 180 value 314.611955
+iter 190 value 314.602482
+iter 200 value 314.597942
+iter 210 value 314.595438
+iter 220 value 314.594093
+final  value 314.577615 
+converged
+- Fold03: size= 2, decay=1e-04 
++ Fold03: size= 4, decay=1e-04 
+# weights:  17
+initial  value 2692.804249 
+iter  10 value 692.775176
+iter  20 value 690.204018
+iter  30 value 690.183413
+iter  40 value 690.182704
+iter  50 value 690.181816
+iter  60 value 690.180606
+iter  70 value 690.178777
+iter  80 value 690.175592
+iter  90 value 690.168485
+iter 100 value 690.138703
+iter 110 value 365.343467
+iter 120 value 327.501529
+iter 130 value 322.661915
+iter 140 value 319.897462
+iter 150 value 316.910539
+iter 160 value 315.152360
+iter 170 value 314.263209
+iter 180 value 314.137378
+iter 190 value 313.941226
+iter 200 value 313.806931
+iter 210 value 313.601662
+iter 220 value 313.533929
+iter 230 value 313.425635
+iter 240 value 313.365523
+iter 250 value 313.322131
+iter 260 value 313.277187
+iter 270 value 313.249253
+iter 280 value 313.203664
+iter 290 value 313.168650
+iter 300 value 313.109195
+iter 310 value 313.079637
+iter 320 value 313.077620
+iter 330 value 313.073699
+iter 340 value 313.063524
+iter 350 value 313.038612
+iter 360 value 313.014308
+iter 370 value 312.923700
+iter 380 value 312.890988
+iter 390 value 312.860486
+iter 400 value 312.849957
+iter 410 value 312.843111
+iter 420 value 312.837578
+final  value 312.837251 
+converged
+- Fold03: size= 4, decay=1e-04 
++ Fold03: size= 8, decay=1e-04 
+# weights:  33
+initial  value 6980.912658 
+iter  10 value 692.387523
+iter  20 value 690.262236
+iter  30 value 690.257433
+iter  40 value 690.222722
+iter  50 value 345.311694
+iter  60 value 318.678935
+iter  70 value 317.112429
+iter  80 value 316.153855
+iter  90 value 315.453723
+iter 100 value 314.830057
+iter 110 value 314.189381
+iter 120 value 314.088810
+iter 130 value 313.748849
+iter 140 value 313.574610
+iter 150 value 313.463518
+iter 160 value 313.370786
+iter 170 value 313.309078
+iter 180 value 313.282281
+iter 190 value 313.266703
+iter 200 value 313.215107
+iter 210 value 313.142889
+iter 220 value 313.036514
+iter 230 value 312.907593
+iter 240 value 312.640639
+iter 250 value 312.467225
+iter 260 value 312.350297
+iter 270 value 312.212065
+iter 280 value 312.148061
+iter 290 value 312.105246
+iter 300 value 312.092307
+iter 310 value 312.078447
+iter 320 value 312.071172
+iter 330 value 312.067109
+iter 340 value 312.058272
+iter 350 value 312.039873
+iter 360 value 312.025248
+iter 370 value 311.970886
+iter 380 value 311.896258
+iter 390 value 311.880901
+iter 400 value 311.814352
+iter 410 value 311.786615
+iter 420 value 311.736739
+iter 430 value 311.699278
+iter 440 value 311.587581
+iter 450 value 311.528573
+iter 460 value 311.489736
+iter 470 value 311.450204
+iter 480 value 311.426679
+iter 490 value 311.368989
+iter 500 value 311.312928
+iter 510 value 311.287422
+iter 520 value 311.268228
+iter 530 value 311.246558
+iter 540 value 311.224400
+iter 550 value 311.202393
+iter 560 value 311.183569
+iter 570 value 311.163482
+iter 580 value 311.140706
+iter 590 value 311.134139
+iter 600 value 311.113269
+iter 610 value 311.088169
+iter 620 value 311.067811
+iter 630 value 311.062637
+iter 640 value 311.051356
+iter 650 value 311.043985
+iter 660 value 311.042426
+iter 670 value 311.036418
+iter 680 value 311.031585
+iter 690 value 311.027435
+iter 700 value 311.025819
+iter 710 value 311.024357
+final  value 311.023965 
+converged
+- Fold03: size= 8, decay=1e-04 
++ Fold03: size=16, decay=1e-04 
+# weights:  65
+initial  value 515.799881 
+iter  10 value 323.655047
+iter  20 value 316.969587
+iter  30 value 315.401815
+iter  40 value 313.984557
+iter  50 value 313.377075
+iter  60 value 312.631161
+iter  70 value 312.396285
+iter  80 value 312.343700
+iter  90 value 312.296696
+iter 100 value 312.259264
+iter 110 value 312.221505
+iter 120 value 312.186887
+iter 130 value 312.158263
+iter 140 value 312.138675
+iter 150 value 312.071304
+iter 160 value 311.997839
+iter 170 value 311.929332
+iter 180 value 311.865631
+iter 190 value 311.757314
+iter 200 value 311.635789
+iter 210 value 311.455097
+iter 220 value 311.361938
+iter 230 value 311.307630
+iter 240 value 311.261448
+iter 250 value 311.242896
+iter 260 value 311.221896
+iter 270 value 311.214902
+iter 280 value 311.198922
+iter 290 value 311.178566
+iter 300 value 311.151832
+iter 310 value 311.113605
+iter 320 value 311.086711
+iter 330 value 311.066994
+iter 340 value 311.047820
+iter 350 value 311.020079
+iter 360 value 311.005270
+iter 370 value 310.988314
+iter 380 value 310.973520
+iter 390 value 310.962657
+iter 400 value 310.956944
+iter 410 value 310.952996
+iter 420 value 310.945337
+iter 430 value 310.933369
+iter 440 value 310.923860
+iter 450 value 310.911885
+iter 460 value 310.892407
+iter 470 value 310.875925
+iter 480 value 310.855586
+iter 490 value 310.837009
+iter 500 value 310.823453
+iter 510 value 310.809534
+iter 520 value 310.802044
+iter 530 value 310.794384
+iter 540 value 310.791179
+iter 550 value 310.779169
+iter 560 value 310.771927
+iter 570 value 310.764289
+iter 580 value 310.755887
+iter 590 value 310.747395
+iter 600 value 310.737169
+iter 610 value 310.732757
+iter 620 value 310.726028
+iter 630 value 310.722947
+iter 640 value 310.720242
+iter 650 value 310.717507
+final  value 310.716454 
+converged
+- Fold03: size=16, decay=1e-04 
++ Fold03: size= 1, decay=1e-01 
+# weights:  5
+initial  value 773.737832 
+iter  10 value 380.302219
+iter  20 value 351.137528
+iter  30 value 329.656248
+iter  40 value 326.079520
+final  value 326.031877 
+converged
+- Fold03: size= 1, decay=1e-01 
++ Fold03: size= 2, decay=1e-01 
+# weights:  9
+initial  value 1053.796839 
+iter  10 value 347.325390
+iter  20 value 326.871579
+iter  30 value 326.150584
+iter  40 value 326.072440
+iter  50 value 326.018567
+iter  60 value 326.014269
+iter  60 value 326.014268
+iter  60 value 326.014268
+final  value 326.014268 
+converged
+- Fold03: size= 2, decay=1e-01 
++ Fold03: size= 4, decay=1e-01 
+# weights:  17
+initial  value 933.452910 
+iter  10 value 459.120222
+iter  20 value 330.974303
+iter  30 value 327.916130
+iter  40 value 326.866542
+iter  50 value 326.410450
+iter  60 value 326.034276
+iter  70 value 326.012414
+iter  80 value 326.008660
+iter  90 value 325.998137
+iter 100 value 325.997375
+final  value 325.997319 
+converged
+- Fold03: size= 4, decay=1e-01 
++ Fold03: size= 8, decay=1e-01 
+# weights:  33
+initial  value 995.516881 
+iter  10 value 407.450102
+iter  20 value 332.361464
+iter  30 value 326.823124
+iter  40 value 325.990086
+iter  50 value 325.743771
+iter  60 value 325.547314
+iter  70 value 325.441954
+iter  80 value 325.121522
+iter  90 value 324.920815
+iter 100 value 324.919266
+iter 110 value 324.916130
+final  value 324.915943 
+converged
+- Fold03: size= 8, decay=1e-01 
++ Fold03: size=16, decay=1e-01 
+# weights:  65
+initial  value 4842.017497 
+iter  10 value 737.067511
+iter  20 value 334.536453
+iter  30 value 327.127450
+iter  40 value 326.056956
+iter  50 value 325.506019
+iter  60 value 325.135206
+iter  70 value 325.069923
+iter  80 value 325.057477
+iter  90 value 325.039644
+iter 100 value 325.014169
+iter 110 value 325.004677
+iter 120 value 324.987466
+iter 130 value 324.979649
+iter 140 value 324.974597
+iter 150 value 324.971764
+iter 160 value 324.924014
+iter 170 value 324.916493
+final  value 324.915785 
+converged
+- Fold03: size=16, decay=1e-01 
++ Fold04: size= 1, decay=0e+00 
+# weights:  5
+initial  value 1703.641884 
+final  value 688.918947 
+converged
+- Fold04: size= 1, decay=0e+00 
++ Fold04: size= 2, decay=0e+00 
+# weights:  9
+initial  value 521.936693 
+iter  10 value 328.683221
+iter  20 value 316.894429
+iter  30 value 316.566498
+iter  40 value 316.341073
+iter  50 value 313.920981
+iter  60 value 313.562318
+iter  70 value 313.388760
+iter  80 value 313.350265
+iter  90 value 313.309024
+iter 100 value 313.302145
+final  value 313.297905 
+converged
+- Fold04: size= 2, decay=0e+00 
++ Fold04: size= 4, decay=0e+00 
+# weights:  17
+initial  value 1139.582208 
+final  value 688.918947 
+converged
+- Fold04: size= 4, decay=0e+00 
++ Fold04: size= 8, decay=0e+00 
+# weights:  33
+initial  value 641.024979 
+iter  10 value 323.255459
+iter  20 value 314.155773
+iter  30 value 312.749066
+iter  40 value 312.177570
+iter  50 value 311.399103
+iter  60 value 311.230844
+iter  70 value 311.163353
+iter  80 value 311.112581
+iter  90 value 311.002271
+iter 100 value 310.945186
+iter 110 value 310.901084
+iter 120 value 310.847580
+iter 130 value 310.786765
+iter 140 value 310.758593
+iter 150 value 310.735733
+iter 160 value 310.702425
+iter 170 value 310.665360
+iter 180 value 310.620566
+iter 190 value 310.563507
+iter 200 value 310.506785
+iter 210 value 310.489177
+iter 220 value 310.408514
+iter 230 value 310.095339
+iter 240 value 309.956890
+iter 250 value 309.908009
+iter 260 value 309.853490
+iter 270 value 309.816100
+iter 280 value 309.803621
+iter 290 value 309.777122
+iter 300 value 309.747274
+iter 310 value 309.691411
+iter 320 value 309.594525
+iter 330 value 309.508367
+iter 340 value 309.442446
+iter 350 value 309.405555
+iter 360 value 309.378214
+iter 370 value 309.358221
+iter 380 value 309.344243
+iter 390 value 309.307143
+iter 400 value 309.244735
+iter 410 value 309.223221
+iter 420 value 309.194212
+iter 430 value 309.133477
+iter 440 value 309.084416
+iter 450 value 309.036884
+iter 460 value 308.998310
+iter 470 value 308.986421
+final  value 308.986409 
+converged
+- Fold04: size= 8, decay=0e+00 
++ Fold04: size=16, decay=0e+00 
+# weights:  65
+initial  value 3045.224961 
+final  value 688.918947 
+converged
+- Fold04: size=16, decay=0e+00 
++ Fold04: size= 1, decay=1e-04 
+# weights:  5
+initial  value 1590.535961 
+iter  10 value 689.753193
+iter  20 value 688.932324
+iter  30 value 688.932084
+iter  40 value 688.931824
+iter  50 value 688.931542
+iter  60 value 688.931233
+iter  70 value 688.930890
+iter  80 value 688.930507
+iter  90 value 688.930072
+iter 100 value 688.929570
+iter 110 value 688.928982
+iter 120 value 688.928276
+iter 130 value 688.927404
+iter 140 value 688.926289
+iter 150 value 688.924793
+iter 160 value 688.922651
+iter 170 value 688.919275
+iter 180 value 688.913082
+iter 190 value 688.898084
+iter 200 value 688.826744
+iter 210 value 497.527184
+iter 220 value 326.761905
+iter 230 value 317.190486
+iter 240 value 316.634896
+iter 240 value 316.634894
+iter 240 value 316.634894
+final  value 316.634894 
+converged
+- Fold04: size= 1, decay=1e-04 
++ Fold04: size= 2, decay=1e-04 
+# weights:  9
+initial  value 3452.391145 
+iter  10 value 695.156855
+iter  20 value 688.990885
+iter  30 value 688.932913
+iter  40 value 688.932050
+iter  50 value 688.930994
+iter  60 value 688.929654
+iter  70 value 688.927880
+iter  80 value 688.925380
+iter  90 value 688.921532
+iter 100 value 688.914690
+iter 110 value 688.898660
+iter 120 value 688.814264
+iter 130 value 361.363927
+iter 140 value 329.839981
+iter 150 value 317.886296
+iter 160 value 316.752714
+iter 170 value 316.643269
+final  value 316.643263 
+converged
+- Fold04: size= 2, decay=1e-04 
++ Fold04: size= 4, decay=1e-04 
+# weights:  17
+initial  value 1869.437087 
+iter  10 value 690.996826
+iter  20 value 688.942751
+iter  30 value 688.940574
+iter  40 value 688.936928
+iter  50 value 688.929292
+iter  60 value 688.902122
+iter  70 value 653.023947
+iter  80 value 327.598987
+iter  90 value 322.606309
+iter 100 value 315.343790
+final  value 314.129400 
+converged
+- Fold04: size= 4, decay=1e-04 
++ Fold04: size= 8, decay=1e-04 
+# weights:  33
+initial  value 5409.974878 
+iter  10 value 693.314501
+iter  20 value 688.979064
+iter  30 value 688.940839
+iter  40 value 688.940577
+iter  50 value 688.940282
+iter  60 value 688.939948
+iter  70 value 688.939564
+iter  80 value 688.939098
+iter  90 value 688.938506
+iter 100 value 688.937705
+iter 110 value 688.936548
+iter 120 value 688.934635
+iter 130 value 688.930686
+iter 140 value 688.917136
+iter 150 value 674.060414
+iter 160 value 324.808770
+iter 170 value 314.675529
+iter 180 value 313.831379
+iter 190 value 313.001352
+iter 200 value 312.036453
+iter 210 value 311.858178
+iter 220 value 311.777653
+iter 230 value 311.731969
+iter 240 value 311.645809
+iter 250 value 311.559327
+iter 260 value 311.492516
+iter 270 value 311.439198
+iter 280 value 311.389646
+iter 290 value 311.369280
+iter 300 value 311.337776
+iter 310 value 311.251651
+iter 320 value 311.097555
+iter 330 value 311.069849
+iter 340 value 311.043900
+iter 350 value 311.032702
+iter 360 value 311.027222
+iter 370 value 311.014578
+iter 380 value 310.994256
+iter 390 value 310.968494
+iter 400 value 310.933105
+iter 410 value 310.876602
+iter 420 value 310.854475
+iter 430 value 310.850678
+iter 440 value 310.827059
+iter 450 value 310.801405
+iter 460 value 310.779024
+iter 470 value 310.725172
+iter 480 value 310.677784
+iter 490 value 310.645315
+iter 500 value 310.617480
+iter 510 value 310.592997
+iter 520 value 310.582030
+iter 530 value 310.564714
+iter 540 value 310.530273
+iter 550 value 310.506828
+iter 560 value 310.490151
+iter 570 value 310.455417
+iter 580 value 310.425084
+iter 590 value 310.388436
+iter 600 value 310.370553
+iter 610 value 310.343188
+iter 620 value 310.326138
+iter 630 value 310.313427
+iter 640 value 310.302561
+iter 650 value 310.295076
+iter 660 value 310.289500
+iter 670 value 310.280683
+iter 680 value 310.259923
+iter 690 value 310.252872
+iter 700 value 310.249350
+iter 710 value 310.242100
+iter 720 value 310.238781
+iter 730 value 310.236231
+iter 740 value 310.232692
+iter 750 value 310.231436
+final  value 310.230796 
+converged
+- Fold04: size= 8, decay=1e-04 
++ Fold04: size=16, decay=1e-04 
+# weights:  65
+initial  value 1233.548066 
+iter  10 value 691.476336
+iter  20 value 688.964182
+iter  30 value 677.173102
+iter  40 value 320.827327
+iter  50 value 314.971180
+iter  60 value 313.999284
+iter  70 value 312.674929
+iter  80 value 311.783466
+iter  90 value 311.574711
+iter 100 value 311.424414
+iter 110 value 311.341179
+iter 120 value 311.279814
+iter 130 value 311.211289
+iter 140 value 311.145812
+iter 150 value 310.991281
+iter 160 value 310.910643
+iter 170 value 310.867637
+iter 180 value 310.791379
+iter 190 value 310.685547
+iter 200 value 310.611166
+iter 210 value 310.549026
+iter 220 value 310.508489
+iter 230 value 310.459979
+iter 240 value 310.426228
+iter 250 value 310.383882
+iter 260 value 310.347080
+iter 270 value 310.286205
+iter 280 value 310.217052
+iter 290 value 310.113658
+iter 300 value 310.083786
+iter 310 value 310.055991
+iter 320 value 310.006024
+iter 330 value 309.956927
+iter 340 value 309.894849
+iter 350 value 309.870001
+iter 360 value 309.853556
+iter 370 value 309.845048
+iter 380 value 309.832907
+iter 390 value 309.818807
+iter 400 value 309.789335
+iter 410 value 309.761592
+iter 420 value 309.724665
+iter 430 value 309.708281
+iter 440 value 309.698305
+iter 450 value 309.670518
+iter 460 value 309.657366
+iter 470 value 309.640944
+iter 480 value 309.630869
+iter 490 value 309.621212
+iter 500 value 309.612987
+iter 510 value 309.603576
+iter 520 value 309.597382
+iter 530 value 309.595301
+iter 540 value 309.593869
+iter 550 value 309.593130
+final  value 309.592435 
+converged
+- Fold04: size=16, decay=1e-04 
++ Fold04: size= 1, decay=1e-01 
+# weights:  5
+initial  value 1250.259144 
+iter  10 value 370.659309
+iter  20 value 343.899212
+iter  30 value 325.971825
+iter  40 value 325.855195
+final  value 325.855191 
+converged
+- Fold04: size= 1, decay=1e-01 
++ Fold04: size= 2, decay=1e-01 
+# weights:  9
+initial  value 2949.855311 
+iter  10 value 788.936341
+iter  20 value 372.020934
+iter  30 value 336.254779
+iter  40 value 329.979431
+iter  50 value 326.063221
+iter  60 value 325.931603
+iter  70 value 325.849956
+iter  80 value 325.833260
+iter  90 value 325.471939
+iter 100 value 324.647834
+iter 110 value 324.459360
+final  value 324.459256 
+converged
+- Fold04: size= 2, decay=1e-01 
++ Fold04: size= 4, decay=1e-01 
+# weights:  17
+initial  value 1443.157704 
+iter  10 value 383.412821
+iter  20 value 332.586572
+iter  30 value 328.267065
+iter  40 value 326.123168
+iter  50 value 324.671409
+iter  60 value 324.424324
+iter  70 value 324.421491
+iter  80 value 324.419639
+final  value 324.418971 
+converged
+- Fold04: size= 4, decay=1e-01 
++ Fold04: size= 8, decay=1e-01 
+# weights:  33
+initial  value 2282.195405 
+iter  10 value 666.700901
+iter  20 value 345.434113
+iter  30 value 332.882580
+iter  40 value 327.956890
+iter  50 value 326.897145
+iter  60 value 325.506519
+iter  70 value 324.994031
+iter  80 value 324.793305
+iter  90 value 324.383701
+final  value 324.380631 
+converged
+- Fold04: size= 8, decay=1e-01 
++ Fold04: size=16, decay=1e-01 
+# weights:  65
+initial  value 2734.349628 
+iter  10 value 730.983645
+iter  20 value 343.558487
+iter  30 value 326.645854
+iter  40 value 325.155692
+iter  50 value 324.911628
+iter  60 value 324.767430
+iter  70 value 324.656727
+iter  80 value 324.604658
+iter  90 value 324.546997
+iter 100 value 324.491204
+iter 110 value 324.460549
+iter 120 value 324.448394
+iter 130 value 324.442845
+iter 140 value 324.434631
+iter 150 value 324.375860
+iter 160 value 324.370945
+final  value 324.369761 
+converged
+- Fold04: size=16, decay=1e-01 
++ Fold05: size= 1, decay=0e+00 
+# weights:  5
+initial  value 2893.558567 
+final  value 687.613592 
+converged
+- Fold05: size= 1, decay=0e+00 
++ Fold05: size= 2, decay=0e+00 
+# weights:  9
+initial  value 2605.231364 
+final  value 687.613592 
+converged
+- Fold05: size= 2, decay=0e+00 
++ Fold05: size= 4, decay=0e+00 
+# weights:  17
+initial  value 717.808253 
+final  value 687.613592 
+converged
+- Fold05: size= 4, decay=0e+00 
++ Fold05: size= 8, decay=0e+00 
+# weights:  33
+initial  value 3780.638619 
+final  value 687.613592 
+converged
+- Fold05: size= 8, decay=0e+00 
++ Fold05: size=16, decay=0e+00 
+# weights:  65
+initial  value 3930.681502 
+final  value 687.613592 
+converged
+- Fold05: size=16, decay=0e+00 
++ Fold05: size= 1, decay=1e-04 
+# weights:  5
+initial  value 2288.236262 
+iter  10 value 689.215748
+iter  20 value 687.642460
+iter  30 value 687.622448
+iter  40 value 687.617649
+iter  50 value 687.608404
+iter  60 value 687.586423
+iter  70 value 687.497686
+iter  80 value 541.116499
+iter  90 value 343.820258
+iter 100 value 322.334537
+iter 110 value 317.556714
+iter 120 value 315.090142
+iter 130 value 314.135327
+final  value 314.080335 
+converged
+- Fold05: size= 1, decay=1e-04 
++ Fold05: size= 2, decay=1e-04 
+# weights:  9
+initial  value 1695.746607 
+iter  10 value 371.720580
+iter  20 value 342.810084
+iter  30 value 329.360205
+iter  40 value 318.336147
+iter  50 value 314.421460
+iter  60 value 312.411137
+iter  70 value 311.553354
+iter  80 value 311.100836
+iter  90 value 311.077084
+iter 100 value 311.060369
+iter 110 value 311.058659
+final  value 311.058214 
+converged
+- Fold05: size= 2, decay=1e-04 
++ Fold05: size= 4, decay=1e-04 
+# weights:  17
+initial  value 3536.661355 
+iter  10 value 691.348784
+iter  20 value 687.660588
+iter  30 value 687.586223
+iter  40 value 666.252835
+iter  50 value 329.200225
+iter  60 value 316.288340
+iter  70 value 311.261098
+iter  80 value 309.875778
+iter  90 value 309.737435
+iter 100 value 309.582328
+iter 110 value 309.413176
+iter 120 value 309.294250
+iter 130 value 309.236132
+iter 140 value 309.199823
+iter 150 value 309.108955
+iter 160 value 309.056421
+iter 170 value 309.016988
+iter 180 value 309.000173
+iter 190 value 308.989575
+iter 200 value 308.987580
+iter 210 value 308.981145
+iter 220 value 308.976937
+iter 230 value 308.975266
+iter 240 value 308.973319
+iter 250 value 308.971563
+iter 260 value 308.970690
+iter 270 value 308.969089
+iter 280 value 308.967149
+final  value 308.965686 
+converged
+- Fold05: size= 4, decay=1e-04 
++ Fold05: size= 8, decay=1e-04 
+# weights:  33
+initial  value 701.249400 
+iter  10 value 346.224777
+iter  20 value 315.281261
+iter  30 value 312.626587
+iter  40 value 311.439862
+iter  50 value 310.256515
+iter  60 value 309.540305
+iter  70 value 309.291949
+iter  80 value 309.160310
+iter  90 value 308.999971
+iter 100 value 308.852816
+iter 110 value 308.713834
+iter 120 value 308.584917
+iter 130 value 308.479164
+iter 140 value 308.358206
+iter 150 value 308.330654
+iter 160 value 308.264168
+iter 170 value 308.201227
+iter 180 value 308.120755
+iter 190 value 308.067476
+iter 200 value 307.994480
+iter 210 value 307.963103
+iter 220 value 307.949893
+iter 230 value 307.928238
+iter 240 value 307.892932
+iter 250 value 307.878252
+iter 260 value 307.856100
+iter 270 value 307.842775
+iter 280 value 307.838458
+iter 290 value 307.835870
+iter 300 value 307.832216
+iter 310 value 307.829605
+iter 320 value 307.826733
+iter 330 value 307.823939
+iter 340 value 307.817966
+iter 350 value 307.813673
+iter 360 value 307.800395
+iter 370 value 307.792259
+iter 380 value 307.787407
+iter 390 value 307.785330
+iter 400 value 307.784855
+iter 410 value 307.783995
+final  value 307.783981 
+converged
+- Fold05: size= 8, decay=1e-04 
++ Fold05: size=16, decay=1e-04 
+# weights:  65
+initial  value 1400.610729 
+iter  10 value 690.603433
+iter  20 value 687.664630
+iter  30 value 687.637430
+iter  40 value 687.636613
+iter  50 value 687.635270
+iter  60 value 687.632196
+iter  70 value 687.615444
+iter  80 value 334.069053
+iter  90 value 317.012857
+iter 100 value 313.216983
+iter 110 value 311.948173
+iter 120 value 310.458535
+iter 130 value 309.817579
+iter 140 value 309.571252
+iter 150 value 309.469342
+iter 160 value 309.254259
+iter 170 value 309.055713
+iter 180 value 308.894114
+iter 190 value 308.700773
+iter 200 value 308.537950
+iter 210 value 308.460484
+iter 220 value 308.434736
+iter 230 value 308.382031
+iter 240 value 308.333602
+iter 250 value 308.293203
+iter 260 value 308.262611
+iter 270 value 308.208735
+iter 280 value 308.155973
+iter 290 value 308.094890
+iter 300 value 308.022320
+iter 310 value 307.944233
+iter 320 value 307.894961
+iter 330 value 307.841189
+iter 340 value 307.813687
+iter 350 value 307.809347
+iter 360 value 307.792949
+iter 370 value 307.773594
+iter 380 value 307.739857
+iter 390 value 307.690888
+iter 400 value 307.634728
+iter 410 value 307.593228
+iter 420 value 307.542347
+iter 430 value 307.495957
+iter 440 value 307.467071
+iter 450 value 307.414555
+iter 460 value 307.353818
+iter 470 value 307.293120
+iter 480 value 307.285014
+iter 490 value 307.245371
+iter 500 value 307.210339
+iter 510 value 307.194900
+iter 520 value 307.183565
+iter 530 value 307.171161
+iter 540 value 307.152159
+iter 550 value 307.133575
+iter 560 value 307.118829
+iter 570 value 307.106723
+iter 580 value 307.095033
+iter 590 value 307.084454
+iter 600 value 307.076201
+final  value 307.075805 
+converged
+- Fold05: size=16, decay=1e-04 
++ Fold05: size= 1, decay=1e-01 
+# weights:  5
+initial  value 1648.808408 
+iter  10 value 389.172783
+iter  20 value 329.760841
+iter  30 value 323.186173
+final  value 323.162701 
+converged
+- Fold05: size= 1, decay=1e-01 
++ Fold05: size= 2, decay=1e-01 
+# weights:  9
+initial  value 737.491325 
+iter  10 value 352.292557
+iter  20 value 323.990712
+iter  30 value 323.234255
+iter  40 value 323.141042
+iter  50 value 323.104511
+iter  60 value 322.498591
+iter  70 value 322.146289
+final  value 322.144793 
+converged
+- Fold05: size= 2, decay=1e-01 
++ Fold05: size= 4, decay=1e-01 
+# weights:  17
+initial  value 591.025680 
+iter  10 value 358.911870
+iter  20 value 337.329026
+iter  30 value 323.977642
+iter  40 value 323.611880
+iter  50 value 323.121520
+iter  60 value 322.511116
+iter  70 value 322.250914
+iter  80 value 322.216276
+final  value 322.215879 
+converged
+- Fold05: size= 4, decay=1e-01 
++ Fold05: size= 8, decay=1e-01 
+# weights:  33
+initial  value 1832.205533 
+iter  10 value 591.532149
+iter  20 value 328.775637
+iter  30 value 324.076363
+iter  40 value 323.698220
+iter  50 value 323.567200
+iter  60 value 322.655652
+iter  70 value 322.244708
+iter  80 value 322.199585
+iter  90 value 322.138471
+iter 100 value 322.136788
+final  value 322.136732 
+converged
+- Fold05: size= 8, decay=1e-01 
++ Fold05: size=16, decay=1e-01 
+# weights:  65
+initial  value 7042.562326 
+iter  10 value 486.331334
+iter  20 value 335.289555
+iter  30 value 324.439398
+iter  40 value 322.727290
+iter  50 value 322.387025
+iter  60 value 322.289476
+iter  70 value 322.265643
+iter  80 value 322.251285
+iter  90 value 322.237354
+iter 100 value 322.209015
+iter 110 value 322.188775
+iter 120 value 322.180628
+iter 130 value 322.175865
+iter 140 value 322.172695
+iter 150 value 322.083886
+iter 160 value 322.080320
+final  value 322.078577 
+converged
+- Fold05: size=16, decay=1e-01 
++ Fold06: size= 1, decay=0e+00 
+# weights:  5
+initial  value 3746.933186 
+final  value 692.723506 
+converged
+- Fold06: size= 1, decay=0e+00 
++ Fold06: size= 2, decay=0e+00 
+# weights:  9
+initial  value 716.557027 
+final  value 692.723506 
+converged
+- Fold06: size= 2, decay=0e+00 
++ Fold06: size= 4, decay=0e+00 
+# weights:  17
+initial  value 3693.543675 
+final  value 692.723506 
+converged
+- Fold06: size= 4, decay=0e+00 
++ Fold06: size= 8, decay=0e+00 
+# weights:  33
+initial  value 6213.820998 
+final  value 692.723506 
+converged
+- Fold06: size= 8, decay=0e+00 
++ Fold06: size=16, decay=0e+00 
+# weights:  65
+initial  value 3049.091433 
+final  value 692.723506 
+converged
+- Fold06: size=16, decay=0e+00 
++ Fold06: size= 1, decay=1e-04 
+# weights:  5
+initial  value 2956.513841 
+iter  10 value 736.137571
+iter  20 value 693.505272
+iter  30 value 692.736817
+iter  40 value 692.736165
+iter  50 value 692.735909
+iter  60 value 692.735709
+iter  70 value 692.735497
+iter  80 value 692.735271
+iter  90 value 692.735030
+iter 100 value 692.734770
+iter 110 value 692.734488
+iter 120 value 692.734181
+iter 130 value 692.733844
+iter 140 value 692.733471
+iter 150 value 692.733053
+iter 160 value 692.732581
+iter 170 value 692.732039
+iter 180 value 692.731407
+iter 190 value 692.730656
+iter 200 value 692.729742
+iter 210 value 692.728596
+iter 220 value 692.727101
+iter 230 value 692.725046
+iter 240 value 692.722000
+iter 250 value 692.716922
+iter 260 value 692.706506
+iter 270 value 692.671846
+iter 280 value 684.449361
+iter 290 value 340.638185
+iter 300 value 325.112571
+iter 310 value 319.512349
+iter 320 value 317.411209
+iter 330 value 316.305077
+final  value 316.302086 
+converged
+- Fold06: size= 1, decay=1e-04 
++ Fold06: size= 2, decay=1e-04 
+# weights:  9
+initial  value 1125.311770 
+iter  10 value 693.366098
+iter  20 value 692.732086
+iter  30 value 692.730640
+iter  40 value 692.728519
+iter  50 value 692.725041
+iter  60 value 692.718149
+iter  70 value 692.697605
+iter  80 value 692.229278
+iter  90 value 332.081480
+iter 100 value 317.057916
+iter 110 value 316.346901
+iter 120 value 316.322072
+iter 130 value 316.313245
+iter 140 value 316.302898
+iter 150 value 316.271888
+iter 160 value 316.084123
+iter 170 value 315.836083
+iter 180 value 315.649402
+iter 190 value 315.586504
+iter 200 value 315.577464
+iter 210 value 315.566830
+iter 220 value 315.551467
+iter 230 value 315.515564
+iter 240 value 315.485420
+iter 250 value 315.463586
+iter 260 value 315.444596
+iter 270 value 315.436737
+iter 280 value 315.432832
+iter 290 value 315.427125
+iter 300 value 315.423351
+iter 310 value 315.419813
+iter 320 value 315.417722
+iter 330 value 315.411709
+iter 340 value 315.408882
+iter 350 value 315.408203
+iter 360 value 315.407844
+iter 370 value 315.407314
+iter 380 value 315.407062
+final  value 315.406945 
+converged
+- Fold06: size= 2, decay=1e-04 
++ Fold06: size= 4, decay=1e-04 
+# weights:  17
+initial  value 1238.428073 
+iter  10 value 693.733030
+iter  20 value 692.727611
+iter  30 value 692.715617
+iter  40 value 692.581587
+iter  50 value 347.278243
+iter  60 value 318.129835
+iter  70 value 315.538447
+iter  80 value 313.928862
+iter  90 value 313.792588
+iter 100 value 313.772886
+iter 110 value 313.758796
+iter 120 value 313.729320
+iter 130 value 313.603216
+iter 140 value 313.232482
+iter 150 value 312.856310
+iter 160 value 312.617682
+iter 170 value 312.265430
+iter 180 value 312.161657
+iter 190 value 311.902941
+iter 200 value 311.748707
+iter 210 value 311.555279
+iter 220 value 311.360809
+iter 230 value 311.233720
+iter 240 value 311.218886
+iter 250 value 311.197258
+iter 260 value 311.192315
+iter 270 value 311.189861
+iter 280 value 311.187023
+iter 290 value 311.179141
+iter 300 value 311.175272
+iter 310 value 311.173325
+iter 320 value 311.171104
+iter 330 value 311.164096
+iter 340 value 311.159148
+iter 350 value 311.155185
+iter 360 value 311.152416
+iter 370 value 311.150202
+iter 380 value 311.149083
+iter 390 value 311.148002
+iter 400 value 311.145388
+iter 410 value 311.143652
+iter 420 value 311.142344
+iter 430 value 311.140652
+final  value 311.139280 
+converged
+- Fold06: size= 4, decay=1e-04 
++ Fold06: size= 8, decay=1e-04 
+# weights:  33
+initial  value 2825.523218 
+iter  10 value 323.357954
+iter  20 value 317.916672
+iter  30 value 314.480079
+iter  40 value 313.712822
+iter  50 value 313.210977
+iter  60 value 312.399371
+iter  70 value 311.808133
+iter  80 value 311.335377
+iter  90 value 311.202288
+iter 100 value 311.057648
+iter 110 value 310.988085
+iter 120 value 310.949986
+iter 130 value 310.918389
+iter 140 value 310.848183
+iter 150 value 310.810200
+iter 160 value 310.773177
+iter 170 value 310.705087
+iter 180 value 310.673957
+iter 190 value 310.646568
+iter 200 value 310.608602
+iter 210 value 310.449874
+iter 220 value 310.388318
+iter 230 value 310.284106
+iter 240 value 310.136099
+iter 250 value 310.046424
+iter 260 value 309.996571
+iter 270 value 309.962303
+iter 280 value 309.938764
+iter 290 value 309.925090
+iter 300 value 309.912375
+iter 310 value 309.894364
+iter 320 value 309.880830
+iter 330 value 309.876125
+iter 340 value 309.874690
+final  value 309.872800 
+converged
+- Fold06: size= 8, decay=1e-04 
++ Fold06: size=16, decay=1e-04 
+# weights:  65
+initial  value 3681.405304 
+iter  10 value 320.401125
+iter  20 value 315.293352
+iter  30 value 314.471712
+iter  40 value 312.570848
+iter  50 value 311.336644
+iter  60 value 310.851217
+iter  70 value 310.620002
+iter  80 value 310.494520
+iter  90 value 310.357884
+iter 100 value 310.205871
+iter 110 value 310.107424
+iter 120 value 310.033267
+iter 130 value 309.980727
+iter 140 value 309.963084
+iter 150 value 309.887269
+iter 160 value 309.821789
+iter 170 value 309.752940
+iter 180 value 309.714452
+iter 190 value 309.699121
+iter 200 value 309.683622
+iter 210 value 309.678820
+iter 220 value 309.668378
+iter 230 value 309.656029
+iter 240 value 309.650016
+iter 250 value 309.642211
+iter 260 value 309.639598
+final  value 309.638930 
+converged
+- Fold06: size=16, decay=1e-04 
++ Fold06: size= 1, decay=1e-01 
+# weights:  5
+initial  value 2078.983011 
+iter  10 value 750.380031
+iter  20 value 346.295064
+iter  30 value 327.539560
+iter  40 value 326.512380
+final  value 326.511610 
+converged
+- Fold06: size= 1, decay=1e-01 
++ Fold06: size= 2, decay=1e-01 
+# weights:  9
+initial  value 2771.064161 
+iter  10 value 371.787072
+iter  20 value 328.273730
+iter  30 value 326.562586
+iter  40 value 326.188042
+iter  50 value 324.693538
+iter  60 value 324.484241
+final  value 324.484185 
+converged
+- Fold06: size= 2, decay=1e-01 
++ Fold06: size= 4, decay=1e-01 
+# weights:  17
+initial  value 1308.797304 
+iter  10 value 363.340144
+iter  20 value 328.847367
+iter  30 value 325.532403
+iter  40 value 324.841554
+iter  50 value 324.559581
+iter  60 value 324.373745
+iter  70 value 324.369137
+final  value 324.363296 
+converged
+- Fold06: size= 4, decay=1e-01 
++ Fold06: size= 8, decay=1e-01 
+# weights:  33
+initial  value 1860.051337 
+iter  10 value 349.150289
+iter  20 value 327.376237
+iter  30 value 325.257058
+iter  40 value 324.528300
+iter  50 value 324.338121
+iter  60 value 324.308584
+iter  70 value 324.306534
+iter  80 value 324.304180
+final  value 324.299448 
+converged
+- Fold06: size= 8, decay=1e-01 
++ Fold06: size=16, decay=1e-01 
+# weights:  65
+initial  value 1619.630964 
+iter  10 value 682.142608
+iter  20 value 332.459303
+iter  30 value 326.103559
+iter  40 value 325.349660
+iter  50 value 324.867503
+iter  60 value 324.785608
+iter  70 value 324.636424
+iter  80 value 324.518732
+iter  90 value 324.461914
+iter 100 value 324.403312
+iter 110 value 324.356742
+iter 120 value 324.318902
+iter 130 value 324.305848
+iter 140 value 324.297106
+iter 150 value 324.232959
+final  value 324.232366 
+converged
+- Fold06: size=16, decay=1e-01 
++ Fold07: size= 1, decay=0e+00 
+# weights:  5
+initial  value 963.732018 
+final  value 686.086270 
+converged
+- Fold07: size= 1, decay=0e+00 
++ Fold07: size= 2, decay=0e+00 
+# weights:  9
+initial  value 2356.728425 
+final  value 686.086270 
+converged
+- Fold07: size= 2, decay=0e+00 
++ Fold07: size= 4, decay=0e+00 
+# weights:  17
+initial  value 1563.130068 
+final  value 686.086270 
+converged
+- Fold07: size= 4, decay=0e+00 
++ Fold07: size= 8, decay=0e+00 
+# weights:  33
+initial  value 574.276954 
+iter  10 value 319.964319
+iter  20 value 311.763891
+iter  30 value 310.200377
+iter  40 value 309.119109
+iter  50 value 307.941419
+iter  60 value 307.450276
+iter  70 value 307.289967
+iter  80 value 307.136818
+iter  90 value 306.999943
+iter 100 value 306.918318
+iter 110 value 306.699474
+iter 120 value 306.402270
+iter 130 value 306.237523
+iter 140 value 306.094322
+iter 150 value 305.998331
+iter 160 value 305.899594
+iter 170 value 305.859800
+iter 180 value 305.835741
+iter 190 value 305.824906
+iter 200 value 305.814866
+iter 210 value 305.813787
+iter 220 value 305.809942
+iter 230 value 305.804279
+iter 240 value 305.797702
+iter 250 value 305.789088
+iter 260 value 305.770763
+iter 270 value 305.757596
+iter 280 value 305.752265
+iter 290 value 305.745603
+iter 300 value 305.739994
+iter 310 value 305.726030
+iter 320 value 305.720589
+iter 330 value 305.718100
+iter 340 value 305.710444
+iter 350 value 305.707996
+iter 360 value 305.705470
+iter 370 value 305.701005
+iter 380 value 305.694651
+iter 390 value 305.683165
+iter 400 value 305.663915
+final  value 305.660679 
+converged
+- Fold07: size= 8, decay=0e+00 
++ Fold07: size=16, decay=0e+00 
+# weights:  65
+initial  value 5643.393535 
+final  value 686.086270 
+converged
+- Fold07: size=16, decay=0e+00 
++ Fold07: size= 1, decay=1e-04 
+# weights:  5
+initial  value 2883.686741 
+iter  10 value 724.856858
+iter  20 value 686.784419
+iter  30 value 686.085410
+iter  40 value 686.078367
+iter  50 value 686.061188
+iter  60 value 685.979334
+iter  70 value 359.909590
+iter  80 value 324.378644
+iter  90 value 314.105550
+iter 100 value 313.041609
+iter 110 value 313.026099
+final  value 313.026095 
+converged
+- Fold07: size= 1, decay=1e-04 
++ Fold07: size= 2, decay=1e-04 
+# weights:  9
+initial  value 727.286084 
+iter  10 value 322.825493
+iter  20 value 315.625993
+iter  30 value 313.599300
+iter  40 value 312.088039
+iter  50 value 311.899516
+iter  60 value 310.997347
+iter  70 value 310.661962
+iter  80 value 310.519732
+iter  90 value 310.505654
+final  value 310.500454 
+converged
+- Fold07: size= 2, decay=1e-04 
++ Fold07: size= 4, decay=1e-04 
+# weights:  17
+initial  value 1959.118062 
+iter  10 value 687.985510
+iter  20 value 686.110376
+iter  30 value 686.080606
+iter  40 value 686.053054
+iter  50 value 563.448409
+iter  60 value 321.873653
+iter  70 value 314.605728
+iter  80 value 310.016406
+iter  90 value 309.168028
+iter 100 value 308.458570
+iter 110 value 308.363431
+iter 120 value 308.306002
+iter 130 value 308.265661
+iter 140 value 308.252458
+iter 150 value 308.244652
+final  value 308.244295 
+converged
+- Fold07: size= 4, decay=1e-04 
++ Fold07: size= 8, decay=1e-04 
+# weights:  33
+initial  value 3359.130034 
+iter  10 value 690.916986
+iter  20 value 686.151564
+iter  30 value 686.090191
+iter  40 value 686.033738
+iter  50 value 346.831172
+iter  60 value 317.847609
+iter  70 value 311.583833
+iter  80 value 310.078008
+iter  90 value 309.047227
+iter 100 value 308.578980
+iter 110 value 308.397377
+iter 120 value 308.333534
+iter 130 value 308.291834
+iter 140 value 308.264534
+iter 150 value 308.235164
+iter 160 value 308.222510
+iter 170 value 308.113094
+iter 180 value 308.009889
+iter 190 value 307.834280
+iter 200 value 307.771352
+iter 210 value 307.702098
+iter 220 value 307.576898
+iter 230 value 307.432435
+iter 240 value 307.398050
+iter 250 value 307.375249
+iter 260 value 307.368867
+iter 270 value 307.358533
+iter 280 value 307.329670
+iter 290 value 307.278622
+iter 300 value 307.256822
+iter 310 value 307.233554
+iter 320 value 307.106426
+iter 330 value 307.023030
+iter 340 value 306.949738
+iter 350 value 306.879252
+iter 360 value 306.824633
+iter 370 value 306.792941
+iter 380 value 306.778413
+iter 390 value 306.759067
+iter 400 value 306.747719
+iter 410 value 306.728008
+iter 420 value 306.709672
+iter 430 value 306.695344
+iter 440 value 306.671031
+iter 450 value 306.660457
+iter 460 value 306.650104
+iter 470 value 306.644029
+iter 480 value 306.628707
+iter 490 value 306.621837
+iter 500 value 306.618728
+iter 510 value 306.614470
+iter 520 value 306.612434
+iter 530 value 306.611167
+iter 540 value 306.610003
+iter 550 value 306.608629
+iter 560 value 306.607459
+iter 570 value 306.606727
+iter 580 value 306.606249
+iter 590 value 306.605836
+final  value 306.605788 
+converged
+- Fold07: size= 8, decay=1e-04 
++ Fold07: size=16, decay=1e-04 
+# weights:  65
+initial  value 436.285180 
+iter  10 value 320.190454
+iter  20 value 315.892572
+iter  30 value 310.956817
+iter  40 value 309.933881
+iter  50 value 309.180093
+iter  60 value 308.253712
+iter  70 value 307.759330
+iter  80 value 307.549703
+iter  90 value 307.382685
+iter 100 value 307.272936
+iter 110 value 307.150724
+iter 120 value 306.877031
+iter 130 value 306.662631
+iter 140 value 306.615823
+iter 150 value 306.566436
+iter 160 value 306.531400
+iter 170 value 306.486980
+iter 180 value 306.419438
+iter 190 value 306.337194
+iter 200 value 306.251904
+iter 210 value 306.215389
+iter 220 value 306.180531
+iter 230 value 306.150161
+iter 240 value 306.104190
+iter 250 value 306.083750
+iter 260 value 306.055117
+iter 270 value 306.043343
+iter 280 value 306.011710
+iter 290 value 305.968799
+iter 300 value 305.942014
+iter 310 value 305.918336
+iter 320 value 305.897483
+iter 330 value 305.867916
+iter 340 value 305.836731
+iter 350 value 305.812207
+iter 360 value 305.745317
+iter 370 value 305.678193
+iter 380 value 305.646649
+iter 390 value 305.615921
+iter 400 value 305.605983
+iter 410 value 305.597858
+iter 420 value 305.576363
+iter 430 value 305.556220
+iter 440 value 305.546938
+iter 450 value 305.540987
+iter 460 value 305.535594
+iter 470 value 305.531465
+iter 480 value 305.530038
+iter 490 value 305.528842
+iter 500 value 305.527789
+iter 510 value 305.526829
+iter 520 value 305.525977
+final  value 305.525484 
+converged
+- Fold07: size=16, decay=1e-04 
++ Fold07: size= 1, decay=1e-01 
+# weights:  5
+initial  value 2295.735883 
+iter  10 value 752.597057
+iter  20 value 353.587787
+iter  30 value 324.122006
+iter  40 value 322.404985
+final  value 322.403407 
+converged
+- Fold07: size= 1, decay=1e-01 
++ Fold07: size= 2, decay=1e-01 
+# weights:  9
+initial  value 2507.742806 
+iter  10 value 377.155027
+iter  20 value 329.828572
+iter  30 value 323.153971
+iter  40 value 322.497582
+iter  50 value 322.378092
+iter  60 value 322.369359
+iter  70 value 322.232348
+iter  80 value 321.324132
+iter  90 value 320.925118
+final  value 320.924450 
+converged
+- Fold07: size= 2, decay=1e-01 
++ Fold07: size= 4, decay=1e-01 
+# weights:  17
+initial  value 2471.223506 
+iter  10 value 594.827499
+iter  20 value 336.682627
+iter  30 value 322.269798
+iter  40 value 321.172671
+iter  50 value 320.971867
+iter  60 value 320.953709
+final  value 320.952578 
+converged
+- Fold07: size= 4, decay=1e-01 
++ Fold07: size= 8, decay=1e-01 
+# weights:  33
+initial  value 1205.647313 
+iter  10 value 458.051146
+iter  20 value 328.009397
+iter  30 value 322.492685
+iter  40 value 321.759619
+iter  50 value 321.288061
+iter  60 value 321.005658
+iter  70 value 320.962016
+iter  80 value 320.940524
+iter  90 value 320.884087
+iter 100 value 320.882783
+iter 100 value 320.882782
+iter 100 value 320.882782
+final  value 320.882782 
+converged
+- Fold07: size= 8, decay=1e-01 
++ Fold07: size=16, decay=1e-01 
+# weights:  65
+initial  value 1068.282674 
+iter  10 value 684.011895
+iter  20 value 325.783473
+iter  30 value 323.634200
+iter  40 value 322.322308
+iter  50 value 321.287820
+iter  60 value 320.979294
+iter  70 value 320.922667
+iter  80 value 320.903952
+iter  90 value 320.895893
+iter 100 value 320.890910
+iter 110 value 320.889606
+iter 120 value 320.888383
+iter 130 value 320.887148
+iter 140 value 320.885313
+iter 150 value 320.836273
+iter 160 value 320.834712
+final  value 320.834461 
+converged
+- Fold07: size=16, decay=1e-01 
++ Fold08: size= 1, decay=0e+00 
+# weights:  5
+initial  value 1844.790082 
+final  value 695.263743 
+converged
+- Fold08: size= 1, decay=0e+00 
++ Fold08: size= 2, decay=0e+00 
+# weights:  9
+initial  value 1086.704410 
+final  value 695.263743 
+converged
+- Fold08: size= 2, decay=0e+00 
++ Fold08: size= 4, decay=0e+00 
+# weights:  17
+initial  value 4063.170882 
+final  value 695.263743 
+converged
+- Fold08: size= 4, decay=0e+00 
++ Fold08: size= 8, decay=0e+00 
+# weights:  33
+initial  value 1933.555068 
+final  value 695.263743 
+converged
+- Fold08: size= 8, decay=0e+00 
++ Fold08: size=16, decay=0e+00 
+# weights:  65
+initial  value 6704.412147 
+final  value 695.263743 
+converged
+- Fold08: size=16, decay=0e+00 
++ Fold08: size= 1, decay=1e-04 
+# weights:  5
+initial  value 2154.541021 
+iter  10 value 696.756724
+iter  20 value 695.288968
+iter  30 value 695.288678
+iter  40 value 695.288374
+iter  50 value 695.288050
+iter  60 value 695.287711
+iter  70 value 695.287353
+iter  80 value 695.286982
+iter  90 value 695.286584
+iter 100 value 695.286151
+iter 110 value 695.285679
+iter 120 value 695.285161
+iter 130 value 695.284586
+iter 140 value 695.283943
+iter 150 value 695.283216
+iter 160 value 695.282385
+iter 170 value 695.281420
+iter 180 value 695.280283
+iter 190 value 695.278915
+iter 200 value 695.277231
+iter 210 value 695.275093
+iter 220 value 695.272273
+iter 230 value 695.268353
+iter 240 value 695.262483
+iter 250 value 695.252624
+iter 260 value 695.232340
+iter 270 value 695.165696
+iter 280 value 664.430391
+iter 290 value 339.576636
+iter 300 value 326.740282
+iter 310 value 323.193517
+iter 320 value 320.522006
+iter 330 value 319.954025
+final  value 319.953152 
+converged
+- Fold08: size= 1, decay=1e-04 
++ Fold08: size= 2, decay=1e-04 
+# weights:  9
+initial  value 1880.993034 
+iter  10 value 696.641891
+iter  20 value 695.280772
+iter  20 value 695.280765
+final  value 695.280765 
+converged
+- Fold08: size= 2, decay=1e-04 
++ Fold08: size= 4, decay=1e-04 
+# weights:  17
+initial  value 1311.017156 
+iter  10 value 696.419493
+iter  20 value 695.258297
+iter  30 value 695.006636
+iter  40 value 334.241676
+iter  50 value 328.496300
+iter  60 value 319.650111
+iter  70 value 317.611030
+iter  80 value 317.266264
+iter  90 value 316.829946
+iter 100 value 315.995765
+iter 110 value 315.777472
+iter 120 value 315.517718
+iter 130 value 315.442069
+iter 140 value 315.349709
+iter 150 value 315.311518
+iter 160 value 315.169002
+iter 170 value 315.087238
+iter 180 value 315.061487
+iter 190 value 315.016815
+iter 200 value 314.935722
+iter 210 value 314.866370
+iter 220 value 314.830447
+iter 230 value 314.794898
+iter 240 value 314.783026
+iter 250 value 314.776973
+iter 260 value 314.772301
+iter 270 value 314.769078
+final  value 314.767752 
+converged
+- Fold08: size= 4, decay=1e-04 
++ Fold08: size= 8, decay=1e-04 
+# weights:  33
+initial  value 4063.204824 
+iter  10 value 332.406666
+iter  20 value 319.527377
+iter  30 value 317.573319
+iter  40 value 316.789202
+iter  50 value 315.890039
+iter  60 value 315.427740
+iter  70 value 314.774394
+iter  80 value 314.583006
+iter  90 value 314.413837
+iter 100 value 314.326166
+iter 110 value 314.241949
+iter 120 value 314.202207
+iter 130 value 314.182727
+iter 140 value 314.160633
+iter 150 value 314.126388
+iter 160 value 314.078308
+iter 170 value 313.943304
+iter 180 value 313.901176
+iter 190 value 313.878616
+iter 200 value 313.842544
+final  value 313.835099 
+converged
+- Fold08: size= 8, decay=1e-04 
++ Fold08: size=16, decay=1e-04 
+# weights:  65
+initial  value 915.791273 
+iter  10 value 696.828354
+iter  20 value 695.298813
+iter  30 value 333.322166
+iter  40 value 319.091798
+iter  50 value 318.180174
+iter  60 value 316.738855
+iter  70 value 315.962277
+iter  80 value 315.076725
+iter  90 value 314.868663
+iter 100 value 314.751748
+iter 110 value 314.647027
+iter 120 value 314.572746
+iter 130 value 314.506589
+iter 140 value 314.418596
+iter 150 value 314.325954
+iter 160 value 314.232238
+iter 170 value 314.121724
+iter 180 value 314.024328
+iter 190 value 313.950648
+iter 200 value 313.872840
+iter 210 value 313.771138
+iter 220 value 313.682624
+iter 230 value 313.560280
+iter 240 value 313.476027
+iter 250 value 313.444080
+iter 260 value 313.423350
+iter 270 value 313.407136
+iter 280 value 313.380854
+iter 290 value 313.372558
+iter 300 value 313.367847
+iter 310 value 313.354845
+iter 320 value 313.337037
+iter 330 value 313.317848
+iter 340 value 313.283181
+iter 350 value 313.246497
+iter 360 value 313.193125
+iter 370 value 313.147837
+iter 380 value 313.113782
+iter 390 value 313.107080
+iter 400 value 313.090505
+iter 410 value 313.083717
+iter 420 value 313.070671
+iter 430 value 313.068670
+iter 440 value 313.053623
+iter 450 value 313.028208
+iter 460 value 313.000201
+iter 470 value 312.977103
+iter 480 value 312.956371
+iter 490 value 312.949281
+iter 500 value 312.943413
+iter 510 value 312.935880
+iter 520 value 312.932294
+iter 530 value 312.925510
+iter 540 value 312.917326
+iter 550 value 312.912759
+iter 560 value 312.912040
+iter 570 value 312.907992
+iter 580 value 312.903890
+iter 590 value 312.899568
+iter 600 value 312.896056
+iter 610 value 312.893066
+iter 620 value 312.888049
+iter 630 value 312.884787
+iter 640 value 312.881551
+iter 650 value 312.879255
+iter 660 value 312.876413
+iter 670 value 312.871296
+iter 680 value 312.866836
+final  value 312.866756 
+converged
+- Fold08: size=16, decay=1e-04 
++ Fold08: size= 1, decay=1e-01 
+# weights:  5
+initial  value 903.864038 
+iter  10 value 377.707452
+iter  20 value 368.784409
+iter  30 value 365.159470
+iter  40 value 341.145296
+iter  50 value 331.004402
+iter  60 value 329.580881
+final  value 329.465528 
+converged
+- Fold08: size= 1, decay=1e-01 
++ Fold08: size= 2, decay=1e-01 
+# weights:  9
+initial  value 1641.654319 
+iter  10 value 486.118396
+iter  20 value 346.062275
+iter  30 value 332.045558
+iter  40 value 330.273502
+iter  50 value 329.892899
+iter  60 value 329.567002
+iter  70 value 328.398893
+iter  80 value 328.161060
+final  value 328.158707 
+converged
+- Fold08: size= 2, decay=1e-01 
++ Fold08: size= 4, decay=1e-01 
+# weights:  17
+initial  value 2107.412703 
+iter  10 value 395.189219
+iter  20 value 330.091200
+iter  30 value 328.416506
+iter  40 value 328.113066
+iter  50 value 327.983833
+iter  60 value 327.966673
+final  value 327.965391 
+converged
+- Fold08: size= 4, decay=1e-01 
++ Fold08: size= 8, decay=1e-01 
+# weights:  33
+initial  value 2514.611734 
+iter  10 value 461.913584
+iter  20 value 333.972099
+iter  30 value 329.857306
+iter  40 value 328.791006
+iter  50 value 328.376059
+iter  60 value 328.142654
+iter  70 value 328.045255
+iter  80 value 327.987876
+iter  90 value 327.975400
+iter  90 value 327.975398
+iter  90 value 327.975398
+final  value 327.975398 
+converged
+- Fold08: size= 8, decay=1e-01 
++ Fold08: size=16, decay=1e-01 
+# weights:  65
+initial  value 2061.252437 
+iter  10 value 512.970604
+iter  20 value 337.276579
+iter  30 value 330.033312
+iter  40 value 328.680204
+iter  50 value 328.286669
+iter  60 value 328.134813
+iter  70 value 328.043309
+iter  80 value 327.976959
+iter  90 value 327.955308
+iter 100 value 327.944478
+iter 110 value 327.933446
+iter 120 value 327.930696
+iter 130 value 327.927902
+iter 140 value 327.926895
+iter 150 value 327.920889
+final  value 327.920557 
+converged
+- Fold08: size=16, decay=1e-01 
++ Fold09: size= 1, decay=0e+00 
+# weights:  5
+initial  value 3786.181905 
+final  value 692.024613 
+converged
+- Fold09: size= 1, decay=0e+00 
++ Fold09: size= 2, decay=0e+00 
+# weights:  9
+initial  value 741.284537 
+final  value 692.024613 
+converged
+- Fold09: size= 2, decay=0e+00 
++ Fold09: size= 4, decay=0e+00 
+# weights:  17
+initial  value 4068.146164 
+final  value 692.024613 
+converged
+- Fold09: size= 4, decay=0e+00 
++ Fold09: size= 8, decay=0e+00 
+# weights:  33
+initial  value 6214.146277 
+final  value 692.024613 
+converged
+- Fold09: size= 8, decay=0e+00 
++ Fold09: size=16, decay=0e+00 
+# weights:  65
+initial  value 515.859630 
+iter  10 value 322.559536
+iter  20 value 316.576332
+iter  30 value 315.694574
+iter  40 value 314.175887
+iter  50 value 313.219488
+iter  60 value 312.764837
+iter  70 value 312.389028
+iter  80 value 312.281188
+iter  90 value 312.228306
+iter 100 value 312.200380
+iter 110 value 312.189352
+iter 120 value 312.129341
+iter 130 value 311.956678
+iter 140 value 311.818073
+iter 150 value 311.509116
+iter 160 value 311.332314
+iter 170 value 311.277868
+iter 180 value 311.245176
+iter 190 value 311.201478
+iter 200 value 311.131346
+iter 210 value 311.075632
+iter 220 value 311.044474
+iter 230 value 310.996062
+iter 240 value 310.934284
+iter 250 value 310.890672
+iter 260 value 310.818220
+iter 270 value 310.801829
+iter 280 value 310.767683
+iter 290 value 310.715126
+iter 300 value 310.678909
+iter 310 value 310.628590
+iter 320 value 310.582491
+iter 330 value 310.523392
+iter 340 value 310.483154
+iter 350 value 310.453231
+iter 360 value 310.399346
+iter 370 value 310.367735
+iter 380 value 310.350699
+iter 390 value 310.333034
+iter 400 value 310.312224
+iter 410 value 310.282076
+iter 420 value 310.232501
+iter 430 value 310.203307
+iter 440 value 310.161723
+iter 450 value 310.141338
+iter 460 value 310.131267
+iter 470 value 310.126611
+iter 480 value 310.114076
+iter 490 value 310.105030
+iter 500 value 310.095684
+iter 510 value 310.078408
+iter 520 value 310.056136
+iter 530 value 310.044374
+iter 540 value 310.042751
+iter 550 value 310.036397
+iter 560 value 310.027167
+iter 570 value 310.021401
+iter 580 value 310.007941
+iter 590 value 309.999911
+iter 600 value 309.995546
+iter 610 value 309.984746
+iter 620 value 309.975905
+iter 630 value 309.969459
+iter 640 value 309.963996
+iter 650 value 309.957179
+iter 660 value 309.952870
+iter 670 value 309.951449
+iter 680 value 309.947305
+iter 690 value 309.943203
+iter 700 value 309.939694
+iter 710 value 309.928454
+iter 720 value 309.915454
+iter 730 value 309.901915
+iter 740 value 309.876344
+iter 750 value 309.862793
+iter 760 value 309.850899
+iter 770 value 309.805619
+iter 780 value 309.732008
+iter 790 value 309.662904
+iter 800 value 309.657740
+iter 810 value 309.625673
+iter 820 value 309.605147
+iter 830 value 309.594904
+iter 840 value 309.587052
+iter 850 value 309.576212
+iter 860 value 309.559848
+iter 870 value 309.543959
+iter 880 value 309.499985
+iter 890 value 309.487130
+iter 900 value 309.456427
+iter 910 value 309.440647
+final  value 309.438407 
+converged
+- Fold09: size=16, decay=0e+00 
++ Fold09: size= 1, decay=1e-04 
+# weights:  5
+initial  value 1652.370699 
+iter  10 value 713.097925
+iter  20 value 692.404084
+iter  30 value 692.038815
+iter  40 value 692.038418
+iter  50 value 692.037968
+iter  60 value 692.037448
+iter  70 value 692.036840
+iter  80 value 692.036114
+iter  90 value 692.035225
+iter 100 value 692.034107
+iter 110 value 692.032649
+iter 120 value 692.030665
+iter 130 value 692.027805
+iter 140 value 692.023357
+iter 150 value 692.015620
+iter 160 value 691.999457
+iter 170 value 691.949573
+iter 180 value 690.711636
+iter 190 value 349.909045
+iter 200 value 324.941577
+iter 210 value 319.564344
+iter 220 value 317.965900
+final  value 317.962935 
+converged
+- Fold09: size= 1, decay=1e-04 
++ Fold09: size= 2, decay=1e-04 
+# weights:  9
+initial  value 1677.709527 
+iter  10 value 693.271985
+iter  20 value 692.040164
+iter  30 value 692.037027
+iter  40 value 692.031904
+iter  50 value 692.021733
+iter  60 value 691.990572
+iter  70 value 690.078109
+iter  80 value 331.878339
+iter  90 value 325.041849
+iter 100 value 316.455537
+iter 110 value 314.652532
+iter 120 value 314.620823
+iter 130 value 314.592115
+iter 140 value 314.576093
+iter 150 value 314.559484
+iter 160 value 314.548167
+iter 170 value 314.540038
+iter 180 value 314.539809
+final  value 314.539707 
+converged
+- Fold09: size= 2, decay=1e-04 
++ Fold09: size= 4, decay=1e-04 
+# weights:  17
+initial  value 2240.952455 
+iter  10 value 322.990310
+iter  20 value 316.155755
+iter  30 value 315.109175
+iter  40 value 314.387521
+iter  50 value 314.123886
+iter  60 value 314.007097
+iter  70 value 313.970472
+iter  80 value 313.945763
+iter  90 value 313.908675
+iter 100 value 313.528020
+iter 110 value 312.823174
+iter 120 value 312.677229
+iter 130 value 312.630082
+iter 140 value 312.590727
+iter 150 value 312.570438
+iter 160 value 312.568991
+iter 170 value 312.564757
+iter 180 value 312.559035
+iter 190 value 312.557180
+final  value 312.557021 
+converged
+- Fold09: size= 4, decay=1e-04 
++ Fold09: size= 8, decay=1e-04 
+# weights:  33
+initial  value 4198.481755 
+iter  10 value 325.146535
+iter  20 value 316.730002
+iter  30 value 315.684536
+iter  40 value 314.178421
+iter  50 value 313.329241
+iter  60 value 313.158017
+iter  70 value 313.012527
+iter  80 value 312.898878
+iter  90 value 312.828660
+iter 100 value 312.714811
+iter 110 value 312.637183
+iter 120 value 312.593863
+iter 130 value 312.558139
+iter 140 value 312.404026
+iter 150 value 312.338296
+iter 160 value 312.229954
+iter 170 value 312.183715
+iter 180 value 312.170007
+iter 190 value 312.156252
+iter 200 value 312.127179
+iter 210 value 312.104235
+iter 220 value 312.045500
+iter 230 value 311.892620
+iter 240 value 311.784901
+iter 250 value 311.745149
+iter 260 value 311.678147
+iter 270 value 311.668852
+iter 280 value 311.665392
+iter 290 value 311.658450
+iter 300 value 311.636765
+iter 310 value 311.623063
+iter 320 value 311.615154
+iter 330 value 311.609009
+final  value 311.603505 
+converged
+- Fold09: size= 8, decay=1e-04 
++ Fold09: size=16, decay=1e-04 
+# weights:  65
+initial  value 769.407902 
+iter  10 value 692.068107
+iter  20 value 322.573484
+iter  30 value 316.467982
+iter  40 value 315.543307
+iter  50 value 313.909208
+iter  60 value 313.200625
+iter  70 value 312.890989
+iter  80 value 312.776027
+iter  90 value 312.615904
+iter 100 value 312.548379
+iter 110 value 312.464682
+iter 120 value 312.363312
+iter 130 value 312.336959
+iter 140 value 312.284320
+iter 150 value 312.262020
+iter 160 value 312.188822
+iter 170 value 312.138825
+iter 180 value 312.092706
+iter 190 value 312.055726
+iter 200 value 312.023063
+iter 210 value 311.977785
+iter 220 value 311.908472
+iter 230 value 311.848150
+iter 240 value 311.809338
+iter 250 value 311.766986
+iter 260 value 311.721394
+iter 270 value 311.676532
+iter 280 value 311.667579
+iter 290 value 311.658043
+iter 300 value 311.644029
+iter 310 value 311.633608
+iter 320 value 311.619323
+iter 330 value 311.593834
+iter 340 value 311.549244
+iter 350 value 311.475584
+iter 360 value 311.373427
+iter 370 value 311.324741
+iter 380 value 311.293938
+iter 390 value 311.273233
+iter 400 value 311.229170
+iter 410 value 311.214304
+iter 420 value 311.197717
+iter 430 value 311.177752
+iter 440 value 311.154685
+iter 450 value 311.117490
+iter 460 value 311.102906
+iter 470 value 311.087192
+iter 480 value 311.080415
+iter 490 value 311.078051
+iter 500 value 311.075262
+iter 510 value 311.073918
+iter 520 value 311.071748
+iter 530 value 311.070406
+iter 540 value 311.069468
+iter 540 value 311.069465
+iter 540 value 311.069465
+final  value 311.069465 
+converged
+- Fold09: size=16, decay=1e-04 
++ Fold09: size= 1, decay=1e-01 
+# weights:  5
+initial  value 969.062980 
+iter  10 value 371.564856
+iter  20 value 333.444145
+iter  30 value 327.230097
+final  value 327.223674 
+converged
+- Fold09: size= 1, decay=1e-01 
++ Fold09: size= 2, decay=1e-01 
+# weights:  9
+initial  value 3714.658298 
+iter  10 value 374.883851
+iter  20 value 329.054726
+iter  30 value 326.073186
+iter  40 value 325.958573
+final  value 325.926596 
+converged
+- Fold09: size= 2, decay=1e-01 
++ Fold09: size= 4, decay=1e-01 
+# weights:  17
+initial  value 1472.899726 
+iter  10 value 402.902735
+iter  20 value 340.243434
+iter  30 value 328.007290
+iter  40 value 326.272071
+iter  50 value 325.771016
+iter  60 value 325.751551
+final  value 325.751543 
+converged
+- Fold09: size= 4, decay=1e-01 
++ Fold09: size= 8, decay=1e-01 
+# weights:  33
+initial  value 2078.902576 
+iter  10 value 423.273029
+iter  20 value 338.480571
+iter  30 value 328.764609
+iter  40 value 327.796167
+iter  50 value 326.869738
+iter  60 value 326.143157
+iter  70 value 325.860195
+iter  80 value 325.751841
+iter  90 value 325.711125
+iter 100 value 325.710728
+iter 100 value 325.710725
+iter 100 value 325.710725
+final  value 325.710725 
+converged
+- Fold09: size= 8, decay=1e-01 
++ Fold09: size=16, decay=1e-01 
+# weights:  65
+initial  value 1374.013704 
+iter  10 value 701.401635
+iter  20 value 332.083566
+iter  30 value 327.831490
+iter  40 value 326.603513
+iter  50 value 325.995870
+iter  60 value 325.826684
+iter  70 value 325.798113
+iter  80 value 325.777590
+iter  90 value 325.763169
+iter 100 value 325.757723
+iter 110 value 325.755747
+iter 120 value 325.753378
+iter 130 value 325.750860
+iter 140 value 325.749680
+iter 150 value 325.702557
+iter 160 value 325.698161
+final  value 325.697420 
+converged
+- Fold09: size=16, decay=1e-01 
++ Fold10: size= 1, decay=0e+00 
+# weights:  5
+initial  value 2239.880635 
+final  value 693.144367 
+converged
+- Fold10: size= 1, decay=0e+00 
++ Fold10: size= 2, decay=0e+00 
+# weights:  9
+initial  value 2673.703189 
+final  value 693.144367 
+converged
+- Fold10: size= 2, decay=0e+00 
++ Fold10: size= 4, decay=0e+00 
+# weights:  17
+initial  value 1071.671949 
+final  value 693.144367 
+converged
+- Fold10: size= 4, decay=0e+00 
++ Fold10: size= 8, decay=0e+00 
+# weights:  33
+initial  value 4230.213864 
+final  value 693.144367 
+converged
+- Fold10: size= 8, decay=0e+00 
++ Fold10: size=16, decay=0e+00 
+# weights:  65
+initial  value 2810.975082 
+final  value 693.144367 
+converged
+- Fold10: size=16, decay=0e+00 
++ Fold10: size= 1, decay=1e-04 
+# weights:  5
+initial  value 3672.134342 
+iter  10 value 744.836488
+iter  20 value 694.075197
+iter  30 value 693.140343
+iter  40 value 693.128087
+iter  50 value 693.098345
+iter  60 value 692.938657
+iter  70 value 365.876407
+iter  80 value 329.515525
+iter  90 value 318.216184
+iter 100 value 316.745936
+iter 110 value 316.540483
+final  value 316.539053 
+converged
+- Fold10: size= 1, decay=1e-04 
++ Fold10: size= 2, decay=1e-04 
+# weights:  9
+initial  value 1137.855225 
+iter  10 value 693.667288
+iter  20 value 693.152571
+iter  30 value 693.152101
+iter  40 value 693.151543
+iter  50 value 693.150866
+iter  60 value 693.150020
+iter  70 value 693.148919
+iter  80 value 693.147411
+iter  90 value 693.145188
+iter 100 value 693.141514
+iter 110 value 693.134107
+iter 120 value 693.110622
+iter 130 value 689.651037
+iter 140 value 346.078155
+iter 150 value 325.943594
+iter 160 value 317.656121
+iter 170 value 314.408571
+iter 180 value 314.019724
+iter 190 value 313.631752
+iter 200 value 313.559685
+iter 210 value 313.477848
+iter 220 value 313.472116
+iter 230 value 313.467442
+iter 240 value 313.465914
+iter 250 value 313.464546
+iter 260 value 313.463999
+iter 270 value 313.463451
+iter 280 value 313.462849
+iter 290 value 313.461230
+iter 300 value 313.458718
+iter 310 value 313.452706
+iter 320 value 313.431916
+iter 330 value 313.428372
+iter 340 value 313.424503
+final  value 313.423907 
+converged
+- Fold10: size= 2, decay=1e-04 
++ Fold10: size= 4, decay=1e-04 
+# weights:  17
+initial  value 705.807538 
+iter  10 value 353.561458
+iter  20 value 319.266541
+iter  30 value 314.761711
+iter  40 value 312.764275
+iter  50 value 312.224831
+iter  60 value 311.785496
+iter  70 value 311.425414
+iter  80 value 311.310597
+iter  90 value 311.182723
+iter 100 value 311.165969
+iter 110 value 311.158357
+iter 120 value 311.157951
+iter 130 value 311.156761
+iter 140 value 311.156076
+final  value 311.155971 
+converged
+- Fold10: size= 4, decay=1e-04 
++ Fold10: size= 8, decay=1e-04 
+# weights:  33
+initial  value 2963.689221 
+iter  10 value 698.020390
+iter  20 value 693.208200
+iter  30 value 693.155189
+iter  40 value 693.141635
+iter  50 value 692.650351
+iter  60 value 331.602563
+iter  70 value 318.419143
+iter  80 value 314.078637
+iter  90 value 313.242769
+iter 100 value 312.078833
+iter 110 value 311.966507
+iter 120 value 311.835051
+iter 130 value 311.664581
+iter 140 value 311.635010
+iter 150 value 311.598142
+iter 160 value 311.560687
+iter 170 value 311.508556
+iter 180 value 311.444357
+iter 190 value 311.325359
+iter 200 value 311.284153
+iter 210 value 311.271675
+iter 220 value 311.233212
+iter 230 value 311.188270
+iter 240 value 311.136743
+iter 250 value 311.060019
+iter 260 value 310.981401
+iter 270 value 310.923383
+iter 280 value 310.852888
+iter 290 value 310.797609
+iter 300 value 310.767943
+iter 310 value 310.643482
+iter 320 value 310.513317
+iter 330 value 310.422202
+iter 340 value 310.383167
+iter 350 value 310.364208
+iter 360 value 310.347602
+iter 370 value 310.339881
+iter 380 value 310.327445
+iter 390 value 310.313854
+iter 400 value 310.296153
+iter 410 value 310.290829
+iter 420 value 310.273117
+iter 430 value 310.252818
+iter 440 value 310.212249
+iter 450 value 310.194045
+iter 460 value 310.184764
+iter 470 value 310.176947
+iter 480 value 310.175408
+iter 490 value 310.171287
+iter 500 value 310.167357
+iter 510 value 310.162871
+iter 520 value 310.159460
+iter 530 value 310.158052
+final  value 310.157731 
+converged
+- Fold10: size= 8, decay=1e-04 
++ Fold10: size=16, decay=1e-04 
+# weights:  65
+initial  value 1007.559275 
+iter  10 value 321.690294
+iter  20 value 315.750756
+iter  30 value 313.770730
+iter  40 value 313.282782
+iter  50 value 312.751410
+iter  60 value 311.908363
+iter  70 value 311.147873
+iter  80 value 310.896102
+iter  90 value 310.830374
+iter 100 value 310.754437
+iter 110 value 310.681313
+iter 120 value 310.611134
+iter 130 value 310.503077
+iter 140 value 310.441410
+iter 150 value 310.390386
+iter 160 value 310.345036
+iter 170 value 310.303157
+iter 180 value 310.279418
+iter 190 value 310.244861
+iter 200 value 310.211174
+iter 210 value 310.175286
+iter 220 value 310.122485
+iter 230 value 310.017494
+iter 240 value 309.968913
+iter 250 value 309.959370
+iter 260 value 309.949018
+iter 270 value 309.945125
+iter 280 value 309.938954
+iter 290 value 309.934627
+iter 300 value 309.928072
+iter 310 value 309.920099
+iter 320 value 309.912610
+iter 330 value 309.908952
+iter 340 value 309.904383
+iter 350 value 309.898733
+iter 360 value 309.895433
+iter 370 value 309.891332
+iter 380 value 309.884791
+iter 390 value 309.879425
+iter 400 value 309.873747
+iter 410 value 309.873278
+iter 420 value 309.870871
+iter 430 value 309.866442
+iter 440 value 309.858407
+iter 450 value 309.849231
+iter 460 value 309.839778
+iter 470 value 309.835891
+iter 480 value 309.832374
+iter 490 value 309.829603
+iter 500 value 309.822166
+iter 510 value 309.813489
+iter 520 value 309.808895
+iter 530 value 309.804947
+final  value 309.804566 
+converged
+- Fold10: size=16, decay=1e-04 
++ Fold10: size= 1, decay=1e-01 
+# weights:  5
+initial  value 1221.186675 
+iter  10 value 522.119373
+iter  20 value 330.974298
+iter  30 value 326.662894
+final  value 326.654277 
+converged
+- Fold10: size= 1, decay=1e-01 
++ Fold10: size= 2, decay=1e-01 
+# weights:  9
+initial  value 2202.949285 
+iter  10 value 646.907608
+iter  20 value 340.866576
+iter  30 value 326.087357
+iter  40 value 325.931132
+iter  50 value 325.824126
+iter  60 value 324.952643
+iter  70 value 324.620465
+final  value 324.609128 
+converged
+- Fold10: size= 2, decay=1e-01 
++ Fold10: size= 4, decay=1e-01 
+# weights:  17
+initial  value 580.803766 
+iter  10 value 327.799360
+iter  20 value 326.782713
+iter  30 value 326.569431
+iter  40 value 326.336120
+iter  50 value 325.891259
+iter  60 value 325.582242
+iter  70 value 325.032938
+iter  80 value 324.693365
+iter  90 value 324.656294
+iter 100 value 324.580670
+iter 110 value 324.574749
+final  value 324.574423 
+converged
+- Fold10: size= 4, decay=1e-01 
++ Fold10: size= 8, decay=1e-01 
+# weights:  33
+initial  value 6457.987786 
+iter  10 value 471.671429
+iter  20 value 352.241731
+iter  30 value 328.131501
+iter  40 value 326.449712
+iter  50 value 325.902368
+iter  60 value 325.531508
+iter  70 value 325.386489
+iter  80 value 324.777347
+iter  90 value 324.600288
+iter 100 value 324.594869
+iter 110 value 324.593664
+iter 120 value 324.591908
+final  value 324.591832 
+converged
+- Fold10: size= 8, decay=1e-01 
++ Fold10: size=16, decay=1e-01 
+# weights:  65
+initial  value 2602.119228 
+iter  10 value 425.351973
+iter  20 value 327.881526
+iter  30 value 326.626972
+iter  40 value 325.732567
+iter  50 value 324.939650
+iter  60 value 324.612410
+iter  70 value 324.564766
+iter  80 value 324.559970
+iter  90 value 324.558674
+iter 100 value 324.558001
+iter 110 value 324.557340
+iter 120 value 324.556165
+iter 130 value 324.555684
+iter 140 value 324.545441
+final  value 324.545259 
+converged
+- Fold10: size=16, decay=1e-01 
+Aggregating results
+Selecting tuning parameters
+Fitting size = 8, decay = 1e-04 on full training set
+# weights:  33
+initial  value 1893.000926 
+iter  10 value 360.973088
+iter  20 value 350.491358
+iter  30 value 349.700639
+iter  40 value 348.381327
+iter  50 value 346.744248
+iter  60 value 346.334850
+iter  70 value 346.176105
+iter  80 value 346.039533
+iter  90 value 345.954650
+iter 100 value 345.836001
+iter 110 value 345.769187
+iter 120 value 345.723101
+iter 130 value 345.699897
+iter 140 value 345.692672
+iter 150 value 345.677624
+iter 160 value 345.656027
+iter 170 value 345.647226
+iter 180 value 345.635489
+iter 190 value 345.624193
+iter 200 value 345.609188
+iter 210 value 345.597188
+iter 220 value 345.559326
+iter 230 value 345.456795
+iter 240 value 345.352119
+iter 250 value 345.122881
+iter 260 value 344.998160
+iter 270 value 344.949170
+iter 280 value 344.913523
+iter 290 value 344.875257
+iter 300 value 344.844952
+iter 310 value 344.833139
+iter 320 value 344.806666
+iter 330 value 344.777361
+iter 340 value 344.727336
+iter 350 value 344.672732
+iter 360 value 344.648863
+iter 370 value 344.640272
+iter 380 value 344.631058
+iter 390 value 344.615380
+iter 400 value 344.605082
+iter 410 value 344.590589
+iter 420 value 344.579858
+iter 430 value 344.574724
+iter 440 value 344.573308
+iter 450 value 344.570953
+iter 460 value 344.569284
+iter 470 value 344.566403
+iter 480 value 344.563454
+iter 490 value 344.560591
+final  value 344.559168 
+converged
+[1] "ANN done"
+Type: DONE 
+Warning message:
+In nominalTrainWorkflow(x = x, y = y, wts = weights, info = trainInfo,  :
+  There were missing values in resampled performance measures.

@@ -11,8 +11,8 @@ preProcess <- function(data, column) {
 }
 
 startDate <- "20150205"
-endDate <- "20150225"
-#splitDate <- "20150202"
+endDate <- "20150331"
+splitDate <- "20150226"
 directory <- "../../Data/Autopassdata/Singledatefiles/Dataset/"
 
 # Get data set from startDate to endDate
@@ -23,9 +23,9 @@ dataSet$fiveMinuteMean <- preProcess(dataSet, "fiveMinuteMean")
 dataSet$trafficVolume <- preProcess(dataSet, "trafficVolume")
 dataSet$actualTravelTime <- preProcess(dataSet, "actualTravelTime")
 
-#splitIndex <- which(dataSet$dateAndTime >= as.Date(c(splitDate), "%Y%m%d"))[1]
-#trainingSet <- dataSet[1:(splitIndex-1), ]
-#testingSet <- dataSet[splitIndex:nrow(dataSet), ]
+splitIndex <- which(dataSet$dateAndTime >= as.Date(c(splitDate), "%Y%m%d"))[1]
+trainingSet <- dataSet[1:(splitIndex-1), ]
+testingSet <- dataSet[splitIndex:nrow(dataSet), ]
 #trainingSet$actualTravelTime <- preProcess(trainingSet, "actualTravelTime")
 
 # actual <- testingSet$actualTravelTime
@@ -38,7 +38,7 @@ ctrl <- trainControl(verboseIter = TRUE, method='none')
 
 #radial_grid <- expand.grid(sigma = radialSigma, C = c(2^-5, 2^-1, 2, 2^5, 2^10, 2^15))
 radial_grid <- data.frame(sigma=4.1451371, C=0.5)
-radial.svm <- train(formula, dataSet, method="svmRadial", trControl=ctrl, tuneGrid=radial_grid)
+radial.svm <- train(formula, trainingDataSet, method="svmRadial", trControl=ctrl, tuneGrid=radial_grid)
 save(radial.svm, file='new_baselines/main_radial_svmMod.RData')
 
 # pred.radial.svm <- predict(radial.svm, testingSet)

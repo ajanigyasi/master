@@ -9,8 +9,8 @@ preProcess <- function(data, column) {
 }
 
 startDate <- "20150205"
-endDate <- "20150225"
-#splitDate <- "20150202"
+endDate <- "20150331"
+splitDate <- "20150226"
 directory <- "../../Data/Autopassdata/Singledatefiles/Dataset/"
 
 # Get data set from startDate to endDate
@@ -20,13 +20,13 @@ dataSet <- getDataSet(startDate, endDate, paste(directory, "raw/", sep=""), 'fil
 dataSet$fiveMinuteMean <- preProcess(dataSet, "fiveMinuteMean")
 dataSet$trafficVolume <- preProcess(dataSet, "trafficVolume")
 dataSet$actualTravelTime <- preProcess(dataSet, "actualTravelTime")
-#splitIndex <- which(dataSet$dateAndTime >= as.Date(c(splitDate), "%Y%m%d"))[1]
-#trainingSet <- dataSet[1:(splitIndex-1), ]
-#testingSet <- dataSet[splitIndex:nrow(dataSet), ]
+splitIndex <- which(dataSet$dateAndTime >= as.Date(c(splitDate), "%Y%m%d"))[1]
+trainingSet <- dataSet[1:(splitIndex-1), ]
+testingSet <- dataSet[splitIndex:nrow(dataSet), ]
 
 formula <- actualTravelTime~fiveMinuteMean+trafficVolume
 ctrl <- trainControl(verboseIter = TRUE, method='none')
 
 knn_grid <- expand.grid(kmax = c(50), distance = c(1), kernel=c("rank"))
-knnMod = train(formula, dataSet, method="kknn", trControl = ctrl, tuneGrid = knn_grid)
+knnMod = train(formula, trainingDataSet, method="kknn", trControl = ctrl, tuneGrid = knn_grid)
 save(knnMod, file="new_baselines/main_knnMod.RData")
