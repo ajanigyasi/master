@@ -26,9 +26,6 @@ frbsTrainingTargets = getDataSet(frbsTrainingStartDate, frbsTrainingEndDate, dat
 
 theta <- quantile(frbsTrainingTargets$combinedDataSet.actualTravelTime, probs=seq(0, 1, 0.1))[2:10]
 
-frbsTrainingInputs = frbsTrainingInputs[1:100, ]
-frbsTrainingTargets = data.frame(frbsTrainingTargets[1:100, ])
-
 # Read testing inputs and testing targets
 frbsTestingInputs = getDataSet(frbsTestingStartDate, frbsTestingEndDate, predictionsDirectory, model)
 frbsTestingInputs <- data.frame(cbind(frbsTestingInputs$nnet, frbsTestingInputs$kalmanFilter))
