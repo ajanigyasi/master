@@ -31,7 +31,7 @@ minimum <- min(dataSet$actualTravelTime)
 maximum <- max(dataSet$actualTravelTime)
 
 formula <- actualTravelTime~fiveMinuteMean+trafficVolume
-ctrl <- trainControl(verboseIter = TRUE, , method='cv')
+ctrl <- trainControl(verboseIter = TRUE, method='cv')
 
 linear.svm <- train(formula, trainingSet, method="svmLinear", trControl=ctrl, tuneGrid = data.frame(C = c(2^-5, 2^-1, 2, 2^5, 2^10, 2^15)))
 save(linear.svm, file='new_baselines/linear_svmMod.RData')
