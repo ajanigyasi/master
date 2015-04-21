@@ -13,6 +13,8 @@ ctrl <- trainControl(verboseIter=TRUE, method='cv')
 lasso_grid <- data.frame(fraction=seq(from=0.05, to=1, by=0.05)) 
 lasso <- train(baselinePredictions[, -1], actualTravelTimes[, 1], method="lasso", trControl=ctrl, tuneGrid=lasso_grid)
 
+save(lasso, file='lassoMod.RData')
+
 # get testing data
 testingSet = getDataSet("20150319", "20150331", paste(directory, "predictions/", sep=""), "baselinePredictions")
  
