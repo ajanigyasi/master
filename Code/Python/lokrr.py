@@ -72,8 +72,9 @@ class lokrr:
         interval =  roundToNearestFiveMinute(data_point[0])
         for i in range(-self.window_size, self.window_size+1):
             time = (interval + timedelta(minutes=(i*5))).time()
-            k = self.kernel_map[str(time)]
-            k.update(data_point[1:3], data_point[3])
+            if ((time >= time(6, 0)) & (time <= time(9, 0))):
+                k = self.kernel_map[str(time)]
+                k.update(data_point[1:3], data_point[3])
 
 def normalize_dataset(dataset):
     fiveMinuteMean = dataset['fiveMinuteMean']
