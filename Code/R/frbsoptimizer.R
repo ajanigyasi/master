@@ -7,35 +7,8 @@ library(ROI)
 
 source("dataSetGetter.R")
 
-# #read data 
-# klett_samf_jan14 <- read.csv2("../../Data/O3-H-01-2014/klett_samf_jan14.csv")
-# 
-# #extract travel times and construct trainingdata
-# traveltimes = klett_samf_jan14$Reell.reisetid..sek.
-# l <- length(traveltimes)
-# y <- traveltimes[-1:-2]
-# x1 <- traveltimes[2:(l-1)]
-# x2 <- traveltimes[1:(l-2)]
-# data <- as.data.frame(cbind(x1, x2, y))
-# 
-# #partition data into training and testing sets
-# trainingindices <- unlist(createDataPartition(1:8926, p=0.7))
-# trainingdata <- data[trainingindices, ]
-# testingdata.input <- data[-trainingindices, 1:2]
-# testingdata.output <- data[-trainingindices, 3]
-# 
-# min.value <- min(traveltimes)
-# max.value <- max(traveltimes)
-# 
-# #train baselines
-# svm <- train(y~x1+x2, trainingdata, method="svmLinear")
-# knn <- knnreg(trainingdata[, 1:2], trainingdata[, 3])
-# 
-# #get predictions
-# svm.predictions <- predict(svm, testingdata.input)
-# knn.predictions <- predict(knn, testingdata.input)
-
 # Set start and end dates for training and testing
+# TODO: set correct dates
 frbsTrainingStartDate = "20150219"
 frbsTrainingEndDate = "20150219"
 frbsTestingStartDate = "20150220"
@@ -46,7 +19,7 @@ dataSetDirectory = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
 predictionsDirectory = "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/"
 
 # Set the type of file you want to retreive
-model = 'baselines'
+model = 'baselinePredictions'
 
 # Read training inputs and training targets
 frbsTrainingInputs = getDataSet(frbsTrainingStartDate, frbsTrainingEndDate, predictionsDirectory, model)
@@ -54,10 +27,10 @@ frbsTrainingTargets = getDataSet(frbsTrainingStartDate, frbsTrainingEndDate, dat
 
 # Read testing inputs and testing targets
 frbsTestingInputs = getDataSet(frbsTestingStartDate, frbsTestingEndDate, predictionsDirectory)
-frbsTestingInputs <- data.frame(abs(cbind(frbsTestingInputs$neuralnet, frbsTestingInputs$kalmanFilter)))
+frbsTestingInputs <- data.frame(cbind(frbsTestingInputs$neuralnet, frbsTestingInputs$kalmanFilter))
 colnames(frbsTestingInputs) = c("ANN", "KalmanFilter")
 
-frbsTestingDataSet <- getDataSet(frbsTestingStartDate, frbsTestingEndDate, dataSetDirectory)
+frbsTestingDataSet <- getDataSet(frbsTestingStartDate, frbsTestingEndDate, dataSetDirectory, 'filteredDataset')
 frbsTestingTargets <- frbsTestingDataSet$actualTravelTime
 colnames(frbsTestingTargets) = c("ActualTravelTime")
 numberOfTestingExamples = nrow(frbsTestingTargets)
@@ -165,60 +138,6 @@ buildFrbs <- function(params, rule=NULL){
   return(frbs.model)
 }
 
-############## OPTIMX ##############
-# a1 <- 500
-# b1 <- 550
-# c1 <- 600
-# a2 <- 600
-# b2 <- 650
-# c2 <- 700
-# a3 <- 700
-# b3 <- 750
-# c3 <- 800
-# 
-
-# a1 <- min
-# b1 <- 0
-# c1 <- 0
-# a2 <- min
-# b2 <- 0
-# c2 <- 0
-# a3 <- min
-# b3 <- 0
-# c3 <- 0
-# 
-# initial.vals <- c(a1, b1, c1, a2, b2, c2, a3, b3, c3)
-# lower.bounds <- c(min, 0, 0, min, 0, 0, min, 0, 0)
-# upper.bounds <- c(max, max-a1, max-a1-b1, max, max-a2, max-a2-b2, max, max-a3, max-a3-b3)
-# ctrl <- list(trace = 5)
-# optimx(initial.vals, objective.func, method = "L-BFGS-B", lower = lower.bounds, upper = upper.bounds, control = ctrl)
-
-############## ROI ##############
-
-# #objective function
-# objf <- F_objective(objective.func, 9)
-# 
-# #matrix with constraints
-# L <- matrix(c(1, 0, 0, 0, 0, 0, 0 ,0, 0, 
-#               -1, 1, 0, 0, 0, 0, 0, 0, 0, 
-#               0, -1, 1, 0, 0, 0, 0, 0, 0,
-#               1, 1, 1, 0, 0, 0, 0, 0, 0,
-#               0, 0, 0, 1, 1, 1, 0, 0, 0,
-#               0, 0, 0, 0, 0, 0, 1, 1, 1,
-#               0, 1, 0, 0, 0, 0, 0, 0, 0,
-#               0, 0, 1, 0, 0, 0, 0, 0, 0,
-#               0, 0, 0, 0, 1, 0, 0, 0, 0,
-#               0, 0, 0, 0, 0, 1, 0, 0, 0,
-#               0, 0, 0, 0, 0, 0, 0, 1, 0,
-#               0, 0, 0, 0, 0, 0, 0, 0, 1), nrow = 12, byrow = TRUE)
-# colnames(L) <- c("a1", "b1", "c1", "a2", "b2", "c2", "a3", "b3", "c3")
-# dir <- c(">=", ">", ">", "<=", "<=", "<=", ">", ">", ">", ">", ">", ">")
-# rhs <- c(min.value, 0, 0, max.value, max.value, max.value, 0, 0, 0, 0, 0, 0)
-# 
-# linear.constraints <- L_constraint(L, dir, rhs)
-# opt.problem <- OP(objf, linear.constraints)
-
-
 ############## constrOptim ##############
 
 #theta <- c(222, 290, 304, 313, 323, 333, 347, 368, 505)
@@ -285,7 +204,6 @@ storePredictions <- function(predictions) {
 # Store predictions to file
 finalPredictions$dateAndTime <- as.character(frbsTestingDataSet$dateAndTime)
 colnames(finalPredictions) = c("frbsPrediction", "dateAndTime")
-print(class(finalPredictions$dateAndTime))
 storePredictions(finalPredictions)
 
 # comparison <- data.frame(frbsTestingData, frbsPredictions, actualTravelTimesTesting)
