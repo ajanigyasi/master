@@ -17,7 +17,7 @@ generateModels <- function(m, n, data, trainingMethod, ...){
     indices = baggingIndices[, i]
     modelData = data[indices, ]
     #Change this line to use another method for prediction
-    model = train(modelData[, 1:2], modelData[, 3], method=trainingMethod, ...)
+    model = train(modelData[, 2:3], modelData[, 4], method=trainingMethod, ...)
     models[[i]] = model
   }
   return(models)
@@ -33,18 +33,33 @@ makePrediction <- function(models, testingdata){
   return(predictions)
 }
 
-#get training data
+preProcess <- function(data, column) {
+  minimum <- min(dataSet[column])
+  maximum <- max(dataSet[column])
+  normalize(data[column][, 1], minimum, maximum)
+}
+
+startDate <- "20150205"
+endDate <- "20150331"
+splitDate <- "20150226"
 directory <- "../../Data/Autopassdata/Singledatefiles/Dataset/"
-trainingSet <- getDataSet("20150219", "20150220", paste(directory, "raw/", sep=""), "dataset")
-#TODO: normalize data (depends on what baseline is used)
+
+# Get data set from startDate to endDate
+dataSet <- getDataSet(startDate, endDate, paste(directory, "raw/", sep=""), 'filteredDataset')
+
+#normalize data and partition into training and testing set
+dataSet$fiveMinuteMean <- preProcess(dataSet, "fiveMinuteMean")
+dataSet$trafficVolume <- preProcess(dataSet, "trafficVolume")
+dataSet$actualTravelTime <- preProcess(dataSet, "actualTravelTime")
+splitIndex <- which(dataSet$dateAndTime >= as.Date(c(splitDate), "%Y%m%d"))[1]
+trainingSet <- dataSet[1:(splitIndex-1), ]
+testingSet <- dataSet[splitIndex:nrow(dataSet), ]
 
 #Train ensemble of models using bagging
-#TODO: decide what model to use
-nrOfModels <- 2
-models = generateModels(nrOfModels, nrow(trainingSet), trainingSet[-1], "knn")
-
-#get testing data
-testingSet = getDataSet("20150221", "20150221", paste(directory, "raw/", sep=""), "dataset")
+ctrl <- trainControl(verboseIter = TRUE, method='none')
+radial_grid <- data.frame(sigma=4.1451371, C=0.5)
+nrOfModels <- 25
+models = generateModels(nrOfModels, nrow(trainingSet), trainingSet, "svmRadial", trControl=ctrl, tuneGrid=radial_grid)
 
 #Make predictions
 predictions <- makePrediction(models, testingSet[, c(-1, -4)])
