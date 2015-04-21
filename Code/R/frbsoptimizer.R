@@ -11,7 +11,7 @@ source("dataSetGetter.R")
 frbsTrainingStartDate = "20150226"
 frbsTrainingEndDate = "20150228"
 frbsTestingStartDate = "20150301"
-frbsTestingEndDate = "20150301"
+frbsTestingEndDate = "20150331"
 
 # Set directories for data sets and predictions
 dataSetDirectory = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
@@ -177,20 +177,32 @@ ctrl <- list(trace = 1, reltol=0.001)
 # Optimize two set of parameters, one for each rule base
 print("Optimizing parameters for annFRBS")
 annOptim <- constrOptim(theta, f, NULL, ui, ci, control = ctrl, rule=preferAnnRule)
-print("Optimizing parameters for kfFRBS")
+print("Done optimizing parameters for annFRBS")
+print("Optimizing parameters for kalmanFilterFRBS")
 kalmanFilterOptim <- constrOptim(theta, f, NULL, ui, ci, control = ctrl, rule=preferKalmanFilterRule)
+print("Done optimizing parameters for kalmanFilterFRBS")
 
 # Build two frbs-models based on the two optimal sets of parameters
+print("Building annFrbsModel")
 annFrbsModel = buildFrbs(annOptim$par, preferAnnRule)
+print("Done building annFrbsModel")
+print("Building kalmanFilterFrbsModel")
 kalmanFilterFrbsModel = buildFrbs(kalmanFilterOptim$par, preferKalmanFilterRule)
+print("Done building kalmanFilterFrbsModel")
 
 # Save models
 save(annFrbsModel, file="new_baselines/annFrbsModel.RData")
-save(kalmanFilterFrbsModel, file="new_baselines/kalmanFilterFrbsModel")
+save(kalmanFilterFrbsModel, file="new_baselines/kalmanFilterFrbsModel.RData")
+
+print("Saved frbsModels")
 
 # Make two sets of predictions, one for each frbs-model
+print("Start predicting with annFrbs")
 annFrbsPredictions <- data.frame(predict(annFrbsModel, frbsTestingInputs)$predicted.val)
+print("Done predicting with annFrbs")
+print("Start predicting with kalmanFilterFrbs")
 kalmanFilterFrbsPredictions <- data.frame(predict(kalmanFilterFrbsModel, frbsTestingInputs)$predicted.val)
+print("Done predicting with kalmanFilterFrbs")
 
 # Make final predictions according to the rule base preferring the best performing baseline
 finalPredictions <- data.frame(seq(1, numberOfTestingExamples, 1))
@@ -214,7 +226,9 @@ storePredictions <- function(predictions) {
 # Store predictions to file
 finalPredictions$dateAndTime <- as.character(frbsTestingDataSet$dateAndTime)
 colnames(finalPredictions) = c("frbsPrediction", "dateAndTime")
-#storePredictions(finalPredictions)
+print("Storing predictions")
+storePredictions(finalPredictions)
+print("Done storing predictions")
 
 # comparison <- data.frame(frbsTestingData, frbsPredictions, actualTravelTimesTesting)
 # colnames(comparison) <- c("ANN Prediction", "Kalman Filter Prediction",  "FRBS Predictions", "Actual Travel Time")
