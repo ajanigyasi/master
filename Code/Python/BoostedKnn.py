@@ -16,7 +16,7 @@ testingStartDate = "20150226"
 testingEndDate = "20150331"
 directory = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
 predictionsDirectory = "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/"
-model = "dataset"
+model = "filteredDataset"
 
 # Read training data set
 trainingDataSet = getDataSet(trainingStartDate, trainingEndDate, directory, model)
@@ -43,27 +43,3 @@ writeToFile = np.zeros((nofTestingRows,), dtype=[('dateAndTime', datetime), ('bo
 writeToFile['dateAndTime'] = testingDataSet['dateAndTime']
 writeToFile['boostedKnnPrediction'] = boostedKnnPrediction
 saveDataSet(predictionsDirectory, '_boostedknn.csv', writeToFile, ('%s;%f'), 'dateAndTime;boostedKnnPrediction')
-
-# Boosted SVR
-#boostedSvr = AdaBoostRegressor(svm.SVR(), n_estimators=100, random_state=np.random.RandomState(1))
-#boostedSvr.fit(trainingInput, trainingTarget)
-#boostedSvrPrediction = boostedSvr.predict(testingInput)
-#writeToFile = np.zeros((nofTestingRows,), dtype=[('dateAndTime', datetime), ('boostedSvrPrediction', np.float)])
-#writeToFile['dateAndTime'] = testingDataSet['dateAndTime']
-#writeToFile['boostedSvrPrediction'] = boostedSvrPrediction
-#saveDataSet(directory, '20150129_boostedsvr.csv', writeToFile, ('%s;%f'), 'dateAndTime;boostedSvrPrediction')
-
-# Plot difference between the weak learners, and the boosted learner
-#plt.figure()
-#X = np.array([i for i in range(0, nofTestingRows)])
-#print("X.shape: ", X.shape)
-#print("knnPrediction.shape: ", knnPrediction.shape)
-#print("boostedKnnPrediction.shape: ", boostedKnnPrediction.shape)
-#plt.plot(X, knnPrediction, c='r', label='n_estimators=1', linewidth=1)
-#plt.plot(X, boostedKnnPrediction, c='r', label='n_estimators=100', linewidth=1)
-#plt.plot(X, testingTarget, c='b', label='testing_target', linewidth=1)
-#plt.xlabel('data')
-#plt.ylabel('target')
-#plt.title('Boosted KNN')
-#plt.legend()
-#plt.show()
