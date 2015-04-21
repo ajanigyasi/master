@@ -103,32 +103,31 @@ if __name__ == '__main__':
     verificationset = dataset[verification_index:]
     target_values = target_values[verification_index:]
     predictions = zeros((len(target_values), ), dtype=[('dateAndTime', datetime), ('lokrr', float)])
-
-    print 'Training kernels'
-    print 'Training on data from', from_date, 'to', (test_start_date - timedelta(days=1)).date()
-    print 'Testing on data from', test_start_date.date(), 'to', verification_start_date.date()
     
-    l = lokrr(trainingset, testingset, 1)
+    #l = lokrr(trainingset, testingset, 1)
 
-    print 'Training done'
+    # with open('lokrr_object2.pkl', 'wb') as output:
+    #     pickle.dump(l, output, pickle.HIGHEST_PROTOCOL)
 
-    with open('lokrr_object2.pkl', 'wb') as output:
-        pickle.dump(l, output, pickle.HIGHEST_PROTOCOL)
+    #load lokrr object from file
+    file = open('lokrr_object2.pkl', 'rb')
+    file.seek(0)
+    l = pickle.load(file)
     
-    # h = []
+    h = []
 
-    # for i in range(0, len(verificationset)):
-    #     curr = get_data_point(verificationset, i)
-    #     while(len(h) > 0 and h[0][0] < curr[0]): #new travel times are observed prior to the current time
-    #         index = heapq.heappop(h)[1]
-    #         observation = get_data_point(verificationset, index)
-    #         l.update(observation)
-    #     predictions[i] = (curr[0], l.predict(curr[0:3]))
-    #     print predictions[i]
-    #     heapq.heappush(h, (curr[0] + timedelta(seconds=curr[3]), i))
+    for i in range(0, len(verificationset)):
+        curr = get_data_point(verificationset, i)
+        while(len(h) > 0 and h[0][0] < curr[0]): #new travel times are observed prior to the current time
+            index = heapq.heappop(h)[1]
+            observation = get_data_point(verificationset, index)
+            l.update(observation)
+        predictions[i] = (curr[0], l.predict(curr[0:3]))
+        print predictions[i]
+        heapq.heappush(h, (curr[0] + timedelta(seconds=curr[3]), i))
 
-    # predictions['lokrr'] = denormalize(predictions['lokrr'], min_travel_time, max_travel_time)
+    predictions['lokrr'] = denormalize(predictions['lokrr'], min_travel_time, max_travel_time)
     
-    # save_path = "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/"
-    # saveDataSet(save_path, "_lokrr.csv", predictions, ('%s;%f'), 'dateAndTime;lokrr')
+    save_path = "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/"
+    #saveDataSet(save_path, "_lokrr.csv", predictions, ('%s;%f'), 'dateAndTime;lokrr')
 
