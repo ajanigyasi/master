@@ -108,9 +108,9 @@ if __name__ == '__main__':
                     (times_in_verificationset <= time(21, 0)))
     verificationset = verificationset[indices]
 
-    target_values = target_values[verification_index:]
-    target_values = target_values[indices]
-    predictions = zeros((len(target_values), ), dtype=[('dateAndTime', datetime), ('lokrr', float)])
+    # target_values = target_values[verification_index:]
+    # target_values = target_values[indices]
+    predictions = zeros((len(verificationset), ), dtype=[('dateAndTime', datetime), ('lokrr', float)])
     
     #l = lokrr(trainingset, testingset, 1)
 
