@@ -101,7 +101,15 @@ if __name__ == '__main__':
     trainingset = dataset[0:test_index]
     testingset = dataset[test_index:verification_index]
     verificationset = dataset[verification_index:]
+
+    #TODO: only keep rows between 6AM and 9PM in verificationset
+    times_in_verificationset = get_list_of_times(verificationset['dateAndTime'])
+    indices = where((times_in_verificationset >= time(6, 0)) &
+                    (times_in_verificationset <= time(21, 0)))
+    verificationset = verificationset[indices]
+
     target_values = target_values[verification_index:]
+    target_values = target_values[indices]
     predictions = zeros((len(target_values), ), dtype=[('dateAndTime', datetime), ('lokrr', float)])
     
     #l = lokrr(trainingset, testingset, 1)
