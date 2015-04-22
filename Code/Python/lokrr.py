@@ -71,9 +71,9 @@ class lokrr:
     def update(self, data_point):
         interval =  roundToNearestFiveMinute(data_point[0])
         for i in range(-self.window_size, self.window_size+1):
-            time = (interval + timedelta(minutes=(i*5))).time()
-            if ((time >= time(6, 0)) & (time <= time(9, 0))):
-                k = self.kernel_map[str(time)]
+            kernel_time = (interval + timedelta(minutes=(i*5))).time()
+            if ((kernel_time >= time(6, 0)) & (kernel_time <= time(9, 0))):
+                k = self.kernel_map[str(kernel_time)]
                 k.update(data_point[1:3], data_point[3])
 
 def normalize_dataset(dataset):
@@ -138,5 +138,5 @@ if __name__ == '__main__':
     predictions['lokrr'] = denormalize(predictions['lokrr'], min_travel_time, max_travel_time)
     
     save_path = "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/"
-    #saveDataSet(save_path, "_lokrr.csv", predictions, ('%s;%f'), 'dateAndTime;lokrr')
+    saveDataSet(save_path, "_lokrr.csv", predictions, ('%s;%f'), 'dateAndTime;lokrr')
 
