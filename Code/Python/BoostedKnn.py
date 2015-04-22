@@ -3,9 +3,7 @@ import numpy as np
 import scipy
 from datetime import *
 import matplotlib.pyplot as plt
-from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import AdaBoostRegressor
-from sklearn.neural_network import BernoulliRBM
 from sklearn import neighbors, svm
 from utils import *
 
@@ -37,9 +35,15 @@ testingTarget = np.array(testingDataSet['actualTravelTime'])
 # Boosted knn
 n_neighbors = 50
 boostedKnn = AdaBoostRegressor(neighbors.KNeighborsRegressor(n_neighbors, weights='distance'), n_estimators=50, random_state=np.random.RandomState(1))
+print("Training boosted knn")
 boostedKnn.fit(trainingInput, trainingTarget)
+print("Done training boosted knn")
+print("Predicting from boosted knn model")
 boostedKnnPrediction = boostedKnn.predict(testingInput)
+print("Done predicting from boosted knn model")
+print("Writing results to file")
 writeToFile = np.zeros((nofTestingRows,), dtype=[('dateAndTime', datetime), ('boostedKnnPrediction', np.float)])
 writeToFile['dateAndTime'] = testingDataSet['dateAndTime']
 writeToFile['boostedKnnPrediction'] = boostedKnnPrediction
 saveDataSet(predictionsDirectory, '_boostedknn.csv', writeToFile, ('%s;%f'), 'dateAndTime;boostedKnnPrediction')
+print("Boosted knn done")
