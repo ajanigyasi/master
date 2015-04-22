@@ -9,8 +9,8 @@ source("dataSetGetter.R")
 # Set start and end dates for training and testing
 # TODO: set correct dates
 frbsTrainingStartDate = "20150226"
-frbsTrainingEndDate = "20150228"
-frbsTestingStartDate = "20150301"
+frbsTrainingEndDate = "20150304"
+frbsTestingStartDate = "20150305"
 frbsTestingEndDate = "20150331"
 
 # Set directories for data sets and predictions
@@ -188,8 +188,8 @@ kalmanFilterFrbsModel = buildFrbs(kalmanFilterOptim$par, preferKalmanFilterRule)
 print("Done building kalmanFilterFrbsModel")
 
 # Save models
-save(annFrbsModel, file="new_baselines/annFrbsModel.RData")
-save(kalmanFilterFrbsModel, file="new_baselines/kalmanFilterFrbsModel.RData")
+save(annFrbsModel, file="new_baselines/annFrbsModel_one_week.RData")
+save(kalmanFilterFrbsModel, file="new_baselines/kalmanFilterFrbsModel_one_week.RData")
 
 print("Saved frbsModels")
 
@@ -216,7 +216,7 @@ storePredictions <- function(predictions) {
   #create data frame from testingSet for each day in list of dates and write to csv file
   for (i in 1:length(listOfDates)) {
     date = listOfDates[i]
-    write.table(predictions[predictions$dateAndTime == date, c("dateAndTime", "frbsPrediction")], file = paste(predictionsDirectory, gsub("-", "", as.character(date)), "_frbs.csv", sep = ""), sep = ";", row.names=FALSE)
+    write.table(predictions[predictions$dateAndTime == date, c("dateAndTime", "frbsPrediction")], file = paste(predictionsDirectory, gsub("-", "", as.character(date)), "_frbs_one_week.csv", sep = ""), sep = ";", row.names=FALSE)
   }
 }
 

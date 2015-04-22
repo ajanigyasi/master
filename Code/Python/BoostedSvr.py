@@ -35,10 +35,16 @@ testingInput = np.column_stack((testingFiveMinuteMean, testingTrafficVolume))
 testingTarget = np.array(testingDataSet['actualTravelTime'])
 
 # Boosted SVR
-boostedSvr = AdaBoostRegressor(svm.SVR(C=0.5, gamma=-0.02909994750870712934656920757212), n_estimators=50, random_state=np.random.RandomState(1))
+boostedSvr = AdaBoostRegressor(svm.SVR(C=0.5, gamma=0.02909994750870712934656920757212), n_estimators=25, random_state=np.random.RandomState(1))
+print("Training boosted svr")
 boostedSvr.fit(trainingInput, trainingTarget)
+print("Done training boosted svr")
+print("Predicting with boosted svr")
 boostedSvrPrediction = boostedSvr.predict(testingInput)
+print("Done predicting with boosted svr")
+print("Writing predictions to file")
 writeToFile = np.zeros((nofTestingRows,), dtype=[('dateAndTime', datetime), ('boostedSvrPrediction', np.float)])
 writeToFile['dateAndTime'] = testingDataSet['dateAndTime']
 writeToFile['boostedSvrPrediction'] = boostedSvrPrediction
 saveDataSet(directory, '_boostedsvr.csv', writeToFile, ('%s;%f'), 'dateAndTime;boostedSvrPrediction')
+print("Boosted SVR done!")
