@@ -40,14 +40,19 @@ generatePlot <- function(date1, date2, mod1, mod2, dir1, dir2, plotDir, plotName
   }
 
   # Generate plot and save to file
-  png(paste(plotDir, date1, "-", date2, "_", plotName, ".png", sep=""), width=1404, height=302)
+  if(date1==date2){
+    png(paste(plotDir, plotName, "_",  date1, ".png", sep=""), width=718, height=302)
+  } else{
+    png(paste(plotDir, plotName, "_",  date1, "-", date2,".png", sep=""), width=718, height=302)
+  }
   plot(dataSet1$dateAndTime, travelTimes1, type="l", col="black", xlab=xlab, ylab=ylab, main="")
   lines(dataSet2$dateAndTime, travelTimes2, col="green", xlab=xlab, ylab=ylab, main="")
   dev.off()
 }
 
 date1 = "20150212"
-date2 = "20150218"
+date2 = "20150213"
+#listOfDates <- seq(firstDate, lastDate, by="days")
 mod1 = "dataset"
 mod2 = "delayedEkfPredictions"
 dir1 = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
