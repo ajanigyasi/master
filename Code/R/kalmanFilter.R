@@ -21,17 +21,17 @@ getKalmanFilterPredictions <- function(startDate, testingStartDate, endDate, dir
   #print("Find optimal parameters for filter")
   #timesMLE <- dlmMLE(observations, par, timesBuild, m0=observations[1], C0=sd(observations))
   #save(timesMLE, file="timesMLE.RData")
-  print("Loading timesMLE")
+  #print("Loading timesMLE")
   #timesMLE <- load(file='new_baselines/timesMLE.RData')
-  print(class(timesMLE))
+  #print(class(timesMLE))
   
   # Build model from the optimal parameters
   #print("Build model from the optimal parameters")
   #timesMod <- timesBuild(timesMLE$par, m0=observations[1], C0=sd(observations))
   #save(timesMod, file="timesMod.RData")
-  print("Loading timesMod")
+  #print("Loading timesMod")
   #timesMod <- load(file='new_baselines/timesMod.RData')
-  print(class(timesMod))
+  #print(class(timesMod))
   
   # Build filter based on model
   #print("Build filter based on model")
@@ -43,7 +43,7 @@ getKalmanFilterPredictions <- function(startDate, testingStartDate, endDate, dir
   # Get the means of the distribution of the state vector at time t, given the observations from time 1 to time t-1
   print("Extracting one-step forecasts")
   timesFore <- timesFilt$a
-  save(timesFore, file="main_timesFore.RData")
+  #save(timesFore, file="main_timesFore.RData")
   
   # Extract predictions for testing dates
   splitDate <- as.Date(c(testingStartDate), "%Y%m%d")
