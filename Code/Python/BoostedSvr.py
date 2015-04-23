@@ -8,6 +8,7 @@ from sklearn.ensemble import AdaBoostRegressor
 from sklearn.neural_network import BernoulliRBM
 from sklearn import neighbors, svm
 from utils import *
+import pickle
 
 # Initialize start date, end date, directory and model
 trainingStartDate = "20150205"
@@ -57,6 +58,10 @@ testingTarget = np.array(testingTargets)
 # Boosted SVR
 boostedSvr = AdaBoostRegressor(svm.SVR(C=0.5, gamma=0.02909994750870712934656920757212), n_estimators=50, random_state=np.random.RandomState(1))
 boostedSvr.fit(trainingInput, trainingTarget)
+
+with open('boostedSVR_object.pkl', 'wb') as output:
+	pickle.dump(boostedSvr, output, pickle.HIGHEST_PROTOCOL)
+
 boostedSvrPrediction = boostedSvr.predict(testingInput)
 boostedSvrPrediction = denormalize(boostedSvrPrediction, minY, maxY)
 writeToFile = np.zeros((nofTestingRows,), dtype=[('dateAndTime', datetime), ('boostedSvrPrediction', np.float)])
