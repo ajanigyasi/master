@@ -79,19 +79,19 @@ computeRMSE <- function(date1, date2, mod1, mod2, dir1, dir2, ...){
   return(rmse(travelTimes1, travelTimes2))
 }
 
-date1 = "20150305"
+date1 = "20150226"
 date2 = "20150331"
 listOfDates <- seq(as.Date(date1, "%Y%m%d"), as.Date(date2, "%Y%m%d"), by="days")
 mod1 = "filteredDataset"
-mod2 = "frbs"
+mod2 = "baselinePredictions"
 dir1 = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
 dir2 = "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/"
 plotDir = "../../Plots/"
-plotName = "frbs_one_Week"
-mod2Col = "frbsPrediction"
+plotName = "kalmanFilter"
+mod2Col = "kalmanFilter"
 print(computeRMSE(date1, date2, mod1, mod2, dir1, dir2, mod2Col=mod2Col))
-# for(i in 1:length(listOfDates)){
-#   date = listOfDates[i]
-#   generatePlot(date, date, mod1, mod2, dir1, dir2, plotDir, plotName, mod2Col=mod2Col)
-#   #print(computeRMSE(date, date, mod1, mod2, dir1, dir2, mod2Col=mod2Col))
-# }
+for(i in 1:length(listOfDates)){
+  date = listOfDates[i]
+  generatePlot(date, date, mod1, mod2, dir1, dir2, plotDir, plotName, mod2Col=mod2Col)
+ # print(computeRMSE(date, date, mod1, mod2, dir1, dir2, mod2Col=mod2Col))
+}
