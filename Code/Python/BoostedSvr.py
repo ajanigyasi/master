@@ -33,14 +33,14 @@ testingFiveMinuteMean = np.array(testingDataSet['fiveMinuteMean'])
 testingTrafficVolume = np.array(testingDataSet['trafficVolume'])
 testingTargets = testingDataSet['actualTravelTime']
 
-minX1 = min(trainingFiveMinuteMean, testingFiveMinuteMean)
-maxX1 = max(trainingFiveMinuteMean, testingFiveMinuteMean)
+minX1 = min(np.row_stack(trainingFiveMinuteMean, testingFiveMinuteMean))
+maxX1 = max(np.row_stack(trainingFiveMinuteMean, testingFiveMinuteMean))
 
-minX2 = min(trainingTrafficVolume, testingTrafficVolume)
-maxX2 = max(trainingTrafficVolume, testingTrafficVolume)
+minX2 = min(np.row_stack(trainingTrafficVolume, testingTrafficVolume))
+maxX2 = max(np.row_stack(trainingTrafficVolume, testingTrafficVolume))
 
-minY = min(trainingTargets, testingTargets)
-maxY = max(trainingTargets, testingTargets)
+minY = min(np.row_stack(trainingTargets, testingTargets))
+maxY = max(np.row_stack(trainingTargets, testingTargets))
 
 trainingFiveMinuteMean = normalize(trainingFiveMinuteMean, minX1, maxX1)
 trainingTrafficVolume = normalize(trainingTrafficVolume, minX2, maxX2)
