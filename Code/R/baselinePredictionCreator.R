@@ -59,9 +59,9 @@ dataSet$trafficVolume <- preProcess(dataSet, "actualTravelTime")
 splitIndex <- which(dataSet$dateAndTime >= as.Date(c(splitDate), "%Y%m%d"))[1]
 testingSet <- dataSet[splitIndex:nrow(dataSet), ]
 
-load("new_baselines/radial_svmMod.RData")
-load("new_baselines/annMod.RData")
-load("new_baselines/knnMod.RData")
+load("new_baselines/main_radial_svmMod.RData")
+load("new_baselines/main_annMod.RData")
+load("new_baselines/main_knnMod_comp.RData")
 
 baselines <- list(radial.svm, annMod, knnMod)
 
