@@ -69,7 +69,7 @@ if(lastAnnIndex==numberOfTestingExamples){
 }
 
 min.value <- 0#min(actualTravelTimes)
-max.value <- max(frbsTrainingTargets)
+max.value <- max(frbsTrainingTargets)+1
 
 #the predictions from the baselines are used as training data for the frbs
 x <- data.frame(cbind(frbsTrainingInputs$nnet, frbsTrainingInputs$kalmanFilter))
@@ -148,7 +148,7 @@ f <- objective.func
 
 #constraints:
 # a1 >= min.value
-# b1 -a1 >= 0
+# b1 - a1 >= 0
 # c1 - b1 >= 0
 # a2 - a1 >= 0
 # b2 - a2 >= 0
@@ -206,8 +206,8 @@ kalmanFilterFrbsModel = buildFrbs(kalmanFilterOptim$par, preferKalmanFilterRule)
 print("Done building kalmanFilterFrbsModel")
 
 # Save models
-save(annFrbsModel, file="new_baselines/annFrbsModel_one_week.RData")
-save(kalmanFilterFrbsModel, file="new_baselines/kalmanFilterFrbsModel_one_week.RData")
+save(annFrbsModel, file="new_baselines/annFrbsModel_new.RData")
+save(kalmanFilterFrbsModel, file="new_baselines/kalmanFilterFrbsModel_new.RData")
 
 print("Saved frbsModels")
 
@@ -234,7 +234,7 @@ storePredictions <- function(predictions) {
   #create data frame from testingSet for each day in list of dates and write to csv file
   for (i in 1:length(listOfDates)) {
     date = listOfDates[i]
-    write.table(predictions[predictions$dateAndTime == date, c("dateAndTime", "frbsPrediction")], file = paste(predictionsDirectory, gsub("-", "", as.character(date)), "_frbs_one_week.csv", sep = ""), sep = ";", row.names=FALSE)
+    write.table(predictions[predictions$dateAndTime == date, c("dateAndTime", "frbsPrediction")], file = paste(predictionsDirectory, gsub("-", "", as.character(date)), "_frbs_new.csv", sep = ""), sep = ";", row.names=FALSE)
   }
 }
 
