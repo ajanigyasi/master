@@ -22,7 +22,7 @@ model = 'baselinePredictions'
 
 # Read training inputs and training targets
 frbsTrainingInputs = getDataSet(frbsTrainingStartDate, frbsTrainingEndDate, predictionsDirectory, model)
-frbsTrainingTargets = getDataSet(frbsTrainingStartDate, frbsTrainingEndDate, dataSetDirectory, "dataset", onlyActualTravelTimes=TRUE)
+frbsTrainingTargets = getDataSet(frbsTrainingStartDate, frbsTrainingEndDate, dataSetDirectory, "filteredDataset", onlyActualTravelTimes=TRUE)
 
 q <- quantile(frbsTrainingTargets$combinedDataSet.actualTravelTime, probs=seq(0, 1, 0.1))
 theta <- c(q[1], q[3], q[5], q[4], q[6], q[8], q[7], q[9], q[11])
