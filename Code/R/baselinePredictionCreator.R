@@ -38,7 +38,8 @@ storePredictions <- function() {
   #create data frame from testingSet for each day in list of dates and write to csv file
   for (i in 1:length(listOfDates)) {
     date = listOfDates[i]
-    write.table(testingSet[testingSet$dateAndTime == date, c("dateAndTime", "svmRadial", "nnet", "kknn")], file = paste(directory, "predictions/", gsub("-", "", as.character(date)), "_baselinePredictions.csv", sep = ""), sep = ";", row.names=FALSE)
+    #write.table(testingSet[testingSet$dateAndTime == date, c("dateAndTime", "svmRadial", "nnet", "kknn")], file = paste(directory, "predictions/", gsub("-", "", as.character(date)), "_baselinePredictions.csv", sep = ""), sep = ";", row.names=FALSE)
+    write.table(testingSet[testingSet$dateAndTime == date, c("dateAndTime", "nnet")], file = paste(directory, "predictions/", gsub("-", "", as.character(date)), "_nnetPredictions.csv", sep = ""), sep = ";", row.names=FALSE)
   }
 }
 
@@ -59,11 +60,12 @@ dataSet$trafficVolume <- preProcess(dataSet, "actualTravelTime")
 splitIndex <- which(dataSet$dateAndTime >= as.Date(c(splitDate), "%Y%m%d"))[1]
 testingSet <- dataSet[splitIndex:nrow(dataSet), ]
 
-load("new_baselines/main_radial_svmMod.RData")
-load("new_baselines/main_annMod.RData")
-load("new_baselines/main_knnMod_comp.RData")
+#load("new_baselines/main_radial_svmMod.RData")
+load("new_baselines/main_annMod2.RData")
+#load("new_baselines/main_knnMod_comp.RData")
 
-baselines <- list(radial.svm, annMod, knnMod)
+#baselines <- list(radial.svm, annMod, knnMod)
+baselines <- list(annMod)
 
 getPredictions(baselines)
 

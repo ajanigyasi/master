@@ -88,10 +88,10 @@ dir1 = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
 dir2 = "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/"
 plotDir = "../../Plots/"
 plotName = "kalmanFilter"
-mod2Col = "kalmanFilter"
+mod2Col = "svmRadial"
 print(computeRMSE(date1, date2, mod1, mod2, dir1, dir2, mod2Col=mod2Col))
-for(i in 1:length(listOfDates)){
-  date = listOfDates[i]
-  generatePlot(date, date, mod1, mod2, dir1, dir2, plotDir, plotName, mod2Col=mod2Col)
- # print(computeRMSE(date, date, mod1, mod2, dir1, dir2, mod2Col=mod2Col))
-}
+# for(i in 1:length(listOfDates)){
+#   date = listOfDates[i]
+#   generatePlot(date, date, mod1, mod2, dir1, dir2, plotDir, plotName, mod2Col=mod2Col)
+#  # print(computeRMSE(date, date, mod1, mod2, dir1, dir2, mod2Col=mod2Col))
+# }
