@@ -10,7 +10,7 @@ preProcess <- function(data, column) {
 
 startDate <- "20150205"
 endDate <- "20150331"
-splitDate <- "20150226"
+splitDate <- "20150319"
 directory <- "../../Data/Autopassdata/Singledatefiles/Dataset/"
 
 # Get data set from startDate to endDate
@@ -31,4 +31,4 @@ ctrl <- trainControl(verboseIter = TRUE, method='none')
 #ann_grid <- expand.grid(size = c(1, 2, 4, 8, 16), decay=c(0, 1e-4, 1e-1))
 ann_grid <- data.frame(size=16, decay=1e-4)
 annMod = train(formula, trainingSet[, -1], method="nnet", trControl = ctrl, tuneGrid=ann_grid, maxit=10000)
-save(annMod, file="new_baselines/main_annMod.RData")
+save(annMod, file="new_baselines/main_annMod2.RData")
