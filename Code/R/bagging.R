@@ -47,6 +47,9 @@ directory <- "../../Data/Autopassdata/Singledatefiles/Dataset/"
 # Get data set from startDate to endDate
 dataSet <- getDataSet(startDate, endDate, paste(directory, "raw/", sep=""), 'filteredDataset')
 
+min.travel.time <- min(dataSet$actualTravelTime)
+max.travel.time <- max(dataSet$actualTravelTime)
+
 #normalize data and partition into training and testing set
 dataSet$fiveMinuteMean <- preProcess(dataSet, "fiveMinuteMean")
 dataSet$trafficVolume <- preProcess(dataSet, "trafficVolume")
@@ -63,6 +66,7 @@ models = generateModels(nrOfModels, nrow(trainingSet), trainingSet, "svmRadial",
 
 #Make predictions
 predictions <- makePrediction(models, testingSet[, c(-1, -4)])
+predictions <- deNormalize(predictions, min.travel.time, max.travel.time)
 
 #write bagging predictions to file
 firstDate <- as.Date(testingSet[1, "dateAndTime"])
@@ -71,9 +75,10 @@ listOfDates <- seq(firstDate, lastDate, by="days")
 
 #create data frame from testingSet for each day in list of dates and write to csv file
 for (i in 1:length(listOfDates)) {
-  date = listOfDates[i]
-  table <- testingSet[testingSet$dateAndTime == date, c("dateAndTime")]
-  table <- data.frame(table, predictions)
+  date <- listOfDates[i]
+  indices <-testingSet$dateAndTime == date
+  table <- testingSet[indices, c("dateAndTime")]
+  table <- data.frame(table, predictions[indices, ])
   colnames(table)[1] <- "dateAndTime"
   write.table(table, file = paste(directory, "predictions/", gsub("-", "", as.character(date)), "_bagging.csv", sep = ""), sep = ";", row.names=FALSE)
 }
