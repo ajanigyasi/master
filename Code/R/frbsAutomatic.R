@@ -52,7 +52,8 @@ colnames(frbsTestingTargets) = c("ActualTravelTime")
 numberOfTestingExamples = nrow(frbsTestingTargets)
 
 # Make data frame which contains both testing inputs and testing targets
-frbsTrainingDataSet <- data.frame(frbsTestingInputs, frbsTestingTargets)
+frbsTrainingDataSet <- data.frame(frbsTrainingInputs$nnet, frbsTrainingInputs$kalmanFilter, frbsTrainingTargets)
+data.train = data.matrix(frbsTrainingDataSet)
 
 # Make control list for frbs training
 frbsAutoCtrl = list(num.labels=matrix(c(3, 3, 3), nrow=1, ncol=3), type.mf="TRIANGLE", type.tnorm="MIN",type.defuz="COG", type.implication.func="ZADEH", name="frbsAuto")
@@ -68,7 +69,7 @@ maxOut = max(frbsTestingTargets$ActualTravelTime)
 range = matrix(c(minAnn, maxAnn, minKf, maxKf, minOut, maxOut), nrow=2, ncol=3)
 
 # Build frbs-model with auto generated rules
-frbsAutoMod <- frbs.learn(frbsTrainingDataSet, range.data = range, control=frbsAutoCtrl)
+frbsAutoMod <- frbs.learn(data.train, range.data = range, control=frbsAutoCtrl)
 
 # Save frbs-model to file
 save(frbsAutoMod, file="new_baselines/frbsAuto.RData")
