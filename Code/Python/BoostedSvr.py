@@ -57,13 +57,16 @@ testingTarget = np.array(testingTargets)
 
 # Boosted SVR
 boostedSvr = AdaBoostRegressor(svm.SVR(C=0.5, gamma=0.02909994750870712934656920757212), n_estimators=50, random_state=np.random.RandomState(1))
+print("Training Boosted SVR model")
 boostedSvr.fit(trainingInput, trainingTarget)
-
+print("Done training Boosted SVR model")
+print("Saving model to file")
 with open('boostedSVR_object.pkl', 'wb') as output:
 	pickle.dump(boostedSvr, output, pickle.HIGHEST_PROTOCOL)
-
+print("Making predictions")
 boostedSvrPrediction = boostedSvr.predict(testingInput)
 boostedSvrPrediction = denormalize(boostedSvrPrediction, minY, maxY)
+print("Write predictions to file")
 writeToFile = np.zeros((nofTestingRows,), dtype=[('dateAndTime', datetime), ('boostedSvrPrediction', np.float)])
 writeToFile['dateAndTime'] = testingDataSet['dateAndTime']
 writeToFile['boostedSvrPrediction'] = boostedSvrPrediction
