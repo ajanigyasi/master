@@ -56,7 +56,7 @@ testingInput = np.column_stack((testingFiveMinuteMean, testingTrafficVolume))
 testingTarget = np.array(testingTargets)
 
 # Boosted SVR
-boostedSvr = AdaBoostRegressor(svm.SVR(C=0.5, gamma=0.02909994750870712934656920757212), n_estimators=50, random_state=np.random.RandomState(1))
+boostedSvr = AdaBoostRegressor(svm.SVR(C=0.5, gamma=0.02909994750870712934656920757212), n_estimators=25, random_state=np.random.RandomState(1))
 print("Training Boosted SVR model")
 boostedSvr.fit(trainingInput, trainingTarget)
 print("Done training Boosted SVR model")
