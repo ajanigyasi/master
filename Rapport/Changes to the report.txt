@@ -4,3 +4,4 @@ The report has promising results, however there are still some challenges to ove
 - Hvordan skal biblioteker skriver i rapporten: caret, kursiv(caret), "caret"
 - Kommenter på det at trafikktellingene ikke er 100% representative.
 - Lag figurer som viser strukturen til systemet.
+- Skjekk at alle steder det står "Section", "Equation", "Figure", "Table" at det er skrevet med stor forbokstav
