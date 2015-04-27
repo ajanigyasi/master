@@ -32,7 +32,11 @@ generatePlot <- function(date1, date2, mod1, mod2, dir1, dir2, plotDir, plotName
   dev.off()
 }
 
-getTravelTimes <- function(date1, date2, mod1, mod2, dir1, dir2, mod1Col=NULL, mod2Col=NULL){
+getNumberOfSeconds <- function(time){
+  return(as.numeric(format(time, "%H"))*3600 + as.numeric(format(time, "%M"))*60 + as.numeric(format(time, "%S")))
+}
+
+getTravelTimes <- function(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod1Col=NULL, mod2Col=NULL){
   # Get data set
   dataSet1 = getDataSet(date1, date2, dir1, mod1)  
   dataSet2 = getDataSet(date1, date2, dir2, mod2)
@@ -40,6 +44,17 @@ getTravelTimes <- function(date1, date2, mod1, mod2, dir1, dir2, mod1Col=NULL, m
   # Convert dateAndTime columns to chron objects
   dataSet1$dateAndTime = strptime(dataSet1$dateAndTime, format="%Y-%m-%d %H:%M:%S")
   dataSet2$dateAndTime = strptime(dataSet2$dateAndTime, format="%Y-%m-%d %H:%M:%S")
+  
+  
+  # Filter data set on time
+  dataSet1$time = getNumberOfSeconds(dataSet1$dateAndTime)
+  dataSet2$time = getNumberOfSeconds(dataSet2$dateAndTime)
+  
+  t1 = getNumberOfSeconds(strptime(time1, format="%H:%M:%S"))
+  t2 = getNumberOfSeconds(strptime(time2, format="%H:%M:%S"))
+  
+  dataSet1 = dataSet1[(dataSet1$time >= t1) & (dataSet1$time <= t2), ]
+  dataSet2 = dataSet2[(dataSet2$time >= t1) & (dataSet2$time <= t2), ]
   
   # Initialize vectors for holding travel times
   travelTimes1 = seq(from=1, to=nrow(dataSet1))
@@ -70,28 +85,36 @@ getTravelTimes <- function(date1, date2, mod1, mod2, dir1, dir2, mod1Col=NULL, m
   return(travelTimes)
 }
 
-computeRMSE <- function(date1, date2, mod1, mod2, dir1, dir2, ...){
+computeRMSE <- function(date1, date2, time1, time2, mod1, mod2, dir1, dir2, ...){
   # Get travel times
-  travelTimes = getTravelTimes(date1, date2, mod1, mod2, dir1, dir2, ...)
+  travelTimes = getTravelTimes(date1, date2, time1, time2, mod1, mod2, dir1, dir2, ...)
   travelTimes1 = travelTimes[, mod1]
   travelTimes2 = travelTimes[, mod2]
   
   return(rmse(travelTimes1, travelTimes2))
 }
 
-date1 = "20150305"
+date1 = "20150212"
 date2 = "20150331"
+time1 = "06:00:00"
+time2 = "21:00:00"
 listOfDates <- seq(as.Date(date1, "%Y%m%d"), as.Date(date2, "%Y%m%d"), by="days")
-mod1 = "filteredDataset"
-mod2 = "averageEnsemble"
+mod1 = "dataset"
+mod2 = "lokrr"
 dir1 = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
 dir2 = "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/"
 plotDir = "../../Plots/"
 plotName = "averageEnsemble"
-mod2Col = "Average"
-print(computeRMSE(date1, date2, mod1, mod2, dir1, dir2, mod2Col=mod2Col))
-for(i in 1:length(listOfDates)){
-  date = listOfDates[i]
-  generatePlot(date, date, mod1, mod2, dir1, dir2, plotDir, plotName, mod2Col=mod2Col)
- # print(computeRMSE(date, date, mod1, mod2, dir1, dir2, mod2Col=mod2Col))
-}
+mod2Col = "lokrr"
+print(mod2Col)
+print(computeRMSE(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col))
+# for(i in 1:length(listOfDates)){
+#   date = listOfDates[i]
+#   generatePlot(date, date, mod1, mod2, dir1, dir2, plotDir, plotName, mod2Col=mod2Col)
+#  # print(computeRMSE(date, date, mod1, mod2, dir1, dir2, mod2Col=mod2Col))
+# }
+# for(i in 1:25){
+#   col = paste("X", i, sep="")
+#   print(col)
+#   print(computeRMSE(date1, date2, mod1, mod2, dir1, dir2, mod2Col=col))
+# }
