@@ -1,6 +1,16 @@
 library(Metrics)
 source('dataSetGetter.R')
 
+baselinesMinErr = -1516.368
+baselinesMaxErr = 1298.659
+baselinesMinDens = 0.0
+baselinesMaxDens = 0.0118077
+
+onlineMinErr = -2970
+onlineMaxErr = 2666.809
+onlineMinDens = 0.0
+onlineMaxDens = 0.00496603
+
 # Function for generating plot
 # Date is assumed to be a string representing the date in YYYYMMDD format
 # mod1 is the name of the first model to plot (e.g. "dataset")
@@ -13,9 +23,9 @@ source('dataSetGetter.R')
 # if mod1Col is not set, then the function assumes that the travel times can be extracted from column "actualTravelTimes"
 # mod2Col is an optional parameter that represents the column to extract travel times from in mod1 (e.g. "nnet" in baselinePredictions)
 # if mod2Col is not set, then the function assumes that the travel times can be extracted from column "actualTravelTimes
-generatePlot <- function(date1, date2, mod1, mod2, dir1, dir2, plotDir, plotName, xlab="", ylab="", ...){
+generatePlot <- function(date1, date2, time1, time2, mod1, mod2, dir1, dir2, plotDir, plotName, xlab="", ylab="", ...){
   # Get travel times
-  travelTimes = getTravelTimes(date1, date2, mod1, mod2, dir1, dir2, ...)
+  travelTimes = getTravelTimes(date1, date2, time1, time2, mod1, mod2, dir1, dir2, ...)
   dateAndTime1 = travelTimes[, paste(mod1, "dt", sep="")]
   dateAndTime2 = travelTimes[, paste(mod2, "dt", sep="")]
   travelTimes1 = travelTimes[, mod1]
@@ -29,6 +39,32 @@ generatePlot <- function(date1, date2, mod1, mod2, dir1, dir2, plotDir, plotName
   }
   plot(dateAndTime1, travelTimes1, type="l", col="black", xlab=xlab, ylab=ylab, main="")
   lines(dateAndTime2, travelTimes2, col="green", xlab=xlab, ylab=ylab, main="")
+  dev.off()
+}
+
+generateDistribution <- function(date1, date2, time1, time2, mod1, mod2, dir1, dir2, plotDir, plotName, xlab="", ylab="", ...){
+  # Get travel times
+  travelTimes = getTravelTimes(date1, date2, time1, time2, mod1, mod2, dir1, dir2, ...)
+  dateAndTime1 = travelTimes[, paste(mod1, "dt", sep="")]
+  dateAndTime2 = travelTimes[, paste(mod2, "dt", sep="")]
+  travelTimes1 = travelTimes[, mod1]
+  travelTimes2 = travelTimes[, mod2]
+  
+  error = travelTimes2-travelTimes1
+  density = density(error)
+#   return(c(min(error), max(error), min(density$y), max(density$y)))
+  
+  # Generate plot and save to file
+  if(date1==date2){
+    png(paste(plotDir, plotName, "_",  date1, ".png", sep=""), width=718, height=302)
+  } else{
+    png(paste(plotDir, plotName, "_",  date1, "-", date2,".png", sep=""), width=718, height=302)
+  }
+  
+  mean = paste(" = ", round(mean(error), 4), " ", sep="")
+  standardDeviation = paste(" = ", round(sd(error), 2), sep="")
+  mainTitle = bquote(mu~.(mean)~sigma^2~.(standardDeviation))
+  plot(density, xlab="Error (sec)", ylab="Density (%)", main=mainTitle, ylim=c(0.0, 0.0118077), xlim=c(baselinesMinErr, baselinesMaxErr))
   dev.off()
 }
 
@@ -94,27 +130,46 @@ computeRMSE <- function(date1, date2, time1, time2, mod1, mod2, dir1, dir2, ...)
   return(rmse(travelTimes1, travelTimes2))
 }
 
-date1 = "20150212"
-date2 = "20150331"
-time1 = "06:00:00"
-time2 = "21:00:00"
-listOfDates <- seq(as.Date(date1, "%Y%m%d"), as.Date(date2, "%Y%m%d"), by="days")
-mod1 = "dataset"
-mod2 = "lokrr"
-dir1 = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
-dir2 = "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/"
-plotDir = "../../Plots/"
-plotName = "averageEnsemble"
-mod2Col = "lokrr"
-print(mod2Col)
-print(computeRMSE(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col))
-# for(i in 1:length(listOfDates)){
-#   date = listOfDates[i]
-#   generatePlot(date, date, mod1, mod2, dir1, dir2, plotDir, plotName, mod2Col=mod2Col)
-#  # print(computeRMSE(date, date, mod1, mod2, dir1, dir2, mod2Col=mod2Col))
-# }
-# for(i in 1:25){
-#   col = paste("X", i, sep="")
-#   print(col)
-#   print(computeRMSE(date1, date2, mod1, mod2, dir1, dir2, mod2Col=col))
-# }
+modelDataFrame = data.frame(matrix(rep("", 99), nrow=9, ncol=11), stringsAsFactors=FALSE)
+colnames(modelDataFrame) = c("date1", "date2", "time1", "time2", "mod1", "mod2", "dir1", "dir2", "plotDir", "plotName", "mod2Col")
+modelDataFrame[1, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "baselinePredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "svmRadialDensity", "svmRadial")
+modelDataFrame[2, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "baselinePredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "nnetDensity", "nnet")
+modelDataFrame[3, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "baselinePredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "kknnDensity", "kknn")
+modelDataFrame[4, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "baselinePredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "kalmanFilterDensity", "kalmanFilter")
+modelDataFrame[5, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "lasso", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "lassoDensity", "lasso")
+modelDataFrame[6, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "frbs_new", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "frbsDensity", "frbsPrediction")
+modelDataFrame[7, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "frbs_new", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "frbsDensity", "frbsPrediction")
+modelDataFrame[8, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "bagging", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "baggingDensity", "bagging")
+modelDataFrame[9, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "averageEnsemble", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "averageDensity", "Average")
+# modelDataFrame[1, ] = c("20150212", "20150331", "06:00:00", "21:00:00", "dataset", "delayedEkfPredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "onlineDelayedEkfDensity", "prediction")
+# modelDataFrame[2, ] = c("20150212", "20150331", "06:00:00", "21:00:00", "dataset", "lokrr", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "lokrrDensity", "lokrr")
+
+for(i in 1:nrow(modelDataFrame)){
+  date1 = modelDataFrame[i, 1]
+  date2 = modelDataFrame[i, 2]
+  time1 = modelDataFrame[i, 3]
+  time2 = modelDataFrame[i,4]
+  mod1 = modelDataFrame[i, 5]
+  mod2 = modelDataFrame[i, 6]
+  dir1 = modelDataFrame[i, 7]
+  dir2 = modelDataFrame[i, 8]
+  plotDir = modelDataFrame[i, 9]
+  plotName = modelDataFrame[i, 10]
+  mod2Col = modelDataFrame[i, 11]
+  
+#   # Generate density plots
+#   generateDistribution(date1, date2, time1, time2, mod1, mod2, dir1, dir2, plotDir, plotName, mod2Col=mod2Col)
+  
+#   # Compute RMSE
+#   print(mod2Col)
+#   print(computeRMSE(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col))
+  
+#   listOfDates <- seq(as.Date(date1, "%Y%m%d"), as.Date(date2, "%Y%m%d"), by="days")
+#   for(i in 1:length(listOfDates)){
+#     date = listOfDates[i]
+#     # Generate travel time plots for each day
+#     generatePlot(date, date, mod1, mod2, dir1, dir2, plotDir, plotName, mod2Col=mod2Col)
+#     # Print RMSE for each day
+#     print(computeRMSE(date, date, mod1, mod2, dir1, dir2, mod2Col=mod2Col))
+#   }
+}
