@@ -130,6 +130,17 @@ computeRMSE <- function(date1, date2, time1, time2, mod1, mod2, dir1, dir2, ...)
   return(rmse(travelTimes1, travelTimes2))
 }
 
+computeMAPE <- function(date1, date2, time1, time2, mod1, mod2, dir1, dir2, ...){
+  # Get travel times
+  travelTimes = getTravelTimes(date1, date2, time1, time2, mod1, mod2, dir1, dir2, ...)
+  travelTimes1 = travelTimes[, mod1]
+  travelTimes2 = travelTimes[, mod2]
+  
+  error = abs(travelTimes1-travelTimes2)
+  percentageError = error/travelTimes1
+  return(mean(percentageError))
+}
+
 modelDataFrame = data.frame(matrix(rep("", 99), nrow=9, ncol=11), stringsAsFactors=FALSE)
 colnames(modelDataFrame) = c("date1", "date2", "time1", "time2", "mod1", "mod2", "dir1", "dir2", "plotDir", "plotName", "mod2Col")
 modelDataFrame[1, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "baselinePredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "svmRadialDensity", "svmRadial")
@@ -138,8 +149,8 @@ modelDataFrame[3, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filtere
 modelDataFrame[4, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "baselinePredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "kalmanFilterDensity", "kalmanFilter")
 modelDataFrame[5, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "lasso", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "lassoDensity", "lasso")
 modelDataFrame[6, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "frbs_new", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "frbsDensity", "frbsPrediction")
-modelDataFrame[7, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "frbs_new", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "frbsDensity", "frbsPrediction")
-modelDataFrame[8, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "bagging", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "baggingDensity", "bagging")
+modelDataFrame[7, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "bagging", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "baggingDensity", "bagging")
+modelDataFrame[8, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "boostedsvr_25", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "boostingDensity", "boostedSvrPrediction")
 modelDataFrame[9, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "averageEnsemble", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "averageDensity", "Average")
 # modelDataFrame[1, ] = c("20150212", "20150331", "06:00:00", "21:00:00", "dataset", "delayedEkfPredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "onlineDelayedEkfDensity", "prediction")
 # modelDataFrame[2, ] = c("20150212", "20150331", "06:00:00", "21:00:00", "dataset", "lokrr", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "lokrrDensity", "lokrr")
@@ -160,9 +171,13 @@ for(i in 1:nrow(modelDataFrame)){
 #   # Generate density plots
 #   generateDistribution(date1, date2, time1, time2, mod1, mod2, dir1, dir2, plotDir, plotName, mod2Col=mod2Col)
   
-#   # Compute RMSE
-#   print(mod2Col)
-#   print(computeRMSE(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col))
+  # Compute RMSE
+  RMSE = computeRMSE(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col)
+
+  # Compute MAPE
+  MAPE = computeMAPE(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col)
+
+  cat(mod2Col, " - RMSE: ", RMSE, " MAPE: ", MAPE, "\n")
   
 #   listOfDates <- seq(as.Date(date1, "%Y%m%d"), as.Date(date2, "%Y%m%d"), by="days")
 #   for(i in 1:length(listOfDates)){
