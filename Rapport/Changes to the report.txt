@@ -1,11 +1,8 @@
 The report has promising results, however there are still some challenges to overcome, which is not trivial.
-- Gjør det konsistent med forkortelser på metoder (ANN, kNN, SVM, FRBS, EKF...). Etter man har skrevet navnet på metoden fullt ut og skrevet forkortelsen i parentes kan forkortelsen brukes deretter.
+- Gjør det konsistent med forkortelser på metoder (ANN, k-NN, SVM, FRBS, EKF...). Etter man har skrevet navnet på metoden fullt ut og skrevet forkortelsen i parentes kan forkortelsen brukes deretter.
 - Hvilke tabeller er nødvendig å ha med i brødteksten? Hvilke tabeller kan heller stå i appendix?
-- Hvordan skal biblioteker skriver i rapporten: caret, kursiv(caret), "caret"
 - Kommenter på det at trafikktellingene ikke er 100% representative.
-- Lag figurer som viser strukturen til systemet.
 - Skjekk at alle steder det står "Section", "Equation", "Figure", "Table" at det er skrevet med stor forbokstav
 - Skal tabeller, figurer etc. settes inn i samme rekkefølge som de refereres til i teksten slik at det er stigende rekkfølge på tall en leser i teksten
 	"Table 1.1, 1.2 and 1.3" istedenfor "Table 1.2, 1.1 and 1.3"
 - Legg til en setning eller to som sier "for a more elaborate description of the parameter tuning for this method see Appendix X.Y" for Bagging, Boosting, Lasso, FRBS og LOKRR
-- En burde bruke uttrykket "Traffic Flow" når en snakker om antall biler som passerer et punkt de forrige fem minuttene når en beskriver datasettet, da dette uttrykket blir introdusert i kapittel 2.1.4.
