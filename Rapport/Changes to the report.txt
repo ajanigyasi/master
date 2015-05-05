@@ -1,4 +1,7 @@
 ﻿The report has promising results, however there are still some challenges to overcome, which is not trivial.
 - Gjør det konsistent med forkortelser på metoder (ANN, k-NN, SVM, FRBS, EKF...). Etter man har skrevet navnet på metoden fullt ut og skrevet forkortelsen i parentes kan forkortelsen brukes deretter.
-- Kommenter på det at trafikktellingene ikke er 100% representative.
 - Gå over starten på alle avsnitt og sjekk at ikke for mange starter på "the".
+
+Ting å huske på i diskusjon
+- Bagging fungerer bedre på ustabile modeller vs. stabile modeller. Vi har valgt SVM som er en stabil modell, dette kan muligens forklare hvorfor bagging ikke fungerte så bra.
+- Kommenter på det at trafikktellingene ikke er 100% representative.
