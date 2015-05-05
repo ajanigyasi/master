@@ -63,7 +63,7 @@ generateDistribution <- function(date1, date2, time1, time2, mod1, mod2, dir1, d
   
   mean = paste(" = ", round(mean(error), 4), " ", sep="")
   standardDeviation = paste(" = ", round(sd(error), 2), sep="")
-  mainTitle = bquote(mu~.(mean)~sigma^2~.(standardDeviation))
+  mainTitle = bquote(mu~.(mean)~sigma~.(standardDeviation))
   plot(density, xlab="Error (sec)", ylab="Density (%)", main=mainTitle, ylim=c(0.0, 0.0118077), xlim=c(baselinesMinErr, baselinesMaxErr))
   dev.off()
 }
@@ -206,30 +206,51 @@ modelDataFrame[9, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filtere
 # modelDataFrame[1, ] = c("20150212", "20150331", "06:00:00", "21:00:00", "dataset", "delayedEkfPredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "onlineDelayedEkfDensity", "prediction")
 # modelDataFrame[2, ] = c("20150212", "20150331", "06:00:00", "21:00:00", "dataset", "lokrr", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "lokrrDensity", "lokrr")
 
-date1 = "20150319"
-date2 = "20150331"
-time1 = "00:00:00"
-time2 = "23:59:59"
-mod1 = "filteredDataset"
-mod2 = "boostingEstimators"
+# date1 = "20150319"
+# date2 = "20150331"
+# time1 = "00:00:00"
+# time2 = "23:59:59"
+# mod1 = "filteredDataset"
+# mod2 = "boostingEstimators"
 #mod3 = "boostedsvr_25"
-dir1 = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
-dir2 = "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/"
+# dir1 = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
+# dir2 = "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/"
 #mod2Col = "lasso"
 #mod3Col = "boostedSvrPrediction"
+# 
+# baggingModels = data.frame(rep(0, 25))
+# colnames(baggingModels) = c("RMSE")
+# 
+# boostingModels = data.frame(rep(0, 5))
+# colnames(boostingModels) = c("RMSE")
 
-baggingModels = data.frame(rep(0, 25))
-colnames(baggingModels) = c("RMSE")
+# for(i in 0:4){
+#   mod2Col = paste("estimator", i, sep="")
+#   print(mod2Col)
+#   RMSE = computeRMSE(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col)
+#   boostingModels[i, ] = RMSE
+#   print(RMSE)
+# }
 
-boostingModels = data.frame(rep(0, 5))
-colnames(boostingModels) = c("RMSE")
+ensembleErrors = data.frame(matrix(rep(0, 51000*4), ncol=4))
+colnames(ensembleErrors) = c("bagging", "boosting", "lasso", "frbs")
 
-for(i in 0:4){
-  mod2Col = paste("estimator", i, sep="")
-  print(mod2Col)
-  RMSE = computeRMSE(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col)
-  boostingModels[i, ] = RMSE
-  print(RMSE)
+for(i in 5:8){
+    date1 = modelDataFrame[i, 1]
+    date2 = modelDataFrame[i, 2]
+    time1 = modelDataFrame[i, 3]
+    time2 = modelDataFrame[i,4]
+    mod1 = modelDataFrame[i, 5]
+    mod2 = modelDataFrame[i, 6]
+    dir1 = modelDataFrame[i, 7]
+    dir2 = modelDataFrame[i, 8]
+    mod2Col = modelDataFrame[i, 11]
+    
+    travelTimes = getTravelTimes(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col)
+    actual = travelTimes[, mod1]
+    predicted = travelTimes[, mod2]
+    error = errorFunc(actual, predicted)
+    ensembleErrors[1:length(error), (i-4)] = error
 }
 
 # print(computeRMSE(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col))
