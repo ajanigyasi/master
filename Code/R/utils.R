@@ -232,8 +232,9 @@ modelDataFrame[9, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filtere
 #   print(RMSE)
 # }
 
-ensembleErrors = data.frame(matrix(rep(0, 51000*4), ncol=4))
-colnames(ensembleErrors) = c("bagging", "boosting", "lasso", "frbs")
+ensembleErrors = data.frame(matrix(rep(0, 50381*5), ncol=5))
+ensembleErrors[, 1] = rep(0, 50381)
+colnames(ensembleErrors) = c("foo", "bagging", "boosting", "lasso", "frbs")
 
 for(i in 5:8){
     date1 = modelDataFrame[i, 1]
@@ -250,8 +251,10 @@ for(i in 5:8){
     actual = travelTimes[, mod1]
     predicted = travelTimes[, mod2]
     error = errorFunc(actual, predicted)
-    ensembleErrors[1:length(error), (i-4)] = error
+    ensembleErrors[, (i-3)] = error
 }
+
+write.table(ensembleErrors, file = "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/ensembleErrors.csv", sep=",", row.names=FALSE)
 
 # print(computeRMSE(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col))
 # print(computeRMSE(date1, date2, time1, time2, mod1, mod3, dir1, dir2, mod2Col=mod3Col))

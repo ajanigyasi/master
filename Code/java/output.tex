@@ -1,0 +1,182 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{graphicx}
+\usepackage{lscape}
+\title{Results}
+\author{}
+\date{\today}
+\begin{document}
+\begin{landscape}
+\oddsidemargin 0in \topmargin 0in\maketitle
+\section{Tables of Friedman, Bonferroni-Dunn, Holm, Hochberg and Hommel Tests}
+\begin{table}[!htp]
+\centering
+\caption{Average Rankings of the algorithms
+}\begin{tabular}{c|c}
+Algorithm&Ranking\\
+\hline
+"bagging"&3.1985669200697524\\
+"boosting"&1.4315515769823108\\
+"lasso"&2.6851193902451476\\
+"frbs"&2.684762112699938\\
+\end{tabular}
+\end{table}
+
+
+Friedman statistic considering reduction performance (distributed according to chi-square with 3 degrees of freedom: 51327.67918425304.
+
+
+P-value computed by Friedman Test: 0.0.\newline
+
+Iman and Davenport statistic considering reduction performance (distributed according to F-distribution with 3 and 151140 degrees of freedom: 25906.72910901185.
+
+
+P-value computed by Iman and Daveport Test: 5.551115123125783E-16.\newline
+
+\begin{table}[!htp]
+\centering\tiny
+\caption{Holm / Hochberg Table for $\alpha=0.05$}
+\begin{tabular}{ccccc}
+$i$&algorithm&$z=(R_0 - R_i)/SE$&$p$&Holm/Hochberg/Hommel\\
+\hline
+3&"bagging"&217.23727159709904&0.0&0.016666666666666666\\
+2&"lasso"&154.11391450588238&0.0&0.025\\
+1&"frbs"&154.069990722522&0.0&0.05\\
+\hline
+\end{tabular}
+\end{table}
+Bonferroni-Dunn's procedure rejects those hypotheses that have a p-value $\le0.016666666666666666$.
+
+
+Hochberg's procedure rejects those hypotheses that have a p-value $\le0.05$.
+
+
+Hommel's procedure rejects all hypotheses.
+
+
+\begin{table}[!htp]
+\centering\tiny
+\caption{Holm / Hochberg Table for $\alpha=0.10$}
+\begin{tabular}{ccccc}
+$i$&algorithm&$z=(R_0 - R_i)/SE$&$p$&Holm/Hochberg/Hommel\\
+\hline
+3&"bagging"&217.23727159709904&0.0&0.03333333333333333\\
+2&"lasso"&154.11391450588238&0.0&0.05\\
+1&"frbs"&154.069990722522&0.0&0.1\\
+\hline
+\end{tabular}
+\end{table}
+Bonferroni-Dunn's procedure rejects those hypotheses that have a p-value $\le0.03333333333333333$.
+
+
+Hochberg's procedure rejects those hypotheses that have a p-value $\le0.1$.
+
+
+Hommel's procedure rejects all hypotheses.
+
+
+\begin{table}[!htp]
+\centering\tiny
+\caption{Adjusted $p$-values}
+\begin{tabular}{ccccccc}
+i&algorithm&unadjusted $p$&$p_{Bonf}$&$p_{Holm}$&$p_{Hoch}$&$p_{Homm}$\\
+\hline
+1&"bagging"&0.0&0.0&0.0&0.0&0.0\\
+2&"lasso"&0.0&0.0&0.0&0.0&0.0\\
+3&"frbs"&0.0&0.0&0.0&0.0&0.0\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[!htp]
+\centering\tiny
+\caption{Holm / Shaffer Table for $\alpha=0.05$}
+\begin{tabular}{cccccc}
+$i$&algorithms&$z=(R_0 - R_i)/SE$&$p$&Holm&Shaffer\\
+\hline
+6&"bagging" vs. "boosting"&217.23727159709904&0.0&0.008333333333333333&0.008333333333333333\\
+5&"boosting" vs. "lasso"&154.11391450588238&0.0&0.01&0.016666666666666666\\
+4&"boosting" vs. "frbs"&154.069990722522&0.0&0.0125&0.016666666666666666\\
+3&"bagging" vs. "frbs"&63.167280874577045&0.0&0.016666666666666666&0.016666666666666666\\
+2&"bagging" vs. "lasso"&63.123357091216654&0.0&0.025&0.025\\
+1&"lasso" vs. "frbs"&0.043923783360386805&0.9649651572131228&0.05&0.05\\
+\hline
+\end{tabular}
+\end{table}
+Nemenyi's procedure rejects those hypotheses that have a p-value $\le0.008333333333333333$.
+
+
+Holm's procedure rejects those hypotheses that have a p-value $\le0.05$.
+
+
+Shaffer's procedure rejects those hypotheses that have a p-value $\le0.008333333333333333$.
+
+
+Bergmann's procedure rejects these hypotheses:
+
+
+\begin{itemize}
+
+
+\item "bagging" vs. "boosting"
+\item "bagging" vs. "lasso"
+\item "bagging" vs. "frbs"
+\item "boosting" vs. "lasso"
+\item "boosting" vs. "frbs"
+\end{itemize}
+
+
+\begin{table}[!htp]
+\centering\tiny
+\caption{Holm / Shaffer Table for $\alpha=0.10$}
+\begin{tabular}{cccccc}
+$i$&algorithms&$z=(R_0 - R_i)/SE$&$p$&Holm&Shaffer\\
+\hline
+6&"bagging" vs. "boosting"&217.23727159709904&0.0&0.016666666666666666&0.016666666666666666\\
+5&"boosting" vs. "lasso"&154.11391450588238&0.0&0.02&0.03333333333333333\\
+4&"boosting" vs. "frbs"&154.069990722522&0.0&0.025&0.03333333333333333\\
+3&"bagging" vs. "frbs"&63.167280874577045&0.0&0.03333333333333333&0.03333333333333333\\
+2&"bagging" vs. "lasso"&63.123357091216654&0.0&0.05&0.05\\
+1&"lasso" vs. "frbs"&0.043923783360386805&0.9649651572131228&0.1&0.1\\
+\hline
+\end{tabular}
+\end{table}
+Nemenyi's procedure rejects those hypotheses that have a p-value $\le0.016666666666666666$.
+
+
+Holm's procedure rejects those hypotheses that have a p-value $\le0.1$.
+
+
+Shaffer's procedure rejects those hypotheses that have a p-value $\le0.016666666666666666$.
+
+
+Bergmann's procedure rejects these hypotheses:
+
+
+\begin{itemize}
+
+
+\item "bagging" vs. "boosting"
+\item "bagging" vs. "lasso"
+\item "bagging" vs. "frbs"
+\item "boosting" vs. "lasso"
+\item "boosting" vs. "frbs"
+\end{itemize}
+
+
+\begin{table}[!htp]
+\centering\tiny
+\caption{Adjusted $p$-values}
+\begin{tabular}{cccccccc}
+i&hypothesis&unadjusted $p$&$p_{Neme}$&$p_{Holm}$&$p_{Shaf}$&$p_{Berg}$\\
+\hline
+1&"bagging" vs ."boosting"&0.0&0.0&0.0&0.0&4.9E-324\\
+2&"boosting" vs ."lasso"&0.0&0.0&0.0&0.0&4.9E-324\\
+3&"boosting" vs ."frbs"&0.0&0.0&0.0&0.0&4.9E-324\\
+4&"bagging" vs ."frbs"&0.0&0.0&0.0&0.0&4.9E-324\\
+5&"bagging" vs ."lasso"&0.0&0.0&0.0&0.0&4.9E-324\\
+6&"lasso" vs ."frbs"&0.9649651572131228&5.789790943278737&0.9649651572131228&0.9649651572131228&0.9649651572131228\\
+\hline
+\end{tabular}
+\end{table}
+
+\end{landscape}\end{document}
