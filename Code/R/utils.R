@@ -50,7 +50,7 @@ generateDistribution <- function(date1, date2, time1, time2, mod1, mod2, dir1, d
   travelTimes1 = travelTimes[, mod1]
   travelTimes2 = travelTimes[, mod2]
   
-  error = abs(travelTimes2-travelTimes1)
+  error = travelTimes2-travelTimes1
   density = density(error)
 #   return(c(min(error), max(error), min(density$y), max(density$y)))
   
@@ -64,7 +64,7 @@ generateDistribution <- function(date1, date2, time1, time2, mod1, mod2, dir1, d
   mean = paste(" = ", round(mean(error), 4), " ", sep="")
   standardDeviation = paste(" = ", round(sd(error), 2), sep="")
   mainTitle = bquote(mu~.(mean)~sigma~.(standardDeviation))
-  plot(density, xlab="Error (sec)", ylab="Density (%)", main=mainTitle, ylim=c(0.0, 0.0118077), xlim=c(baselinesMinErr, baselinesMaxErr))
+  plot(density, xlab="Error (sec)", ylab="Density (%)", main=mainTitle, ylim=c(onlineMinDens, onlineMaxDens), xlim=c(onlineMinErr, onlineMaxErr))
   dev.off()
 }
 
@@ -188,80 +188,70 @@ mannWhitneyTest <- function(date1, date2, time1, time2, mod1, mod2, mod3, dir1, 
   print(wilcox.test(x, y, alternative="less", paired=TRUE))
 }
 
+andersonDarlingTest <- function(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod1Col, mod2Col, ...){
+  travelTimes = getTravelTimes(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col = mod2Col, ...)
+  actual = travelTimes[, mod1]
+  predicted = travelTimes[, mod2]
+  error = predicted - actual
+  test = ad.test(error)
+  cat(mod2Col, " & ", test$statistic, " & ", test$p.value, "\n")
+}
+
+wilcoxonSignRankTest <- function(date1, date2, time1, time2, mod1, mod2, mod3, dir1, dir2, mod2Col, mod3Col, ...){
+  # Get travel times
+  actualAndTravelTimes1 = getTravelTimes(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col = mod2Col, ...)
+  actualTravelTimes = actualAndTravelTimes1[, mod1]
+  travelTimes1 = actualAndTravelTimes1[, mod2]
+  
+  actualAndTravelTimes2 = getTravelTimes(date1, date2, time1, time2, mod1, mod3, dir1, dir2, mod2Col = mod3Col, ...)
+  actualTravelTimes = actualAndTravelTimes2[, mod1]
+  travelTimes2 = actualAndTravelTimes2[, mod3]
+  
+  cat("Running Wilcoxon sign-rank test for ", mod2, " and ", mod3, "\n")
+  
+  x = errorFunc(actualTravelTimes, travelTimes1)
+  y = errorFunc(actualTravelTimes, travelTimes2)
+  
+  print(sum(x<y))
+  print(sum(y<x))
+  
+  test = wilcox.test(x, y, alternative="greater", paired = TRUE)
+  print(test)
+}
+
 errorFunc <- function(actual, predicted){
   return(abs(actual-predicted))
 }
 
-modelDataFrame = data.frame(matrix(rep("", 99), nrow=9, ncol=11), stringsAsFactors=FALSE)
+modelDataFrame = data.frame(matrix(rep("", 22), nrow=2, ncol=11), stringsAsFactors=FALSE)
 colnames(modelDataFrame) = c("date1", "date2", "time1", "time2", "mod1", "mod2", "dir1", "dir2", "plotDir", "plotName", "mod2Col")
-modelDataFrame[1, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "baselinePredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "svmRadialDensity_abs", "svmRadial")
-modelDataFrame[2, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "baselinePredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "nnetDensity_abs", "nnet")
-modelDataFrame[3, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "baselinePredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "kknnDensity_abs", "kknn")
-modelDataFrame[4, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "baselinePredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "kalmanFilterDensity_abs", "kalmanFilter")
-modelDataFrame[5, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "bagging", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "baggingDensity_abs", "bagging")
-modelDataFrame[6, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "boostedsvr_25", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "boostingDensity_abs", "boostedSvrPrediction")
-modelDataFrame[7, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "lasso", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "lassoDensity_abs", "lasso")
-modelDataFrame[8, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "frbs_new", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "frbsDensity_abs", "frbsPrediction")
-modelDataFrame[9, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "averageEnsemble", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "averageDensity_abs", "Average")
-# modelDataFrame[1, ] = c("20150212", "20150331", "06:00:00", "21:00:00", "dataset", "delayedEkfPredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "onlineDelayedEkfDensity", "prediction")
-# modelDataFrame[2, ] = c("20150212", "20150331", "06:00:00", "21:00:00", "dataset", "lokrr", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "lokrrDensity", "lokrr")
+# modelDataFrame[1, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "baselinePredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "svmRadialDensity", "svmRadial")
+# modelDataFrame[2, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "baselinePredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "nnetDensity", "nnet")
+# modelDataFrame[3, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "baselinePredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "kknnDensity", "kknn")
+# modelDataFrame[4, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "baselinePredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "kalmanFilterDensity", "kalmanFilter")
+# modelDataFrame[5, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "bagging", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "baggingDensity", "bagging")
+# modelDataFrame[6, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "boostedsvr_25", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "boostingDensity", "boostedSvrPrediction")
+# modelDataFrame[7, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "lasso", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "lassoDensity", "lasso")
+# modelDataFrame[8, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "frbs_new", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "frbsDensity", "frbsPrediction")
+# modelDataFrame[9, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "averageEnsemble", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "averageDensity", "Average")
+modelDataFrame[1, ] = c("20150212", "20150331", "06:00:00", "21:00:00", "dataset", "delayedEkfPredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "onlineDelayedEkfDensity", "prediction")
+modelDataFrame[2, ] = c("20150212", "20150331", "06:00:00", "21:00:00", "dataset", "lokrr", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "lokrrDensity", "lokrr")
 
-# date1 = "20150319"
-# date2 = "20150331"
-# time1 = "00:00:00"
-# time2 = "23:59:59"
-# mod1 = "filteredDataset"
-# mod2 = "boostingEstimators"
-#mod3 = "boostedsvr_25"
-# dir1 = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
-# dir2 = "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/"
-#mod2Col = "lasso"
-#mod3Col = "boostedSvrPrediction"
-# 
-# baggingModels = data.frame(rep(0, 25))
-# colnames(baggingModels) = c("RMSE")
-# 
-# boostingModels = data.frame(rep(0, 5))
-# colnames(boostingModels) = c("RMSE")
+date1 = "20150319"
+date2 = "20150331"
+time1 = "06:00:00"
+time2 = "21:00:00"
+mod1 = "dataset"
+mod2 = "delayedEkfPredictions"
+mod3 = "lokrr"
+dir1 = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
+dir2 = "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/"
+mod2Col = "prediction"
+mod3Col = "lokrr"
 
-# for(i in 0:4){
-#   mod2Col = paste("estimator", i, sep="")
-#   print(mod2Col)
-#   RMSE = computeRMSE(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col)
-#   boostingModels[i, ] = RMSE
-#   print(RMSE)
-# }
+wilcoxonSignRankTest(date1, date2, time1, time2, mod1, mod2, mod3, dir1, dir2, mod2Col, mod3Col)
 
-ensembleErrors = data.frame(matrix(rep(0, 50381*5), ncol=5))
-ensembleErrors[, 1] = rep(0, 50381)
-colnames(ensembleErrors) = c("foo", "bagging", "boosting", "lasso", "frbs")
 
-for(i in 5:8){
-    date1 = modelDataFrame[i, 1]
-    date2 = modelDataFrame[i, 2]
-    time1 = modelDataFrame[i, 3]
-    time2 = modelDataFrame[i,4]
-    mod1 = modelDataFrame[i, 5]
-    mod2 = modelDataFrame[i, 6]
-    dir1 = modelDataFrame[i, 7]
-    dir2 = modelDataFrame[i, 8]
-    mod2Col = modelDataFrame[i, 11]
-    
-    travelTimes = getTravelTimes(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col)
-    actual = travelTimes[, mod1]
-    predicted = travelTimes[, mod2]
-    error = errorFunc(actual, predicted)
-    ensembleErrors[, (i-3)] = error
-}
-
-write.table(ensembleErrors, file = "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/ensembleErrors.csv", sep=",", row.names=FALSE)
-
-# print(computeRMSE(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col))
-# print(computeRMSE(date1, date2, time1, time2, mod1, mod3, dir1, dir2, mod2Col=mod3Col))
-# testObj = signTest(date1, date2, time1, time2, mod1, mod2, mod3, dir1, dir2, mod2Col, mod3Col)
-# mwutestObj = mannWhitneyTest(date1, date2, time1, time2, mod1, mod2, mod3, dir1, dir2, mod2Col, mod3Col)
-
-# 
 # for(i in 1:nrow(modelDataFrame)){
 #   date1 = modelDataFrame[i, 1]
 #   date2 = modelDataFrame[i, 2]
@@ -275,7 +265,7 @@ write.table(ensembleErrors, file = "../../Data/Autopassdata/Singledatefiles/Data
 #   plotName = modelDataFrame[i, 10]
 #   mod2Col = modelDataFrame[i, 11]
 #   
-# #   # Generate density plots
+#   # Generate density plots
 # #   generateDistribution(date1, date2, time1, time2, mod1, mod2, dir1, dir2, plotDir, plotName, mod2Col=mod2Col)
 # #   
 #   # Compute RMSE
@@ -285,6 +275,9 @@ write.table(ensembleErrors, file = "../../Data/Autopassdata/Singledatefiles/Data
 # #   MAPE = computeMAPE(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col)
 # 
 # #   cat(mod2Col, " - RMSE: ", RMSE, " MAPE: ", MAPE, "\n")
+# 
+# #     # Run Anderson-Darling test
+# #     andersonDarlingTest(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col)
 #   
 # #   listOfDates <- seq(as.Date(date1, "%Y%m%d"), as.Date(date2, "%Y%m%d"), by="days")
 # #   for(i in 1:length(listOfDates)){

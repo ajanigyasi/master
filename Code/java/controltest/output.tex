@@ -1,0 +1,282 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{graphicx}
+\usepackage{lscape}
+\title{Results}
+\author{}
+\date{\today}
+\begin{document}
+\begin{landscape}
+\oddsidemargin 0in \topmargin 0in\maketitle
+\section{Tables of Friedman, Aligned Friedman, Bonferroni-Dunn, Holm, Hochberg and Hommel Tests}
+\begin{table}[!htp]
+\centering
+\caption{Average Rankings of the algorithms (Friedman)
+}\begin{tabular}{c|c}
+Algorithm&Ranking\\
+\hline
+"lasso"&2.463805799805104\\
+"svmRadial"&1.4922093646411243\\
+"nnet"&3.894861157975291\\
+"kknn"&3.4137075484797084\\
+"kalmanFilter"&3.7354161290951198\\
+\end{tabular}
+\end{table}
+
+
+Friedman statistic (distributed according to chi-square with 4 degrees of freedom: 82094.91513020675. 
+P-value computed by Friedman Test: 0.0.\newline
+
+Iman and Davenport statistic (distributed according to F-distribution with 4 and 201520 degrees of freedom: 34630.94294634342. 
+P-value computed by Iman and Daveport Test: 0.0.\newline
+
+
+\newpage
+
+\begin{table}[!htp]
+\centering
+\caption{Average Rankings of the algorithms (Aligned Friedman)
+}\begin{tabular}{c|c}
+Algorithm&Ranking\\
+\hline
+"lasso"&95129.951509498\\
+"svmRadial"&53927.57694368861\\
+"nnet"&171631.97677695955\\
+"kknn"&146257.8251126394\\
+"kalmanFilter"&162817.6696572109\\
+\end{tabular}
+\end{table}
+
+
+Aligned Friedman statistic (distributed according to chi-square with 4 degrees of freedom: 41704.706573478325. 
+P-value computed by Aligned Friedman Test: 0.0.\newline
+
+
+\newpage
+
+\begin{table}[!htp]
+\centering
+\caption{Average Rankings of the algorithms (Quade)
+}\begin{tabular}{c|c}
+Algorithm&Ranking\\
+\hline
+"lasso"&2.413077290114864\\
+"svmRadial"&1.5637240685032896\\
+"nnet"&3.797256188460031\\
+"kknn"&3.489546136152798\\
+"kalmanFilter"&3.736396316769006\\
+\end{tabular}
+\end{table}
+Quade statistic (distributed according to F-distribution with 4 and 201520 degrees of freedom: -50380.00333300672. 
+P-value computed by Quade Test: Infinity.\newline
+
+
+\newpage
+
+\begin{table}[!htp]
+\centering\tiny
+\caption{Contrast Estimation}
+\begin{tabular}{
+|r|r|r|r|r|r|}
+\hline
+ &"lasso"&"svmRadial"&"nnet"&"kknn"&"kalmanFilter"\\
+\hline
+"lasso"&0,000&-21,89&31,68&22,97&29,89\\
+\hline
+"svmRadial"&21,89&0,000&53,57&44,86&51,78\\
+\hline
+"nnet"&-31,68&-53,57&0,000&-8,702&-1,790\\
+\hline
+"kknn"&-22,97&-44,86&8,702&0,000&6,912\\
+\hline
+"kalmanFilter"&-29,89&-51,78&1,790&-6,912&0,000\\
+\hline
+
+\end{tabular}
+\end{table}
+
+\newpage
+
+\begin{table}[!htp]
+\centering\scriptsize
+\caption{Holm / Hochberg / Holland / Rom / Finner / Li Table for $\alpha=0.05$ (FRIEDMAN)}
+\begin{tabular}{ccccccccc}
+$i$&algorithm&$z=(R_0 - R_i)/SE$&$p$&Holm/Hochberg/Hommel&Holland&Rom&Finner&Li\\
+\hline
+4&"nnet"&241.17885242261144&0.0&0.0125&0.012741455098566168&0.013109375000000001&0.012741455098566168&0.05263157894736842\\
+3&"kalmanFilter"&225.1737162657628&0.0&0.016666666666666666&0.016952427508441503&0.016666666666666666&0.025320565519103666&0.05263157894736842\\
+2&"kknn"&192.88051984729168&0.0&0.025&0.025320565519103666&0.025&0.03773939976903784&0.05263157894736842\\
+1&"lasso"&97.52911924268913&0.0&0.05&0.050000000000000044&0.05&0.050000000000000044&0.05\\
+\hline
+\end{tabular}
+\end{table}
+Bonferroni-Dunn's procedure rejects those hypotheses that have a p-value $\le0.0125$.
+
+
+Hochberg's procedure rejects those hypotheses that have a p-value $\le0.05$.
+
+
+Hommel's procedure rejects all hypotheses.
+
+
+Rom's procedure rejects those hypotheses that have a p-value $\le0.05$.
+
+
+Li's procedure rejects those hypotheses that have a p-value $\le0.05$.
+
+
+
+\newpage
+
+\begin{table}[!htp]
+\centering\scriptsize
+\caption{Holm / Hochberg / Holland / Rom / Finner / Li Table for $\alpha=0.05$ (ALIGNED FRIEDMAN)}
+\begin{tabular}{ccccccccc}
+$i$&algorithm&$z=(R_0 - R_i)/SE$&$p$&Holm/Hochberg/Hommel&Holland&Rom&Finner&Li\\
+\hline
+4&"nnet"&256.8999763845786&0.0&0.0125&0.012741455098566168&0.013109375000000001&0.012741455098566168&0.05263157894736842\\
+3&"kalmanFilter"&237.6619929776934&0.0&0.016666666666666666&0.016952427508441503&0.016666666666666666&0.025320565519103666&0.05263157894736842\\
+2&"kknn"&201.51870794791668&0.0&0.025&0.025320565519103666&0.025&0.03773939976903784&0.05263157894736842\\
+1&"lasso"&89.92772630367735&0.0&0.05&0.050000000000000044&0.05&0.050000000000000044&0.05\\
+\hline
+\end{tabular}
+\end{table}
+Bonferroni-Dunn's procedure rejects those hypotheses that have a p-value $\le0.0125$.
+
+
+Hochberg's procedure rejects those hypotheses that have a p-value $\le0.05$.
+
+
+Hommel's procedure rejects all hypotheses.
+
+
+Rom's procedure rejects those hypotheses that have a p-value $\le0.05$.
+
+
+Li's procedure rejects those hypotheses that have a p-value $\le0.05$.
+
+
+
+\newpage
+
+\begin{table}[!htp]
+\centering\scriptsize
+\caption{Holm / Hochberg / Holland / Rom / Finner / Li Table for $\alpha=0.05$ (QUADE)}
+\begin{tabular}{ccccccccc}
+$i$&algorithm&$z=(R_0 - R_i)/SE$&$p$&Holm/Hochberg/Hommel&Holland&Rom&Finner&Li\\
+\hline
+4&"nnet"&137.29615685503506&0.0&0.0125&0.012741455098566168&0.013109375000000001&0.012741455098566168&0.05263157894736842\\
+3&"kalmanFilter"&133.5550749985404&0.0&0.016666666666666666&0.016952427508441503&0.016666666666666666&0.025320565519103666&0.05263157894736842\\
+2&"kknn"&118.3810907899618&0.0&0.025&0.025320565519103666&0.025&0.03773939976903784&0.05263157894736842\\
+1&"lasso"&52.210099016606314&0.0&0.05&0.050000000000000044&0.05&0.050000000000000044&0.05\\
+\hline
+\end{tabular}
+\end{table}
+Bonferroni-Dunn's procedure rejects those hypotheses that have a p-value $\le0.0125$.
+
+
+Hochberg's procedure rejects those hypotheses that have a p-value $\le0.05$.
+
+
+Hommel's procedure rejects all hypotheses.
+
+
+Rom's procedure rejects those hypotheses that have a p-value $\le0.05$.
+
+
+Li's procedure rejects those hypotheses that have a p-value $\le0.05$.
+
+
+
+\newpage
+
+\begin{table}[!htp]
+\centering\scriptsize
+\caption{Adjusted $p$-values (FRIEDMAN)}
+\begin{tabular}{ccccccc}
+i&algorithm&unadjusted $p$&$p_{Bonf}$&$p_{Holm}$&$p_{Hoch}$&$p_{Homm}$\\
+\hline
+1&"nnet"&0.0&0.0&0.0&0.0&0.0\\
+2&"kalmanFilter"&0.0&0.0&0.0&0.0&0.0\\
+3&"kknn"&0.0&0.0&0.0&0.0&0.0\\
+4&"lasso"&0.0&0.0&0.0&0.0&0.0\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[!htp]
+\centering\scriptsize
+\caption{Adjusted $p$-values (FRIEDMAN)}
+\begin{tabular}{ccccccc}
+i&algorithm&unadjusted $p$&$p_{Holl}$&$p_{Rom}$&$p_{Finn}$&$p_{Li}$\\
+\hline
+1&"nnet"&0.0&0.0&0.0&0.0&0.0\\
+2&"kalmanFilter"&0.0&0.0&0.0&0.0&0.0\\
+3&"kknn"&0.0&0.0&0.0&0.0&0.0\\
+4&"lasso"&0.0&0.0&0.0&0.0&0.0\\
+\hline
+\end{tabular}
+\end{table}
+
+
+\newpage
+
+\begin{table}[!htp]
+\centering\scriptsize
+\caption{Adjusted $p$-values (ALIGNED FRIEDMAN)}
+\begin{tabular}{ccccccc}
+i&algorithm&unadjusted $p$&$p_{Bonf}$&$p_{Holm}$&$p_{Hoch}$&$p_{Homm}$\\
+\hline
+1&"nnet"&0.0&0.0&0.0&0.0&0.0\\
+2&"kalmanFilter"&0.0&0.0&0.0&0.0&0.0\\
+3&"kknn"&0.0&0.0&0.0&0.0&0.0\\
+4&"lasso"&0.0&0.0&0.0&0.0&0.0\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[!htp]
+\centering\scriptsize
+\caption{Adjusted $p$-values (ALIGNED FRIEDMAN)}
+\begin{tabular}{ccccccc}
+i&algorithm&unadjusted $p$&$p_{Holl}$&$p_{Rom}$&$p_{Finn}$&$p_{Li}$\\
+\hline
+1&"nnet"&0.0&0.0&0.0&0.0&0.0\\
+2&"kalmanFilter"&0.0&0.0&0.0&0.0&0.0\\
+3&"kknn"&0.0&0.0&0.0&0.0&0.0\\
+4&"lasso"&0.0&0.0&0.0&0.0&0.0\\
+\hline
+\end{tabular}
+\end{table}
+
+
+\newpage
+
+\begin{table}[!htp]
+\centering\scriptsize
+\caption{Adjusted $p$-values (QUADE)}
+\begin{tabular}{ccccccc}
+i&algorithm&unadjusted $p$&$p_{Bonf}$&$p_{Holm}$&$p_{Hoch}$&$p_{Homm}$\\
+\hline
+1&"nnet"&0.0&0.0&0.0&0.0&0.0\\
+2&"kalmanFilter"&0.0&0.0&0.0&0.0&0.0\\
+3&"kknn"&0.0&0.0&0.0&0.0&0.0\\
+4&"lasso"&0.0&0.0&0.0&0.0&0.0\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[!htp]
+\centering\scriptsize
+\caption{Adjusted $p$-values (QUADE)}
+\begin{tabular}{ccccccc}
+i&algorithm&unadjusted $p$&$p_{Holl}$&$p_{Rom}$&$p_{Finn}$&$p_{Li}$\\
+\hline
+1&"nnet"&0.0&0.0&0.0&0.0&0.0\\
+2&"kalmanFilter"&0.0&0.0&0.0&0.0&0.0\\
+3&"kknn"&0.0&0.0&0.0&0.0&0.0\\
+4&"lasso"&0.0&0.0&0.0&0.0&0.0\\
+\hline
+\end{tabular}
+\end{table}
+
+\end{landscape}\end{document}
