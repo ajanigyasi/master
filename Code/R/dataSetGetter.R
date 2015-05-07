@@ -21,16 +21,20 @@ getDataSet <- function(startDate, endDate, directory, model, onlyActualTravelTim
   # Select rows having dates within the given range
   files = files[(files$fileDates >= startDate) & (files$fileDates <= endDate),]
   # Read data sets within the given range, and store them in one data frame
-  firstFileName = files$fileNames[1]
-  combinedDataSet = data.frame(read.csv(paste(directory, firstFileName, sep=""), sep=";", stringsAsFactor = FALSE))
-  for(fileName in files$fileNames[-1]){
-    dataSet = data.frame(read.csv(paste(directory, fileName, sep=""), sep=";", stringsAsFactor = FALSE))
-    combinedDataSet = data.frame(rbind(combinedDataSet, dataSet))
+  if(nrow(files) > 0){
+    firstFileName = files$fileNames[1]
+    combinedDataSet = data.frame(read.csv(paste(directory, firstFileName, sep=""), sep=";", stringsAsFactor = FALSE))
+    for(fileName in files$fileNames[-1]){
+      dataSet = data.frame(read.csv(paste(directory, fileName, sep=""), sep=";", stringsAsFactor = FALSE))
+      combinedDataSet = data.frame(rbind(combinedDataSet, dataSet))
+    }
+    if(!missing(onlyActualTravelTimes) & onlyActualTravelTimes){
+      combinedDataSet = data.frame(combinedDataSet$actualTravelTime)
+    }
+    return(combinedDataSet)
+  } else{
+    return(NULL)
   }
-  if(!missing(onlyActualTravelTimes) & onlyActualTravelTimes){
-    combinedDataSet = data.frame(combinedDataSet$actualTravelTime)
-  }
-  return(combinedDataSet)
 }
 
 # Returns a data set for which each column represents the predictions for the different baselines provided in the argument "baselines"

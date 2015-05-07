@@ -33,12 +33,36 @@ generatePlot <- function(date1, date2, time1, time2, mod1, mod2, dir1, dir2, plo
 
   # Generate plot and save to file
   if(date1==date2){
-    png(paste(plotDir, plotName, "_",  date1, ".png", sep=""), width=718, height=302)
+    pdf(paste(plotDir, plotName, "_",  date1, ".pdf", sep=""), width=718/100, height=302/100)
   } else{
-    png(paste(plotDir, plotName, "_",  date1, "-", date2,".png", sep=""), width=718, height=302)
+    pdf(paste(plotDir, plotName, "_",  date1, "-", date2,".pdf", sep=""), width=718/100, height=302/100)
   }
-  plot(dateAndTime1, travelTimes1, type="l", col="black", xlab=xlab, ylab=ylab, main="")
-  lines(dateAndTime2, travelTimes2, col="green", xlab=xlab, ylab=ylab, main="")
+  plot(dateAndTime1, travelTimes1, type="p", cex=0.01, col="black", xlab=xlab, ylab=ylab, main="")
+  lines(dateAndTime2, travelTimes2, type="p", cex=0.01, col="green", xlab=xlab, ylab=ylab, main="")
+  dev.off()
+}
+
+generateSinglePlot <- function(date1, date2, time1, time2, mod, modCol, dir, plotDir, plotName, xlab="", ylab="", ...){
+  dataSet = getDataSet(date1, date2, dir1, mod1)
+  dataSet$dateAndTime = strptime(dataSet$dateAndTime, format="%Y-%m-%d %H:%M:%S")
+  
+  dt1 = as.POSIXct(strptime(paste(date1, time1), format="%Y%m%d %H:%M:%S"))
+  dt2 = as.POSIXct(strptime(paste(date2, time2), format="%Y%m%d %H:%M:%S"))+1
+  
+  t1 = getNumberOfSeconds(strptime(time1, format="%H:%M:%S"))
+  t2 = getNumberOfSeconds(strptime(time2, format="%H:%M:%S"))
+  dataSet$time = getNumberOfSeconds(dataSet$dateAndTime)
+  dataSet = dataSet[(dataSet$time >= t1) & (dataSet$time <= t2), ]
+  
+  # Generate plot and save to file
+  if(date1==date2){
+    pdf(paste(plotDir, plotName, "_",  date1, ".pdf", sep=""), width=718/100, height=302/100)
+  } else{
+    pdf(paste(plotDir, plotName, "_",  date1, "-", date2,".pdf", sep=""), width=718/100, height=302/100)
+  }
+  
+  plot(dataSet[, c("dateAndTime")], dataSet[, modCol], type="p", cex=0.01, col="black", xlab=xlab, ylab=ylab, main="", xaxt="n")
+  axis.POSIXct(1,as.POSIXct(seq(dt1, dt2, by="hours")), as.POSIXct(seq(dt1, dt2, by="4 hours")))
   dev.off()
 }
 
@@ -56,15 +80,15 @@ generateDistribution <- function(date1, date2, time1, time2, mod1, mod2, dir1, d
   
   # Generate plot and save to file
   if(date1==date2){
-    png(paste(plotDir, plotName, "_",  date1, ".png", sep=""), width=718, height=302)
+    pdf(file=paste(plotDir, plotName, "_",  date1, ".pdf", sep=""), width=718/100, height=302/100)
   } else{
-    png(paste(plotDir, plotName, "_",  date1, "-", date2,".png", sep=""), width=718, height=302)
+    pdf(file=paste(plotDir, plotName, "_",  date1, "-", date2,".pdf", sep=""), width=718/100, height=302/100)
   }
   
   mean = paste(" = ", round(mean(error), 4), " ", sep="")
   standardDeviation = paste(" = ", round(sd(error), 2), sep="")
   mainTitle = bquote(mu~.(mean)~sigma~.(standardDeviation))
-  plot(density, xlab="Error (sec)", ylab="Density (%)", main=mainTitle, ylim=c(onlineMinDens, onlineMaxDens), xlim=c(onlineMinErr, onlineMaxErr))
+  plot(density, xlab="Error (sec)", ylab="Density (%)", main=mainTitle, ylim=c(baselinesMinDens, baselinesMaxDens), xlim=c(baselinesMinErr, baselinesMaxErr))
   dev.off()
 }
 
@@ -80,7 +104,6 @@ getTravelTimes <- function(date1, date2, time1, time2, mod1, mod2, dir1, dir2, m
   # Convert dateAndTime columns to chron objects
   dataSet1$dateAndTime = strptime(dataSet1$dateAndTime, format="%Y-%m-%d %H:%M:%S")
   dataSet2$dateAndTime = strptime(dataSet2$dateAndTime, format="%Y-%m-%d %H:%M:%S")
-  
   
   # Filter data set on time
   dataSet1$time = getNumberOfSeconds(dataSet1$dateAndTime)
@@ -116,7 +139,7 @@ getTravelTimes <- function(date1, date2, time1, time2, mod1, mod2, dir1, dir2, m
   dt2 = data.frame(dataSet2$dateAndTime)
   
   travelTimes = data.frame(cbind(dt1, dt2, travelTimes1, travelTimes2))
-  colnames(travelTimes) = c(paste(mod1, "dt", sep=""), paste(mod2, "dt", sep=""),  mod1, mod2)
+  colnames(travelTimes) = c(paste(mod1, "dt", sep=""), paste(mod2, "dt", sep=""), mod1, mod2)
   
   return(travelTimes)
 }
@@ -238,18 +261,22 @@ modelDataFrame[1, ] = c("20150212", "20150331", "06:00:00", "21:00:00", "dataset
 modelDataFrame[2, ] = c("20150212", "20150331", "06:00:00", "21:00:00", "dataset", "lokrr", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "lokrrDensity", "lokrr")
 
 date1 = "20150319"
-date2 = "20150331"
-time1 = "06:00:00"
-time2 = "21:00:00"
+date2 = "20150319"
+time1 = "00:00:00"
+time2 = "23:59:59"
 mod1 = "dataset"
-mod2 = "delayedEkfPredictions"
-mod3 = "lokrr"
+mod2 = "lokrr"
+# mod3 = "lokrr"
 dir1 = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
 dir2 = "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/"
-mod2Col = "prediction"
-mod3Col = "lokrr"
-
-wilcoxonSignRankTest(date1, date2, time1, time2, mod1, mod2, mod3, dir1, dir2, mod2Col, mod3Col)
+plotDir = "../../Plots/"
+plotName = "TrafficVolume"
+mod1Col = "trafficVolume"
+mod2Col = "lokrr"
+# mod3Col = "lokrr"
+generateSinglePlot(date1, date2, time1, time2, mod1, mod1Col, dir1, plotDir, plotName)
+# 
+# wilcoxonSignRankTest(date1, date2, time1, time2, mod1, mod2, mod3, dir1, dir2, mod2Col, mod3Col)
 
 
 # for(i in 1:nrow(modelDataFrame)){
@@ -265,7 +292,7 @@ wilcoxonSignRankTest(date1, date2, time1, time2, mod1, mod2, mod3, dir1, dir2, m
 #   plotName = modelDataFrame[i, 10]
 #   mod2Col = modelDataFrame[i, 11]
 #   
-#   # Generate density plots
+#   #Generate density plots
 # #   generateDistribution(date1, date2, time1, time2, mod1, mod2, dir1, dir2, plotDir, plotName, mod2Col=mod2Col)
 # #   
 #   # Compute RMSE
