@@ -1,26 +1,6 @@
 library(Metrics)
 source('dataSetGetter.R')
 
-baselinesMinErr = -1516.368
-baselinesMaxErr = 1298.659
-baselinesMinDens = 0.0
-baselinesMaxDens = 0.0118077
-
-baselinesMinAbsErr = 0
-baselinesMaxAbsErr = 1516.368
-baselinesMinAbsDens = 4.090837e-13
-baselinesMaxAbsDens = 0.0197692
-
-onlineMinErr = -2970
-onlineMaxErr = 2666.809
-onlineMinDens = 0.0
-onlineMaxDens = 0.00496603
-
-onlineMinAbsErr = 0
-onlineMaxAbsErr = 2970
-onlineMinAbsDens = 7.028074e-09
-onlineMaxAbsDens = 0.005311865
-
 # Function for generating plot
 # Date is assumed to be a string representing the date in YYYYMMDD format
 # mod1 is the name of the first model to plot (e.g. "dataset")
@@ -82,8 +62,8 @@ generateSinglePlot <- function(date1, date2, time1, time2, mod, modCol, dir, plo
   axis.POSIXct(1,as.POSIXct(seq(dt1, dt2, by="hours")), as.POSIXct(seq(dt1, dt2, by="4 hours")))
   dev.off()
 }
-
-generateDistribution <- function(date1, date2, time1, time2, mod1, mod2, dir1, dir2, plotDir, plotName, xlab="", ylab="", ...){
+                                 
+generateDistribution <- function(date1, date2, time1, time2, mod1, mod2, dir1, dir2, plotDir, plotName, minDens, maxDens, minErr, maxErr, xlab="", ylab="", ...){
   # Get travel times
   travelTimes = getTravelTimes(date1, date2, time1, time2, mod1, mod2, dir1, dir2, ...)
   dateAndTime1 = travelTimes[, paste(mod1, "dt", sep="")]
@@ -93,10 +73,16 @@ generateDistribution <- function(date1, date2, time1, time2, mod1, mod2, dir1, d
   
   RMSE = rmse(travelTimes1, travelTimes2)
   MAE = mae(travelTimes1, travelTimes2)
-  median = median(errorFunc(travelTimes1, travelTimes2))
+  error = abs(travelTimes2-travelTimes1)
   
-  error = errorFunc(travelTimes1, travelTimes2)
-  density = density(error)
+  median = median(error)
+  mean = mean(error)
+  
+  density = density(error, n=65536)
+  
+  maxY = max(density$y)
+  index = which(density$y == maxY)
+  mode = density$x[index]
 #   cat(mod2, " min error ", min(error), " max error ",  max(error), " min density", min(density$y), " max density ", max(density$y), "\n")
   
 #   # Generate plot and save to file
@@ -113,13 +99,18 @@ generateDistribution <- function(date1, date2, time1, time2, mod1, mod2, dir1, d
       png(file=paste(plotDir, plotName, "_",  date1, "-", date2,".png", sep=""), width=718/100, height=302/100, res=600, units="in")
     }
   
-  mean = paste(" = ", round(median, 4), " ", sep="")
+  meanText = paste(" = ", round(mean, 4), " ", sep="")
   standardDeviation = paste(" = ", round(sd(error), 2), sep="")
-  mainTitle = bquote(tilde(x)~.(mean)~sigma~.(standardDeviation))
-  plot(density, xlab="Error (sec)", ylab="Density (%)", main=mainTitle, ylim=c(baselinesMinAbsDens, baselinesMaxAbsDens), xlim=c(baselinesMinAbsErr, baselinesMaxAbsErr))
+  medianText = paste(" = ", round(median, 4), " ", sep="")
+  modeText = paste(" = ", round(mode, 4), sep="")
+  newLine = "\n"
+  
+#   mainTitle = bquote(atop(bar(x)~.(meanText)~s~.(standardDeviation), Md~.(medianText)~Mo~.(modeText)))
+  mainTitle = bquote(Md~.(medianText)~s~.(standardDeviation))
+  plot(density, xlab="Error (sec)", ylab="Density (%)", main=mainTitle, ylim=c(minDens, maxDens), xlim=c(minErr, maxErr))
   dev.off()
 
-  return(c(RMSE, MAE, median))
+  return(c(RMSE, MAE, median, mean, mode))
 }
 
 getNumberOfSeconds <- function(time){
@@ -294,26 +285,46 @@ errorFunc <- function(actual, predicted){
   return(abs(actual-predicted))
 }
 
-modelDataFrame = data.frame(matrix(rep("", 99), nrow=9, ncol=11), stringsAsFactors=FALSE)
-colnames(modelDataFrame) = c("date1", "date2", "time1", "time2", "mod1", "mod2", "dir1", "dir2", "plotDir", "plotName", "mod2Col")
-modelDataFrame[1, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "baselinePredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "svmRadialDensity_abs", "svmRadial")
-modelDataFrame[2, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "baselinePredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "nnetDensity_abs", "nnet")
-modelDataFrame[3, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "baselinePredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "kknnDensity_abs", "kknn")
-modelDataFrame[4, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "baselinePredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "kalmanFilterDensity_abs", "kalmanFilter")
-modelDataFrame[5, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "bagging", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "baggingDensity_abs", "bagging")
-modelDataFrame[6, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "boostedsvr_25", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "boostingDensity_abs", "boostedSvrPrediction")
-modelDataFrame[7, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "lasso", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "lassoDensity_abs", "lasso")
-modelDataFrame[8, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "frbs_new", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "frbsDensity_abs", "frbsPrediction")
-modelDataFrame[9, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "averageEnsemble", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "averageDensity_abs", "Average")
-# modelDataFrame[1, ] = c("20150212", "20150331", "06:00:00", "21:00:00", "dataset", "delayedEkfPredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "onlineDelayedEkfDensity_abs", "prediction")
-# modelDataFrame[2, ] = c("20150212", "20150331", "06:00:00", "21:00:00", "dataset", "lokrr", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "lokrrDensity_abs", "lokrr")
+baselinesMinDens = 0.0
+baselinesMaxDens = 0.0118077
+baselinesMinErr = -1516.368
+baselinesMaxErr = 1298.659
 
-# date1 = "20150212"
+baselinesMinAbsDens = 4.090837e-13
+baselinesMaxAbsDens = 0.0197692
+baselinesMinAbsErr = 0
+baselinesMaxAbsErr = 1516.368
+
+onlineMinDens = 0.0
+onlineMaxDens = 0.00496603
+onlineMinErr = -2970
+onlineMaxErr = 2666.809
+
+onlineMinAbsDens = 7.028074e-09
+onlineMaxAbsDens = 0.005311865
+onlineMinAbsErr = 0
+onlineMaxAbsErr = 2970
+
+modelDataFrame = data.frame(matrix(rep("", 165), nrow=11, ncol=15), stringsAsFactors=FALSE)
+colnames(modelDataFrame) = c("date1", "date2", "time1", "time2", "mod1", "mod2", "dir1", "dir2", "plotDir", "plotName", "mod2Col")
+modelDataFrame[1, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "baselinePredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "svmRadialDensity_abs", "svmRadial", baselinesMinAbsDens, baselinesMaxAbsDens, baselinesMinAbsErr, baselinesMaxAbsErr)
+modelDataFrame[2, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "baselinePredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "nnetDensity_abs", "nnet", baselinesMinAbsDens, baselinesMaxAbsDens, baselinesMinAbsErr, baselinesMaxAbsErr)
+modelDataFrame[3, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "baselinePredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "kknnDensity_abs", "kknn", baselinesMinAbsDens, baselinesMaxAbsDens, baselinesMinAbsErr, baselinesMaxAbsErr)
+modelDataFrame[4, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "baselinePredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "kalmanFilterDensity_abs", "kalmanFilter", baselinesMinAbsDens, baselinesMaxAbsDens, baselinesMinAbsErr, baselinesMaxAbsErr)
+modelDataFrame[5, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "bagging", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "baggingDensity_abs", "bagging", baselinesMinAbsDens, baselinesMaxAbsDens, baselinesMinAbsErr, baselinesMaxAbsErr)
+modelDataFrame[6, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "boostedsvr_25", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "boostingDensity_abs", "boostedSvrPrediction", baselinesMinAbsDens, baselinesMaxAbsDens, baselinesMinAbsErr, baselinesMaxAbsErr)
+modelDataFrame[7, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "lasso", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "lassoDensity_abs", "lasso", baselinesMinAbsDens, baselinesMaxAbsDens, baselinesMinAbsErr, baselinesMaxAbsErr)
+modelDataFrame[8, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "frbs_new", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "frbsDensity_abs", "frbsPrediction", baselinesMinAbsDens, baselinesMaxAbsDens, baselinesMinAbsErr, baselinesMaxAbsErr)
+modelDataFrame[9, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "averageEnsemble", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "averageDensity_abs", "Average", baselinesMinAbsDens, baselinesMaxAbsDens, baselinesMinAbsErr, baselinesMaxAbsErr)
+modelDataFrame[10, ] = c("20150212", "20150331", "06:00:00", "21:00:00", "dataset", "delayedEkfPredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "onlineDelayedEkfDensity_abs", "prediction", onlineMinAbsDens, onlineMaxAbsDens, onlineMinAbsErr, onlineMaxAbsErr)
+modelDataFrame[11, ] = c("20150212", "20150331", "06:00:00", "21:00:00", "dataset", "lokrr", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/Densities/", "lokrrDensity_abs", "lokrr", onlineMinAbsDens, onlineMaxAbsDens, onlineMinAbsErr, onlineMaxAbsErr)
+
+# date1 = "20150319"
 # date2 = "20150331"
-# time1 = "06:00:00"
-# time2 = "21:00:00"
-# mod1 = "dataset"
-# mod2 = "delayedEkfPrediction"
+# time1 = "00:00:00"
+# time2 = "23:59:59"
+# # mod1 = "dataset"
+# # mod2 = "delayedEkfPrediction"
 # # mod3 = "lokrr"
 # dir1 = "../../Data/Autopassdata/Singledatefiles/Dataset/raw/"
 # dir2 = "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/"
@@ -321,7 +332,7 @@ modelDataFrame[9, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filtere
 # plotName = "MeanTravelTime"
 # mod1Col = "actualTravelTime"
 # mod2Col = "prediction"
-# print(computeMedian(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col))
+# # print(computeMedian(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col))
 # # # mod3Col = "lokrr"
 # # generateSinglePlot(date1, date2, time1, time2, mod1, mod1Col, dir1, plotDir, plotName)
 # # # 
@@ -340,23 +351,31 @@ for(i in 1:nrow(modelDataFrame)){
   plotDir = modelDataFrame[i, 9]
   plotName = modelDataFrame[i, 10]
   mod2Col = modelDataFrame[i, 11]
+  minDens = as.numeric(modelDataFrame[i, 12])
+  maxDens = as.numeric(modelDataFrame[i, 13])
+  minErr = as.numeric(modelDataFrame[i, 14])
+  maxErr = as.numeric(modelDataFrame[i, 15])
   
   # Generate density plots
-  results = generateDistribution(date1, date2, time1, time2, mod1, mod2, dir1, dir2, plotDir, plotName, mod2Col=mod2Col)
-#   
-  # Compute RMSE
-  RMSE = results[1]
-
-  # Compute MAE
-  MAE = results[2]
-
-  # Compute median
-  median = results[3]
-
-  # Compute MAPE
-#   MAPE = computeMAPE(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col)
-
-   cat(mod2Col, " - RMSE: ", RMSE, " MAE: ", MAE, " median", median, "\n")
+  results = generateDistribution(date1, date2, time1, time2, mod1, mod2, dir1, dir2, plotDir, plotName, minDens, maxDens, minErr, maxErr, mod2Col=mod2Col)
+# #   
+# #   # Compute RMSE
+# #   RMSE = results[1]
+# # 
+# #   # Compute MAE
+# #   MAE = results[2]
+# # 
+# #   # Compute median
+#    median = results[3]
+# # 
+# #   # Compute MAPE
+# # #   MAPE = computeMAPE(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col)
+# 
+#   mean = results[4]
+#   mode = results[5]
+# # 
+# #     cat(mod2Col, " - RMSE: ", RMSE, " MAE: ", MAE, " median", median, "\n")
+#   cat(mod2Col, " - median: ", median,  " mean: ", mean, " mode", mode, "\n")
 
 #     # Run Anderson-Darling test
 #     andersonDarlingTest(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col)

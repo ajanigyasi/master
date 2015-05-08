@@ -14,23 +14,23 @@
 }\begin{tabular}{c|c}
 Algorithm&Ranking\\
 \hline
-"bagging"&3.1985669200697524\\
-"boosting"&1.4315515769823108\\
-"lasso"&2.6851193902451476\\
-"frbs"&2.684762112699938\\
+"bagging"&1.801433079929392\\
+"boosting"&3.56844842301772\\
+"lasso"&2.314880609753025\\
+"frbs"&2.315237887298161\\
 \end{tabular}
 \end{table}
 
 
-Friedman statistic considering reduction performance (distributed according to chi-square with 3 degrees of freedom: 51327.67918425304.
+Friedman statistic considering reduction performance (distributed according to chi-square with 3 degrees of freedom: 51327.679184506596.
 
 
 P-value computed by Friedman Test: 0.0.\newline
 
-Iman and Davenport statistic considering reduction performance (distributed according to F-distribution with 3 and 151140 degrees of freedom: 25906.72910901185.
+Iman and Davenport statistic considering reduction performance (distributed according to F-distribution with 3 and 151140 degrees of freedom: 25906.729109205637.
 
 
-P-value computed by Iman and Daveport Test: 5.551115123125783E-16.\newline
+P-value computed by Iman and Daveport Test: 0.0.\newline
 
 \begin{table}[!htp]
 \centering\tiny
@@ -38,9 +38,9 @@ P-value computed by Iman and Daveport Test: 5.551115123125783E-16.\newline
 \begin{tabular}{ccccc}
 $i$&algorithm&$z=(R_0 - R_i)/SE$&$p$&Holm/Hochberg/Hommel\\
 \hline
-3&"bagging"&217.23727159709904&0.0&0.016666666666666666\\
-2&"lasso"&154.11391450588238&0.0&0.025\\
-1&"frbs"&154.069990722522&0.0&0.05\\
+3&"boosting"&217.237271597208&0.0&0.016666666666666666\\
+2&"frbs"&63.167280874448494&0.0&0.025\\
+1&"lasso"&63.123357091097176&0.0&0.05\\
 \hline
 \end{tabular}
 \end{table}
@@ -59,9 +59,9 @@ Hommel's procedure rejects all hypotheses.
 \begin{tabular}{ccccc}
 $i$&algorithm&$z=(R_0 - R_i)/SE$&$p$&Holm/Hochberg/Hommel\\
 \hline
-3&"bagging"&217.23727159709904&0.0&0.03333333333333333\\
-2&"lasso"&154.11391450588238&0.0&0.05\\
-1&"frbs"&154.069990722522&0.0&0.1\\
+3&"boosting"&217.237271597208&0.0&0.03333333333333333\\
+2&"frbs"&63.167280874448494&0.0&0.05\\
+1&"lasso"&63.123357091097176&0.0&0.1\\
 \hline
 \end{tabular}
 \end{table}
@@ -80,9 +80,9 @@ Hommel's procedure rejects all hypotheses.
 \begin{tabular}{ccccccc}
 i&algorithm&unadjusted $p$&$p_{Bonf}$&$p_{Holm}$&$p_{Hoch}$&$p_{Homm}$\\
 \hline
-1&"bagging"&0.0&0.0&0.0&0.0&0.0\\
-2&"lasso"&0.0&0.0&0.0&0.0&0.0\\
-3&"frbs"&0.0&0.0&0.0&0.0&0.0\\
+1&"boosting"&0.0&0.0&0.0&0.0&0.0\\
+2&"frbs"&0.0&0.0&0.0&0.0&0.0\\
+3&"lasso"&0.0&0.0&0.0&0.0&0.0\\
 \hline
 \end{tabular}
 \end{table}
@@ -93,12 +93,12 @@ i&algorithm&unadjusted $p$&$p_{Bonf}$&$p_{Holm}$&$p_{Hoch}$&$p_{Homm}$\\
 \begin{tabular}{cccccc}
 $i$&algorithms&$z=(R_0 - R_i)/SE$&$p$&Holm&Shaffer\\
 \hline
-6&"bagging" vs. "boosting"&217.23727159709904&0.0&0.008333333333333333&0.008333333333333333\\
-5&"boosting" vs. "lasso"&154.11391450588238&0.0&0.01&0.016666666666666666\\
-4&"boosting" vs. "frbs"&154.069990722522&0.0&0.0125&0.016666666666666666\\
-3&"bagging" vs. "frbs"&63.167280874577045&0.0&0.016666666666666666&0.016666666666666666\\
-2&"bagging" vs. "lasso"&63.123357091216654&0.0&0.025&0.025\\
-1&"lasso" vs. "frbs"&0.043923783360386805&0.9649651572131228&0.05&0.05\\
+6&"bagging" vs. "boosting"&217.237271597208&0.0&0.008333333333333333&0.008333333333333333\\
+5&"boosting" vs. "lasso"&154.11391450611083&0.0&0.01&0.016666666666666666\\
+4&"boosting" vs. "frbs"&154.0699907227595&0.0&0.0125&0.016666666666666666\\
+3&"bagging" vs. "frbs"&63.167280874448494&0.0&0.016666666666666666&0.016666666666666666\\
+2&"bagging" vs. "lasso"&63.123357091097176&0.0&0.025&0.025\\
+1&"lasso" vs. "frbs"&0.0439237833513238&0.9649651572203471&0.05&0.05\\
 \hline
 \end{tabular}
 \end{table}
@@ -131,12 +131,12 @@ Bergmann's procedure rejects these hypotheses:
 \begin{tabular}{cccccc}
 $i$&algorithms&$z=(R_0 - R_i)/SE$&$p$&Holm&Shaffer\\
 \hline
-6&"bagging" vs. "boosting"&217.23727159709904&0.0&0.016666666666666666&0.016666666666666666\\
-5&"boosting" vs. "lasso"&154.11391450588238&0.0&0.02&0.03333333333333333\\
-4&"boosting" vs. "frbs"&154.069990722522&0.0&0.025&0.03333333333333333\\
-3&"bagging" vs. "frbs"&63.167280874577045&0.0&0.03333333333333333&0.03333333333333333\\
-2&"bagging" vs. "lasso"&63.123357091216654&0.0&0.05&0.05\\
-1&"lasso" vs. "frbs"&0.043923783360386805&0.9649651572131228&0.1&0.1\\
+6&"bagging" vs. "boosting"&217.237271597208&0.0&0.016666666666666666&0.016666666666666666\\
+5&"boosting" vs. "lasso"&154.11391450611083&0.0&0.02&0.03333333333333333\\
+4&"boosting" vs. "frbs"&154.0699907227595&0.0&0.025&0.03333333333333333\\
+3&"bagging" vs. "frbs"&63.167280874448494&0.0&0.03333333333333333&0.03333333333333333\\
+2&"bagging" vs. "lasso"&63.123357091097176&0.0&0.05&0.05\\
+1&"lasso" vs. "frbs"&0.0439237833513238&0.9649651572203471&0.1&0.1\\
 \hline
 \end{tabular}
 \end{table}
@@ -174,7 +174,7 @@ i&hypothesis&unadjusted $p$&$p_{Neme}$&$p_{Holm}$&$p_{Shaf}$&$p_{Berg}$\\
 3&"boosting" vs ."frbs"&0.0&0.0&0.0&0.0&4.9E-324\\
 4&"bagging" vs ."frbs"&0.0&0.0&0.0&0.0&4.9E-324\\
 5&"bagging" vs ."lasso"&0.0&0.0&0.0&0.0&4.9E-324\\
-6&"lasso" vs ."frbs"&0.9649651572131228&5.789790943278737&0.9649651572131228&0.9649651572131228&0.9649651572131228\\
+6&"lasso" vs ."frbs"&0.9649651572203471&5.789790943322083&0.9649651572203471&0.9649651572203471&0.9649651572203471\\
 \hline
 \end{tabular}
 \end{table}
