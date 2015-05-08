@@ -1,0 +1,27 @@
+svmRadial  				- RMSE:  233.4601  MAE:  108.524   	absmedian 33.56296 
+nnet  					- RMSE:  216.5004  MAE:  107.201   	absmedian 50.21486 
+kknn 					- RMSE:  218.3885  MAE:  110.4693  	absmedian 52.81804 
+kalmanFilter  			- RMSE:  220.5144  MAE:  112.6546  	absmedian 63.42931 
+							
+bagging  				- RMSE:  231.8706  MAE:  93.88298  	absmedian 26.65797 
+boostedSvrPrediction  	- RMSE:  233.3547  MAE:  165.567   	absmedian 136.1421 
+lasso 				 	- RMSE:  167.0931  MAE:  95.92011  	absmedian 58.97313 
+frbsPrediction  		- RMSE:  167.705   MAE:  94.00293  	absmedian 58.21833 
+Average  				- RMSE:  215.6909  MAE:  98.34549  	absmedian 40.6175 
+					
+online-delayed EKF  	- RMSE:  427.1863  MAE:  230.551   	absmedian 142.3268
+lokrr  					- RMSE:  476.1826  MAE:  233.5318  	absmedian 105.9827
+
+svmRadial  				- median:  -31.6325  	mean:  -102.9802 	mode -12.58523 	
+nnet  					- median:  26.54123  	mean:  -43.57351 	mode 44.98491 	
+kknn  					- median:  23.46275  	mean:  -42.71179 	mode 50.8276 	
+kalmanFilter  			- median:  49.39432  	mean:  0.008135596  mode 50.47904 	
+	
+bagging  				- median:  3.364464  	mean:  -59.03571  	mode 14.3708 	
+boostedSvrPrediction  	- median:  127.3407  	mean:  55.521  		mode 140.7379 	
+lasso  					- median:  44.15792  	mean:  2.79219  	mode 45.86803 	
+frbsPrediction  		- median:  38.94373  	mean:  -4.637119 	mode 50.8357 	
+Average  				- median:  20.31335  	mean:  -47.31433 	mode 36.24056 	
+	
+prediction 				- median:  117.2571  	mean:  -3.971993 	mode 137.0641 	
+lokrr  					- median:  -69.81629  	mean:  -153.3961 	mode -106.5497 	
