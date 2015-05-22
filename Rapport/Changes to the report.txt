@@ -3,5 +3,9 @@
 - Gå over starten på alle avsnitt og sjekk at ikke for mange starter på "the".
 
 Ting å huske på i diskusjon
-- Bagging fungerer bedre på ustabile modeller vs. stabile modeller. Vi har valgt SVM som er en stabil modell, dette kan muligens forklare hvorfor bagging ikke fungerte så bra.
+(Bagging fungerer bedre på ustabile modeller vs. stabile modeller. Vi har valgt SVM som er en stabil modell, dette kan muligens forklare hvorfor bagging ikke fungerte så bra.)
 - Kommenter på det at trafikktellingene ikke er 100% representative.
+- Forklar at de lange halene i error fordelingene er mest sannsynlig pga. outliers i datasettet (DONE)
+- Burde kommentere i diskusjonen at online metodene ikke avviker så mye fra hverandre mtp. MAE
+- Det kan være at det at performance metrics for online metoder er ulikt fra Wilcoxon test tyder på at RMSE og MAE blir påvirket av outliers
+- Det burde bli påpekt i limitations at bagging ble brukt med en stable learner

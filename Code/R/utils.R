@@ -40,9 +40,9 @@ generatePlot <- function(date1, date2, time1, time2, mod1, mod2, dir1, dir2, plo
 
   timeSequence = as.POSIXct(seq(dt1, dt2, by="4 hours"))
   plot(dateAndTime1, travelTimes1, type="p", cex=0.01, col="black", xlab=xlab, ylab=ylab, main="", xaxt="n", xlim=c(dt1, dt2))
-  lines(dateAndTime2, travelTimes2, type="p", cex=0.01, col="green", xlab=xlab, ylab=ylab, main="", xaxt="n", xlim=c(dt1, dt2))
+  lines(dateAndTime2, travelTimes2, type="p", cex=0.01, col="dodgerblue", xlab=xlab, ylab=ylab, main="", xaxt="n", xlim=c(dt1, dt2))
   axis.POSIXct(1,timeSequence, timeSequence)
-  legend("topleft", c("Actual travel time", legendName), fill=c("black", "green"))
+  legend("topleft", c("Actual travel time", legendName), fill=c("black", "dodgerblue"))
   dev.off()
 }
 
@@ -326,10 +326,10 @@ modelDataFrame[2, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filtere
 modelDataFrame[3, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "baselinePredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/TravelTimes/Scatter/", "kknn_scatter", "kknn", baselinesMinAbsDens, baselinesMaxAbsDens, baselinesMinAbsErr, baselinesMaxAbsErr, "k-NN")
 modelDataFrame[4, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "baselinePredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/TravelTimes/Scatter/", "kalmanFilter_scatter", "kalmanFilter", baselinesMinAbsDens, baselinesMaxAbsDens, baselinesMinAbsErr, baselinesMaxAbsErr, "Kalman filter")
 modelDataFrame[5, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "bagging", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/TravelTimes/Scatter/", "bagging_scatter", "bagging", baselinesMinDens, baselinesMaxDens, baselinesMinErr, baselinesMaxErr, "Bagging")
-modelDataFrame[6, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "boostedsvr_25", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/TravelTimes/Scatter/", "boosting_scatter", "boostedSvrPrediction", baselinesMinAbsDens, baselinesMaxAbsDens, baselinesMinAbsErr, baselinesMaxAbsErr, "Boosting")
-modelDataFrame[7, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "lasso", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/TravelTimes/Scatter/", "lasso_scatter", "lasso", baselinesMinAbsDens, baselinesMaxAbsDens, baselinesMinAbsErr, baselinesMaxAbsErr, "Lasso")
-modelDataFrame[8, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "frbs_new", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/TravelTimes/Scatter/", "frbs_scatter", "frbsPrediction", baselinesMinAbsDens, baselinesMaxAbsDens, baselinesMinAbsErr, baselinesMaxAbsErr, "FRBS")
-modelDataFrame[9, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "averageEnsemble", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/TravelTimes/Scatter/", "average_scatter", "Average", baselinesMinAbsDens, baselinesMaxAbsDens, baselinesMinAbsErr, baselinesMaxAbsErr, "Average")
+modelDataFrame[6, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "boostedsvr_25", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/TravelTimes/Scatter/", "boosting_scatter", "boostedSvrPrediction", baselinesMinDens, baselinesMaxDens, baselinesMinErr, baselinesMaxErr, "Boosting")
+modelDataFrame[7, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "lasso", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/TravelTimes/Scatter/", "lasso_scatter", "lasso", baselinesMinDens, baselinesMaxDens, baselinesMinErr, baselinesMaxErr, "Lasso")
+modelDataFrame[8, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "frbs_new", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/TravelTimes/Scatter/", "frbs_scatter", "frbsPrediction", baselinesMinDens, baselinesMaxDens, baselinesMinErr, baselinesMaxErr, "FRBS")
+modelDataFrame[9, ] = c("20150319", "20150331", "00:00:00", "23:59:59", "filteredDataset", "averageEnsemble", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/TravelTimes/Scatter/", "average_scatter", "Average", baselinesMinDens, baselinesMaxDens, baselinesMinErr, baselinesMaxErr, "Average")
 modelDataFrame[10, ] = c("20150212", "20150331", "06:00:00", "21:00:00", "dataset", "delayedEkfPredictions", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/TravelTimes/Scatter/", "onlineDelayedEkf_scatter", "prediction", onlineMinAbsDens, onlineMaxAbsDens, onlineMinAbsErr, onlineMaxAbsErr, "Online-delayed EKF")
 modelDataFrame[11, ] = c("20150212", "20150331", "06:00:00", "21:00:00", "dataset", "lokrr", "../../Data/Autopassdata/Singledatefiles/Dataset/raw/", "../../Data/Autopassdata/Singledatefiles/Dataset/predictions/", "../../Plots/TravelTimes/Scatter/", "lokrr_scatter", "lokrr", onlineMinAbsDens, onlineMaxAbsDens, onlineMinAbsErr, onlineMaxAbsErr, "LOKRR")
 
@@ -353,7 +353,13 @@ modelDataFrame[11, ] = c("20150212", "20150331", "06:00:00", "21:00:00", "datase
 # # # wilcoxonSignRankTest(date1, date2, time1, time2, mod1, mod2, mod3, dir1, dir2, mod2Col, mod3Col)
 
 # 
-for(i in 1:nrow(modelDataFrame)){
+# png(file=paste("../../Plots/", "onlineAbsDensityPlot", ".png", sep=""), width=984/100, height=414/100, res=600, units="in")
+
+# onlineTable = data.frame(matrix(rep(0, 8), ncol=4))
+# colnames(onlineTable) = c("Median", "Mean", "Mode", "Standard Deviation") 
+# rownames(onlineTable) = c("Online-delayed EKF", "LOKRR")
+
+for(i in 1:11){
   date1 = modelDataFrame[i, 1]
   date2 = modelDataFrame[i, 2]
   time1 = modelDataFrame[i, 3]
@@ -370,6 +376,35 @@ for(i in 1:nrow(modelDataFrame)){
   minErr = as.numeric(modelDataFrame[i, 14])
   maxErr = as.numeric(modelDataFrame[i, 15])
   legendName = modelDataFrame[i, 16]
+# 
+#   # Get travel times
+#   travelTimes = getTravelTimes(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col)
+#   dateAndTime1 = travelTimes[, paste(mod1, "dt", sep="")]
+#   dateAndTime2 = travelTimes[, paste(mod2, "dt", sep="")]
+#   travelTimes1 = travelTimes[, mod1]
+#   travelTimes2 = travelTimes[, mod2]
+  
+#   RMSE = rmse(travelTimes1, travelTimes2)
+#   MAE = mae(travelTimes1, travelTimes2)
+#   error = abs(travelTimes2-travelTimes1)
+  
+#   median = signif(median(error), digits=5)
+#   mean = signif(mean(error), digits=5)
+#   stdDev = signif(sd(error), digits=5)
+  
+#  density = density(error, n=65536)
+
+#   maxY = max(density$y)
+#   index = which(density$y == maxY)
+#   mode = signif(density$x[index], digits=5)
+ 
+#  onlineTable[(i-9), ] = c(median, mean, mode, stdDev)
+
+#   if(i==10){
+#     plot(density, lty=1, xlab="Error (sec)", ylab="Density (%)", main = "", ylim=c(onlineMinAbsDens, onlineMaxAbsDens), xlim=c(0, 500))
+#   } else {
+#     lines(density, lty=(i-9), xlab="Error (sec)", ylab="Density (%)", main = "", ylim=c(onlineMinAbsDens, onlineMaxAbsDens), xlim=c(0, 500))
+#   }
   
 #   # Generate density plots
 #   results = generateDistribution(date1, date2, time1, time2, mod1, mod2, dir1, dir2, plotDir, plotName, minDens, maxDens, minErr, maxErr, mod2Col=mod2Col)
@@ -405,3 +440,6 @@ for(i in 1:nrow(modelDataFrame)){
 #     print(computeRMSE(date, date, mod1, mod2, dir1, dir2, mod2Col=mod2Col))
   }
 }
+# legend("topright", c("Online-delayed EKF", "LOKRR"), lty=c(1, 2))
+# addtable2plot(275, 0.0018, onlineTable[, c(1, 4)], bty="o", display.rownames=TRUE, hlines=TRUE, vlines=TRUE)
+# dev.off()

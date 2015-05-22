@@ -1,0 +1,278 @@
+\chapter{Evaluation and Conclusion}
+\label{cha:evaluationAndConclusion}
+% - Introduction to this chapter
+Section \ref{sec:Evaluation} presents an evaluation of the results presented in Section \ref{sec:experimentalResults}. Section \ref{sec:Discussion} offers a more detailed discussion, presenting possible explanations for the results. Section \ref{sec:Conclusion} draws the final conclusions based on the evaluation and discussion. Section \ref{sec:Contributions} summarizes the contributions of this work, and Section \ref{sec:futureWork} suggest possible directions for future work.
+
+\section{Evaluation}
+\label{sec:Evaluation}
+% - Objective observation of the results \newline
+This section evaluates the experimental results presented in Section \ref{sec:experimentalResults}. Section \ref{subsec:evaluationOverview} forms the basis for the statistical inference employed in this evaluation, whilst Section \ref{subsec:evalExp1} and Section \ref{subsec:evalExp2} are concerned with the results from Experiment 1 and Experiment 2, respectively.
+
+\subsection{Overview}
+\label{subsec:evaluationOverview}
+
+\input{figs/tex/DensityPlots.tex}
+
+Figures \ref{fig:svmRadialDensity} to \ref{fig:lokrrDensity} display the plots of the error distributions of the predictions from the different models. The error is computed by subtracting the actual travel time from the predicted travel time. Before doing any inference regarding these distributions, it is important to know whether or not they can be assumed to be normally distributed. The distribution of the error affects which properties of the distributions that should be compared, and which hypothesis tests can be employed. Some of the characteristics of the normal distribution are that it is symmetrical about its mean $\mu$; the first derivative is positive for all $x<\mu$ and negative for all $x>\mu$; and the mean, median and mode are the same value. By considering the density plots, it can be seen that none of these properties are satisfied by the error distributions. This indicates that the errors of the different methods do not follow a normal distribution. 
+
+To further investigate this assumption, the Anderson-Darling test \citep{anderson52:asymptotic} is employed to check for normality. The Anderson-Darling test investigates whether or not a given distribution follows a normal distribution. Its null hypothesis is that the distribution follows a normal distribution, and the alternative hypothesis is that the given distribution is not normally distributed. The Anderson-Darling test statistic and the corresponding p-value for each methods' error distribution is displayed in Table \ref{tab:andersonDarlingNormalityTest}. For the baselines and ensemble learning approaches, the Anderson-Darling test is based on $50\ 381$ samples, and for the online learning approaches the test is based on $176\ 953$ samples. The results of the Anderson-Darling test indicate, on a $0.05$ significance level, that none of the error distributions follow a normal distribution. Based on the inspection of the error distributions, and the results of the Anderson-Darling test, it is assumed that none of the errors are normally distributed.
+
+\input{tables/evaluation/AndersonDarlingNormalityTest.tex}
+
+\subsection{Experiment 1 - Ensemble Learning}
+\label{subsec:evalExp1}
+
+In order to investigate Research Question 1, which is repeated below for convenience, a comparison between all the different ensemble methods is conducted. First, this section compares the performance metrics of the different ensemble learning approaches. Second, the plots of the error distributions are evaluated. Finally, the results from the non-parametric significance tests are reported.
+
+\begin{description}
+\item[Research Question 1] {Given a set of baseline methods, which ensemble learning technique yields the best prediction accuracy?}
+\end{description}
+
+\subsubsection{Performance metrics}
+\label{subsubsec:performanceMetrics}
+% Table \ref{tab:baselinesResults} displays the performance metrics for the different baselines used in Experiment 1. The best performing baseline in terms of both RMSE and MAE, is ANN with RMSE and MAE of $216.5004$ and $107.201$, respectively. SVM has a RMSE of $233.4601$ and MAE of $108.524$. K-NN has RMSE of $218.3885$ and MAE of $110.4693$, whilst Kalman filter has RMSE and MAE values of $220.5144$ and $112.6546$, respectively.
+
+The results from Experiment 1 indicate that lasso's RMSE of $167.0931$ is the lowest RMSE of all the ensemble learning approaches. However, it is only slightly lower than FRBS's RMSE of $167.705$. Taking the simple average of the baseline predictions results in a RMSE of $215.6909$. The RMSE values of bagging and boosting are $231.8706$ and $233.3547$, respectively. 
+
+Comparing the MAE for the different models forms a slightly different picture. Bagging has a MAE of $93.88298$, and lasso and FBRS have MAE values of $95.92011$ and $94.00293$, respectively. The average ensemble has a MAE of $98.34549$, and boosting has a MAE of $165.567$. The most noticeable difference comparing the MAE values in contrast to the RMSE values, is that bagging has the lowest value among the ensemble learning approaches. Lasso, FRBS and the average have MAE values close to that of bagging, whilst boosting's MAE is considerably higher. 
+
+Since the results presented above does not agree upon a winner in both RMSE and MAE, the performance metrics alone may not be sufficient to support any conclusions as to which ensemble learning approach provides the best prediction accuracy. The density plots presented in figures \ref{fig:baggingDensity} to \ref{fig:averageDensity} contain a lot of information which a single performance metric is not able to represent. Therefore, a detailed examination of the error distributions follow.
+
+\subsubsection{Error distributions}
+\label{subsubsec:errorDistributions}
+Due to the non-normality assumption of the error distributions, the sample mean of an error distribution is not a representative value for where the majority of the mass of the distribution is located. The sample means of the distributions are affected by the long tails present in the error distributions, and are offset in the direction of the most prominent tail. Two measures that are more capable of representing the location of the majority of the error distribution's mass are the sample median and sample mode, as these are not as affected by the tails present in the error distributions as the sample mean. The sample median is chosen as basis for comparison here because it is convenient to use in non-parametric significance tests.
+
+From the error distributions, presented in figures \ref{fig:baggingDensity} to \ref{fig:averageDensity}, it can be seen that bagging has the sample median closest to zero, which is $3.3645$. This might indicate that bagging is close to unbiased when predicting travel times. The sample medians of average, FRBS, lasso and boosting are $20.3134$, $38.9437$, $44.1579$ and $127.3407$, respectively. Based on the sample median of the error distributions it appears as though these approaches are biased towards overestimating travel times. 
+
+Furthermore, there are noticeably differences between the distributions' sample deviation. Lasso and FRBS have sample deviations of $167.07$ and $167.64$, respectively, which are considerably lower than the sample deviations for average, bagging and boosting which are $210.44$, $224.23$ and $226.66$, respectively. Bagging, boosting and the average have long tails towards the left. This indicates that in rare cases the models heavily underestimate the travel time. Both lasso and FRBS have long tails on both sides, indicating that they occasionally overestimate or underestimate the travel time by far.
+
+In order to investigate whether the observed differences between the sample medians of the different models are significant, statistical significance testing should be employed. Usually, the alternative hypotheses in significance tests are expressed as mean$_A < $ mean$_B$. This poses a problem in this case, as the distributions contain negative errors, which leads to incorrect orderings. E.g. comparing an error of $-100$ to an error of $+1$ would prefer the error of $-100$, which is undesirable because it is a larger error, only in the other direction. For this reason, plots of the distribution of absolute errors are used as basis for making the alternative hypotheses.
+
+Figures \ref{fig:baggingAbsDensity} to \ref{fig:averageAbsDensity} illustrate the distribution of the absolute errors for the ensemble learning approaches. These plots indicate that the sample median of the absolute error for bagging is lower than boosting, lasso, FRBS and average; the sample median of the average is lower than boosting, lasso and FRBS; the sample median of FRBS is lower than boosting and lasso; the sample median of lasso is lower than boosting. To further investigate these hypotheses, statistical significance testing is employed.
+
+\input{figs/tex/AbsDensityPlots.tex}
+
+%Both lasso and FRBS have a lower RMSE than any of the baseline methods SVM, k-NN, ANN and Kalman filter. Both offer a 22 percent improvement in terms of RMSE compared to their best performing baseline method. The simple average improves the RMSE with 0.37 percent. Neither bagging nor boosting improve the prediction accuracy of their best performing baseline in terms of RMSE. The RMSE of the best performing baseline in bagging and boosting is 231.8097 and 230.8501, respectively.
+
+\subsubsection{Hypothesis Testing}
+\label{subsubsec:hypothesisTesting}
+Based on the assumption that the errors do not follow a normal distribution, non-parametric significance testing is used to test the hypotheses described above. In non-parametric significance testing, the test variable used is the sample median in contrast to parametric significance testing, where the sample mean is used.
+
+When doing significance testing on a group of related hypotheses the probability of making type 1 errors increases as the number of hypotheses increases. This probability is referred to as the familywise error rate, and the concept of increasing probability of making type 1 errors when the number of hypotheses increases is also known as the multiplicity effect \citep{salzberg97}. \citet{Trawinski_nonparametricstatistical} suggests using the approach described in \citet{garcia2008extension} to control the familywise error rate, when comparing more than two machine learning regression models. The approach uses the Friedman test \citep{friedman1937}, which works by assigning a rank to each model. For every prediction made during testing, the model with the lowest error is assigned the lowest rank and the model with the highest error is assigned the highest rank. The average rank is computed for each model across all predictions. The Friedman test indicates whether any of the rankings are significantly different from each other. However, it does not identify the specific pairs of models that differ. Consequently, one or more post-hoc procedures are needed to determine which pairs of models are significantly different. Note that these procedures do not test whether or not the differences in sample medians are significant. Rather, their test statistic is based on the differences in Friedman rank.
+
+The post-hoc procedures used in \cite{garcia2008extension} are Nemenyi \citep{nemenyi62}, Holm \citep{holm79}, Shaffer \citep{shaffer86}, and Bergmann-Hommel \citep{bergmann_hommel88}. These procedures perform two-sided hypothesis tests, and can therefore only establish whether or not there is a significant difference in Friedman rank between a pair of models. In the cases where a significant difference can be established, the rank from the Friedman test indicates which of the two models is considered best, where lower rank is better.
+
+This study follows the approach recommended in \citet{Trawinski_nonparametricstatistical}. The Friedman test and post-hoc procedures are conducted using an open source program available on the web page\footnote{\url{http://sci2s.ugr.es/sicidm/\#ten}} for the research group Soft Computing and Intelligent Information Systems at the University of Granada, Spain. The software is written in Java \citep{gosling13:java} and follows the procedure reported in \citet{garcia2008extension}. It is important to note that the program assumes the input to be prediction accuracies. Since the performance of the methods investigated in this study are assessed with error metrics, the inverse of the absolute error is given as input to the program.
+
+The Friedman test is run using $50\ 381$ observations of inverse absolute errors from the five ensemble learning approaches. The result of running the Friedman test indicates, on a $0.05$ significance level, that there is a significant difference in performance between the ensemble learning approaches. The rankings resulting from the Friedman test is displayed in Table \ref{tab:friedmanEnsemble}. 
+
+As the Friedman test indicates a significant difference between the ensemble learning approaches, post-hoc procedures is employed to determine for which pairs of algorithms the difference is significant. The adjusted p-values resulting from running the different post-hoc procedures is illustrated in Table \ref{tab:postHocEnsemble}, where the approach highlighted with bold font is the one with lowest rank in the Friedman test. The post-hoc procedures are unanimous in their decisions to reject all the null hypotheses with a significance level of $0.05$. The results indicate that bagging has a significantly lower Friedman rank than all the other ensemble approaches in this study. Furthermore, the Friedman rank of average is significantly lower than that of boosting, lasso and FRBS. The test also reveals that the Friedman rank of FRBS is significantly lower than the Friedman rank of lasso, whilst both lasso and FRBS have a significantly lower Friedman rank than boosting.
+
+\input{tables/evaluation/FriedmanForEnsemble.tex}
+
+\subsection{Experiment 2 - Online Learning}
+\label{subsec:evalExp2}
+
+In order to investigate Research Question 2, which is repeated below for convenience, a comparison of the two online learning approaches is conducted. First, the performance metrics of online-delayed EKF and LOKRR are compared. Second, the error distributions of the two online methods are examined. Finally, statistical significance testing is employed.
+
+\begin{description}
+\item[Research Question 2] {Which online learning technique yields the best prediction accuracy?}
+\end{description}
+
+The results from Experiment 2, seen in Table \ref{tab:onlineLearningResults}, indicate that the online-delayed EKF has a lower RMSE than LOKRR. The RMSE of the online-delayed EKF is $427.1863$, compared to LOKRR's $476.1826$. Online-delayed EKF also has the lowest MAE of $230.551$, whilst LOKRR has a MAE of $233.5318$. In contrast to the RMSE values, the MAE values do not differ considerably from each other.
+
+Figure \ref{fig:ekfDensity} and Figure \ref{fig:lokrrDensity} illustrate the error distributions of online-delayed EKF and LOKRR, respectively. Online-delayed EKF has a sample median of $+117.2571$, whilst LOKRR has a sample median of $-69.8163$. This might indicate that the two methods have different bias towards predicting travel time, where online-delayed EKF tend to overestimate the travel time and LOKRR tend to underestimate the travel time. Looking at the tails of error distributions for the two methods, it can be seen that LOKRR's right tail is noticeably longer than that of online-delayed EKF. However, both approaches have similarly long tails towards the left. This indicates that both methods greatly underestimates the travel time in some cases, whilst LOKRR also occasionally heavily overestimates the travel time. Online-delayed EKF has a sample deviation of $427.17$, and LOKRR has a sample deviation of $450.8$. The sample deviations do not differ to the same extent as the sample medians of the two methods. 
+
+Following the same approach as with the ensemble learning techniques, the sample medians of the absolute errors of online-delayed EKF and LOKRR are compared. The distributions of the absolute errors for the two online learning approaches are illustrated in Figure \ref{fig:ekfAbsDensity} and Figure \ref{fig:lokrrAbsDensity}. These two plots suggests that the sample median of LOKRR is lower than the sample median of online-delayed EKF. In order to investigate whether the differences between the two sample medians are significantly different, a statistical significance test is employed. 
+
+Section \ref{subsec:evalExp1} introduces the multiplicity effect that arises when performing hypothesis testing including many hypotheses. In Experiment 2, only two models are tested for significant difference, and the multiplicity effect is therefore not prominent. A paired non-parametric significance test is thus sufficient to evaluate the results from Experiment 2. More specifically, the Wilcoxon signed rank test \citep{Wilcoxon45} is employed. The null hypothesis is that the two distributions are equal, meaning that the medians of two distributions are equal. The alternative hypothesis is that the sample median of LOKRR is lower than the sample median of online-delayed EKF. The Wilcoxon signed rank test statistic and corresponding p-value for online-delayed EKF and LOKRR can be seen in Table \ref{tab:onlineWilcoxonSignRankTest}. The results are based on $176\ 953$ samples, and indicate, on a $0.05$ significance level, that LOKRR's sample median is significantly lower than that of online-delayed EKF.
+
+\input{tables/evaluation/OnlineWilcoxonSignRankTest.tex}
+
+\section{Discussion}
+\label{sec:Discussion}
+
+%- What can the results imply?  \newline
+%- What are the possible consequences of these observations? \newline
+%- Discuss possible limitations to this work
+
+This section offers a discussion on the results from the experiments. Section \ref{subsec:errorDistributions} discusses the error distributions of the approaches investigated in this study. Section \ref{subsec:discussEnsemble} discusses the results from Experiment 1, whilst Section \ref{subsec:discussOnline} discusses the results from Experiment 2.
+
+\subsection{Error Distributions}
+\label{subsec:errorDistributions}
+% Nevne det at halene som er beskrevet i evaluation er mest sannsynlig pga. av outliers
+Figures \ref{fig:svmRadialDensity} to \ref{fig:lokrrDensity} in Section \ref{sec:Evaluation} illustrate that the error distributions of the baselines, ensemble learning approaches and the online learning approaches have long tails. These tails may be explained by the presence of outliers in the data set. The traffic flow and mean travel time for those vehicles having an abnormally large travel time might be the same as vehicles having a normal travel time. When the methods make predictions for the vehicles having an extreme travel time, they will have seen the normal case more times, and therefore predict that the current vehicle will have a normal travel time. However, due to this vehicle stopping along the road stretch, the resulting travel time is much larger than normal, and an extreme error occurs. This will both affect the tail of the error distribution, in addition to affecting the performance metrics, especially the RMSE.
+
+\subsection{Experiment 1 - Ensemble Learning}
+\label{subsec:discussEnsemble}
+% - why does bagging perform well in terms of median, but poorly in terms of rmse?
+% - why does the test say that lasso and frbs are significantly different
+One thing that is noticeable from the results in Experiment 1, is that there does not seem to be a strong positive correlation between which method is considered best in terms of sample median, RMSE and MAE. Bagging is the method with the lowest MAE and has the absolute error distribution with lowest sample median, whilst at the same time having the second highest RMSE. Lasso is the method with the lowest RMSE, whilst at the same time having a MAE value close to that of bagging. FRBS has a RMSE value close to that of lasso. The fact that bagging has the lowest MAE and lowest sample median while also having the second highest RMSE might indicate that bagging makes predictions being closer to the actual travel time more often than lasso. This is also indicated by the result of the Friedman test where bagging has the best Friedman rank. Even though bagging has lower MAE and sample median than lasso, lasso has considerably lower RMSE than bagging. Since RMSE is sensitive to large errors, this might indicate that in those rare cases where their errors are very large, bagging's errors are larger than those of lasso.
+
+% - what does lasso and frbs do to get lower rmse?
+Both lasso and FRBS are optimized in terms of RMSE, i.e. they combine the predictions of their baselines in order to reduce the RMSE as much as possible. This might explain why lasso and FRBS achieve lower RMSE than the other approaches. When they optimize their performance in terms of RMSE during training, they will most likely be the ones performing best in terms of RMSE during testing as well, as long as they do not overfit the training data. 
+
+% - bias in baselines, how does this effect the ensemble models
+% Since the ensemble methods are limited by the baselines they are based on, it is important to inspect the properties of the baselines. 
+
+% - bagging works with weak learners, svm is used
+% - compare each ensemble method to its baselines. e.g. why is bagging not biased? is it because the baselines have different bias?
+Bagging's approach, on the other hand, is entirely different. It trains multiple baselines on a random subset of the training data and then combines them by taking the average over all predictions. It makes no attempt to decrease the RMSE, but instead achieves the lowest median of the ensemble approaches. In theory, the strength of bagging is that it can even out the differences in bias between its underlying baselines by averaging their predictions. However, in Experiment 1, this does not seem to be the reason why bagging achieves a low sample median. All the sample medians of the baselines used in bagging are centered around three. These sample medians are presented in Table \ref{tab:baggingMembersSampleMedian} in Appendix \ref{app:tables}. Consequently, when bagging averages the predictions from its baselines, bagging's sample median is also approximately three. 
+
+Recall from Section \ref{subsubsec:boosting} that the implementation of boosting for regression models provided in \verb+scikit-learn+ is used in Experiment 1. The only method of the four baselines used in this study, SVM, k-NN, ANN and Kalman filter, that both is implemented in \verb+scikit-learn+ and supports weighting of training examples is SVM. That puts a restriction on the baseline being used in boosting, as SVM is the only baseline available. In order to compare bagging and boosting on a fair basis, SVM is also chosen as the baseline in bagging. The use of SVM as baseline may have lead to suboptimal performance for bagging. Section \ref{subsec:Bagging} explains that bagging may work well with unstable learners. However, there is little to gain from bagging when using stable learners. SVMs are stable learners \citep{unstableLearners} and are therefore unlikely to get completely different bias when trained on slightly different data. This might explain why all the underlying baselines in bagging are very similar, even though they have been trained on different subsets of the training set. Consequently, when using SVMs as baselines for bagging, this study does not realize bagging's full potential as en ensemble learner. This makes it difficult to conclude whether any of the other ensemble learners are better than bagging.
+
+% - What could have been done to provide even better results for the ensemble learning approaches
+The fact that bagging may work well with unstable learners relates to the fact that ensemble learners work best when its baselines have different bias. By inspecting figures \ref{fig:svmRadialDensity} to \ref{fig:kalmanFilterDensity}, it can be seen that k-NN, ANN and Kalman filter have sample medians of $23.46$, $26.54$ and $49.39$, respectively, whilst SVM has a sample median of $-31.63$. This might indicate that k-NN and ANN have similar bias towards slightly overestimating the travel time, whilst Kalman filter overestimates the travel time even more. In contrast, SVM has a bias towards underestimating the travel time. Including even more baselines, or baselines with greater diversity in terms of bias could potentially lead to even better performance for the ensemble learning approaches. This might also result in a bigger difference in performance between lasso and the average. Imagine having one baseline performing considerably worse than the other baselines in the ensemble. In this situation, lasso may be able to exclude this baseline from its ensemble and thus have better performance than the average, which includes all baselines in the ensemble independent of their performance.
+
+% - boosting got perfect fit on training set, stopped on baselines --> overfitting? reason for poor performance?
+Boosting performs considerably worse than the other methods in terms of sample median and MAE. Its sample median of $127.43$ illustrates a considerable bias towards overestimating the travel time. Additionally, boosting comes out as the worst performing approach in terms of RMSE and Friedman ranking. During training, boosting was set to use a maximum of 25 baselines in order to be similar to bagging. In \verb+scikit-learn+ the boosting algorithm stops if it achieves perfect fit on the training data. In Experiment 1, boosting ended up with 5 baselines. This indicates that it achieved perfect fit on the training data, and its poor performance might be due to overfitting the training set. Although the results for boosting in this study are not promising, it does not mean it is not a viable ensemble learning approach for travel time prediction.
+
+% include some remarks on the average ensemble and whether or not it is worth the use of resources to train the other ensemble learning methods
+The fact that the sample median of the average ensemble is farther away from zero than bagging suggests that the average ensemble has a stronger bias towards overestimating travel times than that of bagging. However, the average ensemble has a sample median closer to zero than lasso, FRBS and boosting, which indicates that the average ensemble has a weaker bias than the mentioned approaches. The average ensemble's MAE value is considerably lower than that of boosting, and close to those of bagging, lasso and FRBS, albeit higher than the three latter methods. The average ensemble's RMSE and sample deviation illustrates that its predictions might have larger deviations than those of lasso and FRBS. These results illustrates that even a simple approach like taking the average of the baselines' predictions may be a viable approach to constructing an ensemble.
+
+% - what metrics are important? metrics/medians not consistent
+% - rmse similar to deviation, what does rmse actually mean? % - mae match better with medians
+As the different performance metrics and other criteria for comparison do not agree on which method is best, it is interesting to explore their interpretation and importance. The RMSE is tightly coupled with the sample deviation, as their computations are carried out in a similar fashion. Therefore, both RMSE and sample deviation can be seen as measures of variation in the predictions of a method. The median, on the other hand, is more representative for the model's bias and is a good indicator for what an expected error is. Similarly, the MAE is a measure indicating what a typical absolute error is. Therefore it is not surprising that the approach with the lowest sample median also has the lowest MAE. Additionally, it is also expected that the method with the lowest RMSE also has the lowest sample deviation.
+
+Since these measures represent different properties, what measure to consider when deciding what model is best depends on what properties are most important. Presented with two methods, method A having low bias, but large deviation; and method B having larger bias, but smaller deviation, which method is most desirable? Method B will in most cases either overestimate or underestimate travel times, depending on the direction of the bias. This is not the case for method A since it is unbiased, but its errors will fluctuate more than method B because of its higher deviation. It is simpler to correct for method B's bias than it is to correct for method A's varying errors. One can, in theory, correct for method B's bias by adding or subtracting a constant to its prediction, depending on the direction of its bias. In terms of predicting travel time, having consistent predictions is important. One can imagine commuters having more confidence in a travel time prediction system if its predictions are consistent. However, it is also important to have accurate predictions, meaning that the travel time predictions are as close to the actual travel time as possible. If a bias is present in a prediction model, it may be better having a bias towards overestimating travel time than underestimating it. Commuters might be more pleased using less time than predicted in contrast to end up using longer time than predicted. In total, both accurate predictions and consistent predictions are desirable from a travel time prediction system.
+
+% Kan bruke avsnittet over som inspirasjon til en diskusjon rundt hvilken av metodene som er best
+To summarize the results, there is no ensemble approach among the ones investigated in this study that clearly outperforms the other methods on all measures. This makes it difficult to conclude which ensemble learning technique has the best prediction accuracy.
+
+% - frbs uses only two baselines, lasso uses 4
+%FRBS uses only two baselines, compared to lasso and average's four. Still it is able to provide similar performance as lasso. 
+
+% FRBS: manually created rules based on article with traffic flow. what would happen if rules were automatically generated and used more baselines?
+
+\subsection{Experiment 2 - Online Learning}
+\label{subsec:discussOnline}
+% Det virker naturlig å kommentere RMSE, MAE og median/Wilcoxon signed rank test her
+% Må si noe mer om performance metrics og test her
+Based on the performance metrics alone, online-delayed EKF appear to be better than LOKRR. However, based on the error distribution plots and the significance tests regarding the sample medians, LOKRR's sample median seem to be lower than the sample median of online-delayed EKF. The fact that online-delayed EKF has lower RMSE and MAE than LOKRR, might be explained by that online-delayed EKF does not have as extreme errors as LOKRR, and in this way does not get punished as much through the performance metrics. At the same time, LOKRR has an absolute error distribution with lower sample median than online-delayed EKF. A possible explanation for this is that in majority, LOKRR makes predictions being closer to the actual travel time than online-delayed EKF, and thus makes less biased predictions than online-delayed EKF.
+
+%Based on these results, which of the two online learning approaches is considered to have the best prediction accuracy? 
+
+% - compare plot of predictions for a day between lokrr and ekf. lokrr is all over the place, ekf looks much better
+% - metrics do not represent this
+% - why is lokrr all over the place? not enough training data? wrong parameters?
+
+Note that the performance metrics and sample deviations of the two online learning approaches are considerably higher than those of the ensemble approaches. This relates to the fact that the online learning approaches have learned from and made predictions for a data set where no attempt to remove outliers is done. In contrast, the ensemble learning approaches have used a data set where outliers have been removed to some degree. Additionally, the offline learners can look at data more than once and therefore have a better chance of discovering patterns in the data. However, the focus of this study is not to compare online learners with offline learners. What is important is to assess the performance of them as online learners and to compare them to each other.
+
+% One of the most prominent differences between the two online learning approaches is their sensitivity to outliers. LOKRR consists of multiple small kernels, which means that extreme values become even more prominent. Especially during parameter tuning where the possible values of sigma and lambda are computed based on the data in the training set. This may explain LOKRR's fluctuating predictions. The predictions from the online-delayed EKF form a smoother curve. Why? % Kalman filter is created to filter out noise to find the actual signal, which in this case is travel time. In a scenario like this where there is no outlier removal, Kalman filter might be the best choice since its predictions are more consistent. 
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{figs/png/evaluation/onlineDelayedEkf_scatter_2015-03-04.png}
+\caption[Predictions from online-delayed EKF March 4, 2015]{Predictions from online-delayed EKF and actual travel time March 4, 2015}
+\label{fig:ekfPredictions20150304}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{figs/png/evaluation/lokrr_scatter_2015-03-04.png}
+\caption[Predictions from LOKRR March 4, 2015]{Predictions from LOKRR and actual travel time March 4, 2015}
+\label{fig:lokrrPredictions20150304}
+\end{figure}
+
+% Sigma -> smoother curve
+% Window size -> should it have been larger?
+% Data does not contain strong cyclic patterns. Maybe that's the reason LOKRR does not perform well
+
+% Plotting each methods predictions against the true travel time can provide more information about their performance. 
+In Figure \ref{fig:ekfPredictions20150304} and Figure \ref{fig:lokrrPredictions20150304} the predictions from online-delayed EKF and LOKRR March 4, 2015 are plotted, respectively. Online-delayed EKF tends to overestimate the travel times. This can be seen in Figure \ref{fig:ekfPredictions20150304}, where the online-delayed EKF predictions tend to lie above the actual travel time during normal traffic conditions. LOKRR, on the other hand, tends to underestimate the travel times as its predictions tend to lie below the actual travel times. It can be seen in Figure \ref{fig:lokrrPredictions20150304} that the predictions from LOKRR vary greatly from one prediction to the next. In contrast to LOKRR, online-delayed EKF's predictions do not fluctuate a lot. Online-delayed EKF seems to be able to follow the curve of the true travel time, albeit with a delay.
+
+% Does this necessarily mean that it is the obvious choice among the two? The answer depends on what is important for the user. If the having an as low as possible prediction accuracy for the entire data set, LOKRR is considered best. However, if these predictions are to be communicated to commuters, e.g. through electronic road signs, it may be more desirable having a smoother prediction curve as the system may be experienced as more consistent.
+
+%TODO: referer til online-delayed EKF i 3.2.1 som forklarer hvorfor den lagger
+In theory, the strength of online learning approaches are their ability to adapt to abnormal traffic scenarios, i.e. scenarios that are not present in the training set. Figure \ref{fig:ekfPredictions20150313} and Figure \ref{fig:lokrrPredictions20150313} illustrate actual travel time and predictions from online-delayed EKF and LOKRR on March 13, 2015, respectively. The afternoon peak on this date is considerably higher than usual. In order to investigate how well the two online learning approaches predict this peak, their predictions are inspected. Interestingly, LOKRR is unable to detect the increase in travel time at all. One possible explanation for LOKRR's inability to detect this peak is that it is an instance based approach. Each kernel contains data which approximately covers the past week. If this data does not contain any abnormally high travel times, the kernel is unable to predict that such travel times can happen. An inspection of the travel times during the week leading up to March 13 reveals that no similar peaks in travel times occurred. It is also interesting to note that the abnormally high travel times observed during the afternoon on March 13 do not seem to affect the predicted travel times the following days. The online-delayed EKF is better able to detect that there is a peak in travel times. However, there is a considerable latency between when the congestion builds up and the online-delayed EKF is able to detect the increase. Similarly, the online-delayed EKF is slow to detect the decrease in travel time. Consequently, the online-delayed EKF predicts a peak in travel time when the traffic is almost back to normal. 
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{figs/png/evaluation/onlineDelayedEkf_scatter_2015-03-13.png}
+\caption[Predictions from online-delayed EKF March 13, 2015]{Predictions from online-delayed EKF and actual travel time March 13, 2015}
+\label{fig:ekfPredictions20150313}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{figs/png/evaluation/lokrr_scatter_2015-03-13.png}
+\caption[Predictions from LOKRR March 13, 2015]{Predictions from LOKRR and actual travel time March 13, 2015}
+\label{fig:lokrrPredictions20150313}
+\end{figure}
+
+% - input to lokrr is different than what is presented in the paper. is it fair to use lokrr with this kind of data?
+In the original paper \citep{haworth14:local_online_kernel_ridge_regression_for_forecasting_of_urban_travel_times}, LOKRR uses five minute aggregated travel time data. However, in this study the kernels contain individual observations. This leads to several challenges.
+
+First of all, using individual travel times heavily limits how far back in time one can keep data. In \citet{haworth14:local_online_kernel_ridge_regression_for_forecasting_of_urban_travel_times}, the kernels consisted of observations from the 80 previous days. Including a window size of 3, this leads to each kernel containing 560 observations. In this study, the biggest kernel contained $698$ observations. However, this only comprised a week of data with a window size of 1. One week of data might not be enough to detect cyclic patterns. Additionally, the limited window size further decreases its ability to detect cyclic patterns, since it is unlikely that e.g. rush hour occurs at the same exact time every day.
+
+Secondly, the kernels end up with different amounts of data. The traffic flow during the morning and afternoon rush hours far exceed the traffic flow at 8 PM. Kernels responsible for periods of the day with less traffic have less data to base their predictions on, which is expected to lead to lower prediction accuracy. This could be solved by setting a limit to how much data each kernel could contain. However, that would mean that the kernels responsible for intervals with less traffic would contain data further back in time than kernels responsible for periods of the day with heavy traffic. Whether or not that is a desirable property should be considered.
+
+It may be unfair to employ LOKRR on a type of data set that it is not designed for and the implications using individual travel times have for LOKRR makes it difficult to compare it to online-delyaed EKF or any other online learner.
+
+\subsection{Limitations}
+\label{subsec:limitations}
+The results from Experiment 1 and Experiment 2 are products of several factors. Some of these are covered in Section \ref{subsec:discussEnsemble} and Section \ref{subsec:discussOnline}. This section presents additional limitations in this work.
+
+% - would the results be different if the data had less/more outliers? how do the outliers affect models during training/how do outliers affect performance metrics
+% - are these performance metrics the correct ones to evalaute the models?
+The methods investigated in this study are data driven approaches that are inherently affected by the data they operate on. Consequently, the data preprocessing step will affect the final results both in terms of the trained models and the performance metrics. Figure \ref{fig:firstdaytraveltime} shows the travel times registered for January 29, 2015. The figure clearly illustrates the presence of vehicles with abnormally high travel times, which is seen as dots high above the line illustrating the normal travel time. An attempt to remove such outliers is performed. However, more sophisticated schemes may be employed. When the methods are evaluated based on RMSE, the approaches that best adapt to the outliers may appear better than those who are unable to adapt to outliers. This may suggest the use of other performance metrics than RMSE, when outliers are present in the data set. However, it may also indicate that having a greater focus on removing outliers from the data set is important in order to assess the performance more based on normal cases and less based on outliers. 
+
+% - are training/tuning/testing steps correctly divided
+% - is data amount big enough?
+% Another aspect affecting the method's performance is the amount of training data that they are provided with. Having more training data increases the probability that the methods generalize better on the test set. In Experiment 1, the baselines are trained on three weeks of data. In order for the baselines to perform well on the test set, these three weeks have to contain enough data to include all the different scenarios in the test set.
+
+% - parameter tuning could have been better. Larger grids to begin with, finer grids later
+The methods are also affected by their parameters. In this study relatively small amounts of data is used for parameter tuning. Additionally, the parameter search is fairly simple. Larger grids could have been employed to begin with, and several steps of using finer grids could have been used to optimize the parameters even further. Some methods are more sensitive to their parameters than others and it is possible that placing more emphasis on the parameter tuning step could have lead to entirely different results. 
+
+% Not so sure about these two:
+% - inclusion criteria screening. could have tested other approaches?
+% - are models correctly implemented
+
+\section{Conclusion}
+\label{sec:Conclusion}
+This study sets out to compare state of the art ensemble learning and online learning solutions in order to find the best performing methods in terms of prediction accuracy. More specifically, the ensemble learning methods that are investigated are bagging, boosting, lasso, FRBS and average. The online learning methods that are investigated are online-delayed extended Kalman filter and local online kernel ridge regression. The methods are trained and tested on a common data set in an attempt to answer the following research questions:
+
+\begin{description}
+\item[Research Question 1] {Given a set of baseline methods, which ensemble learning technique yields the best prediction accuracy?}
+\end{description}
+
+\begin{description}
+\item[Research Question 2] {Which online learning technique yields the best prediction accuracy?}
+\end{description}
+
+The results of the experiments indicates that lasso and fuzzy rule based system are the best methods in terms of root mean squared error, whilst bagging is best in terms of mean average error, and sample median of the error distribution. Boosting performs consistently worse than all the other methods. However, no method performs consistently better than all other methods across all performance metrics. This makes it difficult to determine which ensemble learning technique yields the best prediction accuracy. 
+
+In regards to online learning, online-delayed extended Kalman filter is the best performing method in terms of root mean squared error and mean absolute error. However, local online kernel ridge regression is best in terms of sample median of the error distribution. During an event with unexpectedly high travel times, online-delayed extended Kalman filter is able to adapt to the changing traffic situation considerably better than local online kernel ridge regression. However, the results do not clearly indicate which online learning technique yields the best prediction accuracy.
+
+\section{Contributions}
+\label{sec:Contributions}
+% State contributions
+This work's contribution is two-fold. First, this study compares state of the art ensemble learning and online learning techniques on a common data set. Second, local online kernel ridge regression is employed on a data set with individual travel times, in contrast to the original approach where five minute aggregated data is used.
+
+\section{Future Work}
+\label{sec:futureWork}
+%TODO: censored EKF should be tested in order to see if it is better than delayed for the special case with abnormal traffic
+
+% State suggestions for future work
+% Bagging on same data set with unstable learners
+As mentioned in Section \ref{subsec:discussEnsemble}, bagging is used with support vector machine as baseline, which is considered a stable learner. As there is little to gain from using bagging with a stable learner, a suggestion for future work is to repeat Experiment 1 where bagging is used with an unstable baseline such as artificial neural network in order to investigate whether or not this leads to better performance for bagging.
+
+% FRBS with the same baselines as lasso. FRBS with automatically created rules.
+In Experiment 1, the fuzzy rule based system ensemble uses two baselines, artificial neural network and Kalman filter. In contrast, the lasso ensemble uses four baselines, support vector machine, k-nearest neighbors, artificial neural network and Kalman filter. It would be interesting to investigate how the fuzzy rule based system ensemble performs using the same baselines as the lasso ensemble, in order to compare the two ensemble learning approaches on an equal basis. Furthermore, the fuzzy rule based system used in Experiment 1 uses manually created rules. Investigating whether or not using automatically generated rules will capture different relationships between the baselines in the ensemble is another suggestion for future work.
+
+% evaluate other ensemble and online learners on same data, e.g. the online learner with the traffic regimes. how would that method handle the case on march 13?
+In this work, only two online learning approaches are tested. In order to further investigate which online learning method provides best prediction accuracy, other approaches should be considered. The method described in \cite{wu12:a_online_boosting_approach} is based on handling abnormal traffic conditions by employing separate learners for normal and abnormal traffic conditions. It would be interesting to further investigate and compare the proposed method to the online-delayed extended Kalman filter and local online kernel ridge regression.
+
+% Section \ref{subsec:InclusionCriteria} presents the approach described in \cite{zhu12:a_real-time_layered_neural_network_ensemble} as a possible candidate to be included in Experiment 1. However, as the method is not included in this work, a suggestion for future work is to investigate its performance on the data set used in Experiment 1.
+
+% investigate effect of including more variables like weather, vegloggen etc or variables better able to represent traffic conditions. e.g. how much traffic compared to max on road section
+%One common suggestion for increasing prediction accuracy is to incorporate data from different sources. One possible approach can be to parse traffic messages from the NPRA. This can possibly help detect abnormal traffic conditions, e.g. caused by traffic accidents. Another approach is to use variables that incorporate more information than e.g. traffic flow and travel time. One suggestion is to use a variable representing the ratio of the current traffic flow to the maximum traffic flow on the road section.
+
+% improved outlier detection in order to improve prediction accuracy, because the methods get a "cleaner" model since they don't try to adapt to outliers
+%Another approach to increasing prediction accuracy can be to use more sophisticated outlier detection schemes. Removing outliers can possibly lead to more accurate models since they become less affected by extreme values. Suggestion for scheme?
+
+% evaluate methods based on metrics more focused on detecting when traffic increases and decreases
+There are more aspects to travel time prediction methods than their performance relative to some performance metric. The overall RMSE of a method does not necessarily represent its usefulness for a traffic control center. Being able to accurately predict the sudden increases and drops in travel time might be a more desirable property than having a low overall RMSE. However, comparing that property among a set of methods is difficult. Inspecting predictions for specific scenarios leads to subjective opinions on what method is best. Future work can be to create a numeric performance metric that represents this quality in a method. This way this property can be compared across different methods in an objective manner.
+
+% benchmark data set
+The goal of this study is to compare state of the art travel time prediction approaches in order to find the best approach in terms of prediction accuracy. In the future it might be beneficial to develop a set of benchmark data sets that novel approaches can be tested on. This can make it easier to compare the performance of different approaches.

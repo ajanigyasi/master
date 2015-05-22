@@ -1,0 +1,264 @@
+\chapter{Experiments and Results}
+\label{cha:ResearchAndResults}
+
+This chapter presents the experiments performed in this study along with their results. Section \ref{sec:experimentalPlan} describes the intent of each experiment and how they are conducted. Section \ref{sec:experimentalSetup} explains the experimental setup, describing the data set, and model parameters. Section \ref{sec:environment} describes the environment in which the experiments are run. Section \ref{sec:experimentalResults} presents the results of the experiments.
+
+\section{Experimental Plan}
+\label{sec:experimentalPlan}
+This section introduces the different measures that are used to evaluate the performance of the approaches investigated in this study, in addition to describing the two experiments that are conducted.
+
+\subsection{Performance metrics}
+\label{subsec:performanceMetric}
+%Before explaining how the experiments are performed, this section presents the error metrics used to assess the performance of the methods.
+
+The two performance metrics presented below are chosen because they are extensively used in the literature when comparing predicted values to observed values. They are measures representing the performance of a model using a single number, making it easy to compare the models to each other.
+
+The first performance metric used is \acrfull{rmse}, which is expressed as:
+\begin{equation}
+\label{eq:rmse}
+RMSE = \sqrt{\frac{\sum_{t=1}^{t=N}{(\hat{y_t}-y_t)^2}}{N}}
+\end{equation}
+where $\hat{y_t}$ is the predicted value, $y_t$ is the observed value and $N$ is the number of observations.
+
+%RMSE is chosen as error metric as it is extensively used when comparing predicted values to observed values. Additionally, it is a measure that indicates the performance of the model using a single number, which makes it easy to compare to other models.
+
+Although RMSE is a commonly used error metric, it should be noted that one of the most prominent drawbacks with the RMSE comes from the fact that it squares the difference between predicted values and observed values. Large errors are therefore weighted exponentially more than small errors, making the RMSE sensitive to extreme values.
+
+The other performance metric used is \acrfull{mae}, which is expressed as:
+\begin{equation}
+\label{eq:mae}
+MAE = \frac{1}{N}\sum_{i=1}^{n}\lvert \hat{y_{t}} - y_{t}\rvert
+\end{equation}
+where $\hat{y_t}$ is the predicted value, $y_t$ is the observed value and $N$ is the number of observations.
+
+As both RMSE and MAE are measures of the difference between the predicted and actual values, accurate predictions will result in low RMSE and MAE values. Therefore, minimizing RMSE and MAE is desirable.
+
+\subsection{Experiment 1 - Ensemble Learning}
+\label{subsec:experiment1}
+Experiment 1 is conducted in an attempt to answer Research Question 1, which relates to the prediction accuracy of each ensemble learning method described in Section \ref{sec:ensembleLearning}. The outline of Experiment 1 is presented below, and Research Question 1 is repeated for convenience.
+
+%\begin{description}
+%\item[Research Question 1] {Given a set of baseline methods, which ensemble learning technique improves the baselines' predictions the most?}
+%\end{description}
+
+\begin{description}
+\item[Outline] {
+Use predictions from a set of baselines to construct the ensemble learning methods bagging, boosting, lasso, and FRBS. Compare the ensembles to each other with respect to prediction accuracy. 
+}
+
+\end{description}
+\begin{description}
+\item[Research Question 1] {Given a set of baseline methods, which ensemble learning technique yields the best prediction accuracy?}
+\end{description}
+
+\subsubsection{Baseline Models}
+\label{subsubsec:baselineModels}
+The first step in this experiment is to tune the parameters of the baseline methods SVM, k-NN, ANN and Kalman filter. This parameter tuning is performed on a designated part of the data set. A grid of possible parameters for each baseline is constructed, and a separate model for each combination of parameters is trained using k-fold cross-validation. For each baseline, the set of parameters that produced the lowest RMSE during the grid search is used in Experiment 1.
+
+The baseline models are trained on a separate part of the data set with the parameters obtained from the parameter tuning step, and are used to make predictions for the rest of the data set.
+
+\subsubsection{Ensemble models}
+\label{subsubsec:ensembleModels}
+The next part of the experiment consists of training the ensemble learning models. The predictions from the baselines are divided into a training and a testing set for the ensemble learning techniques. Lasso and FRBS use the training set to tune their parameters and then make predictions for the testing set. Bagging and boosting differ from lasso and FRBS in terms of how they are constructed. Instead of constructing a model based on predictions from the same set of baselines as lasso and FRBS, they are concerned with constructing multiple versions of one type of baseline model. In order to give bagging and boosting a fair basis for comparison, their baselines are built on the same data set as the baselines used in lasso and FRBS. In addition, a naive ensemble learning approach taking the average of the baselines' predictions is constructed. The simple average of the baselines' predictions is included to give a basis for comparison to the other ensemble learning approaches.
+
+In order to evaluate the performance of the ensemble methods in terms of prediction accuracy, their performance metrics and the properties of their error distributions are inspected. Additionally, hypothesis testing is conducted to see if the potential differences between the methods are significant.
+
+\subsection{Experiment 2 - Online Learning}
+\label{subsec:experiment2}
+Experiment 2 sets out to give an answer to Research Question 2, which is concerned with finding the best performing online learning technique among the ones described in Section \ref{sec:onlineLearning}. The outline of Experiment 2 is presented below, and Research Question 2 is repeated for convenience.
+
+\begin{description}
+\item[Outline] {Train LOKRR and online-delayed EKF on a common data set and compare the two approaches with respect to prediction accuracy.}
+\end{description}
+
+\begin{description}
+\item[Research Question 2] {Which online learning technique yields the best prediction accuracy?}
+\end{description}
+
+Section \ref{subsec:onlineExtendedKalmanFilter} explains two ways of using the EKF to train an ANN in an online fashion, namely online-delayed EKF and censored EKF. Implementing the censored EKF approach is more time consuming than implementing the online-delayed EKF. \cite{lint08:online_learning_solutions_for_freeway} reports that using the censored EKF in favor of the online-delayed EKF only results in a slight improvement of prediction accuracy. Because the censored EKF approach requires more time to implement, and only offers a slight improvement over online-delayed EKF, it is decided to only investigate the latter approach in this study.
+
+Parameters for the two online learning approaches LOKRR and online-delayed EKF are tuned using a designated part of the data set. The approach taken to tune the parameters of LOKRR and online-delayed EKF is similar to the one taken to tune the parameters of the baselines in Experiment 1. A grid of possible parameters is constructed, and a model for each combination of parameters is trained. The performance of each model is assessed using RMSE, and the model with best performance is chosen to be used in the next step of the experiment. This model is then used to make predictions, and learn when observations become available, for the rest of the data set. 
+
+In order to evaluate the performance of the online learning methods in terms of prediction accuracy, their performance metrics and the properties their error distributions are inspected. Additionally, hypothesis testing is conducted to see if the potential differences between the methods are significant.
+
+\section{Experimental Setup}
+\label{sec:experimentalSetup}
+
+This section contains information about how the experiments are set up. Section \ref{subsec:dataDescription} presents the data set, whilst Section \ref{subsec:baselines} and Section \ref{subsec:ensembleLearningMethods} describe the setup of parameters and training data for the baseline and ensemble methods, respectively. The setup of the online learning methods is described in Section \ref{subsec:onlineLearningMethods}.
+
+\subsection{Data description}
+\label{subsec:dataDescription}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{figs/images/vegstrekning.png}
+\caption[Map showing the route where the data is collected from]{Map showing the route where the data is collected from.\protect\footnotemark}
+\label{fig:roadmap}
+\end{figure}
+\footnotetext{Taken from \url{http://www.reisetider.no/reisetid/omrade.html?omrade=4} on April 19, 2015}
+
+The data used in the experiments in this study is collected by the NPRA from highway E39 between Dusavik and Bogafjell in Rogaland, Norway. The route is illustrated in green in Figure \ref{fig:roadmap}. There are in total five measurement points along this route, illustrated as black lines across the road in Figure \ref{fig:roadmap}. Data from two consecutive points, Tjensvoll and Auglendshøyden, along this route is used in the experiments. The stretch is 4.6 km long, and the data is collected in the southbound direction between January 29, 2015 and March 31, 2015. The road section is highlighted with red in Figure \ref{fig:roadmap}.
+
+The data set consists of two input variables and one output variable. The two input variables used are mean travel time the last five minutes, and traffic flow at the entry point the last five minutes. The value of each variable is calculated at the time a vehicle enters the road section. The output variable in the data set is the realized travel time for the vehicle. The data is collected by registering IDs from AutoPASS tags in vehicles driving along this road section. Travel times are derived by computing the time difference between the registration of the same AutoPASS identification number at the two points. The mean travel times are trivial to compute once the travel times are registered. Traffic flow is derived from counting the number of vehicles passing the first registration point. The data set consists of $247\ 074$ observations, and the first ten rows of the data set are shown in Table \ref{tab:exampleRowsFromTheDataSet}. 
+
+A plot of individual travel times and five minute mean travel times for January 29, 2015 can be seen in Figure \ref{fig:firstdaytraveltime} and Figure \ref{fig:firstdaymeantraveltime}, respectively. A plot of the traffic flow for the same day is displayed in Figure \ref{fig:firstdaytrafficflow}. By inspecting the travel times plotted in Figure \ref{fig:firstdaytraveltime} it can be seen that a considerable amount of outliers are present in the data set. These are seen as dots lying far above the travel times representative for the current traffic situation. The outliers may represent commuters stopping along the road section to fill gas or to run other errands. In order to train models on observations in the data set that are representative for the actual traffic situation, an attempt to remove outliers is conducted. All rows in the data set having a travel time outside the range $[\mu-3\sigma, \mu+3\sigma]$ are removed, where $\mu$ is the mean of the travel times in the data set and $\sigma$ is the standard deviation of the travel times in the data set. The data set where outliers are removed is used in Experiment 1.
+
+% TODO: det burde kanskje innkluderes en forklaring på hvorfor datasettet med outliers er brukt for online
+In real time systems, removing outliers from the data set is not as straight forward as the approach described above. A global threshold for removing outliers will not suffice, as changes to the data set can happen over time, and the same threshold will not always lead to correct removals. One can imagine using a more local approach to remove outliers, where travel times above some weighted sum of the $x$ previous travel times are not fed to the online learning method. However, such an attempt to remove outliers is not performed in this work, and the online learning approaches in Experiment 2 are trained using the unprocessed data set. 
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.26\textheight,keepaspectratio]{figs/png/dataset_plots/TravelTime_20150319.png}
+\caption{Plot of all travel times from January 29, 2015}
+\label{fig:firstdaytraveltime}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.26\textheight,keepaspectratio]{figs/png/dataset_plots/MeanTravelTime_20150319.png}
+\caption{Plot of five minute mean of all travel times from January 29, 2015}
+\label{fig:firstdaymeantraveltime}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.26\textheight,keepaspectratio]{figs/png/dataset_plots/TrafficVolume_20150319.png}
+\caption{Plot of traffic flow based on all vehicles from January 29, 2015}
+\label{fig:firstdaytrafficflow}
+\end{figure}
+
+\input{tables/dataset/dataSetDescriptionTable.tex}
+
+\subsection{Baselines}
+\label{subsec:baselines}
+This section contains descriptions of each baseline method used in Experiment 1. Information about the process applied to every baseline is given in the first section below, whilst specific details about each baseline is given in the following sections.
+
+\subsubsection{Overview}
+\label{subsubsec:baselinesOverview}
+The baseline methods used in Experiment 1 are implemented in R \citep{rLanguage}. Parameter tuning and training for SVM, k-NN and ANN is done through the library \verb+caret+ \citep{caret}, which is a library meant to make the process of constructing predictive models in R easier. In this work, \verb+caret+ is used as a layer between the authors code in R and the respective implementations of the baseline methods. \verb+caret+ provides structures for setting the grid for which parameters are to be searched among, and returns the model with parameters providing the best performance in terms of RMSE. Tuning and training of the Kalman filter is done with the R library \verb+dlm+ \citep{dlm}.
+
+The baselines use the data set were outliers have been removed. In order to find the best set of parameters for each baseline, 10-fold cross-validation on data from January 29, 2015 to February 1, 2015 is used. Each baseline is then trained with the best set of parameters on data from February 5, 2015 to February 25, 2015. The resulting models are then used to generate predictions from Febrary 26, 2015 to March 31, 2015.
+
+\subsubsection{Support Vector Machine}
+\label{subsubsec:supportVectorMachine}
+The SVM implementation used in this work is from the R library \verb+kernlab+ \citep{kernlab}. When using SVMs one can choose among several kernel functions. To determine which kernel to use in the SVM of Experiment 1, a preliminary experiment comparing the RMSE of SVM models using linear, polynomial and radial basis kernel functions is conducted. The training data for these models are observations from January 29, 2015 to February 1, 2015. The testing data, for which the RMSE is computed, is from February 2, 2015 to February 4, 2015. For each kernel, a grid of possible parameter values is searched in order to find the best set of parameters. The SVM with a radial basis kernel function produced the lowest RMSE, and is therefore selected to be used in Experiment 1. Among the parameter values tested in the grid search for the radial basis function SVM models, the parameters $\sigma$ = 4.1451371 and $C=2^{-1}$ produced the best performing model, and is the one used in Experiment 1. For a more detailed description of the parameter search for SVM, please see Appendix \ref{appsubsubsec:supportVectorMachine}.
+
+\subsubsection{k-Nearest Neighbors}
+\label{subsubsec:k-NearestNeighbors}
+The k-NN implementation used in this work is from the R library \verb+kknn+ \citep{kknn}. The parameters that are possible to tune in \verb+kknn+ are $k$, distance measure and kernel. The $k$ parameter controls how many neighbors to extract from the instances present in the data set when making predictions. The distance measure parameter controls how the distance between two points in the data set is computed. The kernel parameter controls how to weight the values of the $k$ neighbors based on their distance. In order to find a good set of parameters for the weighted k-NN algorithm a grid search is performed. Based on the results from the grid search, the following parameters lead to the lowest RMSE: $k=50$, distance measure = 1 (Euclidean) and kernel = Rank. Please see Appendix \ref{appsubsubsec:k-NearestNeighbors} for a more comprehensive description of the grid search process.
+
+\subsubsection{Artificial Neural Network}
+\label{subsubsec:artificialNeuralNetwork}
+The ANN implementation used in Experiment 1 is from the R library \verb+nnet+ \citep{nnet}. The \verb+nnet+ library provides functions for creating and training feed forward ANNs with a single hidden layer. The parameters being tuned for the ANN is the number of hidden nodes in the network and the weight decay parameter. The parameters producing the lowest RMSE are: number of hidden nodes $=16$ and decay$=\num{1e-04}$. Please see Appendix \ref{appsubsubsec:artificialNeuralNetwork} for a more elaborate description of the parameters, and a table presenting the results for each combination of parameters.
+
+\subsubsection{Kalman Filter}
+\label{subsubsec:kalmanFilterExperiment}
+\verb+dlm+, which is an R library providing functions for defining dynamic linear models of various types, is used to perform the Kalman filter predictions in Experiment 1. The actual travel times of the data set form a time series, and it is assumed that this time series of travel times can be modelled using a first order linear model with the following state space formulation: 
+
+\begin{equation}
+\begin{cases}
+y_t=\theta_t+v_t, v_t \sim \mathcal{N}(0, V_t)\\
+\theta_t=\theta_{t-1}+w_t, w_t \sim \mathcal{N}(0, W_t)
+\end{cases}
+\end{equation}
+where $y_t$ is the observed travel time at time $t$, $\theta_t$ is the \emph{actual} travel time at time $t$, which is assumed to be unobservable, $v_t$ is the observation noise and $w_t$ is the process noise. Both $v_t$ and $w_t$ are assumed to follow a zero mean Gaussian distribution with covariance matrices $V_t$ and $W_t$, respectively.
+
+The parameters that are tuned for this model are the covariance matrices $V_t$ and $W_t$. Since $y_t$ and $\theta_t$ are univariate, matrices $V_t$ and $W_t$ are $1\times1$ matrices, and only one value per covariance matrix is tuned. $V_t$ and $W_t$ are set to $47\ 939$ and $122$, respectively. In order to give a complete definition of the dynamic linear model, an initial estimate of $y_{t=0}$ and its variance $\sigma_{t=0}$ has to be provided. This is set to be the mean and standard deviation of the training observations, which are $242$ and $255$, respectively. A detailed description of the parameter tuning process can be found in Appendix \ref{appsubsubsec:kalmanFilterExperiment}.
+
+\subsection{Ensemble Learning Methods}
+\label{subsec:ensembleLearningMethods}
+The setup of each ensemble method used in Experiment 1 is presented in this section. The general procedure is described in the first section below, whilst specific details concerning the setup of each ensemble method can be found in the following sections.
+
+\subsubsection{Overview}
+\label{subsubsec:ensembleOverview}
+Bagging and boosting train multiple SVMs on the same data set used to train the baselines described in Section \ref{subsec:baselines}, which consists of data from February 5, 2015 to Febrary 25, 2015. These SVMs then generate predictions on data from February 26, 2015 to March 31, 2015.
+
+Lasso and FRBS use the predictions of the baselines described in Section \ref{subsec:baselines} as input. Lasso is tuned and trained on predictions made by the four baselines from February 26, 2015 to March 18, 2015. Lasso's predictions are generated based on the predictions of the four baselines from March 19, 2015 to March 31, 2015. Due to the computational complexity of FRBS, only one week of data from February 26, 2015 to March 4, 2015 is used to search for the best set of parameters. As the rules in the FRBS are manually created, no training phase is necessary. Predictions by FRBS are generated from March 5, 2015 to March 31, 2015.
+
+\subsubsection{Bagging}
+\label{subsubsec:bagging}
+The bagging method is implemented in R. There are two parameters that must be specified when doing bagging of a baseline learner: the number of learners $K$ to use in the ensemble, and the number of observations $N$ to sample for each learner. In Experiment 1, $K$ is set to 25, and $N$ is set to the number of training examples in the training set. An SVM model with the parameters of the best performing model from the parameter tuning step for SVM reported in Section \ref{subsubsec:supportVectorMachine} is used, i.e. an SVM model with a Gaussian radial basis function as kernel, $\sigma$ = 4.1451371 and $C=2^{-1}$.
+
+\subsubsection{Boosting}
+\label{subsubsec:boosting}
+In order to test the effects of boosting, the AdaBoost algorithm is used. An implementation of the AdaBoost.r2 algorithm \citep{Drucker:1997:IRU:645526.657132}, which is a version of the AdaBoost algorithm \citep{Freund1997119} for regression problems, is found in the Python library \verb+scikit-learn+ \citep{scikit-learn}. Of the baseline methods used in this work, the only one that is both implemented in \verb+scikit-learn+ and supports weighting of training examples is SVM. It is therefore used as the baseline in the boosting ensemble in Experiment 1. An SVM model with the same parameters as the one reported in Section \ref{subsubsec:bagging} is used for the boosting approach. The only parameter provided to the AdaBoost algorithm is the number of learners $K$ to use in the ensemble, which is set to 25 in Experiment~1.
+
+\subsubsection{Lasso Ensemble}
+\label{subsubsec:lassoEnsemble}
+The implementation of the lasso method from the R library \verb+elasticnet+ \citep{elasticnet} is used in Experiment 1. The \verb+elasticnet+ library provides functions for defining elastic nets, of which the lasso method is a special case. Recall from Equation \ref{eq:lassoOptWeights} in Section \ref{subsec:LassoEnsemble} that the optimal weights in lasso is given by solving the following equation:
+
+\begin{equation*}
+    \hat{\mathbf{W}}=\argmin_{\mathbf{W}}\|\mathbf{F}-\mathbf{G}\mathbf{W}\|_{2}^{2}+\lambda\|\mathbf{W}\|_{1}
+\end{equation*}
+where $\lambda$ is a parameter of the Lasso method. \verb+caret+ provides functionality for optimizing this $\lambda$ parameter through a grid search, where RMSE is used to assess the performance of a given $\lambda$ value. A $\lambda$ value of $1$ resulted in the lowest RMSE, and is the one used in Experiment 1. More details concerning the parameter tuning of lasso can be found in Appendix \ref{appsubsubsec:lassoEnsemble}.
+
+\subsubsection{Fuzzy Rule Based System}
+\label{subsubsec:FuzzyRuleBasedSystem}
+The R library \verb+frbs+ \citep{frbs} is used to generate a FRBS based on the approach described in \citet{stathopoulos08:fuzzy_modeling_approach}. The input to the FRBS is a data set containing predictions from the ANN and the Kalman filter described in Section \ref{subsec:baselines}. Following the approach described in \citet{stathopoulos08:fuzzy_modeling_approach}, two different rule bases, each preferring one of the two baselines, are used. The rule base preferring ANN is displayed in Table \ref{tab:frbsANNRuleBase}, whilst the rule base preferring Kalman filter is illustrated in Table \ref{tab:frbsKFRuleBase}. The travel time predictions from the baselines are mapped with triangular membership functions to three fuzzy sets; low, medium, and high. Data from February 26, 2015 to March 4, 2015 is used to optimize the membership function parameters. The final membership parameters are presented in Table \ref{tab:annFRBSMFParameters} and Table \ref{tab:kalmanFilterFRBSMFParameters}. The value \emph{b} defines the peak of the triangle, whilst the values \emph{a} and \emph{c} define the left and right boundary of the triangle, respectively. Please refer to Appendix \ref{appsubsubsec:FuzzyRuleBasedSystem} for more details with regards to the FRBS setup.
+
+\input{tables/frbs/FrbsAnnRuleBase.tex}
+\input{tables/frbs/FrbsKalmanFilterRuleBase.tex}
+\input{tables/frbs/FrbsParameterTuningTable.tex}
+
+\subsection{Online Learning Methods}
+\label{subsec:onlineLearningMethods}
+This section presents the setup of the online methods used in Experiment 2. First, the general approach is described. Second, specific details for the individual methods are presented in their respective sections.
+
+\subsubsection{Overview}
+\label{subsubsec:onlineLearningMethodsOverview}
+The online learning methods are tuned and trained on two weeks of data from January 29, 2015 to February 11, 2015. The first week is used to build the models with a certain set of parameters, whilst the second week is used to calculate the RMSE of the predictions done during that week. Since the methods are online, the data in the second week is also used to update the models whilst making predictions. The parameters that lead to the lowest RMSE during parameter tuning is used in the final model. Predictions are generated from February 12, 2015 to March 31, 2015. No outliers are removed in the data set used in Experiment 2.
+
+\subsubsection{Online-Delayed Extended Kalman Filter}
+\label{subsubsec:online-DelayedExtendedKalmanFilter}
+An implementation of the EKF \citep{ekf} and using this EKF to train a feed-forward ANN \citep{annekf} is found in Matlab \citep{MATLAB:2014} on the Matlab Central File Exchange\footnote{\url{http://www.mathworks.com/matlabcentral/fileexchange/}, May 21, 2015}. Recall from Equation \ref{eq:ekfann} in Section \ref{subsec:onlineExtendedKalmanFilter} that the state space definition that is assumed for the EKF can be expressed as follows:
+
+\begin{equation*}
+\begin{cases}
+\theta_t=\theta_{t-1}+r_t, r_t \sim \mathcal{N}(0, R_t)
+y_t=G(\mathbf{x}_t, \mathbf{\theta}_t)\\
+\end{cases}
+\end{equation*}
+where $\theta_t$ represents the weights in the feed-forward ANN at time $t$, $r_t$ is the noise with which the weights are assumed to evolve, and $G$ represents the mapping performed by the ANN from inputs $\mathbf{x}_t$ to output $y_t$ given weights $\mathbf{\theta}_t$.
+
+Recall from Section \ref{subsubsec:ExtendedKalmanFilter} that an initial estimate of the state vector $\mathbf{x}_{t=0}$, its covariance matrix $\mathbf{P}_{t=0}$, process noise covariance matrix $\mathbf{Q}$, and observation noise covariance matrix $\mathbf{R}$ has to be defined in order to run the EKF. Due to the way EKF is used in the experiments in this study, an initial estimate of the weights $\theta_{\text{initial}}$ has to be provided. The approach described in \cite{lint08:online_learning_solutions_for_freeway} is that the weights $\theta_{\text{initial}}$ are initialized using the Nguyen-Widrow method \citep{nguyenWidrow90}. In \cite{lint08:online_learning_solutions_for_freeway}, the weights' covariance matrix $\mathbf{P_{\text{initial}}}$ is initialized to a diagonal matrix with large values, reflecting that it is assumed that the weights are independent, and that there is a large uncertainty regarding the initial guess of the weights. These are also the approaches taken in this work, and the value along the diagonal of $\theta_{\text{initial}}$ is set to $10\ 000$.
+
+As \cite{lint08:online_learning_solutions_for_freeway} does not describe how the covariance matrices $\mathbf{Q}$ and $\mathbf{R}$ are set, a parameter tuning step is performed to find reasonable values for $\mathbf{Q}$ and $\mathbf{R}$, in addition finding to the number of nodes in the hidden layer in the feed-forward ANN. The covariance matrix $\mathbf{Q}$ is assumed to be a diagonal matrix, once more reflecting that the weights are independent, such that the only value being searched for regarding $\mathbf{Q}$ in the parameter tuning step, is the value $q$ along the diagonal of $\mathbf{Q}$: $\mathbf{Q}=q\times\mathbf{I}$. As the output $y_t$ consists of a single value, namely the travel time, the covariance matrix $\mathbf{R}$ of the observation noise is a single element $r$ reflecting the noise related to the observations that the ANN makes of the weights.
+
+The parameters that produced the lowest RMSE during the tuning process are: $q=0.1$, $r=750$, number of hidden nodes $=1$. Please see Appendix \ref{appsubsubsec:online-DelayedExtendedKalmanFilter} for more details on the parameter tuning process.
+
+\subsubsection{Local Online Kernel Ridge Regression}
+\label{subsubsec:LOKRR}
+To the best of the authors knowledge, no open source implementation of LOKRR exists. Therefore, an implementation of LOKRR is developed in Python \citep{pythonLanguage}. LOKRR is tuned on the same data set as online-delayed EKF. For each pair of parameter values, the kernels are trained, i.e. the inverse of the regularized kernel matrix is calculated, on the first week of data. The predictions are made on the second week of data. The observations in the test set are also used to update the kernels to simulate how LOKRR would normally work. The $\mathbf{X}$ matrix is reset to contain only the training data before every run with new parameters. This way the best pair of parameters are found for each kernel.
+
+The recommendations, presented in \citet{haworth14:local_online_kernel_ridge_regression_for_forecasting_of_urban_travel_times}, for finding possible parameter values for the kernel bandwidth $\sigma$ and the regularization constant $\lambda$ are followed. The approach recommended in the article for finding possible $\lambda$ values is based on \citet{exterkate13:model_selection_in_krr}. First, the $R^2$ of an ordinary least squares fit of $\mathbf{y}$ on $\mathbf{X}$ is found. Then $\lambda_0$ is determined as $\lambda_0=1/\phi_0$, where $\phi_0 = R^2/(1-R^2)$. The recommended values for $\lambda$ are \{$1/8\lambda_0, 1/4\lambda_0, 1/2\lambda_0, \lambda_0, 2\lambda_0$\}. The recommended approach for finding possible $\sigma$ parameters is based on the observation that optimal values of $\sigma$ lie in the range between the 0.1 and 0.9 quantiles of the pairwise euclidean distance between the points in the kernel \citep{caputo2012:appearance_based_object_rec}. The 0.25, 0.5 and 0.75 quantiles are used as possible values for $\sigma$. Due to the amount of data being smaller during the night, the data set used for LOKRR only contains observations from 06:00 to 21:00. Additionally, the window size is set to 1. This is done to reduce the computational complexity. A more detailed description of the LOKRR implementation can be found in Appendix \ref{appsubsubsec:LOKRR}.
+
+\section{Environment}
+\label{sec:environment}
+The experiments described in Section \ref{sec:experimentalPlan} are run in two environments, an Ubuntu 14.04 server at \acrfull{ec2} \footnote{\url{http://aws.amazon.com/ec2/}, May 21, 2015} and a laptop computer. The Ubuntu server is running on a EC2 instance of type m3.xlarge \footnote{\url{http://aws.amazon.com/ec2/instance-types/}, May 21, 2015}, which has a Intel Xeon E5-2670 v2 (Ivy Bridge) processor \footnote{\url{http://ark.intel.com/products/75275/Intel-Xeon-Processor-E5-2670-v2-25M-Cache-2_50-GHz}, May 21, 2015} @ 2.5 GHz and 15 GiB of RAM. The laptop computer is a Samsung ATIV Book 9 Plus NP940X3G running Windows 8.1 with an Intel Core i7-4500U Processor @ 1.8 GHz\footnote{\url{http://ark.intel.com/products/75460/Intel-Core-i7-4500U-Processor-4M-Cache-up-to-3_00-GHz}, May 21, 2015} and 8 GiB of RAM. The Ubuntu server is used to run all experiments, with the exception of the online-delayed EKF which is run in Matlab on the laptop computer.
+
+\section{Experimental Results}
+\label{sec:experimentalResults}
+% - Present results \newline
+% - Use tables and graphs with appropriate descriptions
+This section presents the results of Experiment 1 and Experiment 2 in the form of tables showing RMSE and MAE across all examples in the testing set.
+
+%Section \ref{subsec:experiment1Results} presents the results from the first experiment, which is concerned with the ensemble learning methods. Section \ref{subsec:experiment2Results} presents the results from the second experiment, which is concerned with the online learning methods.
+
+\subsection{Experiment 1 - Ensemble Learning}
+\label{subsec:experiment1Results}
+%In Experiment 1, several models are used to make predictions of travel times for vehicles entering the road section described in Section \ref{subsec:dataDescription}. Four baselines, SVM, k-NN, ANN and Kalman Filter are used to make predictions for the dates from February 26, 2015 to March 31, 2015. A lasso ensemble approach is used to combine predictions from these four baselines for the dates March 19, 2015 to March 31, 2015. A FRBS Ensemble approach is used to combine predictions from the aforementioned baselines for the dates March 5, 2015 to March 31, 2015. A bagging version of a SVM is used to make predictions for the dates February 26, 2015 to March 31, 2015. A boosted SVM is used to make predictions for the dates February 26, 2015 to March 31, 2015. 
+
+Table \ref{tab:baselinesResults} shows the performance metrics of the four baselines. Table \ref{tab:ensembleResults} displays the performance metrics for bagging, boosting, lasso, FRBS and a simple average of the baselines' predictions. The performance metrics in Table \ref{tab:baselinesResults} and Table \ref{tab:ensembleResults} are computed based on predictions and actual travel times from March 19, 2015 to March 31, 2015 as this is the largest span of dates that all models have made predictions for. This is done in order to give all methods an equal basis for comparison.
+
+\input{tables/experimental_results/BaselinesResultsTable.tex}
+\input{tables/experimental_results/EnsembleResultsTable.tex}
+
+%Figures \ref{fig:svmRadialDensity}, \ref{fig:knnDensity}, \ref{fig:annDensity} and \ref{fig:kalmanFilterDensity} illustrate the distribution of errors for the SVM, k-NN, ANN and Kalman Filter baselines, respectively. Figures \ref{fig:baggingDensity}, \ref{fig:boostingDensity}, \ref{fig:lassoDensity} and \ref{fig:frbsDensity} illustrate the distribution of errors for the Bagging, Boosting, Lasso Ensemble and FRBS Ensemble approaches, respectively. The error distributions are computed for the same range of dates as the RMSE values reported in tables \ref{tab:baselinesResults} and \ref{tab:ensembleResults}.
+
+\subsection{Experiment 2 - Online Learning}
+\label{subsec:experiment2Results}
+In Experiment 2, two online learning approaches, namely the online-delayed EKF and LOKRR, are used to make predictions for vehicles entering the road section described in Section \ref{subsec:dataDescription} for the dates from February 12, 2015 to March 31, 2015. Table \ref{tab:onlineLearningResults} shows performance metrics values computed from predictions and actual travel times. 
+
+%Figures \ref{fig:ekfDensity} and \ref{fig:lokrrDensity} illustrate the error distributions for the two online learning approaches.
+
+\input{tables/experimental_results/OnlineLearningResultsTable.tex}
