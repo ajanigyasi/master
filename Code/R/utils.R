@@ -353,13 +353,13 @@ modelDataFrame[11, ] = c("20150212", "20150331", "06:00:00", "21:00:00", "datase
 # # # wilcoxonSignRankTest(date1, date2, time1, time2, mod1, mod2, mod3, dir1, dir2, mod2Col, mod3Col)
 
 # 
-# png(file=paste("../../Plots/", "onlineAbsDensityPlot", ".png", sep=""), width=984/100, height=414/100, res=600, units="in")
+# png(file=paste("../../Plots/", "onlineDensityPlotWithoutTable", ".png", sep=""), width=984/100, height=414/100, res=600, units="in")
 
 # onlineTable = data.frame(matrix(rep(0, 8), ncol=4))
 # colnames(onlineTable) = c("Median", "Mean", "Mode", "Standard Deviation") 
 # rownames(onlineTable) = c("Online-delayed EKF", "LOKRR")
 
-for(i in 1:11){
+for(i in 10:11){
   date1 = modelDataFrame[i, 1]
   date2 = modelDataFrame[i, 2]
   time1 = modelDataFrame[i, 3]
@@ -378,19 +378,21 @@ for(i in 1:11){
   legendName = modelDataFrame[i, 16]
 # 
 #   # Get travel times
-#   travelTimes = getTravelTimes(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col)
-#   dateAndTime1 = travelTimes[, paste(mod1, "dt", sep="")]
-#   dateAndTime2 = travelTimes[, paste(mod2, "dt", sep="")]
-#   travelTimes1 = travelTimes[, mod1]
-#   travelTimes2 = travelTimes[, mod2]
+  travelTimes = getTravelTimes(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col)
+  dateAndTime1 = travelTimes[, paste(mod1, "dt", sep="")]
+  dateAndTime2 = travelTimes[, paste(mod2, "dt", sep="")]
+  travelTimes1 = travelTimes[, mod1]
+  travelTimes2 = travelTimes[, mod2]
   
 #   RMSE = rmse(travelTimes1, travelTimes2)
 #   MAE = mae(travelTimes1, travelTimes2)
-#   error = abs(travelTimes2-travelTimes1)
+  error = abs(travelTimes2-travelTimes1)
   
-#   median = signif(median(error), digits=5)
-#   mean = signif(mean(error), digits=5)
-#   stdDev = signif(sd(error), digits=5)
+  median = signif(median(error), digits=5)
+  mean = signif(mean(error), digits=5)
+  stdDev = signif(sd(error), digits=5)
+
+  cat(legendName, " & ", median, " & ", mean, " & ", stdDev, "\n")
   
 #  density = density(error, n=65536)
 
@@ -401,9 +403,9 @@ for(i in 1:11){
 #  onlineTable[(i-9), ] = c(median, mean, mode, stdDev)
 
 #   if(i==10){
-#     plot(density, lty=1, xlab="Error (sec)", ylab="Density (%)", main = "", ylim=c(onlineMinAbsDens, onlineMaxAbsDens), xlim=c(0, 500))
+#     plot(density, lty=1, xlab="Error (sec)", ylab="Density (%)", main = "", ylim=c(onlineMinDens, onlineMaxDens), xlim=c(-500, 500))
 #   } else {
-#     lines(density, lty=(i-9), xlab="Error (sec)", ylab="Density (%)", main = "", ylim=c(onlineMinAbsDens, onlineMaxAbsDens), xlim=c(0, 500))
+#     lines(density, lty=(i-9), xlab="Error (sec)", ylab="Density (%)", main = "", ylim=c(onlineMinDens, onlineMaxDens), xlim=c(-500, 500))
 #   }
   
 #   # Generate density plots
@@ -430,15 +432,15 @@ for(i in 1:11){
 
 #     # Run Anderson-Darling test
 #     andersonDarlingTest(date1, date2, time1, time2, mod1, mod2, dir1, dir2, mod2Col=mod2Col)
-  
-  listOfDates <- seq(as.Date(date1, "%Y%m%d"), as.Date(date2, "%Y%m%d"), by="days")
-  for(i in 1:length(listOfDates)){
-    date = listOfDates[i]
-    # Generate travel time plots for each day
-    generatePlot(date, date, time1, time2, mod1, mod2, dir1, dir2, plotDir, plotName, legendName, mod2Col=mod2Col)
-    # Print RMSE for each day
-#     print(computeRMSE(date, date, mod1, mod2, dir1, dir2, mod2Col=mod2Col))
-  }
+#   
+#   listOfDates <- seq(as.Date(date1, "%Y%m%d"), as.Date(date2, "%Y%m%d"), by="days")
+#   for(i in 1:length(listOfDates)){
+#     date = listOfDates[i]
+#     # Generate travel time plots for each day
+#     generatePlot(date, date, time1, time2, mod1, mod2, dir1, dir2, plotDir, plotName, legendName, mod2Col=mod2Col)
+#     # Print RMSE for each day
+# #     print(computeRMSE(date, date, mod1, mod2, dir1, dir2, mod2Col=mod2Col))
+#   }
 }
 # legend("topright", c("Online-delayed EKF", "LOKRR"), lty=c(1, 2))
 # addtable2plot(275, 0.0018, onlineTable[, c(1, 4)], bty="o", display.rownames=TRUE, hlines=TRUE, vlines=TRUE)
